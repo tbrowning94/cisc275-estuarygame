@@ -4,7 +4,7 @@ public class GitTest {
 
 	public GitTest() {
 		// TODO Auto-generated constructor stub
-		System.out.println("testing...Rya.");
+		System.out.println("testing...Ryan.");
 	}
 
 }
