@@ -5,6 +5,10 @@ public class Level {
 	int height;
 	int money;
 	int ph;
+	Crab[] crabs;
+	Plant[] plants;
+	Fisherman[] fishermen;
+	GarbageCollector[] GarbageCollectors;
 	public Level() {
 		// TODO Auto-generated constructor stub
 	}
