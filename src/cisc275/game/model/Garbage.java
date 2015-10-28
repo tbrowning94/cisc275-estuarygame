@@ -3,9 +3,10 @@ package cisc275.game.model;
 import java.awt.Point;
 
 public class Garbage {
+	int ranking;
 	Point location;
-	int damage;
-	int speed;
+	private int damage;
+	private int speed;
 	int direction; //unclear in UML
 	int getdirection() {
 		return 0;
@@ -17,7 +18,7 @@ public class Garbage {
 	}
 	void onTick() {
 	}
-	public Garbage() {
+	public Garbage(int rank) {
 		// TODO Auto-generated constructor stub
 	}
 
