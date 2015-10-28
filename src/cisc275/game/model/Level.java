@@ -1,6 +1,7 @@
 package cisc275.game.model;
 
 public class Level {
+	int lv;
 	int width;
 	int height;
 	int money;
