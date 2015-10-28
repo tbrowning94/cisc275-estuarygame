@@ -10,5 +10,6 @@ public class Plant {
 	public Plant() {
 		// TODO Auto-generated constructor stub
 	}
-
+	public void checkefficiency(Crab crabs){
+	}
 }
