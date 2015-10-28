@@ -8,8 +8,11 @@ public class Crab {
 	boolean mitten;
 	int speed;
 	int direction; //unclear in UML
-	public Crab() {
+	public Crab(boolean mit) {
 		// TODO Auto-generated constructor stub
+	}
+	public Crab(boolean mit, int speed){
+		
 	}
 	int getdirection() {
 		return 0;
