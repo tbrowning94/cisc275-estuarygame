@@ -3,7 +3,7 @@ package cisc275.game.model;
 import java.awt.Point;
 
 public class Crab {
-	static int mittencount;
+	static int mittencount; 
 	Point location;
 	boolean mitten;
 	int speed;
