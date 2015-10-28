@@ -1,10 +1,10 @@
-package cisc275.game.view.test;
+package cisc275.game.model.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class NodeTest {
+public class GarbageTest {
 
 	@Test
 	public void test() {
