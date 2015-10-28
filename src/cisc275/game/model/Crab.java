@@ -24,4 +24,10 @@ public class Crab {
 	}
 	void onTick() {
 	}
+	//Generates random starting point of crab, 
+	//and random generates next direction
+	//Sleep to determine how often changes direction
+	void move(){
+		
+	}
 }
