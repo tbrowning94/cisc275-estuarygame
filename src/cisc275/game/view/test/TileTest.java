@@ -1,10 +1,10 @@
-package cisc275.game.view;
+package cisc275.game.view.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestGame {
+public class TileTest {
 
 	@Test
 	public void test() {

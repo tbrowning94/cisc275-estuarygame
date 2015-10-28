@@ -7,7 +7,7 @@ public class Garbage {
 	Point location;
 	private int damage;
 	private int speed;
-	int direction; //unclear in UML
+	int direction; //for view, set which way garbage is moving
 	int getdirection() {
 		return 0;
 	}

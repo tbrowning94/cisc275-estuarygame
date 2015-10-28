@@ -5,12 +5,20 @@ import java.awt.Point;
 public class Fisherman {
 	Point finalLocation;
 	Point entryLocation;
-	int catchingRate;
 	int speed;
+	
+
 	public Fisherman() {
 		// TODO Auto-generated constructor stub
 	}
 	void onTick() {
 	}
-
+	
+	//healthier the water, more money that is generated, 
+	//takes in health of water and returns an amount
+	//checked every time a water tile reaches estuary
+	public int Fishing(Water health){
+		return 0;
+		
+	}
 }
