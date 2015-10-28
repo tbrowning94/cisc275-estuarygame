@@ -8,8 +8,12 @@ public class GarbageCollector {
 	private int radius;
 	private int efficiency;
 	private int rate;
+	int max;
+	int current;
 	public GarbageCollector(Point loc, int ranking) { //ranking determines radius, efficiency, rate
 		// TODO Auto-generated constructor stub
 	}
-
+	boolean checkfull() {
+		return false;
+	}
 }
