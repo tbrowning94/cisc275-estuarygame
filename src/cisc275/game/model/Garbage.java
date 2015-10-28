@@ -18,7 +18,7 @@ public class Garbage {
 	}
 	void onTick() {
 	}
-	public Garbage(int rank) {
+	public Garbage(int rank) { //rank determines the damage and speed
 		// TODO Auto-generated constructor stub
 	}
 
