@@ -39,7 +39,7 @@ public class Level {
 	}
 	void startGame() {
 	}
-	int moneyfish() { //Runs Fisherman fishing method then multiplies by number of fisherman
+	int moneyfish() { //Runs Fishermans fishing method then multiplies by number of fisherman
 		return 0;
 	}
 }
