@@ -8,7 +8,6 @@ public class Level {
 	int ph;
 	Crab[] crabs;
 	Plant[] plants;
-	Fisherman[] fishermen;
 	GarbageCollector[] GarbageCollectors;
 	public Level() {
 		// TODO Auto-generated constructor stub
@@ -39,5 +38,8 @@ public class Level {
 	void setLevel() {
 	}
 	void startGame() {
+	}
+	int moneyfish() { //Runs Fisherman fishing method then multiplies by number of fisherman
+		return 0;
 	}
 }
