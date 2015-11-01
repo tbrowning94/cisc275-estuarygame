@@ -3,9 +3,15 @@ package cisc275.game.model;
 import java.awt.Point;
 
 public class Plant {
-	Point location; //where the plant was placed 
-	int ranking; //whether the plant is level one, two, or three (I think this might be easier to do as subclasses)
-	private int radius; //radius of the are the plant can filter/block water
+	
+	//plant constants
+	static final int ranking = 1; //whether the plant is level one, two, or three (I think this might be easier to do as subclasses)
+	private static final int RADIUS = 0; //radius of the are the plant can filter/block water
+	static final int START_EFFICIENCY = 0; //efficiency before being attacked by crab
+	static final int START_RATE = 0; //rate before being attacked by crab
+	
+	//plant variables
+	Point location; //where the plant was placed
 	private int efficiency; //I'm still not sure what the difference between this and rate is
 	private int rate; //rate at which the plant filters/blocks the water
 	
