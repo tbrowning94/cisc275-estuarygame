@@ -13,6 +13,9 @@ public class Garbage {
 	}
 	void setdirection() {
 	}
+	public void setDamage(){
+		
+	}
 	Point getlocation() {
 		return null;
 	}

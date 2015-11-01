@@ -17,9 +17,9 @@ public class Crab {
 	int getdirection() {
 		return 0;
 	}
-	void setdirection() {
+	void setdirection(int location) {
 	}
-	Point getlocation() {
+	Point getlocation(int location) {
 		return null;
 	}
 	void onTick() {

@@ -8,9 +8,18 @@ public class Water {
 	ArrayList<Node> path = new ArrayList<Node>();
 	int damage;
 	int health;
+	int Runoff;
 	public Water() {
 		// TODO Auto-generated constructor stub
 	}
+	public void setRunoff(){
+		
+	}
 	void update() {
+	}
+	//takes in the PhProbe reading and sets health
+	public void setHealth(PhProbe Reading){
+		//return health;
+		
 	}
 }

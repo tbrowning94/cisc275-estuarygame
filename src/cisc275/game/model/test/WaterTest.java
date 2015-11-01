@@ -7,7 +7,7 @@ import org.junit.Test;
 public class WaterTest {
 
 	@Test
-	public void test() {
+	public void testsetHealth() {
 		fail("Not yet implemented");
 	}
 

@@ -17,8 +17,7 @@ public class Fisherman {
 	//healthier the water, more money that is generated, 
 	//takes in health of water and returns an amount
 	//checked every time a water tile reaches estuary
-	public int Fishing(Water health){
-		return 0;
+	public void Fishing(Water health){
 		
 	}
 }

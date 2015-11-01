@@ -7,7 +7,7 @@ import org.junit.Test;
 public class PhProbeTest {
 
 	@Test
-	public void test() {
+	public void testsetReading() {
 		fail("Not yet implemented");
 	}
 
