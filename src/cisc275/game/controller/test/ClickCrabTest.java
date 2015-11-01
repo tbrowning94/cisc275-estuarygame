@@ -24,7 +24,7 @@ public class ClickCrabTest {
 	
 	@Test
 	public void test_equals() {
-		//test for type of crab
+		//test for type of crab at clicked point
 		fail("Not yet implemented");
 	}
 	

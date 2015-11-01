@@ -8,8 +8,9 @@ public class Tile { //Tiles for background sprites, ie grass, sand, building, et
 					//Currently, we have no view related classes or sprites so not
 					//much can be implemented here yet
 	Point location;
-	public Tile(Point loc) {
-		// TODO Auto-generated constructor stub
+	public Tile(Point loc) {// TODO: add param sprite after adding classes
+		// set appropriate sprite, render at location
+		this.location = loc;
 	}
 
 	public boolean solid() { //is the tile solid?
