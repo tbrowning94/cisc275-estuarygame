@@ -12,6 +12,9 @@ public class ActionTest {
 	@Test
 	public void test_isValid() {
 		Level testlev = new Level();
+		//test valid click action on placement
+		//test valid click action on crab
+		//test any other actions? menus?
 		//assertEquals(false, Action.isValid(testlev));
 		
 	}
@@ -19,12 +22,16 @@ public class ActionTest {
 	@Test
 	public void test_update() {
 		Level testlev = new Level();
+		//test placement after update
+		//test crab click after update
+		//test any other action/menus after update
 		//assertEquals(false, Action.isValid(testlev));
 		
 	}
 	
 	@Test
 	public void test_equals() {
+		//not sure what needs to be tested for equal in this class..
 		//assertEquals(false, Action.isValid(testlev));
 		
 	}
