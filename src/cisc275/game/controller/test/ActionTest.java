@@ -10,9 +10,22 @@ import cisc275.game.model.Level;
 public class ActionTest {
 
 	@Test
-	public void test() {
+	public void test_isValid() {
 		Level testlev = new Level();
-		assertEquals(false, Action.isValid(testlev));
+		//assertEquals(false, Action.isValid(testlev));
+		
+	}
+	
+	@Test
+	public void test_update() {
+		Level testlev = new Level();
+		//assertEquals(false, Action.isValid(testlev));
+		
+	}
+	
+	@Test
+	public void test_equals() {
+		//assertEquals(false, Action.isValid(testlev));
 		
 	}
 }

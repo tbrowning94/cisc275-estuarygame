@@ -7,7 +7,7 @@ import org.junit.Test;
 public class NodeTest {
 
 	@Test
-	public void test() {
+	public void test_Node() {
 		fail("Not yet implemented");
 	}
 
