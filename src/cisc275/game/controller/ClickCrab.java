@@ -2,9 +2,9 @@ package cisc275.game.controller;
 
 import java.awt.Point;
 
-import cisc275.game.model.Level;
+import cisc275.game.model.Game;
 
-public class ClickCrab implements Action<Level>{
+public class ClickCrab implements Action<Game>{
 	Point location;
 	boolean remove = false;
 	
@@ -16,7 +16,7 @@ public class ClickCrab implements Action<Level>{
 	}
 	
 	@Override
-	public void update(Level l) {
+	public void update(Game g) {
 		// update level, remove clicked crabs
 		
 	}
@@ -28,7 +28,7 @@ public class ClickCrab implements Action<Level>{
 		
 	}
 	@Override
-	public boolean isValid(Level l) {
+	public boolean isValid(Game g) {
 		// check that the click is a valid operation
 		// should return true as long as it is called
 		// on a crab during the wave phase, then equals
