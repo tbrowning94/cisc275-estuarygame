@@ -3,7 +3,7 @@ package cisc275.game.model;
 import java.util.List;
 
 
-public class Game { //need to figure out how to loop
+public class Game { //need to figure out how to loop - do it in view
 
 	//game constants
 	public static final int WORLD_WIDTH = 0;
@@ -133,7 +133,7 @@ public class Game { //need to figure out how to loop
 	}
 	
 	//runs game
-	public static void main(String[] args) {
+	public static void main(String[] args) { //move to view, windows are central thread of game
 		
 	}
 }
