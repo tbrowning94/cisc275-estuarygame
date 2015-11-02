@@ -8,5 +8,9 @@ public class PhProbe {
 	public void setReading(Garbage damage, Water Runoff){
 		
 	}
+	public int setReading(){
+		return Reading;
+		
+	}
 }
 	
