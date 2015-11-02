@@ -14,12 +14,15 @@ public class Crab {
 	public Crab(boolean mit, int speed){
 		
 	}
-	int getdirection() {
+	public int getdirection() {
 		return 0;
 	}
-	void setdirection(int location) {
+	public void setdirection(int location) {
 	}
-	Point getlocation(int location) {
+	public void setlocation(Point loc){
+		
+	}
+	public Point getlocation() {
 		return null;
 	}
 	void onTick() {

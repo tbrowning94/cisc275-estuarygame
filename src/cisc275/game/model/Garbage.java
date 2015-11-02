@@ -8,15 +8,18 @@ public class Garbage {
 	private int damage;
 	private int speed;
 	int direction; //for view, set which way garbage is moving
-	int getdirection() {
+	public int getdirection() {
 		return 0;
 	}
-	void setdirection() {
+	public void setdirection(int i) {
 	}
 	public void setDamage(){
 		
 	}
-	Point getlocation() {
+	public void setlocation(Point loc){
+		
+	}
+	public Point getlocation() {
 		return null;
 	}
 	void onTick() {

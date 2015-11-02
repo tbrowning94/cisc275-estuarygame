@@ -13,7 +13,7 @@ public class GarbageCollector {
 	public GarbageCollector(Point loc, int ranking) { //ranking determines radius, efficiency, rate
 		// TODO Auto-generated constructor stub
 	}
-	boolean checkfull() {
+	public boolean checkfull() {
 		return false;
 	}
 }

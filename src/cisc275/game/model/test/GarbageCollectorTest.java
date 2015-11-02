@@ -2,13 +2,18 @@ package cisc275.game.model.test;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+
 import org.junit.Test;
 
-public class GarbageCollectorTest {
+import cisc275.game.model.GarbageCollector;
 
+public class GarbageCollectorTest {
+	Point j = new Point();
+	GarbageCollector test = new GarbageCollector(j,1);
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		assertEquals(true, test.checkfull());
 	}
-
+	
 }
