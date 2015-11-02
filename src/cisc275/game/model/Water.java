@@ -18,7 +18,7 @@ public class Water {
 	void update() {
 	}
 	//takes in the PhProbe reading and sets health
-	public void setHealth(PhProbe Reading){
+	public static void setHealth(PhProbe Reading){
 		//return health;
 		
 	}
