@@ -14,7 +14,7 @@ public class ClickCrab implements Action<Game>{
 	boolean remove = false;
 	
 	/**
-	 * The constuctor will check the given location for a valid
+	 * The constructor will check the given location for a valid
 	 * action(clicking a crab) then seeing if it equals a mitten
 	 * crab. If so a cage will be used to remove the crab from the
 	 * game and update
