@@ -2,6 +2,10 @@ package cisc275.game.model;
 
 import java.awt.Point;
 
+/**
+ * @author Nile
+ *
+ */
 public class Crab {
 	static int mittencount; 
 	Point location;

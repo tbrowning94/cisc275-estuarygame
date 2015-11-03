@@ -4,21 +4,30 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Flap Jack
+ *
+ */
 public class Water 
 	implements java.io.Serializable{
 	Point location;
 	ArrayList<Node> path = new ArrayList<Node>();
 	int health;
 	int RunoffParticles;
-	public Water(Point location,ArrayList<Node> p, int health, int RunoffParticles) {
-		this.location = location;this.health=health;this.path=path; this.RunoffParticles=RunoffParticles;
+	public Water(Point loc,ArrayList<Node> p, int heal, int RP) {
+		this.location = loc;this.health=heal;this.path=p; this.RunoffParticles=RP;
 	}
+
 	public int getHealth(){
 		return health;
 	}
+	/**
+	 * @return
+	 */
 	public Point getLocation(){
 		return location;
 	}
+
 	public List getPath(){
 		return path;
 	}
@@ -33,7 +42,7 @@ public class Water
 	void update() {
 	}
 
-	public int setHealth(Game pH, Garbage damage, Water RunoffParticles ){
+	public int setHealthOfRunoff(Garbage damage, Water RunoffParticles ){
 		return health;
 		
 	}
@@ -41,9 +50,9 @@ public class Water
 		return "[Water: location="+location+"RunoffParticles="+RunoffParticles
 				+"Path="+path+"Health="+health+"]";
 	}
-	private Point location1;
-	private ArrayList<Node> path1 = new ArrayList<Node>();
-	private int health1;
-	private int RunoffParticles1;
+	private Point loc;
+	private ArrayList<Node> p = new ArrayList<Node>();
+	private int heal;
+	private int RP;
 }
 
