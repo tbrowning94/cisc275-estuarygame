@@ -57,7 +57,14 @@ public class Game { //need to figure out how to loop - do it in view
 	public static int getPh() {
 		return 0;
 	}
-
+	
+	public static void IntoEstuary(){
+		
+	}
+	
+	public static void setHealth(Water RunoffParticles, Garbage damage, Game Ph){
+		Game.IntoEstuary();
+	}
 	public void setPh(int ph) { 
 		
 	}
