@@ -1,39 +1,38 @@
 package cisc275.game.model;
+
 import java.awt.Point;
 
-
 /**
- * @author Tyler
- *
- * Tile will be used for background sprites, ie grass, sand, building, etc
- * All view related objects get painted on top of tiles, so a
- * crab is able to walk on grass etc
- * Currently, we have no view related classes or sprites so not
- * much can be implemented here yet; This will probably be an abstract class
+ * Tiles for background sprites, ie grass, sand, building, etc
+	All view related objects get painted on top of tiles, so a
+	crab is able to walk on grass etc
+	Currently, we have no view related classes or sprites so not
+	much can be implemented here yet
  */
-public class Tile {
+public class Tile { 
 	Point location;
-	
 	/**
-	 * Tile will set a sprite to a specific location
 	 * @param loc
+	 * Sets appropriate sprite, render at location
 	 */
 	public Tile(Point loc) {// TODO: add param sprite after adding classes
-		// set appropriate sprite, render at location
 		this.location = loc;
 	}
 
 	/**
-	 * Solid will be used to determine pathing on Tile
-	 * @return
+	 * See if tile things can move over tile
+	 * sky will be solid(nothing can go on it) and return true
+	 * Runoff/grass/beach will not be solid, return false 
+	 * and garbage collector/crabs can walk on them 
+	 * @return false
 	 */
-	public boolean solid() { //is the tile solid?
+	public boolean solid() { 
 		return false;
 	}
 	
 	/**
-	 * Breakable will be used to update the state of a Tile
-	 * @return
+	 * Crabs can "break" plants making them disappear
+	 * @return false
 	 */
 	public boolean breakable() { //is the tile breakable?(crab breaking plant)
 		return false;
