@@ -8,7 +8,6 @@ public class Fisherman {
 	int manTotal;
 	int money;
 	
-
 	public Fisherman() {
 		// TODO Auto-generated constructor stub
 	}
@@ -17,9 +16,9 @@ public class Fisherman {
 	public int ManNum(Game pH, Garbage damage){
 		return 0;
 	}
-	//healthier the water, more money that is generated, 
-	//takes in health of water and returns an amount
-	//checked every time a water tile reaches estuary
+	/**healthier the water, more money that is generated, 
+	takes in health of water and returns an amount
+	checked every time a water tile reaches estuary*/
 	public int Fishing(Water health){
 		return money;
 		
