@@ -1,13 +1,25 @@
 package cisc275.game.controller;
-
 import java.awt.Point;
-
 import cisc275.game.model.Game;
 
+
+/**
+ * @author Team 6
+ *
+ * ClickCrab will be used to determine if the player has selected 
+ * a crab which will then be removed if it is a mitten crab
+ */
 public class ClickCrab implements Action<Game>{
 	Point location;
 	boolean remove = false;
 	
+	/**
+	 * The constructor will check the given location for a valid
+	 * action(clicking a crab) then seeing if it equals a mitten
+	 * crab. If so a cage will be used to remove the crab from the
+	 * game and update
+	 * @param location
+	 */
 	public ClickCrab(Point location) {
 		super();
 		// check is valid and equals at the given

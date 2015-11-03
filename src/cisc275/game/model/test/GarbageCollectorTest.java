@@ -10,7 +10,7 @@ import cisc275.game.model.GarbageCollector;
 
 public class GarbageCollectorTest {
 	Point j = new Point();
-	GarbageCollector test = new GarbageCollector(j,1);
+	GarbageCollector test = new GarbageCollector(j);
 	@Test
 	public void test() {
 		assertEquals(true, test.checkfull());

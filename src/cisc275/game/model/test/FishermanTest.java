@@ -16,14 +16,12 @@ public class FishermanTest {
 	}
 	@Test
 	public void testFishing(){
-		PhProbe Reading = new PhProbe();
+		PhProbe R = new PhProbe();
+		R.setReading() = 5;
 		Fisherman fishm = new  Fisherman();
-		Water health = new Water();
-		
-		health == Water.setHealth(Reading));
-		
-		int result = fishm.Fishing(10);
-		
+		Water h = new Water();
+		h.setHealth(R.Reading) = 10;
+		int result = fishm.Fishing(h);
 		assertEquals("50" , result);
 		
 	}

@@ -2,25 +2,39 @@ package cisc275.game.model;
 
 import java.awt.Point;
 
-public class Plant {
+/**
+ * @author rachelbruckel
+ * First level of Plant. Every plant has to have a location, a radius, an efficiency and a way to decrease that efficiency. 
+ * As the level of the plant increases, the values for these parameters, and possibly the way efficiency is decreased, will change.
+ */
+ public class Plant {
 	
 	//plant constants
-	static final int ranking = 1; //whether the plant is level one, two, or three (I think this might be easier to do as subclasses)
-	private static final int RADIUS = 0; //radius of the are the plant can filter/block water
+	private static final int RADIUS = 0; //radius of the are the plant can block water
 	static final int START_EFFICIENCY = 0; //efficiency before being attacked by crab
-	static final int START_RATE = 0; //rate before being attacked by crab
+	
 	
 	//plant variables
 	Point location; //where the plant was placed
-	private int efficiency; //I'm still not sure what the difference between this and rate is
-	private int rate; //rate at which the plant filters/blocks the water
+	public int efficiency; //the amount the plant can reduce the water's flow
+	public int radius; //radius of where the plant can block water
 	
-	//ranking will determine radius efficiency and rate - how would we be able to call different constructors based on the ranking? I definitely think it should be multiple classes. 
+	
+	
+	/**
+	 * @param loc
+	 * Location will be determined by user action. All other attributes will have default values
+	 * based on the level of plant (see RADIUS and START_EFFICIENCY).
+	 */
 	public Plant(Point loc) { 
 		// TODO Auto-generated constructor stub
 	}
 	
-	//lowers the efficiency/rate of the plant (essentially a setter, will be called by crab) howMuch can be changed based on level if desired
-	public void decreaseEfficiency(int howMuch){ 	
+	
+	/**
+	 * @param howMuch
+	 * lowers the efficiency of the plant by half
+	 */
+	public void decreaseEfficiency(){ 	
 	}
 }

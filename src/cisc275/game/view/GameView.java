@@ -2,13 +2,13 @@ package cisc275.game.view;
 
 import java.awt.Image;
 
-public class Game {
+public class GameView {
 	Image crab;
 	Image mcrab;
 	Image garbage;
 	Image plant;
 	Image garbageCollector;
-	public Game() {
+	public GameView() {
 		// TODO Auto-generated constructor stub
 	}
 	void InitializeBoardsize() {
