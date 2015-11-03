@@ -20,7 +20,7 @@ public class ClickCrab implements Action<Game>{
 	 * game and update
 	 * @param location
 	 */
-	public ClickCrab(Point location) {
+	public ClickCrab(Point location) { //TODO: remove this, add a new method
 		super();
 		// check is valid and equals at the given
 		// location, is so cage and remove in update
