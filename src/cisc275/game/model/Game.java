@@ -54,7 +54,7 @@ public class Game { //need to figure out how to loop - do it in view
 		
 	}
 
-	public int getPh() {
+	public static int getPh() {
 		return 0;
 	}
 
@@ -122,6 +122,11 @@ public class Game { //need to figure out how to loop - do it in view
 	//sets the list of available levels
 	void setLevel() {
 	}
+	
+	public static void getLevel(){
+		
+	}
+	
 	
 	//makes a default start game
 	void startGame() {
