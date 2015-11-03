@@ -14,7 +14,7 @@ public class PlaceObject implements Action<Game>{
 	 * @param obj
 	 * @param g
 	 */
-	public PlaceObject(Point loc, Object obj, Game g) {
+	public PlaceObject(Point loc, Object obj, Game g) { //TODO: remove this, replace with a new method
 		/** Used to place plants or collectors
 		 must check that money is available for passed
 	 	object first, if so update money

@@ -10,7 +10,7 @@ public class ClickCrabTest {
 	Crab test_mit = new Crab(true); // Mitten crab
 	Crab test_nomit = new Crab(false); // Normal crab
 	//TODO: Add another object to test for fails
-	Game g = new Game();
+	Game g = new Game(); //TODO: fix this
 	
 	@Test
 	public void test_ClickCrab() {
