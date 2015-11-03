@@ -33,11 +33,11 @@ public class Game { //need to figure out how to loop - do it in view
 	
 	//this level and the list of all possible levels
 	private int level;
-	private List<Level> levels;
+
 	
 	
 	public Game(int money, int ph, Crab[] crabs, Plant[] plants, GarbageCollector[] garbageCollectors, long speed,
-			int rows, int cols, int level, List<Level> levels) {
+			int rows, int cols, int level) {
 		
 	}
 	
