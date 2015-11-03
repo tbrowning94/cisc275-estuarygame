@@ -1,12 +1,19 @@
 package cisc275.game.controller;
-
 import java.awt.Point;
-
 import cisc275.game.model.Game;
 
+/**
+ * @author Team 6
+ *
+ */
 public class PlaceObject implements Action<Game>{
 	Point location;
 	
+	/**
+	 * @param loc
+	 * @param obj
+	 * @param g
+	 */
 	public PlaceObject(Point loc, Object obj, Game g) {
 		/** Used to place plants or collectors
 		 must check that money is available for passed
@@ -34,6 +41,4 @@ public class PlaceObject implements Action<Game>{
 		// relevant list etc.
 		
 	}
-	
-
 }
