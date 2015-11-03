@@ -18,7 +18,6 @@ public class Tile {
 	public Tile(Point loc) {// TODO: add param sprite after adding classes
 		this.location = loc;
 	}
-
 	/**
 	 * See if tile things can move over tile
 	 * sky will be solid(nothing can go on it) and return true
