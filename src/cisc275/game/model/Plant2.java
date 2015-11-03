@@ -19,7 +19,4 @@ public class Plant2 extends Plant {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override 	
-	public void decreaseEfficiency(int howMuch){ 	
-	}
 }

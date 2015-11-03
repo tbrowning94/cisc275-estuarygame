@@ -18,12 +18,4 @@ public class Plant1 extends Plant {
 		// TODO Auto-generated constructor stub
 	}
 	
-	/* (non-Javadoc)
-	 * @see cisc275.game.model.Plant#decreaseEfficiency(int)
-	 * doesn't necessarily need to be implemented again, there is just a possibility decreasing efficiency
-	 * will differ for each level of plant.
-	 */
-	@Override 	
-	public void decreaseEfficiency(int howMuch){ 	
-	}
 }
