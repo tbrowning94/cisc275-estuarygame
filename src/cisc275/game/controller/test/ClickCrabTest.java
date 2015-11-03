@@ -42,7 +42,7 @@ public class ClickCrabTest {
 	}
 	
 	@Test
-	public void test_isValid() {
+	public void test_isValid() { //TODO: change to check that click is valid not object is valid
 		//test click is on crab objects
 		Point p1 = new Point(0,0);
 		test_mit.setlocation(p1); // TODO: add a crab constructor that accepts a point?
