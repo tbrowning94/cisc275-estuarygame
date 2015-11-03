@@ -2,12 +2,12 @@ package cisc275.game.controller;
 
 import java.awt.Point;
 
-import cisc275.game.model.Level;
+import cisc275.game.model.Game;
 
-public class PlaceObject implements Action{
+public class PlaceObject implements Action<Game>{
 	Point location;
 	
-	public PlaceObject(Point loc, Object obj, Level l) {
+	public PlaceObject(Point loc, Object obj, Game g) {
 		// Used to place plants or collectors
 		// must check that money is available for passed
 		// object first, if so update money
@@ -16,20 +16,20 @@ public class PlaceObject implements Action{
 		// and must be during placement phase
 		// if placement is valid update needed list
 		// and set location of object
-		if (isValid(l)) { // if placement valid
+		if (isValid(g)) { // if placement valid
 			this.location = loc; // set location
-			update(l); // update level with new object
+			update(g); // update level with new object
 		}
 		// return null or -1 on failure?
 	}
 	
 	@Override
-	public boolean isValid(Level l) {
+	public boolean isValid(Game g) {
 		// make sure point is available and player has enough money
 		return false;
 	}
 	@Override
-	public void update(Level l) {
+	public void update(Game g) {
 		// update level with new objects, add to
 		// relevant list etc.
 		

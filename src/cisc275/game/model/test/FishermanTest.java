@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import cisc275.game.model.Fisherman;
+import cisc275.game.model.PhProbe;
 import cisc275.game.model.Water;
 
 public class FishermanTest {
@@ -13,12 +14,19 @@ public class FishermanTest {
 	public void test() {
 		fail("Not yet implemented");
 	}
-//	@Test
-//	public void testFishing(){
-//		Fisherman fishm = new  Fisherman();
-//		int result = fishm.Fishing(Water health);
-//		assertEquals( , result)
-//		
-//	}
+	@Test
+	public void testFishing(){
+		PhProbe Reading = new PhProbe();
+		Fisherman fishm = new  Fisherman();
+		Water health = new Water();
+		
+		health == Water.setHealth(Reading));
+		
+		int result = fishm.Fishing(10);
+		
+		assertEquals("50" , result);
+		
+	}
 }
+
 
