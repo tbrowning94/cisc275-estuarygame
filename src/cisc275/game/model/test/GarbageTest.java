@@ -10,7 +10,7 @@ import cisc275.game.model.Crab;
 import cisc275.game.model.Garbage;
 
 public class GarbageTest {
-	Garbage tester = new Garbage(1);
+	Garbage tester = new Garbage(1, 0);
 	@Test
 	public void getdirection() {
 		tester.setdirection(1);
