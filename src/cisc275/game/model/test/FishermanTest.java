@@ -18,7 +18,7 @@ import cisc275.game.model.Water;
 public class FishermanTest {
 	Fisherman test = new Fisherman(null, null, 0, 0);
 	Game game = new Game(0, 6, null, null, null, 0, 0, 0, 0);
-	Garbage G = new Garbage(0, 0);
+	Garbage G = new Garbage(0);
 	
 	/**
 	 * test amount of money generated from fishermen

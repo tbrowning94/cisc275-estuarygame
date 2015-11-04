@@ -16,7 +16,7 @@ import cisc275.game.model.Water;
  */
 public class WaterTest {
 	Water test = new Water(null, null, 0, 10, null);
-	Garbage G = new Garbage(0, 15);
+	Garbage G = new Garbage(0);
 	Game game = new Game(0, 0, null, null, null, 0, 0, 0, 0);
 	/**
 	 * tests if setHealthOfRunoff returns product of 
