@@ -35,7 +35,7 @@ public class Water
 	 * Dependent on the level of the game, there will be a certain amount 
 	 * of "particles" of dirt per runoff tile, this method sets
 	 * the number of dirt particles per tile
-	 * @return 
+	 * @return RunoffParticles
 	 */
 	public int setRunoffParticles(Game level){
 		return RunoffParticles;

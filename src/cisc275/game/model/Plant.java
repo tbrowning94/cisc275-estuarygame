@@ -36,8 +36,6 @@ import java.io.Serializable;
 	
 	/**
 	 * lowers the efficiency of the plant by half
-	 * @param howMuch
-	 * 
 	 */
 	public void decreaseEfficiency(){ 	
 	}
