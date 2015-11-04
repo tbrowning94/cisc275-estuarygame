@@ -58,15 +58,24 @@ public class Game { //need to figure out how to loop - do it in view
 		return 0;
 	}
 	
-	public static void IntoEstuary(){
+	/**
+	 * Sees how much of the runoff and garbage crosses the estuary boarder and 
+	 * contaminates the estuary using its location
+	 */
+	public static void IntoEstuary(Water location, Garbage loc){
 		
 	}
 	
-	public static void setHealth(Water RunoffParticles, Garbage damage, Game Ph){
-		Game.IntoEstuary();
-	}
-	public void setPh(int ph) { 
-		
+	/**
+	 * uses the result from IntoEstuary to then set what the 
+	 * health of the estuary is
+	 * and ph defines the health, 7 is the best, ph lowers
+	 * as more particle filled runoff and garbage enters it
+	 * @return ph
+	 */
+	public int setHealthOfEstuary(Water health){
+		IntoEstuary(null, null);
+		return ph;
 	}
 
 	public Crab[] getCrabs() {
@@ -91,12 +100,18 @@ public class Game { //need to figure out how to loop - do it in view
 		return 0;
 	}
 
-	//prints the current level, money, and pH
+	
+	/**
+	 * @return prints the current level, money, and pH
+	 */
 	public String getStatus() {
 		return null; 
     }
 	
-	//I'm assuming this is like the onTick method in Atlas' game
+	
+	/**
+	 * acts as onTick
+	 */
 	void update() {
 	}
 	
@@ -106,8 +121,12 @@ public class Game { //need to figure out how to loop - do it in view
 	void render() {
 	}
 	
-	//checks if the game is in an ending state.
-	//happens when the pH of the estaury is at a dangerous level (need to determine that number)
+
+	/**
+	 * checks if the game is in an ending state.
+	 * happens when the pH of the estaury is at a dangerous level (need to determine that number)
+	 * @return boolean value
+	 */
 	boolean isEnd() {
 		return false;
 	}
