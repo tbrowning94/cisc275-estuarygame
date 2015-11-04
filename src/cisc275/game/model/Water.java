@@ -12,6 +12,7 @@ import java.util.List;
 public class Water 
 	implements java.io.Serializable{
 	Point location;
+	Water[][] waters;
 	ArrayList<Node> path = new ArrayList<Node>();
 	int health;
 	int RunoffParticles;

@@ -17,6 +17,7 @@ import java.io.Serializable;
 	
 	//plant variables
 	Point location; //where the plant was placed
+	static Plant[][] plants; //matrix board of plants
 	public int efficiency; //the amount the plant can reduce the water's flow
 	public int radius; //radius of where the plant can block water
 	
@@ -35,7 +36,7 @@ import java.io.Serializable;
 	
 	/**
 	 * lowers the efficiency of the plant by half,
-	 * will run checkProximity to determine whether there are any crabs
+	 * will run checkProximity(Crab matrix) to determine whether there are any crabs
 	 * present to decrease Efficiency
 	 */
 	public void decreaseEfficiency(){ 	
@@ -43,7 +44,7 @@ import java.io.Serializable;
 	
 	
 	/**
-	 * runs checkProximity to determine whether there is any water nearby
+	 * runs checkProximity(Water matrix) to determine whether there is any water nearby
 	 * and will reduce the size(health) of that water
 	 */
 	public void blockwater(){
