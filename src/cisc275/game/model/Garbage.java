@@ -19,7 +19,7 @@ import java.awt.Point;
  * @author Ryan
  *
  */
-public class Garbage extends Mob{
+public class Garbage extends Mob implements java.io.Serializable{
 	static Garbage[][] garbages; //matrix board of garbage
 	int ranking;
 	Point location;

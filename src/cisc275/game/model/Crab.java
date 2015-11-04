@@ -12,7 +12,7 @@ import java.awt.Point;
  *mitten determines whether the crab is harmful or not
  *speed determines how fast the crab moves(changes by level)
  */
-public class Crab extends RandomMover{
+public class Crab extends RandomMover implements java.io.Serializable{
 	private static Crab[][] crabs;
 	static int mittencount; 
 	Point location;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Team 6
  *
  */
-public class Mob {
+public class Mob implements java.io.Serializable{
 	/**
 	 * location - location of the mob within the game and within 
 	 * the mob matrix

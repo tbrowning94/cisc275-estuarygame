@@ -3,7 +3,7 @@ package cisc275.game.model;
 import java.util.List;
 
 
-public class Game { //need to figure out how to loop - do it in view
+public class Game implements java.io.Serializable{ //need to figure out how to loop - do it in view
 
 	//game constants
 	public static final int WORLD_WIDTH = 0;

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author rachelbruckel
  * 
  */
- public class Plant extends Mob implements Serializable{
+ public class Plant extends Mob{
 	
 	//plant constants
 	private static final int RADIUS = 0; //radius of the are the plant can block water
