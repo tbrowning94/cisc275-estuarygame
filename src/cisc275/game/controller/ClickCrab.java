@@ -19,7 +19,7 @@ public class ClickCrab implements Action<Game>{
 	 * crab. If so a cage will be used to remove the crab from the
 	 * game and update
 	 * 
-	 * @param location
+	 * @param location - point where the player clicked
 	 */
 	public ClickCrab(Point location) {
 		// check is valid and equals at the given
