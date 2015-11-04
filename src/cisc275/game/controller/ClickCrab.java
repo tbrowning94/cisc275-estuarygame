@@ -20,11 +20,23 @@ public class ClickCrab implements Action<Game>{
 	 * game and update
 	 * @param location
 	 */
-	public ClickCrab(Point location) { //TODO: remove this, add a new method
-		super();
+	public ClickCrab(Point location) {
 		// check is valid and equals at the given
 		// location, is so cage and remove in update
 		this.location = location;
+		this.remove = false;
+	}
+	
+	public Point getLocation() {
+		return location;
+	}
+	
+	public boolean getRemove() {
+		return remove;
+	}
+	
+	public void setRemove(Point p) {
+		
 	}
 	
 	@Override
@@ -47,6 +59,10 @@ public class ClickCrab implements Action<Game>{
 		// determines whether its a mitten crab to remove
 		// the object
 		return false;
+	}
+	
+	public String toString() {
+		return null;
 	}
 	
 }
