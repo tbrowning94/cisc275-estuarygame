@@ -22,8 +22,8 @@ public class ClickCrabTest {
 	int lvl = 1;
 	Game g = new Game(m, est_ph, g_crabs, g_plants, g_collect, g_speed, grows, gcols, lvl); //TODO: fix this
 	
-	@Test //removed constuctor, no longer needed
-	public void test_ClickCrab() {
+	@Test 
+	public void test_ClickCrab() { // Test constructor for updates to game
 		//test on mitten crab
 		//test on normal crab
 		//test any other cases?
@@ -38,7 +38,7 @@ public class ClickCrabTest {
 	}
 	
 	@Test
-	public void test_update() {
+	public void test_update() { // Test update for updated lists in game
 		Point p1 = new Point(0,0);
 		test_mit.setlocation(p1); // TODO: add a crab constructor that accepts a point?
 		Point p2 = new Point(0,0);
@@ -48,7 +48,7 @@ public class ClickCrabTest {
 	}
 	
 	@Test
-	public void test_equals() {
+	public void test_equals() { // Test equals for valid crab type removal
 		//test for for crab and type at clicked point
 		Point p1 = new Point(0,0);
 		test_mit.setlocation(p1); // TODO: add a crab constructor that accepts a point?
@@ -61,7 +61,7 @@ public class ClickCrabTest {
 	}
 	
 	@Test
-	public void test_isValid() { //TODO: change to check that click is valid not object is valid <- DONE!
+	public void test_isValid() { // isValid will always be turn for player clicks
 		//test click is valid anywhere
 		Point p1 = new Point(0,0);
 		ClickCrab ccrab = new ClickCrab(p1);

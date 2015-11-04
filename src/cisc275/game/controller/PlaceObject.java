@@ -3,16 +3,23 @@ import java.awt.Point;
 import cisc275.game.model.Game;
 
 /**
+ * PlaceObject is used whenever the player uses
+ * a plant or collector. It checks the the location
+ * is valid for the object and that the player
+ * has money for the object
+ * 
  * @author Team 6
- *
  */
 public class PlaceObject implements Action<Game>{
 	Point location;
 	
 	/**
-	 * @param loc
-	 * @param obj
-	 * @param g
+	 * PlaceObject constructor determines is the action
+	 * is valid and updates the game accordingly
+	 * 
+	 * @param loc - point where click was made
+	 * @param obj - object to be placed(plant or collector)
+	 * @param g - instance of game
 	 */
 	public PlaceObject(Point loc, Object obj, Game g) { //TODO: remove this, replace with a new method
 		/** Used to place plants or collectors
@@ -39,6 +46,7 @@ public class PlaceObject implements Action<Game>{
 		// make sure point is available and player has enough money
 		return false;
 	}
+	
 	@Override
 	public void update(Game g) {
 		// update level with new objects, add to

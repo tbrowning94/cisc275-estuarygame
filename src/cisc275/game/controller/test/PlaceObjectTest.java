@@ -25,7 +25,7 @@ public class PlaceObjectTest {
 	Game g = new Game(m, est_ph, g_crabs, g_plants, g_collect, g_speed, grows, gcols, lvl); //TODO: fix this
 	
 	@Test
-	public void test_PlaceObject() {
+	public void test_PlaceObject() { // Test constuctor for updates to game
 		//test plant placement w/ and w/o money
 		//test collector placement w/ and w/o money
 		//test on solid and unsolid location
@@ -43,12 +43,12 @@ public class PlaceObjectTest {
 	}
 	
 	@Test
-	public void test_isValid() {
+	public void test_isValid() { // Test placement within game bounds
 		//test location permits placement, within path area(not sky/water)
 		PlaceObject po1 = new PlaceObject(p1, test_plant, g);
-		assertEquals(true, po1.isValid(g)); //Passes, mitten at p1
+		assertEquals(true, po1.isValid(g)); //Passes, no objects at point
 		PlaceObject po2 = new PlaceObject(p2, test_plant, g);
-		assertEquals(false, po2.isValid(g)); //Fails, normal at p2
+		assertEquals(true, po2.isValid(g)); //Passes, no object at point
 		//TODO: add test based on money(w/ and w/o enough)
 	}
 

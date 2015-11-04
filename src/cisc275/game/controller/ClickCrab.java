@@ -4,10 +4,10 @@ import cisc275.game.model.Game;
 
 
 /**
- * @author Team 6
- *
  * ClickCrab will be used to determine if the player has selected 
  * a crab which will then be removed if it is a mitten crab
+ * 
+ * @author Team 6
  */
 public class ClickCrab implements Action<Game>{
 	Point location;
@@ -18,6 +18,7 @@ public class ClickCrab implements Action<Game>{
 	 * action(clicking a crab) then seeing if it equals a mitten
 	 * crab. If so a cage will be used to remove the crab from the
 	 * game and update
+	 * 
 	 * @param location
 	 */
 	public ClickCrab(Point location) {
