@@ -3,7 +3,7 @@ package cisc275.game.model;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Fisherman {
+public class Fisherman implements java.io.Serializable {
 	Point finalLocation;
 	Point entryLocation;
 	int manTotal;
@@ -35,9 +35,5 @@ public class Fisherman {
 		return "[Fisherman: finalLocation="+finalLocation+"entryLocation="+entryLocation
 				+"manTotal="+manTotal+"money="+money+"]";
 	}
-	
-	private Point FL;
-	private Point EL;
-	private int MT;
-	private int M;
+
 }

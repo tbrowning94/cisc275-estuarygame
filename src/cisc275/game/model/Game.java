@@ -49,7 +49,9 @@ public class Game { //need to figure out how to loop - do it in view
 	public int getMoney() {
 		return 0;
 	}
-
+	public int getlevel(){
+		return level;
+	}
 	public void setMoney(int money) { 
 		
 	}
