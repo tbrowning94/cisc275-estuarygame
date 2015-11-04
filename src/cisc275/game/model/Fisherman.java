@@ -3,6 +3,11 @@ package cisc275.game.model;
 import java.awt.Point;
 import java.util.ArrayList;
 
+/**
+ * @author Nile
+ *sets the number of fishermen based on water health,
+ *and the amount of money generated from fishermen
+ */
 public class Fisherman implements java.io.Serializable {
 	Point finalLocation;
 	Point entryLocation;

@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author Nile
- *
+ *Generates, health, path and position of water and runoff particles
  */
 public class Water 
 	implements java.io.Serializable{

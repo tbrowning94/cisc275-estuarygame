@@ -113,7 +113,6 @@ public class Game { //need to figure out how to loop - do it in view
 		return null; 
     }
 	
-	
 	/**
 	 * acts as onTick
 	 */
@@ -126,7 +125,6 @@ public class Game { //need to figure out how to loop - do it in view
 	void render() {
 	}
 	
-
 	/**
 	 * checks if the game is in an ending state.
 	 * happens when the pH of the estaury is at a dangerous level (need to determine that number)
