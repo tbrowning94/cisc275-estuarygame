@@ -1,13 +1,11 @@
 package cisc275.game.controller.test;
 import static org.junit.Assert.*;
 import java.awt.Point;
-import java.util.List;
 import org.junit.Test;
 import cisc275.game.controller.ClickCrab;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
 import cisc275.game.model.GarbageCollector;
-import cisc275.game.model.Level;
 import cisc275.game.model.Plant;
 
 public class ClickCrabTest {
@@ -22,8 +20,7 @@ public class ClickCrabTest {
 	long g_speed = 100;
 	int grows, gcols = 100;
 	int lvl = 1;
-	List<Level> lvls;
-	Game g = new Game(m, est_ph, g_crabs, g_plants, g_collect, g_speed, grows, gcols, lvl, lvls); //TODO: fix this
+	Game g = new Game(m, est_ph, g_crabs, g_plants, g_collect, g_speed, grows, gcols, lvl); //TODO: fix this
 	
 	@Test //removed constuctor, no longer needed
 	public void test_ClickCrab() {
