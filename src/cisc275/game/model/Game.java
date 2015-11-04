@@ -154,8 +154,7 @@ public class Game { //need to figure out how to loop - do it in view
 	public static void getLevel(){
 		
 	}
-	
-	
+
 	//makes a default start game
 	void startGame() {
 	}
