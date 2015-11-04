@@ -1,13 +1,12 @@
 package cisc275.game.controller;
-import java.awt.Point;
-
 import cisc275.game.model.Game;
 
 /**
  * An Action is something that a player can perform
  * on a game model. 
  * 
- * @param <G>
+ * @author Team 6
+ * @param <G> - extension of game
  */
 public interface Action<G extends Game> {
 	
@@ -15,8 +14,8 @@ public interface Action<G extends Game> {
      * Returns true if this Action is valid to perform
      * on the given state of the game
      * 
-     * @param game
-     * @return
+     * @param g - instance of game
+     * @return boolean - true for valid action, false otherwise
      */
 	public boolean isValid(Game g);
 	
@@ -24,7 +23,7 @@ public interface Action<G extends Game> {
      * Mutates state of the game according to the properties
      * of this Action
      * 
-     * @param level
+     * @param g - instance of game
      */
 	public void update(Game g);
 
