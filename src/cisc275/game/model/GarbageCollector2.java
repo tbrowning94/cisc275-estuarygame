@@ -3,8 +3,9 @@ package cisc275.game.model;
 import java.awt.Point;
 
 /**
+ * Third level of Garbage Collector
  * @author rachelbruckel
- *Third level of Garbage Collector
+ *
  */
 public class GarbageCollector2 extends GarbageCollector {
 	
@@ -16,9 +17,10 @@ public class GarbageCollector2 extends GarbageCollector {
 	
 	
 	/**
-	 * @param loc
 	 * Starting location determined by user input. Radius, rate, and bagCapacity are constant based on level of garbage collector.
 	 * currGarb always starts at 0. 
+	 * @param loc
+	 * 
 	 */
 	public GarbageCollector2(Point loc) {
 		super(loc);

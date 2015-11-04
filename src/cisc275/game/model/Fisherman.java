@@ -1,6 +1,7 @@
 package cisc275.game.model;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Fisherman {
 	Point finalLocation;
@@ -8,11 +9,18 @@ public class Fisherman {
 	int manTotal;
 	int money;
 	
-	public Fisherman() {
-		// TODO Auto-generated constructor stub
-	}
+	public Fisherman(Point FL, Point EL, int MT, int M) {
+		this.finalLocation=FL; this.entryLocation=EL;this.manTotal=MT; this.money=M;
+		}
+
 	void onTick() {
 	}
+	/**
+	 * from the 
+	 * @param pH
+	 * @param damage
+	 * @return number of fishermen
+	 */
 	public int ManNum(Game pH, Garbage damage){
 		return 0;
 	}
@@ -23,4 +31,13 @@ public class Fisherman {
 		return money;
 		
 	}
+	public String toString(){
+		return "[Fisherman: finalLocation="+finalLocation+"entryLocation="+entryLocation
+				+"manTotal="+manTotal+"money="+money+"]";
+	}
+	
+	private Point FL;
+	private Point EL;
+	private int MT;
+	private int M;
 }

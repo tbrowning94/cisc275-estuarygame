@@ -1,3 +1,6 @@
+/**
+ * Going to be deleted most likely
+ */
 //package cisc275.game.model;
 //
 //public class PhProbe {
