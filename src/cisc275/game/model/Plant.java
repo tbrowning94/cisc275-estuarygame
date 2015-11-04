@@ -1,5 +1,4 @@
 package cisc275.game.model;
-
 import java.awt.Point;
 import java.io.Serializable;
 
@@ -35,11 +34,20 @@ import java.io.Serializable;
 	
 	
 	/**
-	 * lowers the efficiency of the plant by half
+	 * lowers the efficiency of the plant by half,
+	 * will run checkProximity to determine whether there are any crabs
+	 * present to decrease Efficiency
 	 */
 	public void decreaseEfficiency(){ 	
 	}
 	
+	
+	/**
+	 * runs checkProximity to determine whether there is any water nearby
+	 * and will reduce the size(health) of that water
+	 */
+	public void blockwater(){
+	}
 	public String toString() {
 		return null;
 	}

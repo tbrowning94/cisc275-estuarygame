@@ -34,8 +34,13 @@ public class Mob {
 	 * @return ArrayList<Mob> containing all Mob objects found in the matrix
 	 * within the given Mob's radius
 	 */
-	ArrayList<Mob> checkProximity(){
+	public static ArrayList<Mob> checkProximity(){
 		return null; 
+		
+	}
+
+	public void setlocation(Point points) {
+		// TODO Auto-generated method stub
 		
 	}
 
