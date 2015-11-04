@@ -30,6 +30,10 @@ public class PlaceObject implements Action<Game>{
 		// return null or -1 on failure?
 	}
 	
+	public Point getLocation() {
+		return null;
+	}
+	
 	@Override
 	public boolean isValid(Game g) {
 		// make sure point is available and player has enough money
@@ -40,5 +44,9 @@ public class PlaceObject implements Action<Game>{
 		// update level with new objects, add to
 		// relevant list etc.
 		
+	}
+	
+	public String toString() {
+		return null;
 	}
 }

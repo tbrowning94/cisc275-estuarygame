@@ -2,9 +2,7 @@ package cisc275.game.controller.test;
 import static org.junit.Assert.*;
 import java.awt.Point;
 import java.util.List;
-
 import org.junit.Test;
-import cisc275.game.controller.ClickCrab;
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
@@ -35,12 +33,15 @@ public class PlaceObjectTest {
 		//test collector placement w/ and w/o money
 		//test on solid and unsolid location
 		//test with various path splitting spots
-
+		Point pt1 = new Point(0,0);
+		Plant plant1 = new Plant(pt1); // Normal crab
+		PlaceObject po1 = new PlaceObject(p1, plant1, g);
+		assertEquals(plant1, g.getPlants()[0]); //TODO: Define equals for plants
 	}
 	
 	@Test
 	public void test_update() {
-		//test object placed or didn't place as expected
+		//test object placed or didn't place as expected, this is tested with constructor**
 		fail("Not yet implemented");
 	}
 	

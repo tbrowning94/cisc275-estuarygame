@@ -2,9 +2,7 @@ package cisc275.game.controller.test;
 import static org.junit.Assert.*;
 import java.awt.Point;
 import java.util.List;
-
 import org.junit.Test;
-
 import cisc275.game.controller.ClickCrab;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
@@ -27,28 +25,29 @@ public class ClickCrabTest {
 	List<Level> lvls;
 	Game g = new Game(m, est_ph, g_crabs, g_plants, g_collect, g_speed, grows, gcols, lvl, lvls); //TODO: fix this
 	
-//	@Test //removed constuctor, no longer needed
-//	public void test_ClickCrab() {
-//		//test on mitten crab
-//		//test on normal crab
-//		//test any other cases?
-//		Point p1 = new Point(0,0);
-//		test_mit.setlocation(p1); // TODO: add a crab constructor that accepts a point?
-//		Point p2 = new Point(0,1);
-//		test_nomit.setlocation(p2);
-//		ClickCrab test_click1 = new ClickCrab(p1);
-//		assertEquals(true, test_click1.equals(test_click1)); //Passes, mitten at p1
-//		ClickCrab test_click2 = new ClickCrab(p2);
-//		assertEquals(false, test_click2.equals(test_click2)); //Fails, normal at p2
-//	}
+	@Test //removed constuctor, no longer needed
+	public void test_ClickCrab() {
+		//test on mitten crab
+		//test on normal crab
+		//test any other cases?
+		Point p1 = new Point(0,0);
+		test_mit.setlocation(p1); // TODO: add a crab constructor that accepts a point?
+		Point p2 = new Point(0,1);
+		test_nomit.setlocation(p2);
+		ClickCrab test_click1 = new ClickCrab(p1);
+		assertEquals(test_mit.getlocation(), test_click1.getLocation()); //Passes, mitten at p1
+		ClickCrab test_click2 = new ClickCrab(p2);
+		assertEquals(test_nomit.getlocation(), test_click2.getLocation()); //Passes, normal crab at p2
+	}
 	
 	@Test
 	public void test_update() {
-		//test removal of mitten crab
-		//test what happens to normal crab
-		//other tests?
-		//***need game states to implement test?
-		fail("Not yet implemented");
+		Point p1 = new Point(0,0);
+		test_mit.setlocation(p1); // TODO: add a crab constructor that accepts a point?
+		Point p2 = new Point(0,0);
+		test_nomit.setlocation(p2); // TODO: add a crab constructor that accepts a point?
+		ClickCrab test_click1 = new ClickCrab(p1);
+		assertEquals(test_nomit, g.getCrabs()); // Passes, only mit crab removed from game
 	}
 	
 	@Test
