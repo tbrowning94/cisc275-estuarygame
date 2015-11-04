@@ -2,7 +2,7 @@ package cisc275.game.model;
 
 import java.awt.Point;
 
-public class Crab {
+public class Crab extends RandomMover{
 	static int mittencount; 
 	Point location;
 	boolean mitten;
@@ -30,7 +30,4 @@ public class Crab {
 	//Generates random starting point of crab, 
 	//and random generates next direction
 	//Sleep to determine how often changes direction
-	void move(){
-		
-	}
 }

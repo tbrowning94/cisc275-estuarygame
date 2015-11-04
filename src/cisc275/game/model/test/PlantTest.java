@@ -5,6 +5,7 @@ import java.awt.Point;
 import org.junit.Test;
 import cisc275.game.model.Plant1;
 import cisc275.game.model.Plant2;
+import cisc275.game.model.Water;
 import cisc275.game.model.Plant;
 
 public class PlantTest {
@@ -31,6 +32,19 @@ public class PlantTest {
 		assertEquals(10, plant.efficiency);
 		plant.decreaseEfficiency();
 		assertEquals(5, plant.efficiency);
+	}
+	/**
+	 * tests to determine whether plant successfully reduces size(health) of water 
+	 * after detecting being on top of it
+	 */
+	@Test
+	
+	public void blockwater(){
+		Point locc = new Point(0,0);
+		Water w = new Water(locc, null, 0, 0, null);
+		Plant p = new Plant(locc);
+		p.blockwater();
+		assertEquals(1, w.getHealth());
 	}
 
 }

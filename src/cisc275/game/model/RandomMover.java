@@ -5,10 +5,13 @@ package cisc275.game.model;
  * @author rachelbruckel
  *
  */
-public abstract class RandomMover {
+public abstract class RandomMover extends Mob{
 	
 	/**
-	 * defines how objects extending this class will move. 
+	 * defines how objects extending this class will move.
+	 * after, spawn, the object will randomly move one space up, down,
+	 * left, or right(except if on a wall)
+	 *  
 	 */
 	public void moveRandomly() {
 		
