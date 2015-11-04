@@ -10,7 +10,7 @@ import cisc275.game.model.Fisherman;
 import cisc275.game.model.Water;
 
 public class FishermanTest {
-	Fisherman test = new Fisherman();
+	Fisherman test = new Fisherman(null, null, 0, 0);
 	@Test
 	public void test() {
 		fail("Not yet implemented");
