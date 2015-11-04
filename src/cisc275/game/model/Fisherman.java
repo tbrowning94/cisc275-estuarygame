@@ -16,12 +16,10 @@ public class Fisherman implements java.io.Serializable {
 	void onTick() {
 	}
 	/**
-	 * from the 
-	 * @param pH
-	 * @param damage
-	 * @return number of fishermen
+	 * @param ph
+	 * @return number of fishermen on screen
 	 */
-	public int ManNum(Game pH, Garbage damage){
+	public int ManNum(Game ph){
 		return 0;
 	}
 	/**healthier the water, more money that is generated, 

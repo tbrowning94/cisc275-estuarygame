@@ -79,6 +79,9 @@ public class Game { //need to figure out how to loop - do it in view
 		IntoEstuary(null, null);
 		return ph;
 	}
+	public int getHealthOfEstuary(){
+		return ph;
+	}
 
 	public Crab[] getCrabs() {
 		return null;
