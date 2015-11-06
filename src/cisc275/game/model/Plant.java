@@ -17,7 +17,6 @@ import java.io.Serializable;
 	
 	//plant variables
 	Point location; //where the plant was placed
-	static Plant[][] plants; //matrix board of plants
 	public int efficiency; //the amount the plant can reduce the water's flow
 	public int radius; //radius of where the plant can block water
 	

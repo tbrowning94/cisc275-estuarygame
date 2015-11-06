@@ -22,6 +22,7 @@ public class Mob implements java.io.Serializable{
 	 */
 	Point location;
 	int radius;
+	public static Mob[][] mobs;
 	public Mob() {
 		// TODO Auto-generated constructor stub
 	}
@@ -29,7 +30,7 @@ public class Mob implements java.io.Serializable{
 	/**The method will be called within the methods of Mob 
 	 * subclasses(Plant uses checkefficiency() and blockwater(), garbage 
 	 * uses checkcollector()), checks proximity according to the Mob's radius
-	 * and the compared Mob matrix. 
+	 * and the  Mob matrix. 
 	 * @return ArrayList<Mob> containing all Mob objects found in the matrix
 	 * within the given Mob's radius
 	 */

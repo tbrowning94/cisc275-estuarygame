@@ -13,7 +13,6 @@ import java.awt.Point;
  *speed determines how fast the crab moves(changes by level)
  */
 public class Crab extends RandomMover implements java.io.Serializable{
-	private static Crab[][] crabs;
 	static int mittencount; 
 	Point location;
 	boolean mitten;
@@ -41,10 +40,5 @@ public class Crab extends RandomMover implements java.io.Serializable{
 	//Generates random starting point of crab, 
 	//and random generates next direction
 	//Sleep to determine how often changes direction
-	public static Crab[][] getCrabs() {
-		return crabs;
-	}
-	public static void setCrabs(Crab[][] crabs) {
-		Crab.crabs = crabs;
-	}
+	
 }

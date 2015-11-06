@@ -9,7 +9,6 @@ import java.io.Serializable;
  *and pick up garbage when it is within their radius. 
  */
 public class GarbageCollector extends RandomMover implements Serializable {
-	static GarbageCollector[][] GarbageCollectors;
 	Point location; //location of Garbage collector
 	static final int RADIUS = 0; //radius of area collect can pick up trash in
 	static final int RATE = 0; //rate at which collector can pick up trash - are we sure we still want this?
