@@ -164,9 +164,4 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	int moneyFish() { 
 		return 0;
 	}
-	
-	//runs game
-	public static void main(String[] args) { //move to view, windows are central thread of game
-		
-	}
 }
