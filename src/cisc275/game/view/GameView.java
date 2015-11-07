@@ -1,27 +1,33 @@
 package cisc275.game.view;
+import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import cisc275.game.controller.Action;
 import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
 import cisc275.game.model.Game;
 
-public class GameView implements GameListener<Game>, Runnable {
+public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	//game constants
 	private static final int WORLD_WIDTH = 800;
 	private static final int WORLD_HEIGHT = 448;
 	private static final int SCALE = 1;
 	public static String title = "Estuary Defense";
 	
-	private Thread thread;
-	private JFrame frame;
+	private JPanel panel;
 	private Player player;
 	//private Key, Mouse?
 	private boolean running = false;
@@ -47,6 +53,7 @@ public class GameView implements GameListener<Game>, Runnable {
 	Image garbageCollector;
 	
 	public GameView() {
+		initUI();
 	}
 	public int getlevel(){
 		return level;
@@ -87,18 +94,20 @@ public class GameView implements GameListener<Game>, Runnable {
 	void startGame() {
 	}
 	
-	void InitializeBoardsize() {
-		frame = new JFrame();
+	private void initUI() {
+		panel = new JPanel();
 		Game game = new Game(); // Not sure if this should go here?
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE);
-		frame.setPreferredSize(size);
-		frame.setResizable(false);
-		frame.setTitle(title);
+		panel.setPreferredSize(size);
+		panel.setBorder(BorderFactory.createLineBorder(Color.gray));
+		panel.setLayout(new GridLayout(4,3,0,0));
 		//frame.add(gameview);
-		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		add(panel, BorderLayout.CENTER);
+		//add buttons, i.e. objects
+		pack();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setResizable(false);
 	}
 	void drawCrabs() {
 	}
@@ -144,60 +153,77 @@ public class GameView implements GameListener<Game>, Runnable {
 		
 	}
 	
-	public synchronized void start() {
-		running = true;
-		thread = new Thread(this, "Display");
-		thread.start();
-	}
+//	public synchronized void start() {
+//		running = true;
+//		thread = new Thread(this, "Display");
+//		thread.start();
+//	}
 	
-	public synchronized void stop() {
-		running = false;
-		try {
-			thread.join();
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			System.out.println("Try/catch failure in GameView.stop()");
-		}
-	}
+//	public synchronized void stop() {
+//		running = false;
+//		try {
+//			thread.join();
+//			
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//			System.out.println("Try/catch failure in GameView.stop()");
+//		}
+//	}
 	
-	@Override
-	public void run() {
-		long lastTime = System.nanoTime();
-		long timer = System.currentTimeMillis();
-		final double ns = 1000000000.0 / 60.0;
-		double delta = 0;
-		int frames = 0;
-		int updates = 0;
-		frame.requestFocus();
-		while (running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
-			while (delta >= 1) {
-				update();
-				updates++;
-				delta--;
-			}
-			render();
-			frames++;
-			
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
-				// System.out.println(updates+" UPS, "+frames+" FPS");
-				frame.setTitle(title+"  |  "+updates+" UPS, "+frames+" FPS");
-				updates = 0;
-				frames = 0;
-			}
-		}
-		stop();
-	}
+//	@Override
+//	public void run() {
+//		long lastTime = System.nanoTime();
+//		long timer = System.currentTimeMillis();
+//		final double ns = 1000000000.0 / 60.0;
+//		double delta = 0;
+//		int frames = 0;
+//		int updates = 0;
+//		frame.requestFocus();
+//		while (running) {
+//			long now = System.nanoTime();
+//			delta += (now - lastTime) / ns;
+//			lastTime = now;
+//			while (delta >= 1) {
+//				update();
+//				updates++;
+//				delta--;
+//			}
+//			render();
+//			frames++;
+//			
+//			if (System.currentTimeMillis() - timer > 1000) {
+//				timer += 1000;
+//				// System.out.println(updates+" UPS, "+frames+" FPS");
+//				frame.setTitle(title+"  |  "+updates+" UPS, "+frames+" FPS");
+//				updates = 0;
+//				frames = 0;
+//			}
+//		}
+//		stop();
+//	}
 
 	//runs game
 	public static void main(String[] args) { //move to view, windows are central thread of game
-		GameView gv = new GameView();
-		gv.InitializeBoardsize();
-		gv.startGame(); // Not sure about this either
-		gv.start(); // runs thread which calls run()
+//		GameView gv = new GameView();
+//		gv.InitializeBoardsize();
+//		gv.startGame(); // Not sure about this either
+//		gv.start(); // runs thread which calls run()
+		EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				GameView gv = new GameView();
+				gv.setVisible(true);
+			}
+		});
 	}
+
+	@Override
+	public void run() {
+		GameView gv = new GameView();
+		gv.setVisible(true);
+	}
+	
 }
+
+
