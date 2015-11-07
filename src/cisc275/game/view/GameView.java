@@ -22,8 +22,8 @@ import cisc275.game.model.Game;
 
 public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	//game constants
-	private static final int WORLD_WIDTH = 800;
-	private static final int WORLD_HEIGHT = 448;
+	private static final int WORLD_WIDTH = 1440;
+	private static final int WORLD_HEIGHT = 900;
 	private static final int SCALE = 1;
 	public static String title = "Estuary Defense";
 	
@@ -99,11 +99,10 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		Game game = new Game(); // Not sure if this should go here?
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE);
 		panel.setPreferredSize(size);
-		panel.setBorder(BorderFactory.createLineBorder(Color.gray));
-		panel.setLayout(new GridLayout(4,3,0,0));
-		//frame.add(gameview);
+		panel.setBorder(BorderFactory.createLineBorder(Color.gray)); // don't really need this
+		panel.setLayout(new GridLayout(90,225,0,0)); // this should be changed
 		add(panel, BorderLayout.CENTER);
-		//add buttons, i.e. objects
+		//add buttons, i.e. objects, probably better to do in update
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
