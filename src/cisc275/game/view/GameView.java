@@ -19,6 +19,9 @@ import cisc275.game.controller.Action;
 import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
 import cisc275.game.model.Game;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	//game constants
@@ -99,9 +102,17 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		Game game = new Game(); // Not sure if this should go here?
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE);
 		panel.setPreferredSize(size);
-		panel.setBorder(BorderFactory.createLineBorder(Color.gray)); // don't really need this
-		panel.setLayout(new GridLayout(90,225,0,0)); // this should be changed
-		add(panel, BorderLayout.CENTER);
+		panel.setBorder(BorderFactory.createLineBorder(Color.gray));
+		getContentPane().add(panel, BorderLayout.NORTH);
+		panel.setLayout(null);
+		
+		JButton btnPlant = new JButton("Plant"); // buttons can be created by constructors
+		btnPlant.setBounds(1355, 281, 97, 25);
+		panel.add(btnPlant); // but they need to be passed to game view in some way to add them to the panel
+		
+		JButton btnCrab = new JButton("crab");
+		btnCrab.setBounds(727, 391, 97, 25);
+		panel.add(btnCrab);
 		//add buttons, i.e. objects, probably better to do in update
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -222,7 +233,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		GameView gv = new GameView();
 		gv.setVisible(true);
 	}
-	
 }
 
 
