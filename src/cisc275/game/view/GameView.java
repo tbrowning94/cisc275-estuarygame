@@ -45,10 +45,12 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 
 	public static String title = "Estuary Defense";
 	
+	private JButton button;
 	private JPanel panel;
 	private JFrame frame;
-	Image[] Back;
-	final int BackFrames = 3; 
+	public int imgHeight;
+	public int imgWidth;
+	
 	
 	private Player player;
 	//private Key, Mouse?
@@ -76,10 +78,10 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	
     private GameView create() {
         frame.getContentPane().add(createContent());
-
+        
         return this;
     }
-    
+   
     
 	public GameView() {
 		createContent();
@@ -134,15 +136,10 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
                 g.drawImage(image, 0, 0, WORLD_WIDTH-75, WORLD_HEIGHT-150, null);
+                
             }
         };
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        for (String label : new String[]{"Start", "Take the Tutorial"}) {
-            JButton button = new JButton(label);
-            button.setAlignmentX(Component.CENTER_ALIGNMENT);
-            panel.add(Box.createRigidArea(new Dimension(15, 15)));
-            panel.add(button);
-        }
+
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		panel.setPreferredSize(size); // set window dimension
 		panel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
@@ -171,11 +168,27 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 //		panel.add(c1.getButton());
 		//add buttons, i.e. objects, probably better to do in update
 		
-		pack();
+	
+		Box box = Box.createVerticalBox();
+		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
+		Name.setAlignmentX(Component.TOP_ALIGNMENT);
+		
+        panel.add(Name);
+        
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+       
+        for (String label : new String[]{"Start", "Take the Tutorial"}) {
+            JButton button = new JButton(label);
+            button.setAlignmentY(Component.CENTER_ALIGNMENT);
+            panel.add(Box.createRigidArea(new Dimension(300, 0)));
+            panel.add(button);
+        
+        }
+    	pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setResizable(false);
-
+		setResizable(true);
+		
         return panel;
     }
 
@@ -185,6 +198,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
         try {
         	//image=ImageIO.read(file);
             bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
+            imgHeight=bufferedImage.getHeight();
+            imgWidth=bufferedImage.getWidth();
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();
