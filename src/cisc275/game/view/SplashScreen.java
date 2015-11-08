@@ -13,6 +13,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -25,7 +29,10 @@ public class SplashScreen extends JFrame{
 	Button startGame;
 	Button instructions;
 	Image splashimage;
+	BufferedImage[] pics;
+	int numpics = 10;
 	private JPanel panel2;
+	private JButton button;
 	
 	public SplashScreen() {
 		pack();
@@ -60,15 +67,20 @@ public class SplashScreen extends JFrame{
 		
 		getContentPane().add(panel2, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
 		panel2.setLayout(null); // default layout is Flowlayout, we need to decide what we want
-//
-//		panel2.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-//		//panel2.add(Box.createRigidArea(new Dimension(50, 0)));
-//		
-//		JButton button3 = new JButton("Plant");
-//		JButton button4 = new JButton("Garbage Collector");
-//		panel2.add(button3);
-//		panel2.add(button4);
-//		
+
+		panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
+		panel2.add(Box.createRigidArea(new Dimension(50, 0)));
+		
+		JButton button3 = new JButton("Plant");
+//		  try {
+//			    Image img = ImageIO.read(new File("images/Grass.png"));
+//			    button.setIcon(new ImageIcon(img));
+//			  } catch (IOException ex) {
+//			  }
+		JButton button4 = new JButton("Garbage Collector");
+		panel2.add(button3);
+		panel2.add(button4);
+		
     	pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -79,12 +91,9 @@ public class SplashScreen extends JFrame{
     }
     protected BufferedImage createImage() {
         BufferedImage bufferedImage;
-
         try {
-        	//image=ImageIO.read(file);
+        	//bufferedImage=ImageIO.read(file);
             bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
-//            imgHeight=bufferedImage.getHeight();
-//            imgWidth=bufferedImage.getWidth();
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();

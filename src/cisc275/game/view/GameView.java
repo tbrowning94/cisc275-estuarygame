@@ -237,7 +237,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		String cmd = e.getActionCommand();
 	      if(cmd.equals("Open")){
 	            dispose();
-	            System.out.print("hello");
+	           // System.out.print("hello");
 	            new SplashScreen();
 	        }
 	    }
