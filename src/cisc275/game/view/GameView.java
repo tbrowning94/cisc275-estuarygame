@@ -1,7 +1,9 @@
 package cisc275.game.view;
+
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -12,10 +14,15 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import cisc275.game.controller.Action;
 import cisc275.game.controller.GameListener;
@@ -25,15 +32,23 @@ import cisc275.game.model.Game;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	//game constants
 	private static final int WORLD_WIDTH = 1440;
 	private static final int WORLD_HEIGHT = 900;
 	private static final int SCALE = 1;
+
 	public static String title = "Estuary Defense";
 	
 	private JPanel panel;
+	
+	Image[] Back;
+	final int BackFrames = 3; 
+	
 	private Player player;
 	//private Key, Mouse?
 	private boolean running = false;
@@ -58,8 +73,10 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	Image plant;
 	Image garbageCollector;
 	
+	
 	public GameView() {
-		initUI();
+		createContent();
+		//initUI();
 	}
 	public int getlevel(){
 		return level;
@@ -100,15 +117,31 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	void startGame() {
 	}
 	
-	private void initUI() {
-		panel = new JPanel(); // Initialize panel
-		Game game = new Game(); // Not sure if this should go here?
+	private Component createContent() {
+        final Image image = createImage();
+//      panel = new JPanel(); // Initialize panel
+//		Game game = new Game(); // Not sure if this should go here?
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(image, 0, 0, null);
+            }
+        };
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        for (String label : new String[]{"Start", "Take the Tutorial"}) {
+            JButton button = new JButton(label);
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panel.add(Box.createRigidArea(new Dimension(15, 15)));
+            panel.add(button);
+        }
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		panel.setPreferredSize(size); // set window dimension
 		panel.setBorder(BorderFactory.createLineBorder(Color.gray)); // creates a border, not really needed
+		
 		getContentPane().add(panel, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
 		panel.setLayout(null); // default layout is Flowlayout, we need to decide what we want
-		
+
 		// Testing adding normal buttons here
 //		JButton btnPlant = new JButton("Plant"); // buttons can be created by constructors
 //		btnPlant.setBounds(1355, 281, 97, 25);
@@ -134,7 +167,24 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-	}
+
+        return panel;
+    }
+
+    private BufferedImage createImage() {
+        BufferedImage bufferedImage;
+
+        try {
+        	//image=ImageIO.read(file);
+            bufferedImage = ImageIO.read(new File("images/img.jpg"));
+            return bufferedImage;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 	void drawCrabs() {
 	}
 	void drawGarbage() {
@@ -234,6 +284,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 //		gv.InitializeBoardsize();
 //		gv.startGame(); // Not sure about this either
 //		gv.start(); // runs thread which calls run()
+//		SwingUtilities.invokeLater(new Runnable(){
 		EventQueue.invokeLater(new Runnable() {
 			
 			@Override
