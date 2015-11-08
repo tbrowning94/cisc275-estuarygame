@@ -133,7 +133,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
         final Image image = createImage();
 //      panel = new JPanel(); // Initialize panel
 //		Game game = new Game(); // Not sure if this should go here?
-        JPanel panel = new JPanel() {
+        final JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -176,14 +176,13 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		panel.add(Box.createRigidArea(new Dimension(300, 300)));
 		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
 		JButton button1 = new JButton("Start");
-		button1.addActionListener( new ActionListener()
-		{
+		button1.addActionListener( new ActionListener(){
 		 public void actionPerformed(ActionEvent e){
-			 SplashScreen.main(null);
-			 createContent().setVisible(false);
-		     System.exit(0);
 			 
-			
+			 panel.setVisible(false);
+		     dispose();
+		     
+		     JPanel panel2 = new JPanel();
 		         
 		    }
 		});

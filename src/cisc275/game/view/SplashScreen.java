@@ -27,7 +27,7 @@ public class SplashScreen extends GameView {
 	}
 	void inValidate() {
 	}
-	public Component createFrame(){
+	public Component GameFrame(){
         final Image image = G.createImage();
         JPanel panel2 = new JPanel() {
             @Override
@@ -62,25 +62,5 @@ public class SplashScreen extends GameView {
         return panel2;
     	
     }
-	public static void main(String[] args) { //move to view, windows are central thread of game
-//		GameView gv = new GameView();
-//		gv.InitializeBoardsize();
-//		gv.startGame(); // Not sure about this either
-//		gv.start(); // runs thread which calls run()
-		SwingUtilities.invokeLater(new Runnable(){
-//		EventQueue.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				SplashScreen ss = new SplashScreen();
-				ss.setVisible(true);
-			}
-		});
-	}
 
-	@Override
-	public void run() {
-		SplashScreen ss = new SplashScreen();
-		ss.setVisible(true);
-	}
 }
