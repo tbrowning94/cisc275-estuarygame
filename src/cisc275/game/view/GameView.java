@@ -39,7 +39,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class GameView extends JFrame implements GameListener<Game>, Runnable {
+public class GameView extends JFrame implements GameListener<Game>, Runnable, ActionListener {
 	//game constants
 	private static final int WORLD_WIDTH = 1440;
 	private static final int WORLD_HEIGHT = 900;
@@ -172,25 +172,19 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		//add buttons, i.e. objects, probably better to do in update
 		
 	
-		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(300, 300)));
-		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
-		JButton button1 = new JButton("Start");
-		button1.addActionListener( new ActionListener(){
-		 public void actionPerformed(ActionEvent e){
-			 
-			 panel.setVisible(false);
-		     dispose();
-		     
-		     JPanel panel2 = new JPanel();
-		         
-		    }
-		});
-		JButton button2 = new JButton("Tutorial");
-		Name.setAlignmentY(Component.TOP_ALIGNMENT);
-		panel.add(Name); 	
-		panel.add(button1);
-		panel.add(button2);
+
+		
+
+		
+//			 
+//			 panel.setVisible(false);
+//		     dispose();
+//		     
+//		     JPanel panel2 = new JPanel();
+//		         
+//		    }
+//		});
+
 
 		//panel.add(Name, BorderLayout.PAGE_START);
         //panel.add(button1, BorderLayout.LINE_START);
@@ -207,6 +201,18 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(true);
+		
+		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		panel.add(Box.createRigidArea(new Dimension(300, 300)));
+		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
+		JButton button1 = new JButton("Start");
+		button1.addActionListener(this);
+		button1.setActionCommand("Open");
+		JButton button2 = new JButton("Tutorial");
+		Name.setAlignmentY(Component.TOP_ALIGNMENT);
+		panel.add(Name); 	
+		panel.add(button1);
+		panel.add(button2);
 		
         return panel;
     }
@@ -226,7 +232,15 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 
         return null;
     }
-
+	@Override
+	public void actionPerformed(ActionEvent e){
+		String cmd = e.getActionCommand();
+	      if(cmd.equals("Open")){
+	            dispose();
+	            System.out.print("hello");
+	            new SplashScreen();
+	        }
+	    }
 	void drawCrabs() {
 	}
 	void drawGarbage() {

@@ -6,19 +6,25 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class SplashScreen extends GameView {
+public class SplashScreen extends GameView{
 	Button startGame;
 	Button instructions;
 	Image splashimage;
 	private JPanel panel2;
 	public SplashScreen() {
-		// TODO Auto-generated constructor stub
+		pack();
+		setVisible(true);
+		GameFrame();
 	}
 	GameView G = new GameView();
 	void initialize() {
@@ -27,8 +33,9 @@ public class SplashScreen extends GameView {
 	}
 	void inValidate() {
 	}
+
 	public Component GameFrame(){
-        final Image image = G.createImage();
+        final Image image = createImage();
         JPanel panel2 = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -61,6 +68,21 @@ public class SplashScreen extends GameView {
 		
         return panel2;
     	
+    }
+    protected BufferedImage createImage() {
+        BufferedImage bufferedImage;
+
+        try {
+        	//image=ImageIO.read(file);
+            bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
+            imgHeight=bufferedImage.getHeight();
+            imgWidth=bufferedImage.getWidth();
+            return bufferedImage;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
