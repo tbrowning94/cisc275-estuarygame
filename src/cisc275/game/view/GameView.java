@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -169,21 +170,28 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		//add buttons, i.e. objects, probably better to do in update
 		
 	
-		Box box = Box.createVerticalBox();
+		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		panel.add(Box.createRigidArea(new Dimension(300, 300)));
 		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
-		Name.setAlignmentX(Component.TOP_ALIGNMENT);
+		JButton button1 = new JButton("Start");
+		JButton button2 = new JButton("Tutorial");
+		Name.setAlignmentY(Component.TOP_ALIGNMENT);
+		panel.add(Name); 	
+		panel.add(button1);
+		panel.add(button2);
+
 		
-        panel.add(Name);
+		//panel.add(Name, BorderLayout.PAGE_START);
+        //panel.add(button1, BorderLayout.LINE_START);
+       // panel.add(button2, BorderLayout.LINE_END);
+//        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS))
+//        for (String label : new String[]{"Start", "Take the Tutorial"}) {
+//            JButton button = new JButton(label);
+//            button.setAlignmentY(Component.CENTER_ALIGNMENT);
+//            panel.add(Box.createRigidArea(new Dimension(300, 0)));
+//            panel.add(button);
         
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-       
-        for (String label : new String[]{"Start", "Take the Tutorial"}) {
-            JButton button = new JButton(label);
-            button.setAlignmentY(Component.CENTER_ALIGNMENT);
-            panel.add(Box.createRigidArea(new Dimension(300, 0)));
-            panel.add(button);
-        
-        }
+      //  }
     	pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
