@@ -11,7 +11,7 @@ import cisc275.game.model.Plant;
 public class PlaceObjectTest {
 	Point p1 = new Point(0,0);
 	Point p2 = new Point(0,1);
-	Crab test_mit = new Crab(true); // Mitten crab
+	Crab test_mit = new Crab(true, p1); // Mitten crab
 	Plant test_plant = new Plant(p1); // Normal crab
 	//TODO: Add another object to test for fails
 	int m = 100;

@@ -1,5 +1,10 @@
 package cisc275.game.controller;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+
+import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
 
 
@@ -9,9 +14,10 @@ import cisc275.game.model.Game;
  * 
  * @author Team 6
  */
-public class ClickCrab implements Action<Game>{
-	Point location;
-	boolean remove = false;
+public class ClickCrab extends AbstractAction implements Action<Game> {
+	private Point location;
+	private Game g;
+	private boolean remove = false;
 	
 	/**
 	 * The constructor will check the given location for a valid
@@ -64,6 +70,22 @@ public class ClickCrab implements Action<Game>{
 	
 	public String toString() {
 		return null;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		checkButton(e);
+		
+	}
+
+	private void checkButton(ActionEvent e) {
+		int lidx = 0;
+		for (Crab crab : g.getCrabs()) { // loop though crabs
+			if (crab.getlocation() == ((Crab) e.getSource()).getlocation()) { // check if crabs location matches clicked location
+				System.out.println("crab location matchs");
+			}
+		}
+		
 	}
 	
 }

@@ -19,7 +19,7 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	//Basic objects for the game
 	Crab[] crabs;
 	Plant[] plants;
-	GarbageCollector[] GarbageCollectors;
+	GarbageCollector[] garbageCollectors;
 	
 	public Game() {
 		
@@ -75,16 +75,16 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	}
 
 	public Crab[] getCrabs() {
-		return null;
+		return crabs;
 	}
 
 
 	public Plant[] getPlants() {
-		return null;
+		return plants;
 	}
 
 	public GarbageCollector[] getGarbageCollectors() {
-		return null;
+		return garbageCollectors;
 	}	
 	
 	/**

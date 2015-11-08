@@ -7,17 +7,20 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cisc275.game.controller.Action;
 import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
+import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -98,22 +101,35 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	}
 	
 	private void initUI() {
-		panel = new JPanel();
+		panel = new JPanel(); // Initialize panel
 		Game game = new Game(); // Not sure if this should go here?
-		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE);
-		panel.setPreferredSize(size);
-		panel.setBorder(BorderFactory.createLineBorder(Color.gray));
-		getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(null);
+		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
+		panel.setPreferredSize(size); // set window dimension
+		panel.setBorder(BorderFactory.createLineBorder(Color.gray)); // creates a border, not really needed
+		getContentPane().add(panel, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
+		panel.setLayout(null); // default layout is Flowlayout, we need to decide what we want
 		
-		JButton btnPlant = new JButton("Plant"); // buttons can be created by constructors
-		btnPlant.setBounds(1355, 281, 97, 25);
-		panel.add(btnPlant); // but they need to be passed to game view in some way to add them to the panel
+		// Testing adding normal buttons here
+//		JButton btnPlant = new JButton("Plant"); // buttons can be created by constructors
+//		btnPlant.setBounds(1355, 281, 97, 25);
+//		panel.add(btnPlant); // but they need to be passed to game view in some way to add them to the panel
 		
-		JButton btnCrab = new JButton("crab");
-		btnCrab.setBounds(727, 391, 97, 25);
-		panel.add(btnCrab);
+		// Testing implementing crab constructor here, can't get the image to show
+//		ImageIcon crabplaceholder = new ImageIcon("images/textures/bush2.png");
+//		JButton crabbutton = new JButton("crab img", crabplaceholder);
+//		crabbutton.putClientProperty("position", new Point(0,0));
+//		panel.add(crabbutton);
+		
+		// testing adding another normal button here
+//		JButton btnCrab = new JButton("crab");
+//		btnCrab.setBounds(727, 391, 97, 25);
+//		panel.add(btnCrab);
+		
+		// testing adding a crab here, should create a crab button but I can't get it to display still
+//		Crab c1 = new Crab(false, new Point(10,10));
+//		panel.add(c1.getButton());
 		//add buttons, i.e. objects, probably better to do in update
+		
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);

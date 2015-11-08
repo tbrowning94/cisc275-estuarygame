@@ -9,8 +9,9 @@ import cisc275.game.model.GarbageCollector;
 import cisc275.game.model.Plant;
 
 public class ClickCrabTest {
-	Crab test_mit = new Crab(true); // Mitten crab
-	Crab test_nomit = new Crab(false); // Normal crab
+	Point p1 = new Point(0,0);
+	Crab test_mit = new Crab(true, p1); // Mitten crab
+	Crab test_nomit = new Crab(false, p1); // Normal crab
 	//TODO: Add another object to test for fails
 	int m = 100;
 	int est_ph = 7;
