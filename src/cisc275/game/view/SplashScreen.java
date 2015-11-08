@@ -1,5 +1,6 @@
 package cisc275.game.view;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
@@ -16,17 +17,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class SplashScreen extends GameView{
+public class SplashScreen extends JFrame{
+	private static final int WORLD_WIDTH = 1440;
+	private static final int WORLD_HEIGHT = 900;
+	private static final int SCALE = 1;
+	private JFrame frame;
 	Button startGame;
 	Button instructions;
 	Image splashimage;
 	private JPanel panel2;
+	
 	public SplashScreen() {
 		pack();
 		setVisible(true);
+		System.out.print("hEELOOEOEOE");
 		GameFrame();
 	}
-	GameView G = new GameView();
+
 	void initialize() {
 	}
 	void onClick() {
@@ -34,6 +41,7 @@ public class SplashScreen extends GameView{
 	void inValidate() {
 	}
 
+	
 	public Component GameFrame(){
         final Image image = createImage();
         JPanel panel2 = new JPanel() {
@@ -41,17 +49,17 @@ public class SplashScreen extends GameView{
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, getWorldWidth()-75, getWorldHeight()-150, null);
+                g.drawImage(image, 0, 0, WORLD_WIDTH-75, WORLD_HEIGHT-150, null);
                 
             }
         };
 
-		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
+		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		panel2.setPreferredSize(size); // set window dimension
 		panel2.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
 		
-//		getContentPane().add(panel2, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
-//		panel2.setLayout(null); // default layout is Flowlayout, we need to decide what we want
+		getContentPane().add(panel2, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
+		panel2.setLayout(null); // default layout is Flowlayout, we need to decide what we want
 //
 //		panel2.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 //		//panel2.add(Box.createRigidArea(new Dimension(50, 0)));
@@ -75,8 +83,8 @@ public class SplashScreen extends GameView{
         try {
         	//image=ImageIO.read(file);
             bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
-            imgHeight=bufferedImage.getHeight();
-            imgWidth=bufferedImage.getWidth();
+//            imgHeight=bufferedImage.getHeight();
+//            imgWidth=bufferedImage.getWidth();
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();

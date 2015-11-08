@@ -133,7 +133,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
         final Image image = createImage();
 //      panel = new JPanel(); // Initialize panel
 //		Game game = new Game(); // Not sure if this should go here?
-        final JPanel panel = new JPanel() {
+        JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -361,6 +361,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 			public void run() {
 				GameView gv = new GameView();
 				gv.setVisible(true);
+			
 			}
 		});
 	}
