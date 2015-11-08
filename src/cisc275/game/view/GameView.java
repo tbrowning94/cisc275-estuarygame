@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 import cisc275.game.controller.Action;
 import cisc275.game.controller.GameListener;
@@ -45,7 +46,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	public static String title = "Estuary Defense";
 	
 	private JPanel panel;
-	
+	private JFrame frame;
 	Image[] Back;
 	final int BackFrames = 3; 
 	
@@ -73,7 +74,13 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	Image plant;
 	Image garbageCollector;
 	
-	
+    private GameView create() {
+        frame.getContentPane().add(createContent());
+
+        return this;
+    }
+    
+    
 	public GameView() {
 		createContent();
 		//initUI();
@@ -125,7 +132,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(image, 0, 0, null);
+                //g.drawImage(image, 0, 0, null);
+                g.drawImage(image, 0, 0, WORLD_WIDTH-75, WORLD_HEIGHT-150, null);
             }
         };
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -137,7 +145,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
         }
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		panel.setPreferredSize(size); // set window dimension
-		panel.setBorder(BorderFactory.createLineBorder(Color.gray)); // creates a border, not really needed
+		panel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
 		
 		getContentPane().add(panel, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
 		panel.setLayout(null); // default layout is Flowlayout, we need to decide what we want
@@ -176,7 +184,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 
         try {
         	//image=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/img.jpg"));
+            bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -284,8 +292,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 //		gv.InitializeBoardsize();
 //		gv.startGame(); // Not sure about this either
 //		gv.start(); // runs thread which calls run()
-//		SwingUtilities.invokeLater(new Runnable(){
-		EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable(){
+//		EventQueue.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
