@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Window;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -48,6 +49,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	
 	private JButton button;
 	private JPanel panel;
+	
 	private JFrame frame;
 	public int imgHeight;
 	public int imgWidth;
@@ -57,7 +59,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 	//private Key, Mouse?
 	private boolean running = false;
 	
-	private BufferedImage image = new BufferedImage(WORLD_WIDTH, WORLD_HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private BufferedImage image = new BufferedImage(getWorldWidth(), getWorldHeight(), BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
 	// # of milliseconds between state updates, probably will be 
@@ -136,12 +138,12 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, WORLD_WIDTH-75, WORLD_HEIGHT-150, null);
+                g.drawImage(image, 0, 0, getWorldWidth()-75, getWorldHeight()-150, null);
                 
             }
         };
 
-		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
+		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
 		panel.setPreferredSize(size); // set window dimension
 		panel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
 		
@@ -174,13 +176,23 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		panel.add(Box.createRigidArea(new Dimension(300, 300)));
 		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
 		JButton button1 = new JButton("Start");
+		button1.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed(ActionEvent e){
+			 SplashScreen.main(null);
+			 createContent().setVisible(false);
+		     System.exit(0);
+			 
+			
+		         
+		    }
+		});
 		JButton button2 = new JButton("Tutorial");
 		Name.setAlignmentY(Component.TOP_ALIGNMENT);
 		panel.add(Name); 	
 		panel.add(button1);
 		panel.add(button2);
 
-		
 		//panel.add(Name, BorderLayout.PAGE_START);
         //panel.add(button1, BorderLayout.LINE_START);
        // panel.add(button2, BorderLayout.LINE_END);
@@ -200,7 +212,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
         return panel;
     }
 
-    private BufferedImage createImage() {
+    protected BufferedImage createImage() {
         BufferedImage bufferedImage;
 
         try {
@@ -310,6 +322,20 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 //	}
 
 	//runs game
+	
+	public static int getWorldWidth() {
+		return WORLD_WIDTH;
+	}
+
+
+	public static int getWorldHeight() {
+		return WORLD_HEIGHT;
+	}
+
+
+	public static int getScale() {
+		return SCALE;
+	}
 	public static void main(String[] args) { //move to view, windows are central thread of game
 //		GameView gv = new GameView();
 //		gv.InitializeBoardsize();
@@ -331,6 +357,9 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable {
 		GameView gv = new GameView();
 		gv.setVisible(true);
 	}
+
+
+
 }
 
 
