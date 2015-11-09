@@ -38,6 +38,10 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GameView extends JFrame implements GameListener<Game>, Runnable, ActionListener {
 	//game constants
@@ -49,8 +53,12 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	
 	private JButton button;
 	private JPanel panel;
-	
 	private JFrame frame;
+	int deletenum = -1; //with use of crabs
+	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
+	private SplashScreen splashscreen;
+	private InstructionsView instructionsView;
+	private GameView gameView;
 	public int imgHeight;
 	public int imgWidth;
 	
@@ -87,8 +95,19 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
    
     
 	public GameView() {
-		createContent();
+		this.panel = createContent();
+		this.gameView = this;
 		//initUI();
+	}
+	
+	public JFrame getFrame() {
+		return this.frame;
+	}
+	public JPanel getPanel() {
+		return this.panel;
+	}
+	public GameView getGameView() {
+		return this.gameView;
 	}
 	public int getlevel(){
 		return level;
@@ -129,7 +148,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	void startGame() {
 	}
 	
-	private Component createContent() {
+	private JPanel createContent() {
         final Image image = createImage();
 //      panel = new JPanel(); // Initialize panel
 //		Game game = new Game(); // Not sure if this should go here?
@@ -138,10 +157,16 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, getWorldWidth()-75, getWorldHeight()-150, null);
+                g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
                 
             }
         };
+        panel.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
+        	}
+        });
 
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
 		panel.setPreferredSize(size); // set window dimension
@@ -209,6 +234,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
 		JButton button2 = new JButton("Tutorial");
+		button2.addActionListener(this);
+		button2.setActionCommand("OpenTut");
 		Name.setAlignmentY(Component.TOP_ALIGNMENT);
 		panel.add(Name); 	
 		panel.add(button1);
@@ -222,7 +249,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 
         try {
         	//image=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
+            bufferedImage = ImageIO.read(new File("images/BackImg2.jpg"));
             imgHeight=bufferedImage.getHeight();
             imgWidth=bufferedImage.getWidth();
             return bufferedImage;
@@ -236,13 +263,24 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public void actionPerformed(ActionEvent e){
 		String cmd = e.getActionCommand();
 	      if(cmd.equals("Open")){
-	            dispose();
+	            getContentPane().removeAll();//dispose();
 	           // System.out.print("hello");
-	            new SplashScreen();
+	            splashscreen = new SplashScreen();
+	            getContentPane().add(splashscreen.getPanel2());
+	            pack();
 	        }
+	      if(cmd.equals("OpenTut")){
+				getContentPane().removeAll();
+				instructionsView = new InstructionsView();
+				getContentPane().add(instructionsView.getPanel3());
+				pack();
+			}
 	    }
-	void drawCrabs() {
-	}
+	
+    public static int rando(){
+    	Random rnd = new Random();
+    	return(rnd.nextInt(100));
+    }
 	void drawGarbage() {
 	}
 	void drawPlants() {
