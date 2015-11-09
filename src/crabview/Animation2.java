@@ -35,12 +35,12 @@ public class Animation2 extends JPanel {
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
     	for(CrabView c: crabs){
-    		if(c.removel == true){
+    		if(c.removel == true){ //checks if crab needs to be removed
     			deletenum = crabs.indexOf(c);
     		}
     		c.paintcrab(frame);
     	}
-    	if(deletenum != -1){
+    	if(deletenum != -1){ //removes crab
     		frame.remove(crabs.get(deletenum).cbutton);
     		crabs.remove(deletenum);
     		deletenum = -1;
@@ -63,7 +63,7 @@ public class Animation2 extends JPanel {
 //    	});
     	for(int i = 0; i < 10000; i++){
     		frame.repaint();
-    		if(rando() == 1){
+    		if(rando() == 1){ //randomly makes a crab (1/50 chance)
     		crabs.add(new CrabView(true));
     		}
     		try {
