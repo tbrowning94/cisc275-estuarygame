@@ -1,4 +1,4 @@
-package cisc275.game.view.test;
+package cisc275.game.view;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
