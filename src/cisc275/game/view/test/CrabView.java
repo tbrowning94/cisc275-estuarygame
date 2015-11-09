@@ -21,7 +21,7 @@ public class CrabView {
     boolean removel = false;
     static boolean side = true;
     final int frameCount = 8;
-    BufferedImage[] pics;
+    static BufferedImage[] pics;
     int xloc = 0;
     int yloc = 0;
     final int xIncr = 8;
@@ -110,7 +110,31 @@ public class CrabView {
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
 		//Be sure that animation picture direction matches what is happening on screen.
     }
+    public CrabView(boolean t){
+    	crabs.add(this);
+		oneY = rando(3);
+		if(side == true){
+			side = false;
+			oneX = 1275;
+		}
+		else{
+			side = true;
+		}
+		cbutton.setSize(165, 165);
+		cbutton.addMouseListener(new MouseAdapter()  
+    	{  
+    	    public void mouseClicked(MouseEvent e)  
+    	    {  
+    	       // you can open a new frame here as
+    	       // i have assumed you have declared "frame" as instance variable
+    	    	//JOptionPane.showMessageDialog(null, "You Win");
+    	    	removel = true;
+
+    	    }  
+    	}); 
+    }
 	public CrabView() {
+		
 		crabs.add(this);
 		oneY = rando(3);
 		if(side == true){
@@ -125,6 +149,7 @@ public class CrabView {
     	pics = new BufferedImage[80];
     	for(int i = 0; i < frameCount; i++){ //loads all subimages into array, separated by their type
     		pics[i] = img[0].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
+    		//pics[i] = pics[i].getScaledInstance(82, 82, Image.SCALE_DEFAULT);
     		pics[i+10] = img[1].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
     		pics[i+20] = img[2].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
     		pics[i+30] = img[3].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
