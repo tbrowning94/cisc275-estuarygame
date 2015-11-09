@@ -26,8 +26,8 @@ public class CrabView {
     int yloc = 0;
     final int xIncr = 8;
     final int yIncr = 2;
-    final static int frameWidth = 1440;
-    final static int frameHeight = 900;
+    final static int frameWidth = 1366;
+    final static int frameHeight = 768;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
     private int oneX = 7;
@@ -60,7 +60,7 @@ public class CrabView {
     		randcount = 0;
     		rand = rando(2);
     	}
-    	 if (oneX >= 1275 || rand == 1)
+    	 if (oneX >= 1201 || rand == 1)
          {
              right = false;
              left = true;
@@ -72,7 +72,7 @@ public class CrabView {
              left = false;
          }
          
-         if (oneY >= 735 || rand == 3)
+         if (oneY >= 603 || rand == 3)
          {
              up = true;
              down = false;
