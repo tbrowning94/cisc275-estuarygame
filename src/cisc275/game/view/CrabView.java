@@ -1,4 +1,5 @@
 package cisc275.game.view;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
@@ -52,10 +54,12 @@ public class CrabView {
     		return(j);
     	}
     }
-    public void paintcrab(JFrame frame) {
+    
+    public void paintcrab(JPanel panel, Graphics g) {
     	picNum = (picNum + 1) % frameCount;
     	randcount= rando(1);
     	int rand = 0;
+    	//System.out.println(cbutton);
     	if(randcount == 1){
     		randcount = 0;
     		rand = rando(2);
@@ -101,16 +105,18 @@ public class CrabView {
          if(down && right ){
         	 picNums = picNum;
          }
-         frame.remove(cbutton);
+         //System.out.println(panel);
+         panel.remove(cbutton);
          cbutton.setIcon(new ImageIcon(pics[picNums]));
          cbutton.setLocation(oneX, oneY);
-         frame.add(cbutton);
-    	//g.drawImage(pics[picNums], oneX, oneY, Color.gray, this);
+         panel.add(cbutton);
+         
+         g.drawImage(pics[picNums], oneX, oneY, Color.gray, panel);
     	
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
 		//Be sure that animation picture direction matches what is happening on screen.
     }
-    public CrabView(boolean t){
+    public CrabView(JPanel frame){
     	crabs.add(this);
 		oneY = rando(3);
 		if(side == true){
@@ -132,6 +138,8 @@ public class CrabView {
 
     	    }  
     	}); 
+		cbutton.setLocation(20, 20);
+		frame.add(cbutton);
     }
 	public CrabView() {
 		
@@ -173,14 +181,14 @@ public class CrabView {
 	 private BufferedImage[] createImage(){
 	    	BufferedImage[] bufferedImage = new BufferedImage[8];
 	    	try {
-	    		bufferedImage[0] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_southeast.png"));
-	    		bufferedImage[1] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_southwest.png"));
-	    		bufferedImage[2] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_northeast.png"));
-	    		bufferedImage[3] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_northwest.png"));
-	    		bufferedImage[4] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_east.png"));
-	    		bufferedImage[5] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_west.png"));
-	    		bufferedImage[6] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_south.png"));
-	    		bufferedImage[7] = ImageIO.read(getClass().getResource("orc_animation/orc_jump_north.png"));
+	    		bufferedImage[0] = ImageIO.read(getClass().getResource("orc_jump_southeast.png"));
+	    		bufferedImage[1] = ImageIO.read(getClass().getResource("orc_jump_southwest.png"));
+	    		bufferedImage[2] = ImageIO.read(getClass().getResource("orc_jump_northeast.png"));
+	    		bufferedImage[3] = ImageIO.read(getClass().getResource("orc_jump_northwest.png"));
+	    		bufferedImage[4] = ImageIO.read(getClass().getResource("orc_jump_east.png"));
+	    		bufferedImage[5] = ImageIO.read(getClass().getResource("orc_jump_west.png"));
+	    		bufferedImage[6] = ImageIO.read(getClass().getResource("orc_jump_south.png"));
+	    		bufferedImage[7] = ImageIO.read(getClass().getResource("orc_jump_north.png"));
 	    		return bufferedImage;
 	    	} catch (IOException e) {
 	    		e.printStackTrace();
