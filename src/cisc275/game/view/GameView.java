@@ -57,6 +57,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	private SplashScreen splashscreen;
+	private InstructionsView instructionsView;
+	private GameView gameView;
 	public int imgHeight;
 	public int imgWidth;
 	
@@ -93,12 +95,19 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
    
     
 	public GameView() {
-		createContent();
+		this.panel = createContent();
+		this.gameView = this;
 		//initUI();
 	}
 	
 	public JFrame getFrame() {
 		return this.frame;
+	}
+	public JPanel getPanel() {
+		return this.panel;
+	}
+	public GameView getGameView() {
+		return this.gameView;
 	}
 	public int getlevel(){
 		return level;
@@ -139,7 +148,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	void startGame() {
 	}
 	
-	private Component createContent() {
+	private JPanel createContent() {
         final Image image = createImage();
 //      panel = new JPanel(); // Initialize panel
 //		Game game = new Game(); // Not sure if this should go here?
@@ -225,6 +234,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
 		JButton button2 = new JButton("Tutorial");
+		button2.addActionListener(this);
+		button2.setActionCommand("OpenTut");
 		Name.setAlignmentY(Component.TOP_ALIGNMENT);
 		panel.add(Name); 	
 		panel.add(button1);
@@ -258,6 +269,12 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	            getContentPane().add(splashscreen.getPanel2());
 	            pack();
 	        }
+	      if(cmd.equals("OpenTut")){
+				getContentPane().removeAll();
+				instructionsView = new InstructionsView();
+				getContentPane().add(instructionsView.getPanel3());
+				pack();
+			}
 	    }
 	
     public static int rando(){

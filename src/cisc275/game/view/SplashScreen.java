@@ -198,7 +198,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = createPlantImage();
-        g.drawImage(plant, (int)loc.getX(), (int)loc.getY(), 75, 75, null);
+    	g.drawImage(plant, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
     }
     
 
@@ -221,18 +221,18 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         	garbageCollectorClick = true;
 			plantClick = false;
         	System.out.println("garbage collector button enabled");
-        	crabs.add(new CrabView());
-        	for(int i = 0; i < 10000; i++){
-        		panel2.repaint();
-        		if(rando() == 1){
-        		crabs.add(new CrabView(panel2));
-        		}
-        		try {
-        			Thread.sleep(30);
-        		} catch (InterruptedException j) {
-        			j.printStackTrace();
-        		}
-        	}
+//        	crabs.add(new CrabView());
+//        	for(int i = 0; i < 10000; i++){
+//        		panel2.repaint();
+//        		if(rando() == 1){
+//        		crabs.add(new CrabView(panel2));
+//        		}
+//        		try {
+//        			Thread.sleep(30);
+//        		} catch (InterruptedException j) {
+//        			j.printStackTrace();
+//        		}
+//        	}
 		} 
 //        	else {
 //			plantClick = false;
