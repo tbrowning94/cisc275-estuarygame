@@ -111,7 +111,7 @@ public class CrabView {
          cbutton.setLocation(oneX, oneY);
          panel.add(cbutton);
          
-         g.drawImage(pics[picNums], oneX, oneY, Color.gray, panel);
+        // g.drawImage(pics[picNums], oneX, oneY, Color.gray, panel);
     	
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
 		//Be sure that animation picture direction matches what is happening on screen.
