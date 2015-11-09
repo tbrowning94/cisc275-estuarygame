@@ -38,6 +38,8 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GameView extends JFrame implements GameListener<Game>, Runnable, ActionListener {
 	//game constants
@@ -147,6 +149,12 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
                 
             }
         };
+        panel.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
+        	}
+        });
 
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
 		panel.setPreferredSize(size); // set window dimension

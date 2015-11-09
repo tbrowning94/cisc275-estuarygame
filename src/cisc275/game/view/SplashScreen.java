@@ -25,6 +25,8 @@ import javax.swing.SwingUtilities;
 
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Plant;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SplashScreen extends JFrame implements ActionListener{
 	private static final int WORLD_WIDTH = 1440;
@@ -75,6 +77,14 @@ public class SplashScreen extends JFrame implements ActionListener{
 		return this.garbageCollectorClick;
 	}
 	
+	public void setGarbageCollectorBool(boolean b) {
+		this.garbageCollectorClick = b;
+	}
+
+	public void setPlantBool(boolean b) {
+		this.plantClick = b;
+	}
+	
 	public JPanel GameFrame(){
         final Image image = createImage();
         panel2 = new JPanel() {
@@ -86,6 +96,20 @@ public class SplashScreen extends JFrame implements ActionListener{
                 
             }
         };
+        panel2.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		if(getPlantBool()) {
+        			//update
+        			setPlantBool(false);
+        		}
+        		if(getGarbageCollectorBool()) {
+        			//update
+        			setGarbageCollectorBool(false);
+        		}
+        		System.out.println("clicked: "+e.getX()+","+e.getY()+" pbutState:"+getPlantBool()+" gcbutState:"+getGarbageCollectorBool());
+        	}
+        });
 
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		panel2.setPreferredSize(size); // set window dimension
