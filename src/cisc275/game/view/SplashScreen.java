@@ -79,6 +79,14 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		return this.garbageCollectorClick;
 	}
 	
+	public void setPlantBool(boolean b) {
+		this.plantClick = b;
+	}
+	
+	public void setGarbageCollectorBool(boolean b) {
+		this.garbageCollectorClick = b;
+	}
+	
 	public JPanel GameFrame(){
         final Image image = createImage();
         panel2 = new JPanel() {
@@ -101,6 +109,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         			System.out.println("Mouse clicked after plant clicked");
         			Point loc = e.getLocationOnScreen();
         			paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			setPlantBool(false);
         		}
             }
 
@@ -157,7 +166,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         BufferedImage bufferedImage;
         try {
         	//bufferedImage=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/Switchgrass/SwitchGrassSequence.png"));
+            bufferedImage = ImageIO.read(new File("images/RedMaple/RedMaple0005.png"));
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -168,7 +177,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = createPlantImage();
-        g.drawImage(plant, (int)loc.getX(), (int)loc.getY(), 150, 150, null);
+        g.drawImage(plant, (int)loc.getX(), (int)loc.getY(), 100, 100, null);
     }
     
 

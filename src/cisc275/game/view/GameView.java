@@ -252,7 +252,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	            getContentPane().removeAll();//dispose();
 	           // System.out.print("hello");
 	            splashscreen = new SplashScreen();
-	            getContentPane().add(splashscreen.getPanel());
+	            getContentPane().add(splashscreen.getPanel2());
 	            pack();
 	        }
 	    }
