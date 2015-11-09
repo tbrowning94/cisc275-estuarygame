@@ -38,6 +38,8 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -52,7 +54,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private JButton button;
 	private JPanel panel;
 	private JFrame frame;
-	
+	int deletenum = -1; //with use of crabs
+	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	private SplashScreen splashscreen;
 	public int imgHeight;
 	public int imgWidth;
@@ -254,10 +257,40 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	            splashscreen = new SplashScreen();
 	            getContentPane().add(splashscreen.getPanel2());
 	            pack();
+	            drawCrabs();
 	        }
 	    }
 	void drawCrabs() {
+		crabs.add(new CrabView());
+		for(int i = 0; i < 10000; i++){
+    		paintCrabs();
+    		if(rando() == 1){
+    		crabs.add(new CrabView(true));
+    		}
+    		try {
+    			Thread.sleep(30);
+    		} catch (InterruptedException e) {
+    			e.printStackTrace();
+    		}
+    	}
 	}
+	void paintCrabs(){
+		for(CrabView c: crabs){
+    		if(c.removel == true){
+    			deletenum = crabs.indexOf(c);
+    		}
+    		c.paintcrab(frame);
+    	}
+    	if(deletenum != -1){
+    		frame.remove(crabs.get(deletenum).cbutton);
+    		crabs.remove(deletenum);
+    		deletenum = -1;
+    	}
+	}
+    public static int rando(){
+    	Random rnd = new Random();
+    	return(rnd.nextInt(100));
+    }
 	void drawGarbage() {
 	}
 	void drawPlants() {
