@@ -95,7 +95,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, WORLD_WIDTH-75, WORLD_HEIGHT-150, null);
+                g.drawImage(image, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
         
