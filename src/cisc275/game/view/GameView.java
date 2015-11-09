@@ -145,7 +145,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, getWorldWidth()-75, getWorldHeight()-150, null);
+                g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
                 
             }
         };
@@ -235,7 +235,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 
         try {
         	//image=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
+            bufferedImage = ImageIO.read(new File("images/BackImg2.jpg"));
             imgHeight=bufferedImage.getHeight();
             imgWidth=bufferedImage.getWidth();
             return bufferedImage;
