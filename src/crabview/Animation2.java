@@ -72,7 +72,7 @@ public class Animation2 extends JPanel {
     		crabs.add(new CrabView(true));
     		}
     		try {
-    			Thread.sleep(30);
+    			Thread.sleep(50);
     		} catch (InterruptedException e) {
     			e.printStackTrace();
     		}
