@@ -107,7 +107,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	System.out.println("Mouse clicked");
         		if (plantClick) {
         			System.out.println("Mouse clicked after plant clicked");
-        			Point loc = e.getLocationOnScreen();
+        			Point loc = new Point(e.getX(), e.getY());//e.getLocationOnScreen();
         			paintPlantComponent(e.getComponent().getGraphics(), loc);
         			setPlantBool(false);
         		}
@@ -177,7 +177,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = createPlantImage();
-        g.drawImage(plant, (int)loc.getX(), (int)loc.getY(), 100, 100, null);
+        g.drawImage(plant, (int)loc.getX(), (int)loc.getY(), 75, 75, null);
     }
     
 
