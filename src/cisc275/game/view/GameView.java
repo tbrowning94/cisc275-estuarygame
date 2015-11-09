@@ -45,8 +45,8 @@ import java.awt.event.MouseEvent;
 
 public class GameView extends JFrame implements GameListener<Game>, Runnable, ActionListener {
 	//game constants
-	private static final int WORLD_WIDTH = 1440;
-	private static final int WORLD_HEIGHT = 900;
+	private static final int WORLD_WIDTH = 1366;
+	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 
 	public static String title = "Estuary Defense";
@@ -157,7 +157,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, getWorldWidth()-75, getWorldHeight()-200, null);
+                g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
                 
             }
         };
@@ -249,7 +249,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 
         try {
         	//image=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/BackImg2.jpg"));
+            bufferedImage = ImageIO.read(new File("images/BackImg3.jpg"));
             imgHeight=bufferedImage.getHeight();
             imgWidth=bufferedImage.getWidth();
             return bufferedImage;

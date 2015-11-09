@@ -33,8 +33,8 @@ import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Plant;
 
 public class SplashScreen extends JFrame implements ActionListener, MouseListener{
-	private static final int WORLD_WIDTH = 1440;
-	private static final int WORLD_HEIGHT = 900;
+	private static final int WORLD_WIDTH = 1366;
+	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 	//private JFrame frame;
 	private JPanel panel2;
@@ -113,7 +113,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, WORLD_WIDTH-75, WORLD_HEIGHT-200, null);
+                g.drawImage(image, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
         panel2.addMouseListener(new MouseAdapter() {
@@ -177,7 +177,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         BufferedImage bufferedImage;
         try {
         	//bufferedImage=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/BackImg2.jpg"));
+            bufferedImage = ImageIO.read(new File("images/BackImg3.jpg"));
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();
