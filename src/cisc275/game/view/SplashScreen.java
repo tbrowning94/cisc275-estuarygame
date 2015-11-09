@@ -37,7 +37,9 @@ public class SplashScreen extends JFrame implements ActionListener{
 	Image splashimage;
 	BufferedImage[] pics;
 	int numpics = 10;
-	private JButton button;
+	private JButton pbutton, gcbutton;
+	
+	private boolean plantClick, garbageCollectorClick = false;
 	
 	public SplashScreen() {
 		//pack();
@@ -56,7 +58,22 @@ public class SplashScreen extends JFrame implements ActionListener{
 	public JPanel getPanel() {
 		return this.panel2;
 	}
+	
+	public JButton getPButton() {
+		return this.pbutton;
+	}
+	
+	public JButton getGCButton() {
+		return this.gcbutton;
+	}
 
+	public boolean getPlantBool() {
+		return this.plantClick;
+	}
+	
+	public boolean getGarbageCollectorBool() {
+		return this.garbageCollectorClick;
+	}
 	
 	public JPanel GameFrame(){
         final Image image = createImage();
@@ -80,19 +97,19 @@ public class SplashScreen extends JFrame implements ActionListener{
 		panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
 		panel2.add(Box.createRigidArea(new Dimension(50, 0)));
 		
-		JButton button3 = new JButton("Plant");
-		button3.addActionListener(this);
-		button3.setActionCommand("Plant");
+		pbutton = new JButton("Plant");
+		pbutton.addActionListener(this);
+		pbutton.setActionCommand("Plant");
 //		  try {
 //			    Image img = ImageIO.read(new File("images/Grass.png"));
 //			    button.setIcon(new ImageIcon(img));
 //			  } catch (IOException ex) {
 //			  }
-		JButton button4 = new JButton("Garbage Collector");
-		button4.addActionListener(this);
-		button4.setActionCommand("Garbage Collector");
-		panel2.add(button3);
-		panel2.add(button4);
+		gcbutton = new JButton("Garbage Collector");
+		gcbutton.addActionListener(this);
+		gcbutton.setActionCommand("Garbage Collector");
+		panel2.add(pbutton);
+		panel2.add(gcbutton);
 		
     	//pack();
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,12 +139,20 @@ public class SplashScreen extends JFrame implements ActionListener{
 			//we might not want this here, but this could invoke a call to update
 			//which could then place a plant at the next clicked location based on the 
 			//next mouse click that still has this button enabled
-        }
-		if(cmd.equals("Garbage Collector")){
+			plantClick = true;
+			System.out.println("plant button enabled");
+        } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 
 			//invoke a call to update based on a click action listener which
 			//would give the location to place
+        	garbageCollectorClick = true;
+        	System.out.println("garbage collector button enabled");
+		} else {
+			plantClick = false;
+			garbageCollectorClick = false;
+			System.out.println("no buttons enabled"); //doesn't seem to reach this, need to disable the buttons elsewhere
+			//this could manually be done with a setter after updating the actions related to the button
 		}
 	}
 
