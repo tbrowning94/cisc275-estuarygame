@@ -49,8 +49,9 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	
 	private JButton button;
 	private JPanel panel;
-	
 	private JFrame frame;
+	
+	private SplashScreen splashscreen;
 	public int imgHeight;
 	public int imgWidth;
 	
@@ -89,6 +90,10 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public GameView() {
 		createContent();
 		//initUI();
+	}
+	
+	public JFrame getFrame() {
+		return this.frame;
 	}
 	public int getlevel(){
 		return level;
@@ -236,9 +241,11 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public void actionPerformed(ActionEvent e){
 		String cmd = e.getActionCommand();
 	      if(cmd.equals("Open")){
-	            dispose();
+	            getContentPane().removeAll();//dispose();
 	           // System.out.print("hello");
-	            new SplashScreen();
+	            splashscreen = new SplashScreen();
+	            getContentPane().add(splashscreen.getPanel());
+	            pack();
 	        }
 	    }
 	void drawCrabs() {
