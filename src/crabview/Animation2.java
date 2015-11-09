@@ -30,8 +30,8 @@ import javax.swing.JPanel;
 public class Animation2 extends JPanel {
 	static JFrame frame = new JFrame();
     static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
-    final static int frameWidth = 1440;
-    final static int frameHeight = 900;
+    final static int frameWidth = 1366;
+    final static int frameHeight = 768;
     int deletenum = -1;
     public static int rando(){
     	Random rnd = new Random();
