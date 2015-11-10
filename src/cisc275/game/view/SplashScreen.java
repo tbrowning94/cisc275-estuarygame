@@ -43,17 +43,38 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	Button startGame;
 	Button instructions;
 	Image splashimage;
-	BufferedImage[] pics;
 	int numpics = 10;
 	private JButton pbutton, gcbutton;
+    int imgHeight;
+    int imgWidth;
+    
+	ArrayList<BufferedImage> pics = new ArrayList<BufferedImage>(numpics);
 	
 	private boolean plantClick, garbageCollectorClick = false;
+	private File file;
 	
 	public SplashScreen() {
 		//pack();
 		//setVisible(true);
 		//System.out.print("hEELOOEOEOE");
-		this.panel2 = GameFrame();
+		//createImage(file);
+		
+		ArrayList <BufferedImage> pics=new ArrayList<BufferedImage>(numpics);
+		createImage(file);
+    	BufferedImage bi = createImage(new File("images/BackImg1.jpg"));
+    	BufferedImage plant1 = createImage(new File("images/Grass.png"));
+    	BufferedImage GarbCol = createImage(new File("images/Squirrel/Squirrel1.png"));
+    	System.out.print("PrintPics");
+    	pics.add(bi);
+    	pics.add(plant1);
+    	pics.add(GarbCol);
+    	  	
+     	//for(int i = 0; i < pics.size(); i++)
+    		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
+     	
+     	this.panel2 = GameFrame();
+		
+		
 	}
 
 	void initialize() {
@@ -104,16 +125,30 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     		deletenum = -1;
     	}
     }
+	   private BufferedImage createImage(File file) {
+	        BufferedImage bufferedImage;
+	        try {
+	        	bufferedImage=ImageIO.read(file);
+	            //bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
+
+	            return bufferedImage;
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        return null;
+	    }
+
 	public JPanel GameFrame(){
 		
-        final Image image = createImage();
+        final Image image = createImage(file);
         panel2 = new JPanel() {
         	
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+                g.drawImage(pics.get(0), 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
         panel2.addMouseListener(new MouseAdapter() {
@@ -173,49 +208,53 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         return panel2;
     	
     }
-    protected BufferedImage createImage() {
-        BufferedImage bufferedImage;
-        try {
-        	//bufferedImage=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/BackImg3.jpg"));
-            return bufferedImage;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-    protected BufferedImage createPlantImage() {
-        BufferedImage bufferedImage;
-        try {
-        	//bufferedImage=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/Riverbirch/Riverbirch0002.png"));
-            return bufferedImage;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-    protected BufferedImage createGarbageCollectorImage() {
-        BufferedImage bufferedImage;
-        try {
-        	//bufferedImage=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/Squirrel/Squirrel1.png"));
-            return bufferedImage;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
+//    protected BufferedImage createImage() {
+//        BufferedImage bufferedImage;
+//        try {
+//        	//bufferedImage=ImageIO.read(file);
+//            bufferedImage = ImageIO.read(new File("images/BackImg3.jpg"));
+//            return bufferedImage;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+//    }
+//    protected BufferedImage createPlantImage() {
+//        BufferedImage bufferedImage;
+//
+//    	ArrayList<BufferedImage> pics = new ArrayList<BufferedImage>(numpics);
+//
+//        try {
+//        	//bufferedImage=ImageIO.read(file);
+//            bufferedImage = ImageIO.read(new File("images/Riverbirch/Riverbirch0002.png"));
+//            pics.add(bufferedImage);
+//            return bufferedImage;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+//    }
+//    protected BufferedImage createGarbageCollectorImage() {
+//        BufferedImage bufferedImage;
+//        try {
+//        	//bufferedImage=ImageIO.read(file);
+//            bufferedImage = ImageIO.read(new File("images/Squirrel/Squirrel1.png"));
+//            return bufferedImage;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+//    }
     protected void paintPlantComponent(Graphics g, Point loc ) {    
-    	BufferedImage plant = createPlantImage();
+    	BufferedImage plant = pics.get(1);
     	g.drawImage(plant, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
     }
     
     protected void paintGarbageCollectorComponent(Graphics g, Point loc ) {    
-    	BufferedImage GarbC = createGarbageCollectorImage();
+    	BufferedImage GarbC = pics.get(2);
     	g.drawImage(GarbC, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
     }
 
