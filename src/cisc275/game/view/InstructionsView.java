@@ -30,8 +30,8 @@ import java.awt.Component;
 //import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 public class InstructionsView extends JFrame implements ActionListener, MouseListener {
-	private static final int WORLD_WIDTH = 1440;
-	private static final int WORLD_HEIGHT = 900;
+	private static final int WORLD_WIDTH = 1366;
+	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 	//private JFrame frame;
 	private JPanel panel3;
