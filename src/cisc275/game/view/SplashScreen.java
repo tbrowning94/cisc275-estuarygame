@@ -36,7 +36,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
-	//private JFrame frame;
 	private JPanel panel2;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
@@ -48,17 +47,12 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     int imgHeight;
     int imgWidth;
     
-	//ArrayList<BufferedImage> pics = new ArrayList<BufferedImage>(numpics);
 	private BufferedImage pics[];
     
 	private boolean plantClick, garbageCollectorClick = false;
 	private File file;
 	
 	public SplashScreen() {
-		//pack();
-		//setVisible(true);
-		//System.out.print("hEELOOEOEOE");
-		//createImage(file);
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/BackImg1.jpg");
     	BufferedImage plant1 = createImage("images/Grass.png");
@@ -128,8 +122,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	        BufferedImage bufferedImage;
 	        try {
 	        	bufferedImage=ImageIO.read(new File(file));
-	            //bufferedImage = ImageIO.read(new File("images/BackImg1.jpg"));
-
 	            return bufferedImage;
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -139,14 +131,11 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	    }
 
 	public JPanel GameFrame(){
-		
-        //final Image image = createImage(file);
         panel2 = new JPanel() {
         	
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                //g.drawImage(image, 0, 0, null);
                 g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
@@ -180,7 +169,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		panel2.setPreferredSize(size); // set window dimension
 		panel2.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
 		
-		//getContentPane().add(panel2, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
 		panel2.setLayout(null); // default layout is Flowlayout, we need to decide what we want
 
 		panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
@@ -189,64 +177,17 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		pbutton = new JButton("Plant");
 		pbutton.addActionListener(this);
 		pbutton.setActionCommand("Plant");
-//		  try {
-//			    Image img = ImageIO.read(new File("images/Grass.png"));
-//			    button.setIcon(new ImageIcon(img));
-//			  } catch (IOException ex) {
-//			  }
+		
 		gcbutton = new JButton("Garbage Collector");
 		gcbutton.addActionListener(this);
 		gcbutton.setActionCommand("Garbage Collector");
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
 		
-    	//pack();
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setLocationRelativeTo(null);
-		//setResizable(true);
         return panel2;
     	
     }
-//    protected BufferedImage createImage() {
-//        BufferedImage bufferedImage;
-//        try {
-//        	//bufferedImage=ImageIO.read(file);
-//            bufferedImage = ImageIO.read(new File("images/BackImg3.jpg"));
-//            return bufferedImage;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
-//    }
-//    protected BufferedImage createPlantImage() {
-//        BufferedImage bufferedImage;
-//
-//    	ArrayList<BufferedImage> pics = new ArrayList<BufferedImage>(numpics);
-//
-//        try {
-//        	//bufferedImage=ImageIO.read(file);
-//            bufferedImage = ImageIO.read(new File("images/Riverbirch/Riverbirch0002.png"));
-//            pics.add(bufferedImage);
-//            return bufferedImage;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
-//    }
-//    protected BufferedImage createGarbageCollectorImage() {
-//        BufferedImage bufferedImage;
-//        try {
-//        	//bufferedImage=ImageIO.read(file);
-//            bufferedImage = ImageIO.read(new File("images/Squirrel/Squirrel1.png"));
-//            return bufferedImage;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
-//    }
+
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = pics[1];
     	g.drawImage(plant, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
