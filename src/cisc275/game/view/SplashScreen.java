@@ -49,7 +49,12 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     
 	private BufferedImage pics[];
     
-	private boolean plantClick, garbageCollectorClick = false;
+	private enum click {
+		plant1, plant2, plant3, gC1, gC2, gC3
+	}
+	
+	private click isClicked;
+	
 	private File file;
 	
 	public SplashScreen() {
@@ -89,22 +94,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		return this.gcbutton;
 	}
 
-	public boolean getPlantBool() {
-		return this.plantClick;
-	}
-	
-	public boolean getGarbageCollectorBool() {
-		return this.garbageCollectorClick;
-	}
-	
-	public void setPlantBool(boolean b) {
-		this.plantClick = b;
-	}
-	
-	public void setGarbageCollectorBool(boolean b) {
-		this.garbageCollectorClick = b;
-	}
-	
 	public void paint(Graphics g) {
     	for(CrabView c: crabs){
     		if(c.removel == true){
@@ -144,19 +133,33 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 
             @Override
             public void mouseClicked(MouseEvent e) {
-            	System.out.println("Mouse clicked");
-        		if (plantClick) {
-        			System.out.println("Mouse clicked after plant clicked");
-        			Point loc = new Point(e.getX(), e.getY());//e.getLocationOnScreen();
-        			paintPlantComponent(e.getComponent().getGraphics(), loc);
-        			setPlantBool(false);
-        		}
-        		if (garbageCollectorClick){
-        			System.out.println("Mouse clicked after Garbage clicked");
-        			Point loc = new Point(e.getX(), e.getY());//e.getLocationOnScreen();
-        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-        			setGarbageCollectorBool(false);
-        		}
+            	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
+        		
+            	switch (isClicked) {
+            		case plant1:
+            			paintPlantComponent(e.getComponent().getGraphics(), loc);
+            			break;
+            			
+            		case plant2:
+            			paintPlantComponent(e.getComponent().getGraphics(), loc);
+            			break;
+            			
+            		case plant3:
+            			paintPlantComponent(e.getComponent().getGraphics(), loc);
+            			break;
+            			
+            		case gC1:
+            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+            			break;
+            			
+            		case gC2:
+            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+            			break;
+            			
+            		case gC3:
+            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+            			break;
+            	}
             }
 
             @Override
@@ -206,17 +209,13 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			//we might not want this here, but this could invoke a call to update
 			//which could then place a plant at the next clicked location based on the 
 			//next mouse click that still has this button enabled
-			plantClick = true; //should these be done through a setter?
-			garbageCollectorClick = false;
-			System.out.println("plant button enabled");
+			isClicked = click.plant1;
         } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 
 			//invoke a call to update based on a click action listener which
 			//would give the location to place
-        	garbageCollectorClick = true;
-			plantClick = false;
-        	System.out.println("garbage collector button enabled");
+        	isClicked = click.gC1;
 //        	crabs.add(new CrabView());
 //        	for(int i = 0; i < 10000; i++){
 //        		panel2.repaint();
@@ -230,12 +229,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 //        		}
 //        	}
 		} 
-//        	else {
-//			plantClick = false;
-//			garbageCollectorClick = false;
-//			System.out.println("no buttons enabled"); //doesn't seem to reach this, need to disable the buttons elsewhere
-//			//this could manually be done with a setter after updating the actions related to the button
-//		}
 	}
 
 	@Override
