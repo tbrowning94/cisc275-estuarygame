@@ -176,16 +176,29 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 
 		panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
 		panel2.add(Box.createRigidArea(new Dimension(50, 0)));
+	
 		
-		pbutton = new JButton("Plant");
+		//ImageIcon plantIcon = createImageIcon("images/Grass.png", "picture of grass");
+		BufferedImage plant1 = createImage("images/Grass.png");
+		pbutton = new JButton();
+		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(50, 50, 20)));
 		pbutton.addActionListener(this);
 		pbutton.setActionCommand("Plant");
+		pbutton.setBorderPainted(false);
+		pbutton.setFocusPainted(false);
+		pbutton.setContentAreaFilled(false);
 		
-		gcbutton = new JButton("Garbage Collector");
+		BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
+		gcbutton = new JButton();
+		//gcbutton.setLocation(1000,1000);
+		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(50, 50, 20)));
 		gcbutton.addActionListener(this);
 		gcbutton.setActionCommand("Garbage Collector");
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
+		gcbutton.setBorderPainted(false);
+		gcbutton.setFocusPainted(false);
+		gcbutton.setContentAreaFilled(false);
 		
         return panel2;
     	
@@ -265,7 +278,17 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	return(rnd.nextInt(100));
     }
 	
-
+    /** Returns an ImageIcon, or null if the path was invalid. */
+    protected ImageIcon createImageIcon(String path,
+                                               String description) {
+        java.net.URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
 
 
 }
