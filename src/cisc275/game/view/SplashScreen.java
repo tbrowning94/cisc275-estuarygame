@@ -223,7 +223,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		if (run == true){
 		cloud.setBounds(500, 50, 100, 150);
 		theX+=xincr;
-		theY+=yincr;
+		//theY+=yincr;
 		}
 		
 		
