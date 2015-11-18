@@ -62,10 +62,12 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	BufferedImage bi = createImage("images/BackImg1.jpg");
     	BufferedImage plant1 = createImage("images/Grass.png");
     	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
-    	System.out.print("PrintPics");
+    	BufferedImage trash = createImage("images/trash.png");
+    	//System.out.print("PrintPics");
     	pics[0] = bi;
     	pics[1] = plant1;
     	pics[2] = GarbCol;
+    	pics[3] = trash;
     	  	
      	//for(int i = 0; i < pics.size(); i++)
     		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
@@ -126,6 +128,10 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+                Random rand = new Random();
+                for (int i = 0; i<10; i++) {
+                	g.drawImage(pics[3],rand.nextInt(WORLD_WIDTH) - 1, rand.nextInt(WORLD_HEIGHT), 30, 30 - 1, null);
+                }
             }
         };
         panel2.addMouseListener(new MouseAdapter() {
