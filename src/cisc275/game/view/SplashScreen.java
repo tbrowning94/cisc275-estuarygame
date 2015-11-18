@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -171,14 +172,20 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		
 		panel2.setLayout(null); // default layout is Flowlayout, we need to decide what we want
 
-		panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
-		panel2.add(Box.createRigidArea(new Dimension(50, 0)));
+		//panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
+		//panel2.add(Box.createRigidArea(new Dimension(50, 0)));
 	
 		
 		//ImageIcon plantIcon = createImageIcon("images/Grass.png", "picture of grass");
 		BufferedImage plant1 = createImage("images/Grass.png");
 		pbutton = new JButton();
-		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(50, 50, 20)));
+		
+		Dimension size2 = pbutton.getPreferredSize();
+		
+		//pbutton.setFont(new Font("Georgia",Font.BOLD, 12));
+		pbutton.setBounds(1250, 300, 100 , 100);
+		
+		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(100, 100, 20)));
 		pbutton.addActionListener(this);
 		pbutton.setActionCommand("Plant");
 		pbutton.setBorderPainted(true);
@@ -187,10 +194,14 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		
 		BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
 		gcbutton = new JButton();
+		size2 = gcbutton.getPreferredSize();
+		gcbutton.setBounds(1250, 200, 100 , 100);
+		
 		//gcbutton.setLocation(1000,1000);
-		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(50, 50, 20)));
+		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(100, 100, 20)));
 		gcbutton.addActionListener(this);
 		gcbutton.setActionCommand("Garbage Collector");
+	
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
 		gcbutton.setBorderPainted(true);

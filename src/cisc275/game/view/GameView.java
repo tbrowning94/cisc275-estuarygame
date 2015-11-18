@@ -7,9 +7,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Window;
 import java.awt.image.BufferStrategy;
@@ -233,20 +235,40 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		setLocationRelativeTo(null);
 		setResizable(true);
 		
-		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(300, 300)));
-		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
+		panel.setLayout(null);
+		Insets insets = panel.getInsets();
+	
+		//panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		//panel.add(Box.createRigidArea(new Dimension(300, 300)));
+		
+		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!",JLabel.CENTER);
+		Name.setForeground(Color.blue);
+		Dimension size1 = Name.getPreferredSize();
+		
+		Name.setFont(new Font("Georgia",Font.BOLD, 40));
+		Name.setBounds(300, 100, 800 , 50);
+		
 		JButton button1 = new JButton("Start");
+		button1.setForeground(Color.blue);
+		button1.setFont(new Font("Georgia",Font.BOLD,20));
+		size1=button1.getPreferredSize();
+		button1.setBounds(570, 300, 150, 50);
+		
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
 		JButton button2 = new JButton("Tutorial");
+		size1 = button2.getPreferredSize();
+		button2.setBounds(570, 400, 150, 50);
+		button2.setForeground(Color.blue);
+		//button2.setIcon(new ImageIcon("images/textures/grassTile05.png"));
+		button2.setFont(new Font("Georgia",Font.BOLD,20));
 		button2.addActionListener(this);
 		button2.setActionCommand("OpenTut");
-		Name.setAlignmentY(Component.TOP_ALIGNMENT);
+		//Name.setAlignmentY(Component.TOP_ALIGNMENT);
 		panel.add(Name); 	
 		panel.add(button1);
 		panel.add(button2);
-		button2.setLocation(0, 300);
+		//button2.setLocation(0, 300);
         return panel;
     }
 
