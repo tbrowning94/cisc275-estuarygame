@@ -25,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 import cisc275.game.controller.Action;
@@ -32,6 +33,9 @@ import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
+import crabview.CrabView;
+
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -50,13 +54,14 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private static final int SCALE = 1;
 
 	public static String title = "Estuary Defense";
-	
+	static int TIMER_DELAY = 50;
+	static boolean crabby = false;
 	private JButton button;
 	private JPanel panel;
 	private JFrame frame;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
-	private SplashScreen splashscreen;
+	private SplashScreen splashscreen = new SplashScreen();
 	private InstructionsView instructionsView;
 	private GameView gameView;
 	public int imgHeight;
@@ -95,6 +100,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
    
     
 	public GameView() {
+		new Timer(TIMER_DELAY, new TimerListener()).start();
 		this.panel = createContent();
 		this.gameView = this;
 		//initUI();
@@ -265,7 +271,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	      if(cmd.equals("Open")){
 	            getContentPane().removeAll();//dispose();
 	           // System.out.print("hello");
-	            splashscreen = new SplashScreen();
+	            crabs.add(new CrabView());
+	            crabby = true;
 	            getContentPane().add(splashscreen.getPanel2());
 	            pack();
 	        }
@@ -322,7 +329,21 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		// TODO Auto-generated method stub
 		
 	}
-	
+	private class TimerListener implements ActionListener {
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+        	if(crabby == true && SplashScreen.crabby == true){
+        		//System.out.println("test");
+               paintc();
+                //System.out.println("test6");
+//                for(CrabView c: crabs){
+//             	   frame.remove(c.cbutton);
+//            	}
+                if(rando() == 1){ //randomly makes a crab (1/50 chance)
+            		crabs.add(new CrabView(true));
+            		}
+        	}
+        };
+     }
 //	public synchronized void start() {
 //		running = true;
 //		thread = new Thread(this, "Display");
@@ -410,7 +431,28 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		gv.setVisible(true);
 	}
 
-
+	 public void paintc() {
+	    	int i = 0;
+	    	//System.out.println("test2 " + i);
+			i++;
+	    	for(CrabView c: crabs){
+	    		if(c.removel == true){ //checks if crab needs to be removed
+	    			deletenum = crabs.indexOf(c);
+	    			//System.out.println("deletenum");
+	    		}
+	    		c.paintcrab();
+	    		splashscreen.getPanel2().remove(c.cbutton);
+	    		splashscreen.getPanel2().add(c.cbutton);
+	    		
+	    	}
+	    	if(deletenum != -1){ //removes crab
+	    		//System.out.println("deleting");
+	    		splashscreen.getPanel2().remove(crabs.get(deletenum).cbutton);
+	    		crabs.remove(deletenum);
+	    		deletenum = -1;
+	    	}
+	    	//System.out.println("test5");
+	    }
 
 }
 

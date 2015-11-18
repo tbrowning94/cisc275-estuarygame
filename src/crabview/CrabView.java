@@ -13,12 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
 	int picNum = 0;
     int picNums;
-    boolean removel = false;
+    public boolean removel = false;
     static boolean side = true;
     final int frameCount = 8;
     static BufferedImage[] pics;
@@ -37,7 +38,7 @@ public class CrabView {
     boolean down = true;
     boolean left = false;
     boolean right = true;
-    JLabel cbutton = new JLabel("test");
+    public JLabel cbutton = new JLabel();
     Image current;
     public int rando(int l){
     	Random rnd = new Random();
@@ -48,11 +49,11 @@ public class CrabView {
     		return(rnd.nextInt(4)+1);
     	}
     	else{
-    		int j = rnd.nextInt(500)+1;
+    		int j = rnd.nextInt(185)+352;
     		return(j);
     	}
     }
-    public void paintcrab(JFrame frame) {
+    public void paintcrab() {
     	picNum = (picNum + 1) % frameCount;
     	randcount= rando(1);
     	int rand = 0;
@@ -60,6 +61,7 @@ public class CrabView {
     		randcount = 0;
     		rand = rando(2);
     	}
+    	rand = 7;
     	 if (oneX >= 1201 || rand == 1)
          {
              right = false;
@@ -72,13 +74,13 @@ public class CrabView {
              left = false;
          }
          
-         if (oneY >= 603 || rand == 3)
+         if (oneY >= 543 || rand == 3)
          {
              up = true;
              down = false;
          }
          
-         if (oneY <= 0 || rand == 4)
+         if (oneY <= 240 || rand == 4)
          {
              up = false;
              down = true;
@@ -101,10 +103,11 @@ public class CrabView {
          if(down && right ){
         	 picNums = picNum;
          }
-         frame.remove(cbutton); //creates new cbutton with new location and picture
+        // System.out.println("test3");
+          //creates new cbutton with new location and picture
          cbutton.setIcon(new ImageIcon(pics[picNums]));
          cbutton.setLocation(oneX, oneY);
-         frame.add(cbutton);
+         //frame.add(cbutton);
     	//g.drawImage(pics[picNums], oneX, oneY, Color.gray, this);
     	
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
