@@ -106,10 +106,10 @@ public class CrabView {
         	 picNums = picNum;
          }
          //System.out.println(panel);
-         panel.remove(cbutton);
+        // panel.remove(cbutton);
          cbutton.setIcon(new ImageIcon(pics[picNums]));
          cbutton.setLocation(oneX, oneY);
-         panel.add(cbutton);
+        // panel.add(cbutton);
          
         // g.drawImage(pics[picNums], oneX, oneY, Color.gray, panel);
     	

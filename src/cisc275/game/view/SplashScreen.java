@@ -39,6 +39,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private JPanel panel2;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
+	public static boolean crabby = true;
 	Button startGame;
 	Button instructions;
 	Image splashimage;
@@ -50,10 +51,10 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private BufferedImage pics[];
     
 	private enum click {
-		plant1, plant2, plant3, gC1, gC2, gC3
+		plant1, plant2, plant3, gC1, gC2, gC3, norm
 	}
 	
-	private click isClicked;
+	private click isClicked = click.norm;
 	
 	private File file;
 	
@@ -94,19 +95,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		return this.gcbutton;
 	}
 
-	public void paint(Graphics g) {
-    	for(CrabView c: crabs){
-    		if(c.removel == true){
-    			deletenum = crabs.indexOf(c);
-    		}
-    		c.paintcrab(panel2, g);
-    	}
-    	if(deletenum != -1){
-    		panel2.remove(crabs.get(deletenum).cbutton);
-    		crabs.remove(deletenum);
-    		deletenum = -1;
-    	}
-    }
 	   private BufferedImage createImage(String file) {
 	        BufferedImage bufferedImage;
 	        try {
@@ -136,29 +124,38 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
         		
             	switch (isClicked) {
-            		case plant1:
-            			paintPlantComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case plant2:
-            			paintPlantComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case plant3:
-            			paintPlantComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case gC1:
-            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case gC2:
-            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case gC3:
-            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-            			break;
+            	case norm:
+            		System.out.println(loc);
+            		break;
+            	case plant1:
+        			paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			getPButton().setBorderPainted(false);
+        			crabby = true;
+        			isClicked = click.norm;
+        			break;
+        		
+        		case plant2:
+        			paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			break;
+        			
+        		case plant3:
+        			paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			break;
+        			
+        		case gC1:
+        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+        			getGCButton().setBorderPainted(false);
+        			isClicked = click.norm;
+        			crabby = true;
+        			break;
+        			
+        		case gC2:
+        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+        			break;
+        			
+        		case gC3:
+        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+        			break;
             	}
             }
 
@@ -223,12 +220,18 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			//which could then place a plant at the next clicked location based on the 
 			//next mouse click that still has this button enabled
 			isClicked = click.plant1;
+			crabby = false;
+			getPButton().setBorderPainted(true);
+			getGCButton().setBorderPainted(false);
         } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 
 			//invoke a call to update based on a click action listener which
 			//would give the location to place
         	isClicked = click.gC1;
+        	crabby = false;
+        	getGCButton().setBorderPainted(true);
+        	getPButton().setBorderPainted(false);
 //        	crabs.add(new CrabView());
 //        	for(int i = 0; i < 10000; i++){
 //        		panel2.repaint();
@@ -278,17 +281,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	return(rnd.nextInt(100));
     }
 	
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    protected ImageIcon createImageIcon(String path,
-                                               String description) {
-        java.net.URL imgURL = getClass().getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
 
 
 }
