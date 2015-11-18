@@ -138,6 +138,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	switch (isClicked) {
             		case plant1:
             			paintPlantComponent(e.getComponent().getGraphics(), loc);
+            			getPButton().setBorderPainted(false);
+            			isClicked = null;
             			break;
             			
             		case plant2:
@@ -150,6 +152,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             			
             		case gC1:
             			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+            			getGCButton().setBorderPainted(false);
+            			isClicked = null;
             			break;
             			
             		case gC2:
@@ -224,7 +228,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			//next mouse click that still has this button enabled
 			isClicked = click.plant1;
 			getPButton().setBorderPainted(true);
-			getGCButton().setBorderPainted(false);
         } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 
@@ -232,7 +235,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			//would give the location to place
         	isClicked = click.gC1;
         	getGCButton().setBorderPainted(true);
-        	getPButton().setBorderPainted(false);
 //        	crabs.add(new CrabView());
 //        	for(int i = 0; i < 10000; i++){
 //        		panel2.repaint();
