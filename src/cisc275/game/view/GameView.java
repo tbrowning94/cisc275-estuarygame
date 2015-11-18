@@ -362,6 +362,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 //            	}
                 if(rando() == 1 && crabcount < 5){ //randomly makes a crab (1/50 chance)
             		crabs.add(new CrabView(true));
+            		crabcount += 1;
             		}
         	}
         };
