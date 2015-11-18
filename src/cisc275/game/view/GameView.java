@@ -53,7 +53,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private JFrame frame;
 	int deletenum = -1; //with use of crabs
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
-	private GameView gameView;
+	private static GameView gameView = null;
 	public int imgHeight;
 	public int imgWidth;
 	
@@ -84,34 +84,36 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	
 	private InstructionsView instructionsView;
 	private SplashScreen splashScreen;
-	
-    private GameView create() {
-        frame.getContentPane().add(createContent());
-        
-        return this;
-    }
-   
-    
+   	
 	public GameView() {
-		this.gamePanel = new gameViewPanel().setVisible(true);//createContent();
-		this.gameView = this;
-		//initUI();
-	}
-	
-	public gameViewPanel() {
 		splashScreen = SplashScreen.getInstance();
 		instructionsView = InstructionsView.getInstance();
 		
 		splashScreen.setModel(simpleModel);
 		instructionsView.setModel(simpleModel);
 		
-		gamePanel = new JPanel();
+		final Image image = createImage();
+		gamePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
+                
+            }
+        };
 		gv1 = new CardLayout();
 		gamePanel.setLayout(gv1);
-		
+		gamePanel.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
+        	}
+        });
 		gamePanel.add(splashScreen, "1");
 		gamePanel.add(instructionsView, "2");
-		
+		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
+		gamePanel.setPreferredSize(size); // set window dimension
+		gamePanel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
 		gv1.show(gamePanel, "1");
 		
 		buttonPanel = new JPanel();
@@ -124,12 +126,25 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		buttonPanel.add(next);
 		buttonPanel.add(previous);
 		
+		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
+		JButton button1 = new JButton("Start");
+		button1.addActionListener(this);
+		button1.setActionCommand("Open");
+		JButton button2 = new JButton("Tutorial");
+		button2.addActionListener(this);
+		button2.setActionCommand("OpenTut");
+		Name.setAlignmentY(Component.TOP_ALIGNMENT);
+		buttonPanel.add(Name); 	
+		buttonPanel.add(button1);
+		buttonPanel.add(button2);
+		
 		this.setLayout(new BorderLayout());
 		this.add(gamePanel, "Center");
 		this.add(buttonPanel, "South");
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(true);
+		this.setLocationRelativeTo(null);
 		this.pack();
 		this.setVisible(true);
 	}
@@ -143,11 +158,11 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public JFrame getFrame() {
 		return this.frame;
 	}
-	public JPanel getPanel() {
-		return this.panel;
-	}
-	public GameView getGameView() {
-		return this.gameView;
+	public static GameView getInstance() {
+		if (gameView == null) {
+			gameView = new GameView();
+		}
+		return gameView;
 	}
 	public int getlevel(){
 		return level;
@@ -155,7 +170,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public int getRows() {
 		return rows;
 	}
-
 	public int getCols() {
 		return cols;
 	}
@@ -175,7 +189,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	 */
 	void update() {
 	}
-	
 	//no idea what these two do
 	void remove() {
 	}
@@ -184,109 +197,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	//if sewage has stopped and game is not ended advance to next level
 	void nextlevel() {
 	}
-	//makes a default start game
-	void startGame() {
-	}
-	
-	private JPanel createContent() {
-        final Image image = createImage();
-//      panel = new JPanel(); // Initialize panel
-//		Game game = new Game(); // Not sure if this should go here?
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
-                
-            }
-        };
-        panel.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
-        	}
-        });
-
-		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
-		panel.setPreferredSize(size); // set window dimension
-		panel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
-		
-		getContentPane().add(panel, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
-		panel.setLayout(null); // default layout is Flowlayout, we need to decide what we want
-
-		// Testing adding normal buttons here
-//		JButton btnPlant = new JButton("Plant"); // buttons can be created by constructors
-//		btnPlant.setBounds(1355, 281, 97, 25);
-//		panel.add(btnPlant); // but they need to be passed to game view in some way to add them to the panel
-		
-		// Testing implementing crab constructor here, can't get the image to show
-//		ImageIcon crabplaceholder = new ImageIcon("images/textures/bush2.png");
-//		JButton crabbutton = new JButton("crab img", crabplaceholder);
-//		crabbutton.putClientProperty("position", new Point(0,0));
-//		panel.add(crabbutton);
-		
-		// testing adding another normal button here
-//		JButton btnCrab = new JButton("crab");
-//		btnCrab.setBounds(727, 391, 97, 25);
-//		panel.add(btnCrab);
-		
-		// testing adding a crab here, should create a crab button but I can't get it to display still
-//		Crab c1 = new Crab(false, new Point(10,10));
-//		panel.add(c1.getButton());
-		//add buttons, i.e. objects, probably better to do in update
-		
-	
-
-		
-
-		
-//			 
-//			 panel.setVisible(false);
-//		     dispose();
-//		     
-//		     JPanel panel2 = new JPanel();
-//		         
-//		    }
-//		});
-
-
-		//panel.add(Name, BorderLayout.PAGE_START);
-        //panel.add(button1, BorderLayout.LINE_START);
-       // panel.add(button2, BorderLayout.LINE_END);
-//        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS))
-//        for (String label : new String[]{"Start", "Take the Tutorial"}) {
-//            JButton button = new JButton(label);
-//            button.setAlignmentY(Component.CENTER_ALIGNMENT);
-//            panel.add(Box.createRigidArea(new Dimension(300, 0)));
-//            panel.add(button);
-        
-      //  }
-    	pack();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setResizable(true);
-		
-		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(300, 300)));
-		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
-		JButton button1 = new JButton("Start");
-		button1.addActionListener(this);
-		button1.setActionCommand("Open");
-		JButton button2 = new JButton("Tutorial");
-		button2.addActionListener(this);
-		button2.setActionCommand("OpenTut");
-		Name.setAlignmentY(Component.TOP_ALIGNMENT);
-		panel.add(Name); 	
-		panel.add(button1);
-		panel.add(button2);
-		
-        return panel;
-    }
-
     protected BufferedImage createImage() {
         BufferedImage bufferedImage;
-
         try {
         	//image=ImageIO.read(file);
             bufferedImage = ImageIO.read(new File("images/BackImg3.jpg"));
@@ -296,7 +208,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 	@Override
@@ -304,19 +215,15 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		String cmd = e.getActionCommand();
 	      if(cmd.equals("Open")){
 	            getContentPane().removeAll();//dispose();
-	           // System.out.print("hello");
-	            splashScreen = new SplashScreen();
-	            getContentPane().add(splashScreen.getPanel2());
+	            getContentPane().add(splashScreen.getInstance());
 	            pack();
 	        }
 	      if(cmd.equals("OpenTut")){
 				getContentPane().removeAll();
-				instructionsView = new InstructionsView();
-				getContentPane().add(instructionsView.getPanel3());
+				getContentPane().add(instructionsView.getInstance());
 				pack();
 			}
 	    }
-	
     public static int rando(){
     	Random rnd = new Random();
     	return(rnd.nextInt(100));
@@ -340,29 +247,23 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	@Override
 	public void onPerformActionEvent(Action<Game> action, Game game) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void onTickEvent(Game game) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void onStartEvent(Game game) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void onEndEvent(Game game) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void onEvent(String event, Game game) {
 		// TODO Auto-generated method stub
-		
 	}
-	
 //	public synchronized void start() {
 //		running = true;
 //		thread = new Thread(this, "Display");
@@ -411,47 +312,33 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 //		}
 //		stop();
 //	}
-
-	//runs game
-	
 	public static int getWorldWidth() {
 		return WORLD_WIDTH;
 	}
-
-
 	public static int getWorldHeight() {
 		return WORLD_HEIGHT;
 	}
-
-
 	public static int getScale() {
 		return SCALE;
 	}
 	public static void main(String[] args) { //move to view, windows are central thread of game
-//		GameView gv = new GameView();
-//		gv.InitializeBoardsize();
-//		gv.startGame(); // Not sure about this either
-//		gv.start(); // runs thread which calls run()
-		SwingUtilities.invokeLater(new Runnable(){
-//		EventQueue.invokeLater(new Runnable() {
-			
+		SwingUtilities.invokeLater(new Runnable(){	
 			@Override
 			public void run() {
-				GameView gv = new GameView();
-				gv.setVisible(true);
-			
+				if (gameView == null) {
+					gameView = new GameView();
+					gameView.setVisible(true);
+				}
 			}
 		});
 	}
-
 	@Override
 	public void run() {
-		GameView gv = new GameView();
-		gv.setVisible(true);
+		if (gameView == null) {
+			gameView = new GameView();
+			gameView.setVisible(true);
+		}
 	}
-
-
-
 }
 
 
