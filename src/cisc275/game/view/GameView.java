@@ -158,12 +158,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public JFrame getFrame() {
 		return this.frame;
 	}
-	public static GameView getInstance() {
-		if (gameView == null) {
-			gameView = new GameView();
-		}
-		return gameView;
-	}
 	public int getlevel(){
 		return level;
 	}

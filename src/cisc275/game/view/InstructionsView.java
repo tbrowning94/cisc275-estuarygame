@@ -71,7 +71,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		});
 		back.setActionCommand("Back");
 		
-		bl = new BoxLayout(gameView.getInstance(), BoxLayout.Y_AXIS);
+		bl = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setLayout(bl);
 		this.add(description, bl);
 		this.add(locationPanel(), bl);
