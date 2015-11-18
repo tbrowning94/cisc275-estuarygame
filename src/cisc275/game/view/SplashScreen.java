@@ -68,6 +68,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private File file;
 	
 	public SplashScreen() {
+		
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/back1_pipe_1.png");
     	BufferedImage plant1 = createImage("images/Grass.png");
@@ -77,7 +78,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	pics[0] = bi;
     	pics[1] = plant1;
     	pics[2] = GarbCol;
-    	pics[3]=Cloud;
+    	pics[3] = Cloud;
     	  	
      	//for(int i = 0; i < pics.size(); i++)
     		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
@@ -187,20 +188,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	
 		
 		//ImageIcon plantIcon = createImageIcon("images/Grass.png", "picture of grass");
-		BufferedImage Cloud = createImage("images/cloud.png");
-		cloud = new JLabel();
-		
-		paintComponent(Cloud);
-
-
-//		theX += xincr;
-//		if (yincr < 300){
-//			theY+=yincr;
-//		}
-//		else{theY-=yincr;}
-//		
-//		cloud.setLocation(theX, theY);
-		//cloud.setBounds(50, 500, 200, 200);
+		//paintComponent(null);
 		BufferedImage plant1 = createImage("images/Grass.png");
 		pbutton = new JButton();
 		
@@ -237,15 +225,24 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         return panel2;
     	
     }
-	public void paintComponent(BufferedImage cloud){
+	public void paintComponent(Graphics c){
+		BufferedImage Cloud = createImage("images/cloud.png");
 		if(run == true){
-        cloud.createGraphics();
-            theX+=xincr;
-            if(theX > 1500 || theX < 0){
+			cloud = new JLabel();
+			cloud.setLocation(theX, theY);
+			cloud.setBounds(50, 500, 200, 200);
+			theX += xincr;
+			if(theX > 1500 || theX < 0){
             	theX=0;
             }
-
-            cloud.createGraphics();
+			paintComponent(c);
+			if (theY < 300){
+				theY+=yincr;
+			}
+			else if(theY<=300){theY-=yincr;}
+			
+			//c.createGraphics();
+            //cloud.createGraphics();
         }
 	}
     protected void paintPlantComponent(Graphics g, Point loc ) {    
