@@ -217,6 +217,17 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		gcbutton.setFocusPainted(false);
 		gcbutton.setContentAreaFilled(false);
 		
+		BufferedImage Cloud = createImage("images/cloud.png");
+		size2=cloud.getPreferredSize();
+		cloud.setIcon(new ImageIcon(Cloud.getScaledInstance(100, 100, 20)));
+		if (run == true){
+		cloud.setBounds(500, 50, 100, 150);
+		theX+=xincr;
+		theY+=yincr;
+		}
+		
+		
+		
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
 		panel2.add(cloud);
@@ -225,26 +236,26 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         return panel2;
     	
     }
-	public void paintComponent(Graphics c){
-		BufferedImage Cloud = createImage("images/cloud.png");
-		if(run == true){
-			cloud = new JLabel();
-			cloud.setLocation(theX, theY);
-			cloud.setBounds(50, 500, 200, 200);
-			theX += xincr;
-			if(theX > 1500 || theX < 0){
-            	theX=0;
-            }
-			paintComponent(c);
-			if (theY < 300){
-				theY+=yincr;
-			}
-			else if(theY<=300){theY-=yincr;}
-			
-			//c.createGraphics();
-            //cloud.createGraphics();
-        }
-	}
+//	public void paintComponent(Graphics c){
+//		BufferedImage Cloud = createImage("images/cloud.png");
+//		if(run == true){
+//			cloud = new JLabel();
+//			cloud.setLocation(theX, theY);
+//			cloud.setBounds(50, 500, 200, 200);
+//			theX += xincr;
+//			if(theX > 1500 || theX < 0){
+//            	theX=0;
+//            }
+//			paintComponent(c);
+//			if (theY < 300){
+//				theY+=yincr;
+//			}
+//			else if(theY<=300){theY-=yincr;}
+//			
+//			//c.createGraphics();
+//            //cloud.createGraphics();
+//        }
+//	}
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = pics[1];
     	g.drawImage(plant, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants

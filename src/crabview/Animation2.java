@@ -37,7 +37,7 @@ public class Animation2 extends JFrame {
     final static int frameWidth = 1366;
     final static int frameHeight = 768;
     int deletenum = -1;
-    static int TIMER_DELAY = 50;
+    static int TIMER_DELAY = 80;
     public static int rando(){
     	Random rnd = new Random();
     	return(rnd.nextInt(100));
