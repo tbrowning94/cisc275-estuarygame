@@ -69,7 +69,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	
 	public SplashScreen() {
 		pics = new BufferedImage[numpics];
-    	BufferedImage bi = createImage("images/BackImg1.jpg");
+    	BufferedImage bi = createImage("images/back1_pipe_1.png");
     	BufferedImage plant1 = createImage("images/Grass.png");
     	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
     	BufferedImage Cloud = createImage("images/cloud.png");

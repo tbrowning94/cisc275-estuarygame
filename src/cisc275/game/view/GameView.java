@@ -242,7 +242,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		//panel.add(Box.createRigidArea(new Dimension(300, 300)));
 		
 		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!",JLabel.CENTER);
-		Name.setForeground(Color.blue);
+		Name.setForeground(Color.black);
 		Dimension size1 = Name.getPreferredSize();
 		
 		Name.setFont(new Font("Georgia",Font.BOLD, 40));
@@ -277,7 +277,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 
         try {
         	//image=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/BackImg3.jpg"));
+            bufferedImage = ImageIO.read(new File("images/back1.png"));
             imgHeight=bufferedImage.getHeight();
             imgWidth=bufferedImage.getWidth();
             return bufferedImage;
