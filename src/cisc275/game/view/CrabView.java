@@ -40,6 +40,7 @@ public class CrabView {
     boolean left = false;
     boolean right = true;
     JLabel cbutton = new JLabel("test");
+
     Image current;
     public int rando(int l){
     	Random rnd = new Random();
@@ -116,6 +117,7 @@ public class CrabView {
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
 		//Be sure that animation picture direction matches what is happening on screen.
     }
+
     public CrabView(JPanel frame){
     	crabs.add(this);
 		oneY = rando(3);

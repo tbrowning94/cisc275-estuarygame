@@ -27,6 +27,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -44,8 +45,15 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	Button startGame;
 	Button instructions;
 	Image splashimage;
+    JLabel cloud = new JLabel("cloud");
 	int numpics = 10;
 	private JButton pbutton, gcbutton;
+	private int theX=3;
+	private int theY=3;
+	final int xincr = 3;
+	final int yincr = 2;
+	
+	boolean run =true;
     int imgHeight;
     int imgWidth;
     
@@ -64,10 +72,12 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	BufferedImage bi = createImage("images/BackImg1.jpg");
     	BufferedImage plant1 = createImage("images/Grass.png");
     	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
+    	BufferedImage Cloud = createImage("images/cloud.png");
     	System.out.print("PrintPics");
     	pics[0] = bi;
     	pics[1] = plant1;
     	pics[2] = GarbCol;
+    	pics[3]=Cloud;
     	  	
      	//for(int i = 0; i < pics.size(); i++)
     		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
@@ -177,6 +187,20 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	
 		
 		//ImageIcon plantIcon = createImageIcon("images/Grass.png", "picture of grass");
+		BufferedImage Cloud = createImage("images/cloud.png");
+		cloud = new JLabel();
+		
+		paintComponent(Cloud);
+
+
+//		theX += xincr;
+//		if (yincr < 300){
+//			theY+=yincr;
+//		}
+//		else{theY-=yincr;}
+//		
+//		cloud.setLocation(theX, theY);
+		//cloud.setBounds(50, 500, 200, 200);
 		BufferedImage plant1 = createImage("images/Grass.png");
 		pbutton = new JButton();
 		
@@ -201,17 +225,29 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(100, 100, 20)));
 		gcbutton.addActionListener(this);
 		gcbutton.setActionCommand("Garbage Collector");
-	
-		panel2.add(pbutton);
-		panel2.add(gcbutton);
 		gcbutton.setBorderPainted(true);
 		gcbutton.setFocusPainted(false);
 		gcbutton.setContentAreaFilled(false);
 		
+		panel2.add(pbutton);
+		panel2.add(gcbutton);
+		panel2.add(cloud);
+
+		
         return panel2;
     	
     }
+	public void paintComponent(BufferedImage cloud){
+		if(run == true){
+        cloud.createGraphics();
+            theX+=xincr;
+            if(theX > 1500 || theX < 0){
+            	theX=0;
+            }
 
+            cloud.createGraphics();
+        }
+	}
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = pics[1];
     	g.drawImage(plant, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
