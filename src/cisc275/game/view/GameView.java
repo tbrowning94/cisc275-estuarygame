@@ -240,7 +240,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		panel.add(Name); 	
 		panel.add(button1);
 		panel.add(button2);
-		
+		button2.setLocation(0, 300);
         return panel;
     }
 

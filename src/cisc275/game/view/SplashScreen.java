@@ -184,7 +184,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(50, 50, 20)));
 		pbutton.addActionListener(this);
 		pbutton.setActionCommand("Plant");
-		pbutton.setBorderPainted(false);
+		pbutton.setBorderPainted(true);
 		pbutton.setFocusPainted(false);
 		pbutton.setContentAreaFilled(false);
 		
@@ -196,7 +196,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		gcbutton.setActionCommand("Garbage Collector");
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
-		gcbutton.setBorderPainted(false);
+		gcbutton.setBorderPainted(true);
 		gcbutton.setFocusPainted(false);
 		gcbutton.setContentAreaFilled(false);
 		
