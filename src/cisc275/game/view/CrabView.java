@@ -18,20 +18,21 @@ import javax.swing.JPanel;
 
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
-	int picNum = 0;
+	Image ing;
+	int picNum = 1;
     int picNums;
     boolean removel = false;
     static boolean side = true;
     final int frameCount = 8;
-    static BufferedImage[] pics;
+    static Image[] pics;
     int xloc = 0;
     int yloc = 0;
     final int xIncr = 8;
     final int yIncr = 2;
     final static int frameWidth = 1440;
     final static int frameHeight = 900;
-    final static int imgWidth = 165;
-    final static int imgHeight = 165;
+    final static int imgWidth = 315;
+    final static int imgHeight = 230;
     private int oneX = 7;
     private int oneY = 7;
     int randcount = 0;
@@ -51,13 +52,26 @@ public class CrabView {
     		return(rnd.nextInt(4)+1);
     	}
     	else{
-    		int j = rnd.nextInt(500)+1;
+    		int j = rnd.nextInt(269)+358;
     		return(j);
     	}
     }
     
-    public void paintcrab(JPanel panel, Graphics g) {
-    	picNum = (picNum + 1) % frameCount;
+    public void paintcrab() {
+    	//picNum = (picNum + 1) % frameCount;
+    	//System.out.println(picNum);
+    	if(picNum == 1 || picNum == 2){
+    		picNum++;
+    		ing = pics[0];
+    	}
+    	else if(picNum == 3){
+    		picNum++;
+    		ing = pics[1];
+    	}
+    	else{
+    		picNum = 1;
+    	}
+    	
     	randcount= rando(1);
     	int rand = 0;
     	//System.out.println(cbutton);
@@ -77,13 +91,13 @@ public class CrabView {
              left = false;
          }
          
-         if (oneY >= 735 || rand == 3)
+         if (oneY >=  627 || rand == 3)
          {
              up = true;
              down = false;
          }
          
-         if (oneY <= 0 || rand == 4)
+         if (oneY <= 358  || rand == 4)
          {
              up = false;
              down = true;
@@ -93,22 +107,22 @@ public class CrabView {
          if (down) oneY+=yIncr;
          if (left) oneX-=xIncr;
          if (right) oneX+=xIncr;
-         picNums = 0;
-         if(up && left ){ //decides which part of the pic array to read depending on the direction
-        	 picNums = picNum + 30;
-         }
-         if(up && right ){
-        	 picNums = picNum + 20;
-         }
-         if(down && left ){
-        	 picNums = picNum + 10;
-         }
-         if(down && right ){
-        	 picNums = picNum;
-         }
+//         picNums = 0;
+//         if(up && left ){ //decides which part of the pic array to read depending on the direction
+//        	 picNums = picNum + 30;
+//         }
+//         if(up && right ){
+//        	 picNums = picNum + 20;
+//         }
+//         if(down && left ){
+//        	 picNums = picNum + 10;
+//         }
+//         if(down && right ){
+//        	 picNums = picNum;
+//         }
          //System.out.println(panel);
         // panel.remove(cbutton);
-         cbutton.setIcon(new ImageIcon(pics[picNums]));
+         cbutton.setIcon(new ImageIcon(ing));
          cbutton.setLocation(oneX, oneY);
         // panel.add(cbutton);
          
@@ -118,7 +132,7 @@ public class CrabView {
 		//Be sure that animation picture direction matches what is happening on screen.
     }
 
-    public CrabView(JPanel frame){
+    public CrabView(boolean b){
     	crabs.add(this);
 		oneY = rando(3);
 		if(side == true){
@@ -128,7 +142,7 @@ public class CrabView {
 		else{
 			side = true;
 		}
-		cbutton.setSize(165, 165);
+		cbutton.setSize(79, 57);
 		cbutton.addMouseListener(new MouseAdapter()  
     	{  
     	    public void mouseClicked(MouseEvent e)  
@@ -140,8 +154,7 @@ public class CrabView {
 
     	    }  
     	}); 
-		cbutton.setLocation(20, 20);
-		frame.add(cbutton);
+		
     }
 	public CrabView() {
 		
@@ -154,20 +167,21 @@ public class CrabView {
 		else{
 			side = true;
 		}
-		cbutton.setSize(165, 165);
-		BufferedImage[] img = createImage();
-    	pics = new BufferedImage[80];
-    	for(int i = 0; i < frameCount; i++){ //loads all subimages into array, separated by their type
-    		pics[i] = img[0].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
+		cbutton.setSize(79, 57);
+    	pics = new Image[2];
+    	 //loads all subimages into array, separated by their type
+    		
     		//pics[i] = pics[i].getScaledInstance(82, 82, Image.SCALE_DEFAULT);
-    		pics[i+10] = img[1].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-    		pics[i+20] = img[2].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-    		pics[i+30] = img[3].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-    		pics[i+40] = img[4].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-    		pics[i+50] = img[5].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-    		pics[i+60] = img[6].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-    		pics[i+70] = img[7].getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-    	}
+    		try {
+    			pics[0] = ImageIO.read(getClass().getResource("crabby.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
+    			pics[1] = ImageIO.read(getClass().getResource("crab1.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
+    			//System.out.println(pics[1]+ "crab1");
+    			//System.out.println(pics[0]+ "crab2");
+    		} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    		
     	cbutton.addMouseListener(new MouseAdapter()  
     	{  
     	    public void mouseClicked(MouseEvent e)  

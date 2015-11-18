@@ -35,7 +35,7 @@ import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
-import crabview.CrabView;
+import cisc275.game.view.CrabView;
 
 
 import javax.swing.JButton;
