@@ -200,8 +200,8 @@ public class CrabView {
     		
     		//pics[i] = pics[i].getScaledInstance(82, 82, Image.SCALE_DEFAULT);
     		try {
-    			pics[0] = ImageIO.read(getClass().getResource("crabby.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
-    			pics[1] = ImageIO.read(getClass().getResource("crab1.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
+    			pics[0] = ImageIO.read(getClass().getResource("crabburger.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
+    			pics[1] = ImageIO.read(getClass().getResource("crabburger1.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
     			pics[2] = ImageIO.read(getClass().getResource("crab3.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
     			pics[3] = ImageIO.read(getClass().getResource("crab4.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
     			//System.out.println(pics[1]+ "crab1");
