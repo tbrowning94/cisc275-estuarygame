@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 import javax.xml.soap.Text;
 import java.awt.Font;
 import java.awt.Component;
+import javax.swing.SwingConstants;
 
 //import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
@@ -46,14 +47,11 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	private SimpleModel simpleModel;
 	
 	public InstructionsView() {
-		viewName = new JLabel("Instructions");
 		description = new JLabel("Defend your local estuary!");
 		
-		instructions = new JTextArea();
-		
 		back = new JButton("Back");
-		back.setPreferredSize(new Dimension(59, 50));
-		back.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		back.setVerticalAlignment(SwingConstants.BOTTOM);
+		back.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		back.setAlignmentX(Component.CENTER_ALIGNMENT);
 		back.setLocation(720, 2);
 		back.addMouseListener(new MouseAdapter() {
@@ -76,10 +74,15 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		this.setLayout(new FlowLayout());
 		//this.add(description, bl);
 		this.add(locationPanel());
+		Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
+		this.setPreferredSize(size); // set window dimension
 	}
 	
 	public void setModel(SimpleModel simpleModel) {
 		this.simpleModel = simpleModel;
+	}
+	public int getScale() {
+		return SCALE;
 	}
 	
 	private JPanel locationPanel() {
@@ -112,9 +115,15 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
                 setBackground(background);
             }
         });
-		//panel.setLayout(new FlowLayout());
-		panel.add(viewName);
+		
+		instructions = new JTextArea();
 		panel.add(instructions);
+		instructions.setFont(new Font("Courier New", Font.PLAIN, 12));
+		instructions.setText("Defend this estuary with plants and garbage collectors");
+		instructions.setEditable(false);
+		instructions.setColumns(40);
+		viewName = new JLabel("Instructions");
+		panel.add(viewName);
 		panel.add(back);
 		
 		return panel;
@@ -166,6 +175,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		if(cmd.equals("Back")){
 			//TODO:Fix back button
 			System.out.println("back button enabled");
+			
 			//getContentPane().removeAll();//dispose();
 	        //System.out.print("hello");
 	        //gameView = new GameView();

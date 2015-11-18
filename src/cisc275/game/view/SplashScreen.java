@@ -35,6 +35,7 @@ import javax.swing.SwingUtilities;
 
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Plant;
+import javax.swing.SwingConstants;
 
 public class SplashScreen extends JPanel implements ActionListener, MouseListener{
 	private static final int WORLD_WIDTH = 1366;
@@ -68,6 +69,8 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
     	pics[2] = GarbCol;
     	  	
 		viewName = new JLabel("Estuary Defense");
+		viewName.setVerticalAlignment(SwingConstants.TOP);
+		viewName.setHorizontalAlignment(SwingConstants.CENTER);
 		placePlant = new JButton("Plant");
 		placePlant.setIcon(new ImageIcon(pics[1].getScaledInstance(50,50,20)));
 		placePlant.addActionListener(new ActionListener() {
@@ -97,6 +100,8 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 		//this.setLayout(bl);
 		this.setLayout(new FlowLayout());
 		this.add(locationPanel());
+		Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
+		this.setPreferredSize(size); // set window dimension
 		//this.setBorder(BorderFactory.createEmptyBorder());
 	}
 	
@@ -110,6 +115,9 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 				}
 			}
 		});
+	}
+	public int getScale() {
+		return SCALE;
 	}
 	
 	private JPanel locationPanel() {
