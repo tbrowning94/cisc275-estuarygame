@@ -223,12 +223,16 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			//which could then place a plant at the next clicked location based on the 
 			//next mouse click that still has this button enabled
 			isClicked = click.plant1;
+			getPButton().setBorderPainted(true);
+			getGCButton().setBorderPainted(false);
         } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 
 			//invoke a call to update based on a click action listener which
 			//would give the location to place
         	isClicked = click.gC1;
+        	getGCButton().setBorderPainted(true);
+        	getPButton().setBorderPainted(false);
 //        	crabs.add(new CrabView());
 //        	for(int i = 0; i < 10000; i++){
 //        		panel2.repaint();
@@ -278,17 +282,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	return(rnd.nextInt(100));
     }
 	
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    protected ImageIcon createImageIcon(String path,
-                                               String description) {
-        java.net.URL imgURL = getClass().getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
 
 
 }
