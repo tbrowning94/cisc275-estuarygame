@@ -130,7 +130,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
                 g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
                 Random rand = new Random();
                 for (int i = 0; i<10; i++) {
-                	g.drawImage(pics[3],rand.nextInt(WORLD_WIDTH) - 1, rand.nextInt(WORLD_HEIGHT), 30, 30 - 1, null);
+                	g.drawImage(pics[3], rand.nextInt(WORLD_WIDTH-40)+40, rand.nextInt(WORLD_HEIGHT-500) + 300, 30, 30, null);
                 }
             }
         };
