@@ -164,8 +164,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                //g.drawImage(image, 0, 0, null);
-                g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
+                g.drawImage(image, 0, 0, null);
+                //g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
                 
             }
         };
@@ -241,7 +241,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		//panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 		//panel.add(Box.createRigidArea(new Dimension(300, 300)));
 		
-		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!",JLabel.CENTER);
+		JLabel Name = new JLabel("WELCOME TO DRAINAGE DEFENSE!",JLabel.CENTER);
 		Name.setForeground(Color.black);
 		Dimension size1 = Name.getPreferredSize();
 		

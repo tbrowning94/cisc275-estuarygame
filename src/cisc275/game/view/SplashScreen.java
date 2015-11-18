@@ -127,8 +127,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
-               // g.drawImage(pics[4], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+               // g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+               g.drawImage(pics[4], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
         panel2.addMouseListener(new MouseAdapter() {
@@ -198,7 +198,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		Dimension size2 = pbutton.getPreferredSize();
 		
 		//pbutton.setFont(new Font("Georgia",Font.BOLD, 12));
-		pbutton.setBounds(1250, 300, 100 , 100);
+		pbutton.setBounds(1250, 100, 100 , 100);
 		
 		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(100, 100, 20)));
 		pbutton.addActionListener(this);
@@ -261,6 +261,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 //	}
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = pics[1];
+    	
     	g.drawImage(plant, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
     }
     
