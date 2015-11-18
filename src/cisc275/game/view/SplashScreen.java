@@ -136,29 +136,33 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
         		
             	switch (isClicked) {
-            		case plant1:
-            			paintPlantComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case plant2:
-            			paintPlantComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case plant3:
-            			paintPlantComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case gC1:
-            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case gC2:
-            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-            			break;
-            			
-            		case gC3:
-            			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-            			break;
+            	case plant1:
+        			paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			getPButton().setBorderPainted(false);
+        			isClicked = null;
+        			break;
+        			
+        		case plant2:
+        			paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			break;
+        			
+        		case plant3:
+        			paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			break;
+        			
+        		case gC1:
+        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+        			getGCButton().setBorderPainted(false);
+        			isClicked = null;
+        			break;
+        			
+        		case gC2:
+        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+        			break;
+        			
+        		case gC3:
+        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+        			break;
             	}
             }
 
