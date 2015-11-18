@@ -61,7 +61,6 @@ public class CrabView {
     		randcount = 0;
     		rand = rando(2);
     	}
-    	rand = 7;
     	 if (oneX >= 1201 || rand == 1)
          {
              right = false;

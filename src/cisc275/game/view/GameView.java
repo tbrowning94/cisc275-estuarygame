@@ -68,7 +68,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private GameView gameView;
 	public int imgHeight;
 	public int imgWidth;
-	
+	public int crabcount = 1;
 	
 	private Player player;
 	//private Key, Mouse?
@@ -360,7 +360,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 //                for(CrabView c: crabs){
 //             	   frame.remove(c.cbutton);
 //            	}
-                if(rando() == 1){ //randomly makes a crab (1/50 chance)
+                if(rando() == 1 && crabcount < 5){ //randomly makes a crab (1/50 chance)
             		crabs.add(new CrabView(true));
             		}
         	}
@@ -471,6 +471,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	    		//System.out.println("deleting");
 	    		splashscreen.getPanel2().remove(crabs.get(deletenum).cbutton);
 	    		crabs.remove(deletenum);
+	    		crabcount -=1;
 	    		deletenum = -1;
 	    	}
 	    	//System.out.println("test5");
