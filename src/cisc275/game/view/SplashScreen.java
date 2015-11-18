@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -14,6 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,16 +29,18 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Plant;
 
-public class SplashScreen extends JFrame implements ActionListener, MouseListener{
+public class SplashScreen extends JPanel implements ActionListener, MouseListener{
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
+	private static SplashScreen instance = null;
 	private JPanel panel2;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
@@ -46,6 +51,10 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private JButton pbutton, gcbutton;
     int imgHeight;
     int imgWidth;
+    private JLabel viewName;
+    private JButton placePlant, placeGC;
+    private BoxLayout bl;
+    private SimpleModel simpleModel;
     
 	private BufferedImage pics[];
     
@@ -62,7 +71,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	BufferedImage bi = createImage("images/BackImg1.jpg");
     	BufferedImage plant1 = createImage("images/Grass.png");
     	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
-    	System.out.print("PrintPics");
+    	//System.out.print("PrintPics");
     	pics[0] = bi;
     	pics[1] = plant1;
     	pics[2] = GarbCol;
@@ -70,9 +79,54 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
      	//for(int i = 0; i < pics.size(); i++)
     		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
      	
-     	this.panel2 = GameFrame();
+     	//this.panel2 = GameFrame();
+		viewName = new JLabel("Estuary Defense");
+		placePlant = new JButton("Plant");
+		placePlant.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				//TODO
+			}
+		});
+		placeGC = new JButton("Garbage Collector");
+		placeGC.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				//TODO
+			}
+		});
+		bl = new BoxLayout(this, BoxLayout.Y_AXIS);
+		this.setLayout(bl);
+		this.add(locationPanel(), bl);
+		this.setBorder(BorderFactory.createEmptyBorder());
+	}
+	
+	public void setModel(SimpleModel simpleModel) {
+		this.simpleModel = simpleModel;
+		simpleModel.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent pce) {
+				if (simpleModel.getEnum().equals(pce.getPropertyName())) {
+					//TODO
+				}
+			}
+		});
+	}
+	
+	private JPanel locationPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		panel.add(placePlant);
+		panel.add(placeGC);
+		panel.add(viewName);
+		return panel;
+	}
 		
-		
+	public static SplashScreen getInstance() {
+		if (instance == null) {
+			instance = new SplashScreen();
+		}
+		return instance;
 	}
 
 	void initialize() {

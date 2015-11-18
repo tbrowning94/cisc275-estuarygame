@@ -2,6 +2,7 @@ package cisc275.game.view;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -55,9 +56,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private JPanel panel;
 	private JFrame frame;
 	int deletenum = -1; //with use of crabs
-	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
-	private SplashScreen splashscreen;
-	private InstructionsView instructionsView;
+	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	private GameView gameView;
 	public int imgHeight;
 	public int imgWidth;
@@ -87,6 +86,14 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	Image plant;
 	Image garbageCollector;
 	
+	private JPanel gamePanel, buttonPanel;
+	private JButton next, previous;
+	private CardLayout gv1;
+	private SimpleModel simpleModel = new SimpleModel();
+	
+	private InstructionsView instructionsView;
+	private SplashScreen splashScreen;
+	
     private GameView create() {
         frame.getContentPane().add(createContent());
         
@@ -95,9 +102,51 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
    
     
 	public GameView() {
-		this.panel = createContent();
+		this.gamePanel = new gameViewPanel().setVisible(true);//createContent();
 		this.gameView = this;
 		//initUI();
+	}
+	
+	public gameViewPanel() {
+		splashScreen = SplashScreen.getInstance();
+		instructionsView = InstructionsView.getInstance();
+		
+		splashScreen.setModel(simpleModel);
+		instructionsView.setModel(simpleModel);
+		
+		gamePanel = new JPanel();
+		gv1 = new CardLayout();
+		gamePanel.setLayout(gv1);
+		
+		gamePanel.add(splashScreen, "1");
+		gamePanel.add(instructionsView, "2");
+		
+		gv1.show(gamePanel, "1");
+		
+		buttonPanel = new JPanel();
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		
+		next = new JButton("Next");
+		next.addActionListener(new NextButtonAction());
+		previous = new JButton("Previous");
+		
+		buttonPanel.add(next);
+		buttonPanel.add(previous);
+		
+		this.setLayout(new BorderLayout());
+		this.add(gamePanel, "Center");
+		this.add(buttonPanel, "South");
+		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setResizable(true);
+		this.pack();
+		this.setVisible(true);
+	}
+	
+	private class NextButtonAction implements ActionListener {
+		public void actionPerformed(ActionEvent ae) {
+			gv1.next(gamePanel);
+		}
 	}
 	
 	public JFrame getFrame() {
@@ -265,8 +314,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	      if(cmd.equals("Open")){
 	            getContentPane().removeAll();//dispose();
 	           // System.out.print("hello");
-	            splashscreen = new SplashScreen();
-	            getContentPane().add(splashscreen.getPanel2());
+	            splashScreen = new SplashScreen();
+	            getContentPane().add(splashScreen.getPanel2());
 	            pack();
 	        }
 	      if(cmd.equals("OpenTut")){

@@ -3,6 +3,7 @@ package cisc275.game.view;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -21,31 +22,80 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.xml.soap.Text;
 import java.awt.Font;
 import java.awt.Component;
 
 //import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
-public class InstructionsView extends JFrame implements ActionListener, MouseListener {
+public class InstructionsView extends JPanel implements ActionListener, MouseListener {
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
+	private static InstructionsView instance = null;
 	//private JFrame frame;
 	private JPanel panel3;
+	private JLabel viewName, description;
+	private JTextField instructions;
+	private JButton back;
 	private GameView gameView;
-	JButton back;
-	JTextArea instructions;
+	
+	private BoxLayout bl;
+	private SimpleModel simpleModel;
 	Image instimage;
 	
+	
 	public InstructionsView() {
-		this.panel3 = GameFrame();
+		//this.panel3 = GameFrame();
+		viewName = new JLabel("Instructions");
+		description = new JLabel("Defend your local estuary!");
+		
+		instructions = new JTextField(10);
+		
+		back = new JButton("Back");
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				if (simpleModel != null) {
+					simpleModel.setEnum(back.getText());
+				}
+			}
+		});
+		
+		bl = new BoxLayout(gameView.getPanel(), BoxLayout.Y_AXIS);
+		this.setLayout(bl);
+		this.add(description, bl);
+		this.add(locationPanel(), bl);
+		
+	}
+	
+	public void setModel(SimpleModel simpleModel) {
+		this.simpleModel = simpleModel;
+	}
+	
+	private JPanel locationPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		panel.add(viewName);
+		panel.add(instructions);
+		panel.add(back);
+		
+		return panel;
 	}
 	
 	public JPanel getPanel3() {
 		return this.panel3;
+	}
+	
+	public static InstructionsView getInstance() {
+		if (instance == null) {
+			instance = new InstructionsView();
+		}
+		return instance;
 	}
 	
 	public JPanel GameFrame(){
@@ -110,12 +160,12 @@ public class InstructionsView extends JFrame implements ActionListener, MouseLis
 //			    button.setIcon(new ImageIcon(img));
 //			  } catch (IOException ex) {
 //			  }
-		instructions = new JTextArea("Instructions:\r\n\r\n\t- Place plants to stop runoff\r\n\t- Place garbage collectors to pick up trash which \r\n\t  decreases plant effectiveness\r\n\t- Click mitten crabs to cage and remove them before they \r\n          ruin your defense");
-		instructions.setRows(4);
-		instructions.setSize(1438, 200);
-		instructions.setFont(new Font("Courier New", Font.PLAIN, 36));
+		//instructions = new JTextArea("Instructions:\r\n\r\n\t- Place plants to stop runoff\r\n\t- Place garbage collectors to pick up trash which \r\n\t  decreases plant effectiveness\r\n\t- Click mitten crabs to cage and remove them before they \r\n          ruin your defense");
+		//instructions.setRows(4);
+		//instructions.setSize(1438, 200);
+		//instructions.setFont(new Font("Courier New", Font.PLAIN, 36));
 		panel3.add(back);
-		panel3.add(instructions);
+		//panel3.add(instructions);
 		
     	//pack();
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,11 +219,11 @@ public class InstructionsView extends JFrame implements ActionListener, MouseLis
 		if(cmd.equals("Back")){
 			//TODO:Fix back button
 			System.out.println("back button enabled");
-			getContentPane().removeAll();//dispose();
+			//getContentPane().removeAll();//dispose();
 	        //System.out.print("hello");
 	        gameView = new GameView();
-	        getContentPane().add(gameView.getPanel());
-	        pack();
+	        //getContentPane().add(gameView.getPanel());
+	        //pack();
         } 
 	}
 
