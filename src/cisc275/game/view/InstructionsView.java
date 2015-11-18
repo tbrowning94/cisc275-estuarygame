@@ -38,7 +38,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	private static final int SCALE = 1;
 	private static InstructionsView instance = null;
 	private JLabel viewName, description;
-	private JTextField instructions;
+	private JTextArea instructions;
 	private JButton back;
 	private GameView gameView;
 	
@@ -49,7 +49,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		viewName = new JLabel("Instructions");
 		description = new JLabel("Defend your local estuary!");
 		
-		instructions = new JTextField(10);
+		instructions = new JTextArea();
 		
 		back = new JButton("Back");
 		back.setPreferredSize(new Dimension(59, 50));
@@ -71,10 +71,11 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		});
 		back.setActionCommand("Back");
 		
-		bl = new BoxLayout(this, BoxLayout.Y_AXIS);
-		this.setLayout(bl);
-		this.add(description, bl);
-		this.add(locationPanel(), bl);
+		//bl = new BoxLayout(this, BoxLayout.Y_AXIS);
+		//this.setLayout(bl);
+		this.setLayout(new FlowLayout());
+		//this.add(description, bl);
+		this.add(locationPanel());
 	}
 	
 	public void setModel(SimpleModel simpleModel) {
@@ -111,7 +112,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
                 setBackground(background);
             }
         });
-		panel.setLayout(new FlowLayout());
+		//panel.setLayout(new FlowLayout());
 		panel.add(viewName);
 		panel.add(instructions);
 		panel.add(back);

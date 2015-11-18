@@ -109,22 +109,23 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
         		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
         	}
         });
-		gamePanel.add(splashScreen, "1");
-		gamePanel.add(instructionsView, "2");
+		//gamePanel.add(gameView, "1");
+		gamePanel.add(splashScreen, "2");
+		gamePanel.add(instructionsView, "3");
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
 		gamePanel.setPreferredSize(size); // set window dimension
 		gamePanel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
-		gv1.show(gamePanel, "1");
+		gv1.show(gamePanel, "2");
 		
 		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		next = new JButton("Next");
-		next.addActionListener(new NextButtonAction());
-		previous = new JButton("Previous");
+		//next = new JButton("Next");
+		//next.addActionListener(new NextButtonAction());
+		//previous = new JButton("Previous");
 		
-		buttonPanel.add(next);
-		buttonPanel.add(previous);
+		//buttonPanel.add(next);
+		//buttonPanel.add(previous);
 		
 		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
 		JButton button1 = new JButton("Start");
@@ -208,13 +209,17 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public void actionPerformed(ActionEvent e){
 		String cmd = e.getActionCommand();
 	      if(cmd.equals("Open")){
-	            getContentPane().removeAll();//dispose();
-	            getContentPane().add(splashScreen.getInstance());
+	            //getContentPane().removeAll();//dispose();
+	            //getContentPane().add(splashScreen.getInstance());
+	            gv1.show(gamePanel,  "2");
+	            gameView.remove(buttonPanel);
 	            pack();
 	        }
 	      if(cmd.equals("OpenTut")){
-				getContentPane().removeAll();
-				getContentPane().add(instructionsView.getInstance());
+				//getContentPane().removeAll();
+				//getContentPane().add(instructionsView.getInstance());
+				gv1.show(gamePanel, "3");
+				gameView.remove(buttonPanel);
 				pack();
 			}
 	    }

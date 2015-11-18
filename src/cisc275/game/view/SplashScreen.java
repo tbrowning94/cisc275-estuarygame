@@ -93,10 +93,11 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 		placeGC.setFocusPainted(false);
 		placeGC.setContentAreaFilled(false);
 		
-		bl = new BoxLayout(this, BoxLayout.Y_AXIS);
-		this.setLayout(bl);
-		this.add(locationPanel(), bl);
-		this.setBorder(BorderFactory.createEmptyBorder());
+		//bl = new BoxLayout(this, BoxLayout.Y_AXIS);
+		//this.setLayout(bl);
+		this.setLayout(new FlowLayout());
+		this.add(locationPanel());
+		//this.setBorder(BorderFactory.createEmptyBorder());
 	}
 	
 	public void setModel(SimpleModel simpleModel) {
@@ -156,7 +157,7 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
                 setBackground(background);
             }
         });
-		panel.setLayout(new FlowLayout());
+		//panel.setLayout(new FlowLayout());
 		panel.add(placePlant);
 		panel.add(placeGC);
 		panel.add(viewName);
