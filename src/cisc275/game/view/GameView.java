@@ -49,11 +49,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
-
 	public static String title = "Estuary Defense";
-	
-	private JButton button;
-	private JPanel panel;
 	private JFrame frame;
 	int deletenum = -1; //with use of crabs
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
@@ -61,22 +57,17 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public int imgHeight;
 	public int imgWidth;
 	
-	
 	private Player player;
 	//private Key, Mouse?
 	private boolean running = false;
-	
 	private BufferedImage image = new BufferedImage(getWorldWidth(), getWorldHeight(), BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-	
 	// # of milliseconds between state updates, probably will be 
 	//important when we figure out how to loop game
-	private long speed; 
-	
+	private long speed; 	
 	//number of rows and columns in the "world"
 	private int rows;
 	private int cols;
-		
 	//this level and the list of all possible levels
 	private int level;
 	

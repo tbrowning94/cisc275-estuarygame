@@ -37,8 +37,6 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 	private static InstructionsView instance = null;
-	//private JFrame frame;
-	private JPanel panel3;
 	private JLabel viewName, description;
 	private JTextField instructions;
 	private JButton back;
@@ -46,17 +44,23 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	
 	private BoxLayout bl;
 	private SimpleModel simpleModel;
-	Image instimage;
-	
 	
 	public InstructionsView() {
-		//this.panel3 = GameFrame();
 		viewName = new JLabel("Instructions");
 		description = new JLabel("Defend your local estuary!");
 		
 		instructions = new JTextField(10);
 		
 		back = new JButton("Back");
+		back.setPreferredSize(new Dimension(59, 50));
+		back.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		back.setAlignmentX(Component.CENTER_ALIGNMENT);
+		back.setLocation(720, 2);
+		back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		back.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -65,12 +69,12 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 				}
 			}
 		});
+		back.setActionCommand("Back");
 		
 		bl = new BoxLayout(gameView.getPanel(), BoxLayout.Y_AXIS);
 		this.setLayout(bl);
 		this.add(description, bl);
 		this.add(locationPanel(), bl);
-		
 	}
 	
 	public void setModel(SimpleModel simpleModel) {
@@ -78,40 +82,16 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	}
 	
 	private JPanel locationPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		panel.add(viewName);
-		panel.add(instructions);
-		panel.add(back);
-		
-		return panel;
-	}
-	
-	public JPanel getPanel3() {
-		return this.panel3;
-	}
-	
-	public static InstructionsView getInstance() {
-		if (instance == null) {
-			instance = new InstructionsView();
-		}
-		return instance;
-	}
-	
-	public JPanel GameFrame(){
-        final Image image = createImage();
-        panel3 = new JPanel() {
-        	
+		final Image image = createImage();
+		JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                //g.drawImage(image, 0, 0, null);
                 g.drawImage(image, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
-        panel3.addMouseListener(new MouseAdapter() {
+        panel.addMouseListener(new MouseAdapter() {
             private Color background;
-
             @Override
             public void mouseClicked(MouseEvent e) {
             	System.out.println("Mouse clicked");
@@ -126,54 +106,25 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 //        			setGarbageCollectorBool(false);
 //        		}
             }
-
             @Override
             public void mouseReleased(MouseEvent e) {
                 setBackground(background);
             }
         });
-
-		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
-		panel3.setPreferredSize(size); // set window dimension
-		panel3.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
+		panel.setLayout(new FlowLayout());
+		panel.add(viewName);
+		panel.add(instructions);
+		panel.add(back);
 		
-		//getContentPane().add(panel2, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
-		panel3.setLayout(null); // default layout is Flowlayout, we need to decide what we want
-
-		panel3.setLayout(new BoxLayout(panel3,BoxLayout.Y_AXIS));
-		panel3.add(Box.createRigidArea(new Dimension(50, 0)));
-		
-		back = new JButton("Back");
-		back.setPreferredSize(new Dimension(59, 50));
-		back.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		back.setAlignmentX(Component.CENTER_ALIGNMENT);
-		back.setLocation(720, 2);
-		back.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		back.addActionListener(this);
-		back.setActionCommand("Back");
-//		  try {
-//			    Image img = ImageIO.read(new File("images/Grass.png"));
-//			    button.setIcon(new ImageIcon(img));
-//			  } catch (IOException ex) {
-//			  }
-		//instructions = new JTextArea("Instructions:\r\n\r\n\t- Place plants to stop runoff\r\n\t- Place garbage collectors to pick up trash which \r\n\t  decreases plant effectiveness\r\n\t- Click mitten crabs to cage and remove them before they \r\n          ruin your defense");
-		//instructions.setRows(4);
-		//instructions.setSize(1438, 200);
-		//instructions.setFont(new Font("Courier New", Font.PLAIN, 36));
-		panel3.add(back);
-		//panel3.add(instructions);
-		
-    	//pack();
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setLocationRelativeTo(null);
-		//setResizable(true);
-        return panel3;
-    	
-    }
+		return panel;
+	}
+	
+	public static InstructionsView getInstance() {
+		if (instance == null) {
+			instance = new InstructionsView();
+		}
+		return instance;
+	}
 	
 	protected BufferedImage createImage() {
         BufferedImage bufferedImage;
@@ -190,28 +141,23 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -221,7 +167,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 			System.out.println("back button enabled");
 			//getContentPane().removeAll();//dispose();
 	        //System.out.print("hello");
-	        gameView = new GameView();
+	        //gameView = new GameView();
 	        //getContentPane().add(gameView.getPanel());
 	        //pack();
         } 

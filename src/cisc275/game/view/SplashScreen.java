@@ -41,30 +41,21 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 	private static SplashScreen instance = null;
-	private JPanel panel2;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
-	Button startGame;
-	Button instructions;
-	Image splashimage;
 	int numpics = 10;
-	private JButton pbutton, gcbutton;
     int imgHeight;
     int imgWidth;
     private JLabel viewName;
     private JButton placePlant, placeGC;
     private BoxLayout bl;
     private SimpleModel simpleModel;
-    
 	private BufferedImage pics[];
     
 	private enum click {
 		plant1, plant2, plant3, gC1, gC2, gC3
 	}
-	
 	private click isClicked;
-	
-	private File file;
 	
 	public SplashScreen() {
 		pics = new BufferedImage[numpics];
@@ -76,25 +67,32 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
     	pics[1] = plant1;
     	pics[2] = GarbCol;
     	  	
-     	//for(int i = 0; i < pics.size(); i++)
-    		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
-     	
-     	//this.panel2 = GameFrame();
 		viewName = new JLabel("Estuary Defense");
 		placePlant = new JButton("Plant");
+		placePlant.setIcon(new ImageIcon(pics[1].getScaledInstance(50,50,20)));
 		placePlant.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				//TODO
 			}
 		});
+		placePlant.setActionCommand("Plant");
+		placePlant.setBorderPainted(false);
+		placePlant.setFocusPainted(false);
+		placePlant.setContentAreaFilled(false);
 		placeGC = new JButton("Garbage Collector");
+		placeGC.setIcon(new ImageIcon(pics[2].getScaledInstance(50,50,20)));
 		placeGC.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				//TODO
 			}
 		});
+		placeGC.setActionCommand("Garbage Collector");
+		placeGC.setBorderPainted(false);
+		placeGC.setFocusPainted(false);
+		placeGC.setContentAreaFilled(false);
+		
 		bl = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setLayout(bl);
 		this.add(locationPanel(), bl);
@@ -114,77 +112,15 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 	}
 	
 	private JPanel locationPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		panel.add(placePlant);
-		panel.add(placeGC);
-		panel.add(viewName);
-		return panel;
-	}
-		
-	public static SplashScreen getInstance() {
-		if (instance == null) {
-			instance = new SplashScreen();
-		}
-		return instance;
-	}
-
-	void initialize() {
-	}
-	void onClick() {
-	}
-	void inValidate() {
-	}
-	
-	public JPanel getPanel2() {
-		return this.panel2;
-	}
-	
-	public JButton getPButton() {
-		return this.pbutton;
-	}
-	
-	public JButton getGCButton() {
-		return this.gcbutton;
-	}
-
-	public void paint(Graphics g) {
-    	for(CrabView c: crabs){
-    		if(c.removel == true){
-    			deletenum = crabs.indexOf(c);
-    		}
-    		c.paintcrab(panel2, g);
-    	}
-    	if(deletenum != -1){
-    		panel2.remove(crabs.get(deletenum).cbutton);
-    		crabs.remove(deletenum);
-    		deletenum = -1;
-    	}
-    }
-	   private BufferedImage createImage(String file) {
-	        BufferedImage bufferedImage;
-	        try {
-	        	bufferedImage=ImageIO.read(new File(file));
-	            return bufferedImage;
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-
-	        return null;
-	    }
-
-	public JPanel GameFrame(){
-        panel2 = new JPanel() {
-        	
+		JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
-        panel2.addMouseListener(new MouseAdapter() {
+        panel.addMouseListener(new MouseAdapter() {
             private Color background;
-
             @Override
             public void mouseClicked(MouseEvent e) {
             	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
@@ -215,48 +151,64 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
             			break;
             	}
             }
-
             @Override
             public void mouseReleased(MouseEvent e) {
                 setBackground(background);
             }
         });
-
-		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
-		panel2.setPreferredSize(size); // set window dimension
-		panel2.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
+		panel.setLayout(new FlowLayout());
+		panel.add(placePlant);
+		panel.add(placeGC);
+		panel.add(viewName);
+		return panel;
+	}
 		
-		panel2.setLayout(null); // default layout is Flowlayout, we need to decide what we want
+	public static SplashScreen getInstance() {
+		if (instance == null) {
+			instance = new SplashScreen();
+		}
+		return instance;
+	}
 
-		panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
-		panel2.add(Box.createRigidArea(new Dimension(50, 0)));
+	void initialize() {
+	}
+	void onClick() {
+	}
+	void inValidate() {
+	}
 	
-		
-		//ImageIcon plantIcon = createImageIcon("images/Grass.png", "picture of grass");
-		BufferedImage plant1 = createImage("images/Grass.png");
-		pbutton = new JButton();
-		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(50, 50, 20)));
-		pbutton.addActionListener(this);
-		pbutton.setActionCommand("Plant");
-		pbutton.setBorderPainted(false);
-		pbutton.setFocusPainted(false);
-		pbutton.setContentAreaFilled(false);
-		
-		BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
-		gcbutton = new JButton();
-		//gcbutton.setLocation(1000,1000);
-		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(50, 50, 20)));
-		gcbutton.addActionListener(this);
-		gcbutton.setActionCommand("Garbage Collector");
-		panel2.add(pbutton);
-		panel2.add(gcbutton);
-		gcbutton.setBorderPainted(false);
-		gcbutton.setFocusPainted(false);
-		gcbutton.setContentAreaFilled(false);
-		
-        return panel2;
-    	
+	public JButton getPButton() {
+		return this.placePlant;
+	}
+	
+	public JButton getGCButton() {
+		return this.placeGC;
+	}
+
+	public void paint(Graphics g) {
+    	for(CrabView c: crabs){
+    		if(c.removel == true){
+    			deletenum = crabs.indexOf(c);
+    		}
+    		c.paintcrab(this, g);
+    	}
+    	if(deletenum != -1){
+    		this.remove(crabs.get(deletenum).cbutton);
+    		crabs.remove(deletenum);
+    		deletenum = -1;
+    	}
     }
+	   private BufferedImage createImage(String file) {
+	        BufferedImage bufferedImage;
+	        try {
+	        	bufferedImage=ImageIO.read(new File(file));
+	            return bufferedImage;
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        return null;
+	    }
 
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = pics[1];
@@ -301,31 +253,22 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
-
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
-
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
-
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
     public static int rando(){
     	Random rnd = new Random();
@@ -343,6 +286,4 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
             return null;
         }
     }
-
-
 }
