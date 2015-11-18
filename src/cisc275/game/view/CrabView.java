@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
+	boolean mitten;
 	Image ing;
 	int picNum = 1;
     int picNums;
@@ -51,10 +52,15 @@ public class CrabView {
     	else if(l == 2){
     		return(rnd.nextInt(4)+1);
     	}
+    	else if(l == 5){
+    		System.out.print(rnd.nextInt(1));
+    		return(rnd.nextInt(4));
+    	}
     	else{
     		int j = rnd.nextInt(269)+358;
     		return(j);
     	}
+    	
     }
     
     public void paintcrab() {
@@ -62,11 +68,21 @@ public class CrabView {
     	//System.out.println(picNum);
     	if(picNum == 1 || picNum == 2){
     		picNum++;
-    		ing = pics[0];
+    		if(mitten==true){
+    			ing = pics[0];
+    		}
+    		else{
+    			ing = pics[3];
+    		}
     	}
     	else if(picNum == 3){
     		picNum++;
-    		ing = pics[1];
+    		if(mitten==true){
+    			ing = pics[1];
+    		}
+    		else{
+    			ing = pics[2];
+    		}
     	}
     	else{
     		picNum = 1;
@@ -133,6 +149,12 @@ public class CrabView {
     }
 
     public CrabView(boolean b){
+    	if(rando(5)== 1){
+    		mitten = false;
+    	}
+    	else{
+    		mitten = true;
+    	}
     	crabs.add(this);
 		oneY = rando(3);
 		if(side == true){
@@ -168,13 +190,15 @@ public class CrabView {
 			side = true;
 		}
 		cbutton.setSize(79, 57);
-    	pics = new Image[2];
+    	pics = new Image[4];
     	 //loads all subimages into array, separated by their type
     		
     		//pics[i] = pics[i].getScaledInstance(82, 82, Image.SCALE_DEFAULT);
     		try {
     			pics[0] = ImageIO.read(getClass().getResource("crabby.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
     			pics[1] = ImageIO.read(getClass().getResource("crab1.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
+    			pics[2] = ImageIO.read(getClass().getResource("crab3.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
+    			pics[3] = ImageIO.read(getClass().getResource("crab4.png")).getScaledInstance(79, 57, Image.SCALE_DEFAULT);
     			//System.out.println(pics[1]+ "crab1");
     			//System.out.println(pics[0]+ "crab2");
     		} catch (IOException e1) {

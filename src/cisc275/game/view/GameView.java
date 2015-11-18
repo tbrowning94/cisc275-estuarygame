@@ -308,7 +308,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	
     public static int rando(){
     	Random rnd = new Random();
-    	return(rnd.nextInt(100));
+    	return(rnd.nextInt(50));
     }
 	void drawGarbage() {
 	}
@@ -360,7 +360,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 //                for(CrabView c: crabs){
 //             	   frame.remove(c.cbutton);
 //            	}
-                if(rando() == 1 && crabcount < 5){ //randomly makes a crab (1/50 chance)
+                if(rando() == 1 && crabcount < 50){ //randomly makes a crab (1/50 chance)
             		crabs.add(new CrabView(true));
             		crabcount += 1;
             		}
