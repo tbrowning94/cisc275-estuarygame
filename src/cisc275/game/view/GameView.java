@@ -53,6 +53,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GameView extends JFrame implements GameListener<Game>, Runnable, ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3555168036929980855L;
 	//game constants
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
@@ -100,8 +104,26 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		splashScreen.setModel(simpleModel);
 		instructionsView.setModel(simpleModel);
 		
+		gamePanel = locationPanel();
+		gv1 = new CardLayout();
+		this.setLayout(gv1);
+		//this.add(buttonPanel, "South");
+		this.add(gamePanel, "1");
+		this.add(splashScreen, "2");
+		this.add(instructionsView, "3");
+		//gv1.show(getContentPane(), "1");
+		gv1.show(gamePanel.getParent(), "1");
+		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setResizable(true);
+		this.setLocationRelativeTo(null);
+		this.pack();
+		this.setVisible(true);
+	}
+	
+	private JPanel locationPanel() {
 		final Image image = createImage();
-		gamePanel = new JPanel() {
+		JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -110,45 +132,28 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
             }
         };
 		gb1 = new GridBagLayout();
-		gamePanel.setLayout(gb1);
-		gamePanel.addMouseListener(new MouseAdapter() {
+		panel.setLayout(gb1);
+		panel.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
         		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
         	}
         });
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
-		gamePanel.setMinimumSize(size); // set window dimension
+		panel.setMinimumSize(size); // set window dimension
 		
-		//buttonPanel = new JPanel();
-		//buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		
-		//buttonPanel.add(next);
-		//buttonPanel.add(previous);
-		
-		addGridItem(gamePanel,new JLabel("WELCOME TO ESTUARY DEFENSE!"),0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,40,100));
+		JLabel name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
+		addGridItem(panel,name,0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,40,100));
 		JButton button1 = new JButton("Start");
-		addGridItem(gamePanel,button1,0,1,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
+		addGridItem(panel,button1,0,1,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
 		JButton button2 = new JButton("Tutorial");
-		addGridItem(gamePanel,button2,0,2,1,1,GridBagConstraints.CENTER,new Insets(5,100,80,100));
 		button2.addActionListener(this);
-		button2.setActionCommand("OpenTut");	
+		button2.setActionCommand("OpenTut");
+		addGridItem(panel,button2,0,2,1,1,GridBagConstraints.CENTER,new Insets(5,100,80,100));	
 		
-		gv1 = new CardLayout();
-		this.setLayout(gv1);
-		//this.add(buttonPanel, "South");
-		this.add(gamePanel, "1");
-		this.add(splashScreen, "2");
-		this.add(instructionsView, "3");
-		gv1.show(getContentPane(), "1");
-				
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setResizable(true);
-		this.setLocationRelativeTo(null);
-		this.pack();
-		this.setVisible(true);
+		return panel;
 	}
 	
 	private void addGridItem(JPanel panel, JComponent comp, int x, int y, int width, int height, int align, Insets padding) {
@@ -226,16 +231,16 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	      if(cmd.equals("Open")){
 	            //getContentPane().removeAll();//dispose();
 	            //getContentPane().add(splashScreen.getInstance());
-	    	  	gv1.show(splashScreen,  "2");
+	    	  	gv1.show(splashScreen.getParent(),  "2");
 	            //gameView.remove(buttonPanel);
-	            pack();
+	            //pack();
 	        }
 	      if(cmd.equals("OpenTut")){
 				//getContentPane().removeAll();
 				//getContentPane().add(instructionsView.getInstance());
-				gv1.show(instructionsView, "3");
+				gv1.show(instructionsView.getParent(), "3");
 				//gameView.remove(buttonPanel);
-				pack();
+				//pack();
 			}
 	    }
     public static int rando(){
