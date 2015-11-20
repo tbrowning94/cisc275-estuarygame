@@ -22,6 +22,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -137,6 +138,9 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
         		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
+//        		if (instructionsView.getInstance().getSimpleModel().getEnum() == "Back") {
+//        			gv1.show(gamePanel,"1");
+//        		}
         	}
         });
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
@@ -170,12 +174,30 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		panel.add(comp, gcon);
 	}
 	
+	public void setView(String viewNumber) {
+		if (viewNumber == "1") {
+			gv1.show(gamePanel, viewNumber);
+		} else if (viewNumber == "2") {
+			gv1.show(splashScreen, viewNumber);			
+		} else if (viewNumber == "3") {
+			gv1.show(instructionsView, viewNumber);
+		}
+	}
+	
 	private class NextButtonAction implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			gv1.next(gamePanel);
 		}
 	}
-	
+	public GameView getGameView() {
+		return GameView.gameView;
+	}
+	public CardLayout getgv1() {
+		return this.gv1;
+	}
+	public JPanel getGamePanel() {
+		return this.gamePanel;
+	}
 	public JFrame getFrame() {
 		return this.frame;
 	}
@@ -242,6 +264,10 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 				//gameView.remove(buttonPanel);
 				//pack();
 			}
+	      if(cmd.equals("Back")){
+	    	  System.out.println("Back in gv");
+	    	  gv1.show(gamePanel.getParent(), "1");
+	      }
 	    }
     public static int rando(){
     	Random rnd = new Random();

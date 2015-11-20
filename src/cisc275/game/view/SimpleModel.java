@@ -20,6 +20,7 @@ public class SimpleModel {
 	}
 	
 	public void setEnum(String click) {
+		System.out.println("click: "+click);
 		String oldValue = this.eState;
 		String newValue = click;
 		this.eState = click;

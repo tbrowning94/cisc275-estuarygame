@@ -38,11 +38,16 @@ import javax.swing.SwingConstants;
 //import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 public class InstructionsView extends JPanel implements ActionListener, MouseListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3646073377614320934L;
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 	private static InstructionsView instance = null;
 	private JLabel viewName, description;
+	private JPanel ivPanel;
 	private JTextArea instructions;
 	private JButton back;
 	private GameView gameView;
@@ -51,8 +56,11 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	private SimpleModel simpleModel;
 	
 	public InstructionsView() {
+		this.gameView = getGameView();
 		gb1 = new GridBagLayout();
 		this.setLayout(gb1);
+		ivPanel = locationPanel();
+		this.add(ivPanel);
 		description = new JLabel("Defend your local estuary!");
 		instructions = new JTextArea();
 		back = new JButton("Back");
@@ -68,7 +76,26 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		back.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+				String cmd = ae.getActionCommand();
+				if(cmd.equals("Back")){
+					//TODO:Fix back button
+					System.out.println("back button enabled");
+					//instance.getParent().super().getParent().g
+					//instance.getGameView().getgv1().next(instance.getGameView().getGamePanel().getParent());
+					//gameView.getgv1().next(gameView.getGamePanel());
+					getGameView().setView("1");
+					//if (instance.getSimpleModel().getEnum() == "Back") {
+	        			//super().getGameView().getgv1().show(super().getGameView().getGamePanel(), "1");
+	        			//gv1.show(gamePanel,"1");
+					//}
+					//getContentPane().removeAll();//dispose();
+			        //System.out.print("hello");
+			        //gameView = new GameView();
+			        //getContentPane().add(gameView.getPanel());
+			        //pack();
+		        }
 				if (simpleModel != null) {
+					//System.out.println("Back click");
 					simpleModel.setEnum(back.getText());
 				}
 			}
@@ -81,8 +108,6 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		addGridItem(this,instructions,1,1,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
 		addGridItem(this,viewName,0,1,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
 
-		
-		this.add(locationPanel());
 		//Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
 		//this.setPreferredSize(size); // set window dimension
 		this.setVisible(true);
@@ -107,6 +132,12 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	}
 	public int getScale() {
 		return SCALE;
+	}
+	public SimpleModel getSimpleModel() {
+		return simpleModel;
+	}
+	public GameView getGameView() {
+		return this.gameView;
 	}
 	
 	private JPanel locationPanel() {
