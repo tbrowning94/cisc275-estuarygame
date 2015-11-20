@@ -10,9 +10,11 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Window;
 import java.awt.image.BufferStrategy;
@@ -36,7 +38,10 @@ import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
+
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -81,7 +86,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	Image garbageCollector;
 	
 	private JPanel gamePanel, buttonPanel;
-	private JButton next, previous;
 	private CardLayout gv1;
 	private GridBagLayout gb1;
 	private SimpleModel simpleModel = new SimpleModel();
@@ -105,60 +109,60 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
                 
             }
         };
-		gv1 = new CardLayout();
-		//gb1 = new GridBagLayout();
-		gamePanel.setLayout(gv1);
+		gb1 = new GridBagLayout();
+		gamePanel.setLayout(gb1);
 		gamePanel.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
         		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
         	}
         });
-		//gamePanel.add(gamePanel, "1");
-		gamePanel.add(splashScreen, "2");
-		gamePanel.add(instructionsView, "3");
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
-		gamePanel.setPreferredSize(size); // set window dimension
-		gamePanel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
-		gv1.show(gamePanel, "2");
+		gamePanel.setMinimumSize(size); // set window dimension
 		
 		//buttonPanel = new JPanel();
 		//buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		//next = new JButton("Next");
-		//next.addActionListener(new NextButtonAction());
-		//previous = new JButton("Previous");
-		
 		//buttonPanel.add(next);
 		//buttonPanel.add(previous);
 		
-		JLabel Name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
+		addGridItem(gamePanel,new JLabel("WELCOME TO ESTUARY DEFENSE!"),0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,40,100));
 		JButton button1 = new JButton("Start");
+		addGridItem(gamePanel,button1,0,1,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
-		button1.setVerticalAlignment(SwingConstants.BOTTOM);
-		button1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		button1.setLocation(720, 2);
 		JButton button2 = new JButton("Tutorial");
+		addGridItem(gamePanel,button2,0,2,1,1,GridBagConstraints.CENTER,new Insets(5,100,80,100));
 		button2.addActionListener(this);
-		button2.setActionCommand("OpenTut");
-		button2.setVerticalAlignment(SwingConstants.BOTTOM);
-		button2.setAlignmentX(Component.CENTER_ALIGNMENT);
-		button2.setLocation(720, 102);
-		Name.setAlignmentY(Component.TOP_ALIGNMENT);
-		gamePanel.add(Name); 	
-		gamePanel.add(button1);
-		gamePanel.add(button2);
+		button2.setActionCommand("OpenTut");	
 		
-		//this.setLayout(new BorderLayout());
-		this.add(gamePanel, "Center");
+		gv1 = new CardLayout();
+		this.setLayout(gv1);
 		//this.add(buttonPanel, "South");
-		
+		this.add(gamePanel, "1");
+		this.add(splashScreen, "2");
+		this.add(instructionsView, "3");
+		gv1.show(getContentPane(), "1");
+				
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		this.pack();
 		this.setVisible(true);
+	}
+	
+	private void addGridItem(JPanel panel, JComponent comp, int x, int y, int width, int height, int align, Insets padding) {
+		GridBagConstraints gcon = new GridBagConstraints();
+		gcon.gridx = x;
+		gcon.gridy = y;
+		gcon.gridwidth = width;
+		gcon.gridheight = height;
+		gcon.weightx = 0.5;
+		gcon.weighty = 0.5;
+		gcon.insets = padding;
+		gcon.anchor = align;
+		gcon.fill = GridBagConstraints.NONE;
+		panel.add(comp, gcon);
 	}
 	
 	private class NextButtonAction implements ActionListener {
