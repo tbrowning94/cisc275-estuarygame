@@ -8,7 +8,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -25,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -80,6 +83,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private JPanel gamePanel, buttonPanel;
 	private JButton next, previous;
 	private CardLayout gv1;
+	private GridBagLayout gb1;
 	private SimpleModel simpleModel = new SimpleModel();
 	
 	private InstructionsView instructionsView;
@@ -102,6 +106,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
             }
         };
 		gv1 = new CardLayout();
+		//gb1 = new GridBagLayout();
 		gamePanel.setLayout(gv1);
 		gamePanel.addMouseListener(new MouseAdapter() {
         	@Override
@@ -109,7 +114,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
         		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
         	}
         });
-		//gamePanel.add(gameView, "1");
+		//gamePanel.add(gamePanel, "1");
 		gamePanel.add(splashScreen, "2");
 		gamePanel.add(instructionsView, "3");
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
@@ -117,8 +122,8 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		gamePanel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
 		gv1.show(gamePanel, "2");
 		
-		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		//buttonPanel = new JPanel();
+		//buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		//next = new JButton("Next");
 		//next.addActionListener(new NextButtonAction());
@@ -131,17 +136,23 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		JButton button1 = new JButton("Start");
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
+		button1.setVerticalAlignment(SwingConstants.BOTTOM);
+		button1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		button1.setLocation(720, 2);
 		JButton button2 = new JButton("Tutorial");
 		button2.addActionListener(this);
 		button2.setActionCommand("OpenTut");
+		button2.setVerticalAlignment(SwingConstants.BOTTOM);
+		button2.setAlignmentX(Component.CENTER_ALIGNMENT);
+		button2.setLocation(720, 102);
 		Name.setAlignmentY(Component.TOP_ALIGNMENT);
-		buttonPanel.add(Name); 	
-		buttonPanel.add(button1);
-		buttonPanel.add(button2);
+		gamePanel.add(Name); 	
+		gamePanel.add(button1);
+		gamePanel.add(button2);
 		
-		this.setLayout(new BorderLayout());
+		//this.setLayout(new BorderLayout());
 		this.add(gamePanel, "Center");
-		this.add(buttonPanel, "South");
+		//this.add(buttonPanel, "South");
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(true);
@@ -211,15 +222,15 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	      if(cmd.equals("Open")){
 	            //getContentPane().removeAll();//dispose();
 	            //getContentPane().add(splashScreen.getInstance());
-	            gv1.show(gamePanel,  "2");
-	            gameView.remove(buttonPanel);
+	    	  	gv1.show(splashScreen,  "2");
+	            //gameView.remove(buttonPanel);
 	            pack();
 	        }
 	      if(cmd.equals("OpenTut")){
 				//getContentPane().removeAll();
 				//getContentPane().add(instructionsView.getInstance());
-				gv1.show(gamePanel, "3");
-				gameView.remove(buttonPanel);
+				gv1.show(instructionsView, "3");
+				//gameView.remove(buttonPanel);
 				pack();
 			}
 	    }
