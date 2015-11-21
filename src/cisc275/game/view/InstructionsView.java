@@ -83,7 +83,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 					//instance.getParent().super().getParent().g
 					//instance.getGameView().getgv1().next(instance.getGameView().getGamePanel().getParent());
 					//gameView.getgv1().next(gameView.getGamePanel());
-					getGameView().setView("1");
+					//getMainView().setView("1");
 					//if (instance.getSimpleModel().getEnum() == "Back") {
 	        			//super().getGameView().getgv1().show(super().getGameView().getGamePanel(), "1");
 	        			//gv1.show(gamePanel,"1");

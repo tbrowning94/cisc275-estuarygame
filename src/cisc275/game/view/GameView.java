@@ -20,6 +20,8 @@ import java.awt.Window;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
@@ -53,7 +55,7 @@ import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class GameView extends JFrame implements GameListener<Game>, ActionListener {
+public class GameView extends JPanel implements GameListener<Game>, ActionListener {
 	/**
 	 * 
 	 */
@@ -63,7 +65,6 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 	public static String title = "Estuary Defense";
-	private JFrame frame;
 	int deletenum = -1; //with use of crabs
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	private static GameView instance = null;
@@ -72,7 +73,6 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
 	
 	private Player player;
 	//private Key, Mouse?
-	private boolean running = false;
 	private BufferedImage image = new BufferedImage(getWorldWidth(), getWorldHeight(), BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	// # of milliseconds between state updates, probably will be 
@@ -90,35 +90,29 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
 	Image plant;
 	Image garbageCollector;
 	
-	private JPanel gamePanel, buttonPanel;
-	private CardLayout gv1;
+	private JPanel gamePanel;
 	private GridBagLayout gb1;
 	private SimpleModel simpleModel = new SimpleModel();
-	
-	private InstructionsView instructionsView;
-	private SplashScreen splashScreen;
    	
 	public GameView() {
-		splashScreen = SplashScreen.getInstance();
-		instructionsView = InstructionsView.getInstance();
-		
-		splashScreen.setModel(simpleModel);
-		instructionsView.setModel(simpleModel);
-		
 		gamePanel = locationPanel();
-		gv1 = new CardLayout();
-		this.setLayout(gv1);
-		//this.add(buttonPanel, "South");
-		this.add(gamePanel, "1");
-		this.add(splashScreen, "2");
-		this.add(instructionsView, "3");
-		//gv1.show(getContentPane(), "1");
-		gv1.show(gamePanel.getParent(), "1");
+		this.add(gamePanel);
+		gb1 = new GridBagLayout();
+		this.setLayout(gb1);
+		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
+		this.setMinimumSize(size); // set window dimension
 		
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setResizable(true);
-		this.setLocationRelativeTo(null);
-		this.pack();
+		JLabel name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
+		addGridItem(gamePanel,name,0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,40,100));
+		JButton button1 = new JButton("Start");
+		button1.addActionListener(this);
+		button1.setActionCommand("Open");
+		addGridItem(gamePanel,button1,0,1,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
+		JButton button2 = new JButton("Tutorial");
+		button2.addActionListener(this);
+		button2.setActionCommand("OpenTut");
+		addGridItem(gamePanel,button2,0,2,1,1,GridBagConstraints.CENTER,new Insets(5,100,80,100));	
+		
 		this.setVisible(true);
 	}
 	
@@ -132,8 +126,6 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
                 
             }
         };
-		gb1 = new GridBagLayout();
-		panel.setLayout(gb1);
 		panel.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
@@ -143,20 +135,7 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
 //        		}
         	}
         });
-		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
-		panel.setMinimumSize(size); // set window dimension
-		
-		JLabel name = new JLabel("WELCOME TO ESTUARY DEFENSE!");
-		addGridItem(panel,name,0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,40,100));
-		JButton button1 = new JButton("Start");
-		button1.addActionListener(this);
-		button1.setActionCommand("Open");
-		addGridItem(panel,button1,0,1,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
-		JButton button2 = new JButton("Tutorial");
-		button2.addActionListener(this);
-		button2.setActionCommand("OpenTut");
-		addGridItem(panel,button2,0,2,1,1,GridBagConstraints.CENTER,new Insets(5,100,80,100));	
-		
+		this.setLayout(gb1);
 		return panel;
 	}
 	
@@ -173,33 +152,8 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
 		gcon.fill = GridBagConstraints.NONE;
 		panel.add(comp, gcon);
 	}
-	
-	public void setView(String viewNumber) {
-		if (viewNumber == "1") {
-			gv1.show(gamePanel, viewNumber);
-		} else if (viewNumber == "2") {
-			gv1.show(splashScreen, viewNumber);			
-		} else if (viewNumber == "3") {
-			gv1.show(instructionsView, viewNumber);
-		}
-	}
-	
-	private class NextButtonAction implements ActionListener {
-		public void actionPerformed(ActionEvent ae) {
-			gv1.next(gamePanel);
-		}
-	}
-	public GameView getGameView() {
-		return GameView.instance;
-	}
-	public CardLayout getgv1() {
-		return this.gv1;
-	}
 	public JPanel getGamePanel() {
 		return this.gamePanel;
-	}
-	public JFrame getFrame() {
-		return this.frame;
 	}
 	public int getlevel(){
 		return level;
@@ -249,24 +203,25 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
     }
 	@Override
 	public void actionPerformed(ActionEvent e){
+		System.out.println("in gv action performed");
 		String cmd = e.getActionCommand();
 	      if(cmd.equals("Open")){
 	            //getContentPane().removeAll();//dispose();
 	            //getContentPane().add(splashScreen.getInstance());
-	    	  	gv1.show(splashScreen.getParent(),  "2");
+	    	  	//gv1.show(splashScreen.getParent(),  "2");
 	            //gameView.remove(buttonPanel);
 	            //pack();
 	        }
 	      if(cmd.equals("OpenTut")){
 				//getContentPane().removeAll();
 				//getContentPane().add(instructionsView.getInstance());
-				gv1.show(instructionsView.getParent(), "3");
+				//gv1.show(instructionsView.getParent(), "3");
 				//gameView.remove(buttonPanel);
 				//pack();
 			}
 	      if(cmd.equals("Back")){
-	    	  System.out.println("Back in gv");
-	    	  gv1.show(gamePanel.getParent(), "1");
+	    	  //System.out.println("Back in gv");
+	    	  //gv1.show(gamePanel.getParent(), "1");
 	      }
 	    }
     public static int rando(){
@@ -309,54 +264,6 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
 	public void onEvent(String event, Game game) {
 		// TODO Auto-generated method stub
 	}
-//	public synchronized void start() {
-//		running = true;
-//		thread = new Thread(this, "Display");
-//		thread.start();
-//	}
-	
-//	public synchronized void stop() {
-//		running = false;
-//		try {
-//			thread.join();
-//			
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//			System.out.println("Try/catch failure in GameView.stop()");
-//		}
-//	}
-	
-//	@Override
-//	public void run() {
-//		long lastTime = System.nanoTime();
-//		long timer = System.currentTimeMillis();
-//		final double ns = 1000000000.0 / 60.0;
-//		double delta = 0;
-//		int frames = 0;
-//		int updates = 0;
-//		frame.requestFocus();
-//		while (running) {
-//			long now = System.nanoTime();
-//			delta += (now - lastTime) / ns;
-//			lastTime = now;
-//			while (delta >= 1) {
-//				update();
-//				updates++;
-//				delta--;
-//			}
-//			render();
-//			frames++;
-//			
-//			if (System.currentTimeMillis() - timer > 1000) {
-//				timer += 1000;
-//				// System.out.println(updates+" UPS, "+frames+" FPS");
-//				frame.setTitle(title+"  |  "+updates+" UPS, "+frames+" FPS");
-//				updates = 0;
-//				frames = 0;
-//			}
-//		}
-//		stop();
-//	}
 	public static int getWorldWidth() {
 		return WORLD_WIDTH;
 	}
@@ -371,6 +278,21 @@ public class GameView extends JFrame implements GameListener<Game>, ActionListen
 			instance = new GameView();
 		}
 		return instance;
+	}
+
+	public void setModel(SimpleModel simpleModel) {
+		this.simpleModel = simpleModel;
+		simpleModel.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent pce) {
+				if (simpleModel.getEnum().equals(pce.getPropertyName())) {
+					//TODO
+				}
+			}
+		});	
+	}
+	public SimpleModel getSimpleModel() {
+		return simpleModel;
 	}
 }
 
