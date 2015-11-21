@@ -53,7 +53,7 @@ import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class GameView extends JFrame implements GameListener<Game>, Runnable, ActionListener {
+public class GameView extends JFrame implements GameListener<Game>, ActionListener {
 	/**
 	 * 
 	 */
@@ -66,7 +66,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private JFrame frame;
 	int deletenum = -1; //with use of crabs
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
-	private static GameView gameView = null;
+	private static GameView instance = null;
 	public int imgHeight;
 	public int imgWidth;
 	
@@ -190,7 +190,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		}
 	}
 	public GameView getGameView() {
-		return GameView.gameView;
+		return GameView.instance;
 	}
 	public CardLayout getgv1() {
 		return this.gv1;
@@ -366,23 +366,11 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public static int getScale() {
 		return SCALE;
 	}
-	public static void main(String[] args) { //move to view, windows are central thread of game
-		SwingUtilities.invokeLater(new Runnable(){	
-			@Override
-			public void run() {
-				if (gameView == null) {
-					gameView = new GameView();
-					gameView.setVisible(true);
-				}
-			}
-		});
-	}
-	@Override
-	public void run() {
-		if (gameView == null) {
-			gameView = new GameView();
-			gameView.setVisible(true);
+	public static GameView getInstance() {
+		if (instance == null) {
+			instance = new GameView();
 		}
+		return instance;
 	}
 }
 
