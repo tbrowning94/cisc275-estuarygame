@@ -96,7 +96,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		        }
 				if (simpleModel != null) {
 					//System.out.println("Back click");
-					simpleModel.setEnum(back.getText());
+					simpleModel.setAction("Back");
 				}
 			}
 		});
@@ -127,7 +127,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		panel.add(comp, gcon);
 	}
 	
-	public void setModel(SimpleModel simpleModel) {
+	public void setModel(final SimpleModel simpleModel) {
 		this.simpleModel = simpleModel;
 	}
 	public JPanel getInstPanel() {

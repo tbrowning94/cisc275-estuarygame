@@ -7,9 +7,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +23,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 public class MainView extends JFrame implements Runnable, ActionListener {
 	/**
@@ -61,13 +69,42 @@ public class MainView extends JFrame implements Runnable, ActionListener {
 		mainPanel.setLayout(gv1);
 		//gv1.addLayoutComponent(gameView.getGamePanel(), "1");
 		//gv1.addLayoutComponent(splashScreen.getSplashPanel(), "2");
-		//gv1.addLayoutComponent(instructionsView.getInstPanel(), "3");
+		//gv1.addLayoutComponent(instructionsView.getInstPanel(), "3")
 		mainPanel.add(gameView, "1");
 		mainPanel.add(splashScreen, "2");
 		mainPanel.add(instructionsView, "3");
 		gv1.show(mainPanel, "1");
 		//gv1.sh
+			
+		gameView.getSimpleModel().addPropertyChangeListener(new PropertyChangeListener() {
 
+			@Override
+			public void propertyChange(PropertyChangeEvent pce) {
+				if (SimpleModel.ACTION_TEXT.equals(pce.getPropertyName())) {
+					System.out.println("Action in mv: " + gameView.getSimpleModel().getAction());
+				}
+				if (gameView.getSimpleModel().getAction() == "Open") {
+					gv1.show(mainPanel, "2");
+				}
+				if (gameView.getSimpleModel().getAction() == "OpenTut") {
+					gv1.show(mainPanel, "3");
+				}
+			}
+		});
+		
+		instructionsView.getSimpleModel().addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent pce) {
+				if (SimpleModel.ACTION_TEXT.equals(pce.getPropertyName())) {
+					System.out.println("Action in mv: " + instructionsView.getSimpleModel().getAction());
+				}
+				if (instructionsView.getSimpleModel().getAction() == "Back") {
+					gv1.show(mainPanel, "1");
+				}
+			}			
+		});
+		
 		this.setLayout(new BorderLayout());
 		this.add(mainPanel, "Center");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -96,11 +133,11 @@ public class MainView extends JFrame implements Runnable, ActionListener {
 	}
 	public void setView(String viewNumber) {
 		if (viewNumber == "1") {
-			gv1.show(gameView.getGamePanel(), viewNumber);
+			gv1.show(mainPanel, viewNumber);
 		} else if (viewNumber == "2") {
-			gv1.show(splashScreen.getSplashPanel(), viewNumber);
+			gv1.show(mainPanel, viewNumber);
 		} else if (viewNumber == "3") {
-			gv1.show(instructionsView.getInstPanel(), viewNumber);
+			gv1.show(mainPanel, viewNumber);
 		}
 	}
 	public MainView getMainView() {
@@ -137,6 +174,7 @@ public class MainView extends JFrame implements Runnable, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
+		System.out.println("in mv ap: "+cmd);
 		if (cmd.equals("Open")) {
 			gv1.show(splashScreen, "2");
 		}

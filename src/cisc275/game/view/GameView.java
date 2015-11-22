@@ -203,21 +203,17 @@ public class GameView extends JPanel implements GameListener<Game>, ActionListen
     }
 	@Override
 	public void actionPerformed(ActionEvent e){
-		System.out.println("in gv action performed");
 		String cmd = e.getActionCommand();
+		//System.out.println("in gv action performed: "+cmd);
 	      if(cmd.equals("Open")){
-	            //getContentPane().removeAll();//dispose();
-	            //getContentPane().add(splashScreen.getInstance());
 	    	  	//gv1.show(splashScreen.getParent(),  "2");
-	            //gameView.remove(buttonPanel);
-	            //pack();
+	    	  	//setMainView("2");
+	    	  	simpleModel.setAction("Open");
 	        }
 	      if(cmd.equals("OpenTut")){
-				//getContentPane().removeAll();
-				//getContentPane().add(instructionsView.getInstance());
 				//gv1.show(instructionsView.getParent(), "3");
-				//gameView.remove(buttonPanel);
-				//pack();
+	    	  	//setMainView("3");
+	    	  	simpleModel.setAction("OpenTut");
 			}
 	      if(cmd.equals("Back")){
 	    	  //System.out.println("Back in gv");
@@ -280,13 +276,13 @@ public class GameView extends JPanel implements GameListener<Game>, ActionListen
 		return instance;
 	}
 
-	public void setModel(SimpleModel simpleModel) {
+	public void setModel(final SimpleModel simpleModel) {
 		this.simpleModel = simpleModel;
 		simpleModel.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent pce) {
-				if (simpleModel.getEnum().equals(pce.getPropertyName())) {
-					//TODO
+				if (SimpleModel.ACTION_TEXT.equals(pce.getPropertyName())) {
+					System.out.println("Action: " + simpleModel.getAction());
 				}
 			}
 		});	

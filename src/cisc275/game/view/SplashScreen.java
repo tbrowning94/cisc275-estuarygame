@@ -112,12 +112,12 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 		//this.setBorder(BorderFactory.createEmptyBorder());
 	}
 	
-	public void setModel(SimpleModel simpleModel) {
+	public void setModel(final SimpleModel simpleModel) {
 		this.simpleModel = simpleModel;
 		simpleModel.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent pce) {
-				if (simpleModel.getEnum().equals(pce.getPropertyName())) {
+				if (simpleModel.getAction().equals(pce.getPropertyName())) {
 					//TODO
 				}
 			}
@@ -245,12 +245,14 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 			//which could then place a plant at the next clicked location based on the 
 			//next mouse click that still has this button enabled
 			isClicked = click.plant1;
+			simpleModel.setAction("Plant");
         } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 
 			//invoke a call to update based on a click action listener which
 			//would give the location to place
         	isClicked = click.gC1;
+        	simpleModel.setAction("Garbage Collector");
 //        	crabs.add(new CrabView());
 //        	for(int i = 0; i < 10000; i++){
 //        		panel2.repaint();

@@ -6,11 +6,9 @@ import javax.swing.event.SwingPropertyChangeSupport;
 
 public class SimpleModel {
 	private SwingPropertyChangeSupport pcSupport = new SwingPropertyChangeSupport(this);
-	private enum click {
-		plant1, plant2, plant3, gC1, gC2, gC3
-	}
-	private String eState;
-	
+	public static final String ACTION_TEXT = "action text";
+	private String aState;
+
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcSupport.addPropertyChangeListener(listener);
 	}
@@ -19,16 +17,16 @@ public class SimpleModel {
 		pcSupport.removePropertyChangeListener(listener);
 	}
 	
-	public void setEnum(String click) {
+	public void setAction(String click) {
 		System.out.println("click: "+click);
-		String oldValue = this.eState;
+		String oldValue = this.aState;
 		String newValue = click;
-		this.eState = click;
-		pcSupport.firePropertyChange(click, oldValue, newValue);
+		this.aState = click;
+		pcSupport.firePropertyChange(ACTION_TEXT, oldValue, newValue);
 	}
 	
-	public String getEnum() {
-		return this.eState;
+	public String getAction() {
+		return this.aState;
 	}
 	
 }
