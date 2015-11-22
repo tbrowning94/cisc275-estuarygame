@@ -116,8 +116,8 @@ public class MainView extends JFrame implements Runnable, ActionListener {
 		this.setVisible(true);
 	}
 	private JPanel locationPanel() {
-		JPanel panel = new JPanel();
-        panel.addMouseListener(new MouseAdapter() {
+		JPanel mpanel = new JPanel();
+        mpanel.addMouseListener(new MouseAdapter() {
             private Color background;
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -128,10 +128,13 @@ public class MainView extends JFrame implements Runnable, ActionListener {
                 setBackground(background);
             }
         });
-        this.setLayout(gv1);
+        //this.setLayout(gv1);
+        mpanel.setLayout(new CardLayout());
         Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
-		this.setPreferredSize(size);
-		return panel;
+		//this.setPreferredSize(size);
+		mpanel.setPreferredSize(size);
+		mpanel.setMinimumSize(size);
+		return mpanel;
 	}
 	public void setView(String viewNumber) {
 		if (viewNumber == "1") {

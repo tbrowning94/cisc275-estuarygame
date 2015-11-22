@@ -7,7 +7,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +31,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -50,7 +54,7 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
     private JPanel splashPanel;
     private JLabel viewName;
     private JButton placePlant, placeGC;
-    private BoxLayout bl;
+    private GridBagLayout gb2;
     private SimpleModel simpleModel;
 	private BufferedImage pics[];
     
@@ -70,10 +74,16 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
     	pics[2] = GarbCol;
     	 
     	splashPanel = locationPanel();
+    	this.add(splashPanel);
+    	gb2 = new GridBagLayout();
+    	this.setLayout(gb2);
+    	Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
+		this.setMinimumSize(size); // set window dimension
+		this.setPreferredSize(size); // set window dimension
     	
 		viewName = new JLabel("Estuary Defense");
-		viewName.setVerticalAlignment(SwingConstants.TOP);
-		viewName.setHorizontalAlignment(SwingConstants.CENTER);
+		//viewName.setVerticalAlignment(SwingConstants.TOP);
+		//viewName.setHorizontalAlignment(SwingConstants.CENTER);
 		placePlant = new JButton("Plant");
 		placePlant.setIcon(new ImageIcon(pics[1].getScaledInstance(50,50,20)));
 		placePlant.addActionListener(new ActionListener() {
@@ -99,17 +109,11 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 		placeGC.setFocusPainted(false);
 		placeGC.setContentAreaFilled(false);
 		
-		splashPanel.add(placePlant);
-		splashPanel.add(placeGC);
-		splashPanel.add(viewName);
+		addGridItem(splashPanel,viewName,0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,40,100));
+		addGridItem(splashPanel,placePlant,0,1,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
+		addGridItem(splashPanel,placeGC,0,2,1,1,GridBagConstraints.CENTER,new Insets(5,100,80,100));
 		
-		//bl = new BoxLayout(this, BoxLayout.Y_AXIS);
-		//this.setLayout(bl);
-		this.setLayout(new FlowLayout());
-		this.add(splashPanel);
-		Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
-		this.setPreferredSize(size); // set window dimension
-		//this.setBorder(BorderFactory.createEmptyBorder());
+		this.setVisible(true);
 	}
 	
 	public void setModel(final SimpleModel simpleModel) {
@@ -129,16 +133,28 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 	public int getScale() {
 		return SCALE;
 	}
-	
+	private void addGridItem(JPanel panel, JComponent comp, int x, int y, int width, int height, int align, Insets padding) {
+		GridBagConstraints gcon = new GridBagConstraints();
+		gcon.gridx = x;
+		gcon.gridy = y;
+		gcon.gridwidth = width;
+		gcon.gridheight = height;
+		gcon.weightx = 0.5;
+		gcon.weighty = 0.5;
+		gcon.insets = padding;
+		gcon.anchor = align;
+		gcon.fill = GridBagConstraints.NONE;
+		panel.add(comp, gcon);
+	}
 	private JPanel locationPanel() {
-		JPanel panel = new JPanel() {
+		JPanel spanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
-        panel.addMouseListener(new MouseAdapter() {
+        spanel.addMouseListener(new MouseAdapter() {
             private Color background;
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -175,8 +191,13 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
                 setBackground(background);
             }
         });
-		//panel.setLayout(new FlowLayout());
-		return panel;
+        spanel.setLayout(new GridBagLayout());
+		//this.setLayout(gb1);
+		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
+		//this.setPreferredSize(size);
+		spanel.setPreferredSize(size);
+		spanel.setMinimumSize(size);
+		return spanel;
 	}
 		
 	public static SplashScreen getInstance() {

@@ -140,6 +140,7 @@ public class GameView extends JPanel implements GameListener<Game>, ActionListen
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		//this.setPreferredSize(size);
 		gpanel.setPreferredSize(size);
+		gpanel.setMinimumSize(size);
 		return gpanel;
 	}
 	
