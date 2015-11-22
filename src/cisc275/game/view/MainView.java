@@ -129,6 +129,8 @@ public class MainView extends JFrame implements Runnable, ActionListener {
             }
         });
         this.setLayout(gv1);
+        Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
+		this.setPreferredSize(size);
 		return panel;
 	}
 	public void setView(String viewNumber) {

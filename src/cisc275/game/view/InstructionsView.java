@@ -178,7 +178,8 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 //		panel.add(viewName,gb1);
 //		panel.add(back,gb1);
 //		panel.add(description,gb1);
-		
+        Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
+		this.setPreferredSize(size);
 		return panel;
 	}
 	

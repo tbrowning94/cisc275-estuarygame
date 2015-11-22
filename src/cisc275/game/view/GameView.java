@@ -118,7 +118,7 @@ public class GameView extends JPanel implements GameListener<Game>, ActionListen
 	
 	private JPanel locationPanel() {
 		final Image image = createImage();
-		JPanel panel = new JPanel() {
+		JPanel gpanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -126,7 +126,7 @@ public class GameView extends JPanel implements GameListener<Game>, ActionListen
                 
             }
         };
-		panel.addMouseListener(new MouseAdapter() {
+		gpanel.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
         		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
@@ -135,8 +135,12 @@ public class GameView extends JPanel implements GameListener<Game>, ActionListen
 //        		}
         	}
         });
-		this.setLayout(gb1);
-		return panel;
+		gpanel.setLayout(new GridBagLayout());
+		//this.setLayout(gb1);
+		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
+		//this.setPreferredSize(size);
+		gpanel.setPreferredSize(size);
+		return gpanel;
 	}
 	
 	private void addGridItem(JPanel panel, JComponent comp, int x, int y, int width, int height, int align, Insets padding) {
