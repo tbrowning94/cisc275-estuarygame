@@ -47,6 +47,7 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 	int numpics = 10;
     int imgHeight;
     int imgWidth;
+    private JPanel splashPanel;
     private JLabel viewName;
     private JButton placePlant, placeGC;
     private BoxLayout bl;
@@ -67,7 +68,9 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
     	pics[0] = bi;
     	pics[1] = plant1;
     	pics[2] = GarbCol;
-    	  	
+    	 
+    	splashPanel = locationPanel();
+    	
 		viewName = new JLabel("Estuary Defense");
 		viewName.setVerticalAlignment(SwingConstants.TOP);
 		viewName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,10 +99,14 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 		placeGC.setFocusPainted(false);
 		placeGC.setContentAreaFilled(false);
 		
+		splashPanel.add(placePlant);
+		splashPanel.add(placeGC);
+		splashPanel.add(viewName);
+		
 		//bl = new BoxLayout(this, BoxLayout.Y_AXIS);
 		//this.setLayout(bl);
 		this.setLayout(new FlowLayout());
-		this.add(locationPanel());
+		this.add(splashPanel);
 		Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
 		this.setPreferredSize(size); // set window dimension
 		//this.setBorder(BorderFactory.createEmptyBorder());
@@ -115,6 +122,9 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 				}
 			}
 		});
+	}
+	public JPanel getSplashPanel() {
+		return this.splashPanel;
 	}
 	public int getScale() {
 		return SCALE;
@@ -166,9 +176,6 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
             }
         });
 		//panel.setLayout(new FlowLayout());
-		panel.add(placePlant);
-		panel.add(placeGC);
-		panel.add(viewName);
 		return panel;
 	}
 		

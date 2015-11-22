@@ -130,6 +130,9 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	public void setModel(SimpleModel simpleModel) {
 		this.simpleModel = simpleModel;
 	}
+	public JPanel getInstPanel() {
+		return this.ivPanel;
+	}
 	public int getScale() {
 		return SCALE;
 	}
