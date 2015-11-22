@@ -58,7 +58,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	public InstructionsView() {
 		this.gameView = getGameView();
 		gb1 = new GridBagLayout();
-		this.setLayout(gb1);
+		//this.setLayout(gb1);
 		ivPanel = locationPanel();
 		this.add(ivPanel);
 		description = new JLabel("Defend your local estuary!");
@@ -66,7 +66,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 		back = new JButton("Back");
 		viewName = new JLabel("Instructions");
 		
-		addGridItem(this,description,0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
+		addGridItem(ivPanel,description,0,1,3,2,GridBagConstraints.CENTER,new Insets(80,100,5,100));
 		back.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		back.addMouseListener(new MouseAdapter() {
 			@Override
@@ -101,12 +101,12 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 			}
 		});
 		back.setActionCommand("Back");
-		addGridItem(this,back,3,1,1,2,GridBagConstraints.CENTER,new Insets(0,100,20,100));
+		addGridItem(ivPanel,back,4,3,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
 		instructions.setFont(new Font("Courier New", Font.PLAIN, 12));
 		instructions.setText("Defend this estuary with plants and garbage collectors");
 		instructions.setEditable(false);
-		addGridItem(this,instructions,1,1,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
-		addGridItem(this,viewName,0,1,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
+		addGridItem(ivPanel,instructions,0,2,4,2,GridBagConstraints.CENTER,new Insets(0,100,20,100));
+		addGridItem(ivPanel,viewName,0,0,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
 
 		//Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
 		//this.setPreferredSize(size); // set window dimension
@@ -145,14 +145,14 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	
 	private JPanel locationPanel() {
 		final Image image = createImage();
-		JPanel panel = new JPanel() {
+		JPanel ipanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(image, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
-        panel.addMouseListener(new MouseAdapter() {
+        ipanel.addMouseListener(new MouseAdapter() {
             private Color background;
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -173,14 +173,18 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
                 setBackground(background);
             }
         });
-        this.setLayout(gb1);
+        //this.setLayout(gb1);
+        ipanel.setLayout(gb1);;
 //		panel.add(instructions,gb1);
 //		panel.add(viewName,gb1);
 //		panel.add(back,gb1);
 //		panel.add(description,gb1);
         Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
-		this.setPreferredSize(size);
-		return panel;
+        ipanel.setPreferredSize(size);
+        ipanel.setMinimumSize(size);
+        ipanel.setVisible(true);
+		//this.setPreferredSize(size);
+		return ipanel;
 	}
 	
 	public static InstructionsView getInstance() {
