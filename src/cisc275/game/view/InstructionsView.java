@@ -34,6 +34,7 @@ import javax.xml.soap.Text;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicBorders;
 
 //import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
@@ -58,15 +59,14 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 	public InstructionsView() {
 		this.gameView = getGameView();
 		gb1 = new GridBagLayout();
-		//this.setLayout(gb1);
+		this.setLayout(gb1);
 		ivPanel = locationPanel();
-		this.add(ivPanel);
 		description = new JLabel("Defend your local estuary!");
 		instructions = new JTextArea();
 		back = new JButton("Back");
 		viewName = new JLabel("Instructions");
-		
-		addGridItem(ivPanel,description,0,1,3,2,GridBagConstraints.CENTER,new Insets(80,100,5,100));
+	
+		//addGridItem(ivPanel,description,0,1,3,2,GridBagConstraints.CENTER,new Insets(80,100,5,100));
 		back.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		back.addMouseListener(new MouseAdapter() {
 			@Override
@@ -78,21 +78,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 			public void actionPerformed(ActionEvent ae) {
 				String cmd = ae.getActionCommand();
 				if(cmd.equals("Back")){
-					//TODO:Fix back button
 					System.out.println("back button enabled");
-					//instance.getParent().super().getParent().g
-					//instance.getGameView().getgv1().next(instance.getGameView().getGamePanel().getParent());
-					//gameView.getgv1().next(gameView.getGamePanel());
-					//getMainView().setView("1");
-					//if (instance.getSimpleModel().getEnum() == "Back") {
-	        			//super().getGameView().getgv1().show(super().getGameView().getGamePanel(), "1");
-	        			//gv1.show(gamePanel,"1");
-					//}
-					//getContentPane().removeAll();//dispose();
-			        //System.out.print("hello");
-			        //gameView = new GameView();
-			        //getContentPane().add(gameView.getPanel());
-			        //pack();
 		        }
 				if (simpleModel != null) {
 					//System.out.println("Back click");
@@ -101,13 +87,20 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
 			}
 		});
 		back.setActionCommand("Back");
-		addGridItem(ivPanel,back,4,3,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
-		instructions.setFont(new Font("Courier New", Font.PLAIN, 12));
-		instructions.setText("Defend this estuary with plants and garbage collectors");
+		addGridItem(ivPanel,back,2,7,1,1,GridBagConstraints.CENTER,new Insets(20,10,40,10));
+		instructions.setFont(new Font("Courier New", Font.PLAIN, 24));
+		instructions.setText(" - Stop runoff by creating buffers with plants. \n"
+							+" - Use garbage collectors to pick up trash. \n"
+							+" - Cage invasive species to remove them from your estuary. \n"
+							+" - Fishermen collect money which you can purchase resources with. \n"
+							+" - More fishermen will gather the healthy your estuary. \n"
+							+" - Work quickly to prevent an algea bloom! \n");
 		instructions.setEditable(false);
-		addGridItem(ivPanel,instructions,0,2,4,2,GridBagConstraints.CENTER,new Insets(0,100,20,100));
-		addGridItem(ivPanel,viewName,0,0,1,1,GridBagConstraints.CENTER,new Insets(0,100,20,100));
-
+		//instructions.setBorder(BasicBorders.getTextFieldBorder());
+		addGridItem(ivPanel,instructions,0,1,6,6,GridBagConstraints.WEST,new Insets(5,5,20,5));
+		viewName.setFont(new Font("Courier New", Font.BOLD, 24));
+		addGridItem(ivPanel,viewName,0,0,1,1,GridBagConstraints.WEST,new Insets(20,5,5,0));
+		this.add(ivPanel);
 		//Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
 		//this.setPreferredSize(size); // set window dimension
 		this.setVisible(true);
@@ -174,7 +167,7 @@ public class InstructionsView extends JPanel implements ActionListener, MouseLis
             }
         });
         //this.setLayout(gb1);
-        ipanel.setLayout(gb1);;
+        ipanel.setLayout(new GridBagLayout());
 //		panel.add(instructions,gb1);
 //		panel.add(viewName,gb1);
 //		panel.add(back,gb1);
