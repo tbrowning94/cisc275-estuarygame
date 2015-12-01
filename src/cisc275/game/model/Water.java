@@ -15,33 +15,26 @@ import javax.swing.JButton;
 public class Water 
 	implements java.io.Serializable{
 	Point location;
-	ArrayList<Node> path = new ArrayList<Node>();
+	//ArrayList<Node> path = new ArrayList<Node>();
 	int health;
 	int RunoffParticles;
 	Color runoffC;
 	private JButton wbutton;
 	private ImageIcon wimg = new ImageIcon("images/Placeholder/placeholder.png");
 	
-	public Water(Point loc,ArrayList<Node> p, int Health, int RP, Color RO) {
+	public Water(Point loc, int Health, int RP, Color RO) {
 		this.location = loc;
 		this.health = Health;
-		this.path = p; 
 		this.RunoffParticles = RP; 
 		Color runoffC=RO;
 		this.wbutton = new JButton(wimg);
 		this.wbutton.putClientProperty("position", loc);
 	}
-
 	public int getHealth(){
 		return this.health;
 	}
-	
 	public Point getLocation(){
 		return this.location;
-	}
-
-	public List getPath(){
-		return this.path;
 	}
 	public JButton getWaterButton() {
 		return this.wbutton;
@@ -54,15 +47,12 @@ public class Water
 	 */
 	public int setRunoffParticles(Game level){
 		return this.RunoffParticles;
-	}
-		
+	}	
 	public int getRunoffParticles(){
 		return this.RunoffParticles;
 	}
-	
 	void update() {
 	}
-
 	/**
 	 * @param damage
 	 * @param RunoffParticles
@@ -81,7 +71,7 @@ public class Water
 	}
 	public String toString(){
 		return "[Water: location="+location+"RunoffParticles="+RunoffParticles
-				+"Path="+path+"Health="+health+"Color="+runoffC+"]";
+				+"Health="+health+"Color="+runoffC+"]";
 	}
 
 }

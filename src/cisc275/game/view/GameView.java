@@ -35,6 +35,7 @@ import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Game;
+import cisc275.game.model.Water;
 import cisc275.game.view.CrabView;
 
 
@@ -63,6 +64,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private JFrame frame;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
+	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	private SplashScreen splashscreen = new SplashScreen();
 	private InstructionsView instructionsView;
 	private GameView gameView;
@@ -295,6 +297,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	           // System.out.print("hello");
 	            crabs.add(new CrabView());
 	            crabby = true;
+	            waterTiles.add(new Water(new Point(20,20), 100, 5, Color.BLUE));
 	            getContentPane().add(splashscreen.getPanel2());
 	            pack();
 	        }

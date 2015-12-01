@@ -15,7 +15,7 @@ import cisc275.game.model.Water;
  *Basic tests of water methods
  */
 public class WaterTest {
-	Water test = new Water(null, null, 0, 10, null);
+	Water test = new Water(null, 0, 10, null);
 	Garbage G = new Garbage(0);
 	Game game = new Game(0, 0, null, null, null, 0, 0, 0, 0);
 	/**

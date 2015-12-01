@@ -41,7 +41,7 @@ public class PlantTest {
 	
 	public void blockwater(){
 		Point locc = new Point(0,0);
-		Water w = new Water(locc, null, 0, 0, null);
+		Water w = new Water(locc, 0, 0, null);
 		Plant p = new Plant(locc);
 		p.blockwater();
 		assertEquals(1, w.getHealth());

@@ -25,7 +25,7 @@ public class FishermanTest {
 	 */
 	@Test
 	public void testFishing(){
-		Water h = new Water(null, null, 10, 0, null);
+		Water h = new Water(null, 10, 0, null);
 		int result = h.getHealth() * test.ManNum(game);
 		assertEquals(result , test.Fishing(h));
 	}
