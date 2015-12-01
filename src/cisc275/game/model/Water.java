@@ -5,6 +5,9 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 /**
  * @author Nile
  *Generates, health, path and position of water and runoff particles
@@ -16,20 +19,32 @@ public class Water
 	int health;
 	int RunoffParticles;
 	Color runoffC;
+	private JButton wbutton;
+	private ImageIcon wimg = new ImageIcon("images/Placeholder/placeholder.png");
+	
 	public Water(Point loc,ArrayList<Node> p, int Health, int RP, Color RO) {
-		this.location = loc;this.health=Health;this.path=p; this.RunoffParticles=RP; Color runoffC=RO;
+		this.location = loc;
+		this.health = Health;
+		this.path = p; 
+		this.RunoffParticles = RP; 
+		Color runoffC=RO;
+		this.wbutton = new JButton(wimg);
+		this.wbutton.putClientProperty("position", loc);
 	}
 
 	public int getHealth(){
-		return health;
+		return this.health;
 	}
 	
 	public Point getLocation(){
-		return location;
+		return this.location;
 	}
 
 	public List getPath(){
-		return path;
+		return this.path;
+	}
+	public JButton getWaterButton() {
+		return this.wbutton;
 	}
 	/**
 	 * Dependent on the level of the game, there will be a certain amount 
@@ -38,11 +53,11 @@ public class Water
 	 * @return RunoffParticles
 	 */
 	public int setRunoffParticles(Game level){
-		return RunoffParticles;
+		return this.RunoffParticles;
 	}
 		
 	public int getRunoffParticles(){
-		return RunoffParticles;
+		return this.RunoffParticles;
 	}
 	
 	void update() {
@@ -55,14 +70,14 @@ public class Water
 	 * decides what color runoff  will be
 	 */
 	public int setHealthOfRunoff(Garbage damage, Water RunoffParticles ){
-		return health;
+		return this.health;
 	}
 
 	public void setrunoffC(Water health){
 	
 	}
 	public Color getrunoffC(){
-		return runoffC;
+		return this.runoffC;
 	}
 	public String toString(){
 		return "[Water: location="+location+"RunoffParticles="+RunoffParticles
