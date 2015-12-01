@@ -75,44 +75,35 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
     	 
     	splashPanel = locationPanel();
     	this.add(splashPanel);
-    	gb2 = new GridBagLayout();
-    	this.setLayout(gb2);
+    	this.setLayout(null);
+    	splashPanel.setLayout(new BoxLayout(splashPanel,BoxLayout.Y_AXIS));
+    	splashPanel.add(Box.createRigidArea(new Dimension(50, 0)));
     	Dimension size = new Dimension(getWidth()*getScale(), getHeight()*getScale()); // create window dimension
 		this.setMinimumSize(size); // set window dimension
 		this.setPreferredSize(size); // set window dimension
     	
-		viewName = new JLabel("Estuary Defense");
-		//viewName.setVerticalAlignment(SwingConstants.TOP);
-		//viewName.setHorizontalAlignment(SwingConstants.CENTER);
-		placePlant = new JButton("Plant");
-		placePlant.setIcon(new ImageIcon(pics[1].getScaledInstance(50,50,20)));
-		placePlant.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				//TODO
-			}
-		});
+		placePlant = new JButton();
+		placePlant.setIcon(new ImageIcon(plant1.getScaledInstance(50, 50, 20)));
+		placePlant.addActionListener(this);
 		placePlant.setActionCommand("Plant");
 		placePlant.setBorderPainted(false);
 		placePlant.setFocusPainted(false);
 		placePlant.setContentAreaFilled(false);
-		placeGC = new JButton("Garbage Collector");
-		placeGC.setIcon(new ImageIcon(pics[2].getScaledInstance(50,50,20)));
-		placeGC.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				//TODO
-			}
-		});
+		
+		placeGC = new JButton();
+		//gcbutton.setLocation(1000,1000);
+		placeGC.setIcon(new ImageIcon(GarbCol.getScaledInstance(50, 50, 20)));
+		placeGC.addActionListener(this);
 		placeGC.setActionCommand("Garbage Collector");
+		splashPanel.add(placePlant);
+		splashPanel.add(placeGC);
 		placeGC.setBorderPainted(false);
 		placeGC.setFocusPainted(false);
 		placeGC.setContentAreaFilled(false);
 		
-		addGridItem(splashPanel,viewName,0,0,1,1,GridBagConstraints.CENTER,new Insets(80,100,40,100));
-		addGridItem(splashPanel,placePlant,0,1,1,1,GridBagConstraints.CENTER,new Insets(80,100,5,100));
-		addGridItem(splashPanel,placeGC,0,2,1,1,GridBagConstraints.CENTER,new Insets(5,100,80,100));
-		
+		viewName = new JLabel("Estuary Defense");
+		//viewName.setVerticalAlignment(SwingConstants.TOP);
+		//viewName.setHorizontalAlignment(SwingConstants.CENTER);		
 		this.setVisible(true);
 	}
 	
@@ -132,19 +123,6 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
 	}
 	public int getScale() {
 		return SCALE;
-	}
-	private void addGridItem(JPanel panel, JComponent comp, int x, int y, int width, int height, int align, Insets padding) {
-		GridBagConstraints gcon = new GridBagConstraints();
-		gcon.gridx = x;
-		gcon.gridy = y;
-		gcon.gridwidth = width;
-		gcon.gridheight = height;
-		gcon.weightx = 0.5;
-		gcon.weighty = 0.5;
-		gcon.insets = padding;
-		gcon.anchor = align;
-		gcon.fill = GridBagConstraints.NONE;
-		panel.add(comp, gcon);
 	}
 	private JPanel locationPanel() {
 		JPanel spanel = new JPanel() {
@@ -191,12 +169,14 @@ public class SplashScreen extends JPanel implements ActionListener, MouseListene
                 setBackground(background);
             }
         });
-        spanel.setLayout(new GridBagLayout());
+        spanel.setLayout(null);
 		//this.setLayout(gb1);
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		//this.setPreferredSize(size);
 		spanel.setPreferredSize(size);
 		spanel.setMinimumSize(size);
+		//spanel.setLayout(new BoxLayout(splashPanel,BoxLayout.Y_AXIS));
+		//spanel.add(Box.createRigidArea(new Dimension(50,0)));
 		return spanel;
 	}
 		
