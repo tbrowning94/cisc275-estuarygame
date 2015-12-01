@@ -71,7 +71,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/back1_pipe_1.png");
-    	BufferedImage plant1 = createImage("images/Grass.png");
+    	BufferedImage plant1 = createImage("images/Fern.png");
     	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
     	BufferedImage Cloud = createImage("images/cloud.png");
     	BufferedImage bi2 = createImage("images/back1_pipe_2.png");
@@ -192,7 +192,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		
 		//ImageIcon plantIcon = createImageIcon("images/Grass.png", "picture of grass");
 		//paintComponent(null);
-		BufferedImage plant1 = createImage("images/Grass.png");
+		BufferedImage plant1 = createImage("images/Fern.png");
 		pbutton = new JButton();
 		
 		Dimension size2 = pbutton.getPreferredSize();
