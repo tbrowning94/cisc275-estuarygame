@@ -95,7 +95,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		PlantView p = new PlantView();
 		GarbageCollectorView tempgarb = new GarbageCollectorView();
 		pics = new BufferedImage[numpics];
-    	BufferedImage bi = createImage("images/back1_pipe_1.png");
+    	BufferedImage bi = createImage("images/BackTrial1.png");
     	BufferedImage plant1 = createImage("images/Fern.png");
     	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
     	BufferedImage Cloud = createImage("images/cloud.png");
@@ -156,7 +156,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                // g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
-               g.drawImage(pics[4], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+               g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
         moneyvalue.setLocation(1200, -75);
@@ -290,7 +290,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
-		panel2.add(cloud);
+		//panel2.add(cloud);
 
 		
         return panel2;
