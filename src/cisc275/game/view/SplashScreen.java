@@ -299,8 +299,10 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     public JLabel createPlantLabel(Point loc) {
     	BufferedImage plant = pics[1];
     	ImageIcon plantIcon = new ImageIcon(plant.getScaledInstance(100, 100, 20));
-    	JLabel newPlant = new JLabel(plantIcon);
-    	newPlant.putClientProperty("position", loc);
+    	JLabel newPlant = new JLabel("plant");
+    	newPlant.setIcon(plantIcon);
+    	newPlant.setLocation(loc);
+    	newPlant.setSize(75,75);
     	return newPlant;
     }
     public JLabel createWaterLabel(Point loc, int health) {
