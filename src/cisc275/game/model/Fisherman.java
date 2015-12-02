@@ -24,11 +24,7 @@ public class Fisherman implements java.io.Serializable {
 	 * @param ph
 	 * @return number of fishermen on screen
 	 */
-	public int ManNum(Water health){
-		if (Water.getHealth() <= 50){
-			
-		}
-		
+	public int ManNum(Game ph){
 		return 0;
 	}
 	/**healthier the water, more money that is generated, 
