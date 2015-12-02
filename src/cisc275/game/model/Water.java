@@ -2,9 +2,13 @@ package cisc275.game.model;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -25,7 +29,8 @@ public class Water
 	private int RunoffParticles;
 	private Color runoffC;
 	private JButton wbutton;
-	private ImageIcon wimg = new ImageIcon("images/textures/water_map.png");
+	BufferedImage water = createImage("images/textures/water_map.png");
+	private ImageIcon wimg = new ImageIcon(water.getScaledInstance(100, 100, 20));
 	
 	public Water(Point loc, int Health, int RP, Color RO) {
 		this.location = loc;
@@ -96,6 +101,9 @@ public class Water
 		setrunoffC(this);
 		if (this.health <= 0) {
 			this.removed = true; // On the next update in game, removed all water tiles with removed set to true
+		} else {
+			wimg = new ImageIcon(water.getScaledInstance(health, 100, 20)); //change image width with health
+			this.wbutton.setIcon(wimg);
 		}
 	}
 	public Color getrunoffC(){
@@ -119,6 +127,17 @@ public class Water
 		return "[Water: location="+location+"RunoffParticles="+RunoffParticles
 				+"Health="+health+"Color="+runoffC+"]";
 	}
+	private BufferedImage createImage(String file) {
+        BufferedImage bufferedImage;
+        try {
+        	bufferedImage=ImageIO.read(new File(file));
+            return bufferedImage;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 }
 
