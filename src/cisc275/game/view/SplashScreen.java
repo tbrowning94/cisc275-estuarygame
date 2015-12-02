@@ -149,10 +149,9 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	case plant1:
             		//game.addPlant(new Plant(loc));
         			paintPlantComponent(e.getComponent().getGraphics(), loc);
-        			System.out.println("should have painted a plant");
-//        			getPButton().setBorderPainted(false);
-//        			crabby = true;
-//        			isClicked = click.norm;
+        			getPButton().setBorderPainted(false);
+        			crabby = true;
+        			isClicked = click.norm;
         			break;
         		
         		case plant2:
@@ -289,11 +288,9 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			//next mouse click that still has this button enabled
 			isClicked = click.plant1;
 			crabby = false;
-//			while (isClicked == click.plant1) {
-//				paintPlantComponent(getGraphics(), MouseInfo.getPointerInfo().getLocation());
-//			}
-//			getPButton().setBorderPainted(true);
-//			getGCButton().setBorderPainted(false);
+
+			getPButton().setBorderPainted(true);
+			getGCButton().setBorderPainted(false);
         } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 
