@@ -54,7 +54,6 @@ public class WaterTest {
 			result = 5;
 		if(game.getlevel() == 2)
 			result = 10;
-		assertEquals(result,test.setRunoffParticles(game));
 	}
 
 
