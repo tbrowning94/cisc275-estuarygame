@@ -485,7 +485,9 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     }
 	public void paintwater() {
     	for(Water w: waterTiles){
-    		w.move();
+    		if(!w.isStopping()){
+    			w.move();
+    		}
     		if(w.getRemoved() == true){ //checks if crab needs to be removed
     			deletenumWater = waterTiles.indexOf(w);
     			//System.out.println("deletenum:"+deletenumWater);
@@ -507,25 +509,34 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	void plantcheck(){
 		for(PlantView p:plants){
 			
+			for(Water w:waterTiles){
+				if(p.checkintersectw(w)){
+					w.setStopping(true);
+				}
+			}
 			p.intersecting = false;
 			for(CrabView c:crabs){
-				
-				if(p.checkintersects(c)){
-					if(c.mitten){
-					c.stop = true;
-					p.intersecting = true;
-					p.changepic(2);
-					getPanel2().remove(p.pbutton);
-					getPanel2().add(p.pbutton);
-					}
-					else{
-						c.left = !c.left;
-						c.right = !c.right;
-						c.up = !c.up;
-						c.down = !c.down;
+				if(c.planta == null){
+					if(p.checkintersects(c)){
+						if(c.mitten){
+						c.stop = true;
+						c.planta = p;
+						p.intersecting = true;
+						p.changepic(2);
+						getPanel2().remove(p.pbutton);
+						getPanel2().add(p.pbutton);
+						}
+						else{
+							c.left = !c.left;
+							c.right = !c.right;
+							c.up = !c.up;
+							c.down = !c.down;
+						}
 					}
 				}
-				
+				else if(c.planta == p){
+					p.intersecting = true;
+				}
 			}
 			if(!p.intersecting){
 				p.changepic(1);

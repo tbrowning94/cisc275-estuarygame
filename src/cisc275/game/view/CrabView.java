@@ -48,6 +48,7 @@ public class CrabView {
     JLabel cbutton = new JLabel("test");
 
     Image current;
+	public PlantView planta;
     public int rando(int l){
     	Random rnd = new Random();
     	if(l == 1){

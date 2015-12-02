@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import cisc275.game.model.Water;
+
 public class PlantView {
 	static Image[] pics;
     double xloc;
@@ -53,5 +55,11 @@ public class PlantView {
 		pbutton.setIcon(new ImageIcon(pics[i]));
 		// TODO Auto-generated method stub
 		
+	}
+	public boolean checkintersectw(Water w) {
+		Area areaA = new Area(w.getWbutton().getBounds());
+//		System.out.println("CRAB "+areaA);
+//		System.out.println("PLANT " +plantarea);
+		return areaA.intersects(plantarea.getBounds2D());
 	}
 }
