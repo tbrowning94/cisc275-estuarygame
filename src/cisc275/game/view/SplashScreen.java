@@ -51,6 +51,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private JPanel panel2;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
+	 static ArrayList<PlantView> plants = new ArrayList<PlantView>();
 	public static boolean crabby = true;
 	Button startGame;
 	Button instructions;
@@ -70,7 +71,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     int imgWidth;
     
 	private BufferedImage pics[];
-	List<JLabel> plants;
+	//List<JLabel> plants;
     
 	private enum click {
 		plant1, plant2, plant3, gC1, gC2, gC3, norm
@@ -81,7 +82,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private File file;
 	
 	public SplashScreen() {
-		
+		PlantView p = new PlantView();
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/back1_pipe_1.png");
     	BufferedImage plant1 = createImage("images/Fern.png");
@@ -152,7 +153,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             @Override
             public void mouseClicked(MouseEvent e) {
             	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
-        		System.out.println("motion detected");
+        		//System.out.println("motion detected");
             	switch (isClicked) {
             	
             	case norm:
@@ -160,11 +161,13 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             		break;
             		
             	case plant1:
-            		//game.addPlant(new Plant(loc));
-//            		plants.add(new JLabel(new ImageIcon(pics[1].getScaledInstance(100, 100, 20))));
-//            		plants.get(plants.size()).setLocation(e.getLocationOnScreen());
-        			paintPlantComponent(e.getComponent().getGraphics(), loc);
-        			getPButton().setBorderPainted(false);
+            		loc.setLocation(loc.getX()-30, loc.getY()-30);
+            		PlantView tempplant = new PlantView(1, loc);
+            		getPanel2().add(tempplant.pbutton);
+            		plants.add(tempplant);
+        			//paintPlantComponent(e.getComponent().getGraphics(), loc);
+        			//getPButton().setBorderPainted(false);
+            		//plants.get(plantindex).setLocation(loc);
         			crabby = true;
         			isClicked = click.norm;
         			break;
@@ -379,7 +382,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         public void actionPerformed(java.awt.event.ActionEvent e) {
         	if(crabby == true && SplashScreen.crabby == true){
         		//System.out.println("test");
-               paintc();
+               paintcrab();
                 //System.out.println("test6");
 //                for(CrabView c: crabs){
 //             	   frame.remove(c.cbutton);
@@ -391,7 +394,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         	}
         };
      }
-	public void paintc() {
+	public void paintcrab() {
     	int i = 0;
     	//System.out.println("test2 " + i);
 		i++;
