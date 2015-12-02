@@ -16,21 +16,22 @@ import cisc275.game.view.GameView;
  */
 public class Water 
 	implements java.io.Serializable{
-	Point location;
+	private Point location;
 	//ArrayList<Node> path = new ArrayList<Node>();
-	int health;
+	//TODO: create linked listed of water instead of nodes?
+	private int health;
 	private double speed = 1.0;
 	private boolean removed;
-	int RunoffParticles;
-	Color runoffC;
+	private int RunoffParticles;
+	private Color runoffC;
 	private JButton wbutton;
-	private ImageIcon wimg = new ImageIcon("images/Placeholder/placeholder.png");
+	private ImageIcon wimg = new ImageIcon("images/textures/water_map.png");
 	
 	public Water(Point loc, int Health, int RP, Color RO) {
 		this.location = loc;
 		this.health = Health;
 		this.RunoffParticles = RP; 
-		Color runoffC=RO;
+		Color runoffC = RO;
 		this.wbutton = new JButton(wimg);
 		this.wbutton.putClientProperty("position", loc);
 		this.removed = false;
@@ -60,8 +61,8 @@ public class Water
 	 * the number of dirt particles per tile
 	 * @return RunoffParticles
 	 */
-	public int setRunoffParticles(Game level){
-		return this.RunoffParticles;
+	public int setRunoffParticles(int RP){
+		return this.RunoffParticles = RP;
 	}	
 	public int getRunoffParticles(){
 		return this.RunoffParticles;
@@ -79,12 +80,20 @@ public class Water
 	}
 
 	public void setrunoffC(Water health){
-	
+		int h = this.health;
+		if (h > 75 && h <= 90) {
+			this.runoffC = Color.CYAN;
+		} else if (h > 50 && h <= 75){
+			this.runoffC = Color.YELLOW;
+		} else if (h > 0 && h <= 50){
+			this.runoffC = Color.GREEN;
+		}
 	}
 	public void decreaseHealth(int plantEff) {
-		this.health -= plantEff; // Health will be proportional to width, this
-								 // will be triggered by check proximity of the
-								 // plants radius
+		this.health -= plantEff; 	// Health will be proportional to width, this
+		this.RunoffParticles -= 1;	// will be triggered by check proximity of the
+								 	// plants radius
+		setrunoffC(this);
 		if (this.health <= 0) {
 			this.removed = true; // On the next update in game, removed all water tiles with removed set to true
 		}
@@ -96,11 +105,14 @@ public class Water
 		int x, y;
 		x = (int) this.location.getX();
 		y = (int) this.location.getY();
-		if (y < GameView.getWorldHeight() - 2*this.speed) {
-			y += 2*this.speed;
+		if (y < GameView.getWorldHeight() - 2*this.speed) { // Not in water yet, continue moving down
+			y += 2*this.speed; // TODO: finalize movement amount
 		}
-		// else in water, update health, remove water
-		//TODO: come up with x algorithm, define water height of estuary
+		if (y >= GameView.getWorldHeight() - 30) { //TODO: change this hard coded value
+			this.removed = true; // in water, remove on next update
+		}
+		// maybe have the water check if it collides with water to change x?
+		//TODO: come up with x algorithm
 		this.location.setLocation(x, y);
 	}
 	public String toString(){
