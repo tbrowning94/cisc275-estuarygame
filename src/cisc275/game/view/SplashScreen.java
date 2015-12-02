@@ -39,7 +39,6 @@ import javax.swing.Timer;
 
 import java.awt.event.MouseMotionListener;
 import cisc275.game.controller.PlaceObject;
-import cisc275.game.model.Fisherman;
 import cisc275.game.model.Game;
 import cisc275.game.model.Plant;
 //import cisc275.game.view.GameView.TimerListener;
@@ -136,8 +135,6 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	    }
 
 	public JPanel GameFrame(){
-		Fisherman FishM = new Fisherman(null, null, 0, 50);
-		
 		new Timer(TIMER_DELAY, new TimerListener()).start();
         panel2 = new JPanel() {
         	
