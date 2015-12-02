@@ -33,10 +33,10 @@ import javax.swing.WindowConstants;
 import cisc275.game.controller.Action;
 import cisc275.game.controller.GameListener;
 import cisc275.game.controller.Player;
-import cisc275.game.model.Crab;
+
 import cisc275.game.model.Game;
 import cisc275.game.model.Water;
-import cisc275.game.view.CrabView;
+
 
 
 import javax.swing.JButton;
@@ -55,22 +55,19 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
-
-	public static String title = "Estuary Defense";
 	static int TIMER_DELAY = 50;
-	static boolean crabby = false;
+	public static String title = "Estuary Defense";
 	private JButton button;
 	private JPanel panel;
 	private JFrame frame;
-	int deletenum = -1; //with use of crabs
-	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
+	
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	private SplashScreen splashscreen = new SplashScreen();
 	private InstructionsView instructionsView;
 	private GameView gameView;
 	public int imgHeight;
 	public int imgWidth;
-	public int crabcount = 1;
+	
 	
 	private Player player;
 	//private Key, Mouse?
@@ -90,8 +87,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	//this level and the list of all possible levels
 	private int level;
 	
-	Image crab;
-	Image mcrab;
 	Image garbage;
 	Image plant;
 	Image garbageCollector;
@@ -185,53 +180,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		getContentPane().add(panel, BorderLayout.NORTH); // adds panel to content pane, this is what we will paint to and update
 		panel.setLayout(null); // default layout is Flowlayout, we need to decide what we want
 
-		// Testing adding normal buttons here
-//		JButton btnPlant = new JButton("Plant"); // buttons can be created by constructors
-//		btnPlant.setBounds(1355, 281, 97, 25);
-//		panel.add(btnPlant); // but they need to be passed to game view in some way to add them to the panel
-		
-		// Testing implementing crab constructor here, can't get the image to show
-//		ImageIcon crabplaceholder = new ImageIcon("images/textures/bush2.png");
-//		JButton crabbutton = new JButton("crab img", crabplaceholder);
-//		crabbutton.putClientProperty("position", new Point(0,0));
-//		panel.add(crabbutton);
-		
-		// testing adding another normal button here
-//		JButton btnCrab = new JButton("crab");
-//		btnCrab.setBounds(727, 391, 97, 25);
-//		panel.add(btnCrab);
-		
-		// testing adding a crab here, should create a crab button but I can't get it to display still
-//		Crab c1 = new Crab(false, new Point(10,10));
-//		panel.add(c1.getButton());
-		//add buttons, i.e. objects, probably better to do in update
-		
-	
 
-		
-
-		
-//			 
-//			 panel.setVisible(false);
-//		     dispose();
-//		     
-//		     JPanel panel2 = new JPanel();
-//		         
-//		    }
-//		});
-
-
-		//panel.add(Name, BorderLayout.PAGE_START);
-        //panel.add(button1, BorderLayout.LINE_START);
-       // panel.add(button2, BorderLayout.LINE_END);
-//        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS))
-//        for (String label : new String[]{"Start", "Take the Tutorial"}) {
-//            JButton button = new JButton(label);
-//            button.setAlignmentY(Component.CENTER_ALIGNMENT);
-//            panel.add(Box.createRigidArea(new Dimension(300, 0)));
-//            panel.add(button);
-        
-      //  }
     	pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -295,8 +244,6 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	      if(cmd.equals("Open")){
 	            getContentPane().removeAll();//dispose();
 	           // System.out.print("hello");
-	            crabs.add(new CrabView());
-	            crabby = true;
 	            waterTiles.add(new Water(new Point(20,20), 100, 5, Color.BLUE));
 	            getContentPane().add(splashscreen.getPanel2());
 	            pack();
@@ -354,20 +301,9 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		// TODO Auto-generated method stub
 		
 	}
-	private class TimerListener implements ActionListener {
+	public class TimerListener implements ActionListener {
         public void actionPerformed(java.awt.event.ActionEvent e) {
-        	if(crabby == true && SplashScreen.crabby == true){
-        		//System.out.println("test");
-               paintc();
-                //System.out.println("test6");
-//                for(CrabView c: crabs){
-//             	   frame.remove(c.cbutton);
-//            	}
-                if(rando() == 1 && crabcount < 50){ //randomly makes a crab (1/50 chance)
-            		crabs.add(new CrabView(true));
-            		crabcount += 1;
-            		}
-        	}
+
         };
      }
 //	public synchronized void start() {
@@ -457,29 +393,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		gv.setVisible(true);
 	}
 
-	 public void paintc() {
-	    	int i = 0;
-	    	//System.out.println("test2 " + i);
-			i++;
-	    	for(CrabView c: crabs){
-	    		if(c.removel == true){ //checks if crab needs to be removed
-	    			deletenum = crabs.indexOf(c);
-	    			//System.out.println("deletenum");
-	    		}
-	    		c.paintcrab();
-	    		splashscreen.getPanel2().remove(c.cbutton);
-	    		splashscreen.getPanel2().add(c.cbutton);
-	    		
-	    	}
-	    	if(deletenum != -1){ //removes crab
-	    		//System.out.println("deleting");
-	    		splashscreen.getPanel2().remove(crabs.get(deletenum).cbutton);
-	    		crabs.remove(deletenum);
-	    		crabcount -=1;
-	    		deletenum = -1;
-	    	}
-	    	//System.out.println("test5");
-	    }
+
 
 }
 

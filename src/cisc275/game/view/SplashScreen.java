@@ -35,13 +35,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
-import aleksPack10.jdk.MouseMotionListener;
+import java.awt.event.MouseMotionListener;
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Game;
 import cisc275.game.model.Plant;
+//import cisc275.game.view.GameView.TimerListener;
 
 public class SplashScreen extends JFrame implements ActionListener, MouseListener, MouseMotionListener {
+	static int TIMER_DELAY = 50;
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
@@ -59,7 +62,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private int theY=3;
 	final int xincr = 3;
 	final int yincr = 2;
-	
+	public int crabcount = 1;
 	Game game;
 	
 	boolean run =true;
@@ -132,6 +135,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	    }
 
 	public JPanel GameFrame(){
+		new Timer(TIMER_DELAY, new TimerListener()).start();
         panel2 = new JPanel() {
         	
             @Override
@@ -141,6 +145,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
                g.drawImage(pics[4], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
+        crabs.add(new CrabView()); // creates initial crab
         panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
             private Color background;
 
@@ -360,17 +365,55 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     }
 
 	@Override
-	public void mouseDragged(aleksPack10.jdk.MouseEvent arg0) {
+	public void mouseDragged(java.awt.event.MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseMoved(aleksPack10.jdk.MouseEvent arg0) {
+	public void mouseMoved(java.awt.event.MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	private class TimerListener implements ActionListener {
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+        	if(crabby == true && SplashScreen.crabby == true){
+        		//System.out.println("test");
+               paintc();
+                //System.out.println("test6");
+//                for(CrabView c: crabs){
+//             	   frame.remove(c.cbutton);
+//            	}
+                if(rando() == 1 && crabcount < 50){ //randomly makes a crab (1/50 chance)
+            		crabs.add(new CrabView(true));
+            		crabcount += 1;
+            		}
+        	}
+        };
+     }
+	public void paintc() {
+    	int i = 0;
+    	//System.out.println("test2 " + i);
+		i++;
+    	for(CrabView c: crabs){
+    		if(c.removel == true){ //checks if crab needs to be removed
+    			deletenum = crabs.indexOf(c);
+    			//System.out.println("deletenum");
+    		}
+    		c.paintcrab();
+    		getPanel2().remove(c.cbutton);
+    		getPanel2().add(c.cbutton);
+    		
+    	}
+    	if(deletenum != -1){ //removes crab
+    		//System.out.println("deleting");
+    		getPanel2().remove(crabs.get(deletenum).cbutton);
+    		crabs.remove(deletenum);
+    		crabcount -=1;
+    		deletenum = -1;
+    	}
+    	//System.out.println("test5");
+    }
 
 
 }
