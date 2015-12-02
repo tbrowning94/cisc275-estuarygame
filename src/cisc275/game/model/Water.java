@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import cisc275.game.view.GameView;
+import cisc275.game.view.PlantView;
 import cisc275.game.view.SplashScreen;
 
 /**
@@ -34,6 +35,7 @@ public class Water
 	BufferedImage water = createImage("images/textures/water_map.png");
 	private ImageIcon wimg = new ImageIcon(water.getScaledInstance(100, 100, 20));
 	private SplashScreen splashScreen;
+	public ArrayList<PlantView> affected = new ArrayList<PlantView>();
 	
 	public Water(Point loc, int Health, int RP, Color RO) {
 		this.location = loc;
@@ -160,13 +162,22 @@ public class Water
 	public void setWbutton(JLabel wbutton) {
 		this.wbutton = wbutton;
 	}
-	public void shrink(){
-		wimg = new ImageIcon(water.getScaledInstance((health/2), 100, 20)); //change image width with health
+	public void shrink(PlantView p){
+		affected.add(p);
+		if(health/(affected.size()*2)==0){
+			this.Stopping = true;
+		}
+		else{
+		wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), 100, 20)); //change image width with health
 		this.getWbutton().setIcon(wimg);
+		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), 100);
+		}
 	}
-	public void normal() {
-		wimg = new ImageIcon(water.getScaledInstance((health), 100, 20)); //change image width with health
+	public void normal(PlantView p) {
+		affected.remove(p);
+		wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), 100, 20)); //change image width with health
 		this.getWbutton().setIcon(wimg);
+		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), 100);
 		
 	}
 

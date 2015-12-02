@@ -252,4 +252,30 @@ public class CrabView {
 	    	
 	    	// TODO: Change this method so you can load other orc animation bitmaps
 	    }
+	 public void setrandom(){
+		 int rand = rando(2);
+		 if (rand == 1)
+         {
+             right = false;
+             left = true;
+         }
+         
+         if (rand == 2)
+         {
+             right = true;
+             left = false;
+         }
+         
+         if (rand == 3)
+         {
+             up = true;
+             down = false;
+         }
+         
+         if (rand == 4)
+         {
+             up = false;
+             down = true;
+         }
+	 }
 }

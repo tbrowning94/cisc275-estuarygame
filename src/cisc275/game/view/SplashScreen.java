@@ -426,6 +426,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		// TODO Auto-generated method stub
 		
 	}
+	int timer = 0;
 	private class TimerListener implements ActionListener {
         public void actionPerformed(java.awt.event.ActionEvent e) {
         	if(crabby == true && SplashScreen.crabby == true){
@@ -441,9 +442,11 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             		crabs.add(new CrabView(true));
             		crabcount += 1;
             		}
-                if(rando() == 1 && watercount < 10){ //randomly makes a crab (1/50 chance)
+                timer +=1;
+                if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
             		waterTiles.add(new Water(SplashScreen.this, new Point (615,330), 100, 5, Color.BLUE, 1.0));
             		watercount += 1;
+            		timer = 0;
             		}
         	}
         };
@@ -526,13 +529,16 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 						if(p.buffer){
 							w.setStopping(true);
 						}
-						w.shrink();
+						else if(!w.affected.contains(p)){
+							w.shrink(p);
+						}
+						
 						
 						//System.out.println(w.isStopping());
 					}
 				}
-				else{
-					w.normal();
+				else if(w.affected.contains(p)){
+					w.normal(p);
 				}
 			}
 			
@@ -549,10 +555,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 						getPanel2().add(p.pbutton);
 						}
 						else{
-							c.left = !c.left;
-							c.right = !c.right;
-							c.up = !c.up;
-							c.down = !c.down;
+							c.setrandom();
 						}
 					}
 				}
