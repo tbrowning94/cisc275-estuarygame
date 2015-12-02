@@ -417,6 +417,10 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             		crabs.add(new CrabView(true));
             		crabcount += 1;
             		}
+                if(rando() == 1 && watercount < 10){ //randomly makes a crab (1/50 chance)
+            		waterTiles.add(new Water(SplashScreen.this, new Point (615,330), 100, 5, Color.BLUE, 1.0));
+            		watercount += 1;
+            		}
         	}
         };
      }
@@ -448,7 +452,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     		w.move();
     		if(w.getRemoved() == true){ //checks if crab needs to be removed
     			deletenumWater = waterTiles.indexOf(w);
-    			//System.out.println("deletenum");
+    			//System.out.println("deletenum:"+deletenumWater);
     		}
     		w.paintWater();
     		getPanel2().remove(w.getWaterButton());
@@ -457,7 +461,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	}
     	if(deletenumWater != -1){ //removes water
     		//System.out.println("deleting");
-    		getPanel2().remove(waterTiles.get(deletenum).getWaterButton());
+    		getPanel2().remove(waterTiles.get(deletenumWater).getWaterButton());
     		waterTiles.remove(deletenumWater);
     		watercount -=1;
     		deletenumWater = -1;
