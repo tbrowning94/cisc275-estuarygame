@@ -19,8 +19,8 @@ public class PlantTest {
 	public void plantLevelsTest() {
 		assertTrue(plant.efficiency < plant1.efficiency);
 		assertTrue(plant1.efficiency < plant2.efficiency);
-		assertTrue(plant.radius < plant1.radius);
-		assertTrue(plant1.radius < plant2.radius);
+		assertTrue(plant.RADIUS < plant1.RADIUS);
+		assertTrue(plant1.RADIUS < plant2.RADIUS);
 	}
 	
 	/**

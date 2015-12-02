@@ -18,7 +18,7 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	
 	//Basic objects for the game
 	Crab[] crabs;
-	Plant[] plants;
+	List<Plant> plants;
 	GarbageCollector[] garbageCollectors;
 	
 	public Game() {
@@ -79,7 +79,7 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	}
 
 
-	public Plant[] getPlants() {
+	public List<Plant> getPlants() {
 		return plants;
 	}
 
@@ -102,8 +102,8 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	}
 	
 	//adds plant to level when player chooses
-	public void addPlant() {
-		
+	public void addPlant(Plant plant) {
+		plants.add(plant);
 	}
 	
 	//Runs Fisherman's fishing method then multiplies by number of fisherman

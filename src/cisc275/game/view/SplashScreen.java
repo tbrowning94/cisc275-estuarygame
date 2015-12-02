@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import cisc275.game.controller.PlaceObject;
+import cisc275.game.model.Game;
 import cisc275.game.model.Plant;
 
 public class SplashScreen extends JFrame implements ActionListener, MouseListener{
@@ -52,6 +54,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private int theY=3;
 	final int xincr = 3;
 	final int yincr = 2;
+	
+	Game game;
 	
 	boolean run =true;
     int imgHeight;
@@ -137,16 +141,18 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             @Override
             public void mouseClicked(MouseEvent e) {
             	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
-        		
+        		System.out.println("motion detected");
             	switch (isClicked) {
             	case norm:
             		System.out.println(loc);
             		break;
             	case plant1:
+            		//game.addPlant(new Plant(loc));
         			paintPlantComponent(e.getComponent().getGraphics(), loc);
-        			getPButton().setBorderPainted(false);
-        			crabby = true;
-        			isClicked = click.norm;
+        			System.out.println("should have painted a plant");
+//        			getPButton().setBorderPainted(false);
+//        			crabby = true;
+//        			isClicked = click.norm;
         			break;
         		
         		case plant2:
@@ -177,6 +183,9 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             @Override
             public void mouseReleased(MouseEvent e) {
                 setBackground(background);
+//                getPButton().setBorderPainted(false);
+//                crabby = true;
+//    			isClicked = click.norm;
             }
         });
 
@@ -280,8 +289,11 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			//next mouse click that still has this button enabled
 			isClicked = click.plant1;
 			crabby = false;
-			getPButton().setBorderPainted(true);
-			getGCButton().setBorderPainted(false);
+//			while (isClicked == click.plant1) {
+//				paintPlantComponent(getGraphics(), MouseInfo.getPointerInfo().getLocation());
+//			}
+//			getPButton().setBorderPainted(true);
+//			getGCButton().setBorderPainted(false);
         } else if(cmd.equals("Garbage Collector")){
 			//PlaceObject placegc = new PlaceObject();
 			//same thing here. maybe just set the button enable and then 

@@ -9,7 +9,7 @@ import java.awt.Point;
  */
 public class Plant1 extends Plant {
 	//plant constants
-	private static final int RADIUS = 0; //radius of the are the plant can filter/block water
+	public static final int RADIUS = 0; //radius of the are the plant can filter/block water
 	static final int START_EFFICIENCY = 0; //efficiency before being attacked by crab
 	
 	

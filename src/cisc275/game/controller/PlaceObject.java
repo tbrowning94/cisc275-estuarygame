@@ -38,13 +38,13 @@ public class PlaceObject implements Action<Game>{
 	}
 	
 	public Point getLocation() {
-		return null;
+		return this.location;
 	}
 	
 	@Override
 	public boolean isValid(Game g) {
 		// make sure point is available and player has enough money
-		return false;
+		return true;
 	}
 	
 	@Override

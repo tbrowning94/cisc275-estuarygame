@@ -33,7 +33,7 @@ public class PlaceObjectTest {
 		Point pt1 = new Point(0,0);
 		Plant plant1 = new Plant(pt1); // Normal crab
 		PlaceObject po1 = new PlaceObject(p1, plant1, g);
-		assertEquals(plant1, g.getPlants()[0]); //TODO: Define equals for plants
+		assertEquals(plant1, g.getPlants().get(0)); //TODO: Define equals for plants
 	}
 	
 	@Test
