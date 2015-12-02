@@ -178,6 +178,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             		PlantView tempplant = new PlantView(1, loc);
             		getPanel2().add(tempplant.pbutton);
             		plants.add(tempplant);
+            		money-=10;
+            		moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
         			//paintPlantComponent(e.getComponent().getGraphics(), loc);
         			//getPButton().setBorderPainted(false);
             		//plants.get(plantindex).setLocation(loc);
