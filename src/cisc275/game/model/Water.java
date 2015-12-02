@@ -23,7 +23,7 @@ public class Water
 	private Point location;
 	//ArrayList<Node> path = new ArrayList<Node>();
 	//TODO: create linked listed of water instead of nodes?
-	private int health;
+	private static int health;
 	private double speed = 1.0;
 	private boolean removed;
 	private int RunoffParticles;
@@ -51,8 +51,8 @@ public class Water
 		this.wbutton.putClientProperty("position", loc);
 		this.removed = false;
 	}
-	public int getHealth(){
-		return this.health;
+	public static int getHealth(){
+		return health;
 	}
 	public Point getLocation(){
 		return this.location;
