@@ -92,6 +92,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	
 	public SplashScreen() {
 		PlantView p = new PlantView();
+		GarbageCollectorView tempgarb = new GarbageCollectorView();
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/back1_pipe_1.png");
     	BufferedImage plant1 = createImage("images/Fern.png");
@@ -178,6 +179,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	case plant1:
             		loc.setLocation(loc.getX()-30, loc.getY()-30);
             		PlantView tempplant = new PlantView(1, loc);
+            		
             		getPanel2().add(tempplant.pbutton);
             		plants.add(tempplant);
             		money-=10;
