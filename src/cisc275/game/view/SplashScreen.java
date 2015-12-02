@@ -41,6 +41,7 @@ import javax.swing.Timer;
 import java.awt.event.MouseMotionListener;
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Game;
+import cisc275.game.model.GarbageCollector;
 import cisc275.game.model.Plant;
 import cisc275.game.model.Water;
 //import cisc275.game.view.GameView.TimerListener;
@@ -56,6 +57,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	 static ArrayList<PlantView> plants = new ArrayList<PlantView>();
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
+	 static ArrayList<GarbageCollectorView> garbColl = new ArrayList<GarbageCollectorView>();
 	public static boolean crabby = true;
 	Button startGame;
 	int money = 200;
@@ -196,8 +198,14 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         			break;
         			
         		case gC1:
-        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-        			getGCButton().setBorderPainted(false);
+        			loc.setLocation(loc.getX()-30, loc.getY()-30);
+            		GarbageCollectorView tempgc = new GarbageCollectorView(1, loc);
+            		getPanel2().add(tempgc.gcbutton);
+            		garbColl.add(tempgc);
+            		money-=10;
+            		moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
+//        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
+//        			getGCButton().setBorderPainted(false);
         			isClicked = click.norm;
         			crabby = true;
         			break;
