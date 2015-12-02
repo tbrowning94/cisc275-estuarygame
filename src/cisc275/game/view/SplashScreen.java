@@ -33,6 +33,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -48,7 +49,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
-	private JPanel panel2;
+	private JLayeredPane panel2;
 	int deletenum = -1; //with use of crabs
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	 static ArrayList<PlantView> plants = new ArrayList<PlantView>();
@@ -111,7 +112,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	void inValidate() {
 	}
 	
-	public JPanel getPanel2() {
+	public JLayeredPane getPanel2() {
 		return this.panel2;
 	}
 	
@@ -135,9 +136,9 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	        return null;
 	    }
 
-	public JPanel GameFrame(){
+	public JLayeredPane GameFrame(){
 		new Timer(TIMER_DELAY, new TimerListener()).start();
-        panel2 = new JPanel() {
+        panel2 = new JLayeredPane() {
         	
             @Override
             protected void paintComponent(Graphics g) {
