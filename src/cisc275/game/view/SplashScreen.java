@@ -15,16 +15,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,11 +36,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import aleksPack10.jdk.MouseMotionListener;
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Game;
 import cisc275.game.model.Plant;
 
-public class SplashScreen extends JFrame implements ActionListener, MouseListener{
+public class SplashScreen extends JFrame implements ActionListener, MouseListener, MouseMotionListener {
 	private static final int WORLD_WIDTH = 1366;
 	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
@@ -62,6 +67,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     int imgWidth;
     
 	private BufferedImage pics[];
+	List<JLabel> plants;
     
 	private enum click {
 		plant1, plant2, plant3, gC1, gC2, gC3, norm
@@ -135,7 +141,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
                g.drawImage(pics[4], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
-        panel2.addMouseListener(new MouseAdapter() {
+        panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
             private Color background;
 
             @Override
@@ -143,11 +149,15 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
         		System.out.println("motion detected");
             	switch (isClicked) {
+            	
             	case norm:
             		System.out.println(loc);
             		break;
+            		
             	case plant1:
             		//game.addPlant(new Plant(loc));
+//            		plants.add(new JLabel(new ImageIcon(pics[1].getScaledInstance(100, 100, 20))));
+//            		plants.get(plants.size()).setLocation(e.getLocationOnScreen());
         			paintPlantComponent(e.getComponent().getGraphics(), loc);
         			getPButton().setBorderPainted(false);
         			crabby = true;
@@ -182,6 +192,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             @Override
             public void mouseReleased(MouseEvent e) {
                 setBackground(background);
+//                isClicked = click.norm;
 //                getPButton().setBorderPainted(false);
 //                crabby = true;
 //    			isClicked = click.norm;
@@ -329,8 +340,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		isClicked = click.norm;
 	}
 
 	@Override
@@ -348,6 +358,18 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	Random rnd = new Random();
     	return(rnd.nextInt(100));
     }
+
+	@Override
+	public void mouseDragged(aleksPack10.jdk.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(aleksPack10.jdk.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 
