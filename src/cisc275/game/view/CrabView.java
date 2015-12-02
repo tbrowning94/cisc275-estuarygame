@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
 	boolean mitten;
+	static int nativelimit;
 	Image ing;
 	int picNum = 1;
     int picNums;
@@ -178,7 +179,10 @@ public class CrabView {
     	    		removel = true;
     	    	}
     	    	else{
-    	    		JOptionPane.showMessageDialog(null, "Don't Click those, they're native!");
+    	    			removel = true;
+    	    			nativelimit += 1;
+    	    			System.out.println(nativelimit);
+    	    		
     	    	}
 
     	    }  

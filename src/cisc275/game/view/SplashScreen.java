@@ -58,6 +58,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	public static boolean crabby = true;
 	Button startGame;
+	int money = 200;
+	JLabel moneyvalue = new JLabel("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
 	Button instructions;
 	Image splashimage;
     JLabel cloud = new JLabel("cloud");
@@ -153,6 +155,9 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
                g.drawImage(pics[4], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
+        moneyvalue.setLocation(1200, -75);
+        moneyvalue.setSize(200,200);
+        panel2.add(moneyvalue);
         crabs.add(new CrabView()); // creates initial crab
         waterTiles.add(new Water(this, new Point (615,330), 100, 5, Color.BLUE, 1.0));
         panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
@@ -440,6 +445,24 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	}
     	if(deletenum != -1){ //removes crab
     		//System.out.println("deleting");
+    		if(crabs.get(deletenum).mitten!= true){
+    			if(crabs.get(deletenum).nativelimit > 6){
+    				System.out.println("subtractmoney");
+    				money -= 10;
+    				moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
+    				
+    				getPanel2().remove(moneyvalue);
+    				getPanel2().add(moneyvalue);
+    			}
+    			else{
+    				System.out.println("addmoney");
+    				money += 10;
+    				moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
+    				getPanel2().remove(moneyvalue);
+    				getPanel2().add(moneyvalue);
+    			}
+    			
+    		}
     		getPanel2().remove(crabs.get(deletenum).cbutton);
     		crabs.remove(deletenum);
     		crabcount -=1;
