@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import cisc275.game.model.Water;
 
 public class PlantView {
+	boolean buffer = false;
 	static Image[] pics;
     double xloc;
     double yloc;
@@ -29,7 +30,7 @@ public class PlantView {
    			pics[0] = ImageIO.read(getClass().getResource("Fern.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
    			pics[1] = ImageIO.read(getClass().getResource("Fern.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
    			pics[2] = ImageIO.read(getClass().getResource("Fernhurt.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-   			pics[3] = ImageIO.read(getClass().getResource("Fern.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
+   			pics[3] = ImageIO.read(getClass().getResource("Fern.png")).getScaledInstance(scaledimgWidth*2, scaledimgHeight*2, Image.SCALE_DEFAULT);
    			//System.out.println(pics[1]+ "crab1");
    			//System.out.println(pics[0]+ "crab2");
    		} catch (IOException e1) {
@@ -53,13 +54,23 @@ public class PlantView {
 	}
 	public void changepic(int i) {
 		pbutton.setIcon(new ImageIcon(pics[i]));
+		if(i == 3){
+			pbutton.setSize(scaledimgWidth*2, scaledimgHeight*2);
+		}
 		// TODO Auto-generated method stub
 		
 	}
 	public boolean checkintersectw(Water w) {
-		Area areaA = new Area(w.getWbutton().getBounds());
+		Area areaA = new Area(w.getWaterButton().getBounds());
 //		System.out.println("CRAB "+areaA);
 //		System.out.println("PLANT " +plantarea);
 		return areaA.intersects(plantarea.getBounds2D());
 	}
+	public boolean checkintersectp(PlantView p){
+		Area areaA = new Area(p.pbutton.getBounds());
+//		System.out.println("CRAB "+areaA);
+//		System.out.println("PLANT " +plantarea);
+		return areaA.intersects(plantarea.getBounds2D());
+	}
+	
 }

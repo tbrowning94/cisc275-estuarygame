@@ -22,6 +22,7 @@ import cisc275.game.view.SplashScreen;
 public class Water 
 	implements java.io.Serializable{
 	private Point location;
+	private boolean Stopping = false;
 	//ArrayList<Node> path = new ArrayList<Node>();
 	//TODO: create linked listed of water instead of nodes?
 	private int health;
@@ -39,7 +40,7 @@ public class Water
 		this.health = Health;
 		this.RunoffParticles = RP; 
 		Color runoffC = RO;
-		this.wbutton.putClientProperty("position", loc);
+		this.getWbutton().putClientProperty("position", loc);
 		this.removed = false;
 	}
 	public Water(SplashScreen ss, Point loc, int Health, int RP, Color RO, double speed) {
@@ -49,7 +50,7 @@ public class Water
 		this.speed = speed;
 		this.RunoffParticles = RP; 
 		Color runoffC=RO;
-		this.wbutton = ss.createWaterLabel(loc, Health);
+		this.setWbutton(ss.createWaterLabel(loc, Health));
 		this.removed = false;
 	}
 	public int getHealth(){
@@ -59,7 +60,7 @@ public class Water
 		return this.location;
 	}
 	public JLabel getWaterButton() {
-		return this.wbutton;
+		return this.getWbutton();
 	}
 	/**
 	 * Dependent on the level of the game, there will be a certain amount 
@@ -89,8 +90,8 @@ public class Water
 	}
 	
 	public void paintWater() {
-         wbutton.setIcon(this.wimg);
-         wbutton.setLocation(this.location);
+         getWbutton().setIcon(this.wimg);
+         getWbutton().setLocation(this.location);
     }
 	public void setrunoffC(Water health){
 		int h = this.health;
@@ -111,7 +112,7 @@ public class Water
 			this.removed = true; // On the next update in game, removed all water tiles with removed set to true
 		} else {
 			wimg = new ImageIcon(water.getScaledInstance(health, 100, 20)); //change image width with health
-			this.wbutton.setIcon(wimg);
+			this.getWbutton().setIcon(wimg);
 		}
 	}
 	public Color getrunoffC(){
@@ -147,12 +148,17 @@ public class Water
         return null;
     }
 	public boolean isStopping() {
-		// TODO Auto-generated method stub
-		return false;
+		return Stopping;
 	}
 	public void setStopping(boolean b) {
-		// TODO Auto-generated method stub
+		Stopping = b;
 		
+	}
+	public JLabel getWbutton() {
+		return wbutton;
+	}
+	public void setWbutton(JLabel wbutton) {
+		this.wbutton = wbutton;
 	}
 
 }

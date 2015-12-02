@@ -180,7 +180,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             	case plant1:
             		loc.setLocation(loc.getX()-30, loc.getY()-30);
             		PlantView tempplant = new PlantView(1, loc);
-            		
+            		checkbuffer(tempplant);
             		getPanel2().add(tempplant.pbutton);
             		plants.add(tempplant);
             		money-=10;
@@ -493,6 +493,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		//Problem with is stopping,method needs to be implemented
 		//in water class
     	for(Water w: waterTiles){
+    		//System.out.println(w.isStopping());
     		if(!w.isStopping()){
     			w.move();
     		}
@@ -518,16 +519,22 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		for(PlantView p:plants){
 			
 			for(Water w:waterTiles){
-				if(p.checkintersectw(w)){
-				//needs to be implemented in water class
-					w.setStopping(true);
+				if(!p.intersecting){
+					if(p.checkintersectw(w)){
+						//System.out.println("work");
+						w.setStopping(true);
+						//System.out.println(w.isStopping());
+					}
+				}
+				else{
+					w.setStopping(false);
 				}
 			}
 			p.intersecting = false;
 			for(CrabView c:crabs){
 				if(c.planta == null){
 					if(p.checkintersects(c)){
-						if(c.mitten){
+						if(c.mitten & !p.buffer){
 						c.stop = true;
 						c.planta = p;
 						p.intersecting = true;
@@ -547,10 +554,28 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 					p.intersecting = true;
 				}
 			}
-			if(!p.intersecting){
+			if(!p.intersecting & !p.buffer){
 				p.changepic(1);
 			}
 		}
 	}
-
+	public void checkbuffer(PlantView pl){
+		int deleteslot;
+		 ArrayList<PlantView> tempp = new ArrayList<PlantView>();
+		for(PlantView p: plants){
+			if(p != pl){
+				if(pl.checkintersectp(p)){
+					tempp.add(p);
+				}
+			}
+		}
+		if(tempp.size() == 2){
+			for(PlantView q: tempp){
+				plants.remove(q);
+				getPanel2().remove(q.pbutton);
+			}
+			pl.changepic(3);
+			pl.buffer = true;
+		}
+	}
 }
