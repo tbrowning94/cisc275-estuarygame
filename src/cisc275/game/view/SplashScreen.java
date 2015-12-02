@@ -61,6 +61,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	 static ArrayList<GarbageCollectorView> garbColl = new ArrayList<GarbageCollectorView>();
 	public static boolean crabby = true;
 	Button startGame;
+	boolean intersection = false;
 	int money = 200;
 	JLabel moneyvalue = new JLabel("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
 	Button instructions;
@@ -522,14 +523,19 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 				if(!p.intersecting){
 					if(p.checkintersectw(w)){
 						//System.out.println("work");
-						w.setStopping(true);
+						if(p.buffer){
+							w.setStopping(true);
+						}
+						w.shrink();
+						
 						//System.out.println(w.isStopping());
 					}
 				}
 				else{
-					w.setStopping(false);
+					w.normal();
 				}
 			}
+			
 			p.intersecting = false;
 			for(CrabView c:crabs){
 				if(c.planta == null){

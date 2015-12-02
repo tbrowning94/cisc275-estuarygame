@@ -160,6 +160,15 @@ public class Water
 	public void setWbutton(JLabel wbutton) {
 		this.wbutton = wbutton;
 	}
+	public void shrink(){
+		wimg = new ImageIcon(water.getScaledInstance((health/2), 100, 20)); //change image width with health
+		this.getWbutton().setIcon(wimg);
+	}
+	public void normal() {
+		wimg = new ImageIcon(water.getScaledInstance((health), 100, 20)); //change image width with health
+		this.getWbutton().setIcon(wimg);
+		
+	}
 
 }
 
