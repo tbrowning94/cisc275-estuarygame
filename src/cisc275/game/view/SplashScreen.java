@@ -423,7 +423,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         		//System.out.println("test");
                paintcrab();
                paintwater();
-               
+               plantcheck();
                 //System.out.println("test6");
 //                for(CrabView c: crabs){
 //             	   frame.remove(c.cbutton);
@@ -451,6 +451,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     		c.paintcrab();
     		getPanel2().remove(c.cbutton);
     		getPanel2().add(c.cbutton);
+    		getPanel2().repaint();
     		
     	}
     	if(deletenum != -1){ //removes crab
@@ -501,6 +502,33 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	}
     	//System.out.println("test5");
     }
-
+	void plantcheck(){
+		for(PlantView p:plants){
+			
+			p.intersecting = false;
+			for(CrabView c:crabs){
+				
+				if(p.checkintersects(c)){
+					if(c.mitten){
+					c.stop = true;
+					p.intersecting = true;
+					p.changepic(2);
+					getPanel2().remove(p.pbutton);
+					getPanel2().add(p.pbutton);
+					}
+					else{
+						c.left = !c.left;
+						c.right = !c.right;
+						c.up = !c.up;
+						c.down = !c.down;
+					}
+				}
+				
+			}
+			if(!p.intersecting){
+				p.changepic(1);
+			}
+		}
+	}
 
 }

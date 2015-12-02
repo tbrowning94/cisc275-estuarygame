@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
+	boolean stop = false;
 	boolean mitten;
 	static int nativelimit;
 	Image ing;
@@ -90,42 +91,44 @@ public class CrabView {
     	else{
     		picNum = 1;
     	}
-    	
-    	randcount= rando(1);
-    	int rand = 0;
-    	//System.out.println(cbutton);
-    	if(randcount == 1){
-    		randcount = 0;
-    		rand = rando(2);
+    	if(!stop){
+    		randcount= rando(1);
+        	int rand = 0;
+        	//System.out.println(cbutton);
+        	if(randcount == 1){
+        		randcount = 0;
+        		rand = rando(2);
+        	}
+        	 if (oneX >= 1275 || rand == 1)
+             {
+                 right = false;
+                 left = true;
+             }
+             
+             if (oneX <= 0 || rand == 2)
+             {
+                 right = true;
+                 left = false;
+             }
+             
+             if (oneY >=  627 || rand == 3)
+             {
+                 up = true;
+                 down = false;
+             }
+             
+             if (oneY <= 358  || rand == 4)
+             {
+                 up = false;
+                 down = true;
+             }
+             rand = 0;
+             if (up) oneY-=yIncr;
+             if (down) oneY+=yIncr;
+             if (left) oneX-=xIncr;
+             if (right) oneX+=xIncr;
     	}
-    	 if (oneX >= 1275 || rand == 1)
-         {
-             right = false;
-             left = true;
-         }
-         
-         if (oneX <= 0 || rand == 2)
-         {
-             right = true;
-             left = false;
-         }
-         
-         if (oneY >=  627 || rand == 3)
-         {
-             up = true;
-             down = false;
-         }
-         
-         if (oneY <= 358  || rand == 4)
-         {
-             up = false;
-             down = true;
-         }
-         rand = 0;
-         if (up) oneY-=yIncr;
-         if (down) oneY+=yIncr;
-         if (left) oneX-=xIncr;
-         if (right) oneX+=xIncr;
+    	
 //         picNums = 0;
 //         if(up && left ){ //decides which part of the pic array to read depending on the direction
 //        	 picNums = picNum + 30;
