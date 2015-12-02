@@ -52,8 +52,10 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	private static final int SCALE = 1;
 	private JLayeredPane panel2;
 	int deletenum = -1; //with use of crabs
+	int deletenumWater = -1; // with water
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	 static ArrayList<PlantView> plants = new ArrayList<PlantView>();
+	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	public static boolean crabby = true;
 	Button startGame;
 	Button instructions;
@@ -66,6 +68,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 	final int xincr = 3;
 	final int yincr = 2;
 	public int crabcount = 1;
+	public int watercount = 1;
 	Game game;
 	
 	boolean run =true;
@@ -151,6 +154,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             }
         };
         crabs.add(new CrabView()); // creates initial crab
+        waterTiles.add(new Water(this, new Point (615,330), 100, 5, Color.BLUE, 1.0));
         panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
             private Color background;
 
@@ -260,12 +264,10 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		//theY+=yincr;
 		}
 		
-		Water testW = new Water(this, new Point (615,330), 100, 5, Color.BLUE, 1.0);
 		
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
 		panel2.add(cloud);
-		panel2.add(testW.getWaterButton());
 
 		
         return panel2;
@@ -405,6 +407,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         	if(crabby == true && SplashScreen.crabby == true){
         		//System.out.println("test");
                paintcrab();
+               paintwater();
+               
                 //System.out.println("test6");
 //                for(CrabView c: crabs){
 //             	   frame.remove(c.cbutton);
@@ -436,6 +440,27 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     		crabs.remove(deletenum);
     		crabcount -=1;
     		deletenum = -1;
+    	}
+    	//System.out.println("test5");
+    }
+	public void paintwater() {
+    	for(Water w: waterTiles){
+    		w.move();
+    		if(w.getRemoved() == true){ //checks if crab needs to be removed
+    			deletenumWater = waterTiles.indexOf(w);
+    			//System.out.println("deletenum");
+    		}
+    		w.paintWater();
+    		getPanel2().remove(w.getWaterButton());
+    		getPanel2().add(w.getWaterButton());
+    		
+    	}
+    	if(deletenumWater != -1){ //removes water
+    		//System.out.println("deleting");
+    		getPanel2().remove(waterTiles.get(deletenum).getWaterButton());
+    		waterTiles.remove(deletenumWater);
+    		watercount -=1;
+    		deletenumWater = -1;
     	}
     	//System.out.println("test5");
     }

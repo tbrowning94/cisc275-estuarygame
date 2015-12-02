@@ -85,7 +85,13 @@ public class Water
 	public int setHealthOfRunoff(Garbage damage, Water RunoffParticles ){
 		return this.health;
 	}
-
+	public boolean getRemoved() {
+		return this.removed;
+	}
+	public void paintWater() {
+         wbutton.setIcon(this.wimg);
+         wbutton.setLocation(this.location);
+    }
 	public void setrunoffC(Water health){
 		int h = this.health;
 		if (h > 75 && h <= 90) {
