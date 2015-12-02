@@ -260,7 +260,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		//theY+=yincr;
 		}
 		
-		Water testW = new Water(this, new Point (20,20), 100, 5, Color.BLUE, 1.0);
+		Water testW = new Water(this, new Point (615,330), 100, 5, Color.BLUE, 1.0);
 		
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
