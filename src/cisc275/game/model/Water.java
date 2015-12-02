@@ -11,8 +11,10 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import cisc275.game.view.GameView;
+import cisc275.game.view.SplashScreen;
 
 /**
  * @author Nile
@@ -28,27 +30,27 @@ public class Water
 	private boolean removed;
 	private int RunoffParticles;
 	private Color runoffC;
-	private JButton wbutton;
+	private JLabel wbutton;
 	BufferedImage water = createImage("images/textures/water_map.png");
 	private ImageIcon wimg = new ImageIcon(water.getScaledInstance(100, 100, 20));
+	private SplashScreen splashScreen;
 	
 	public Water(Point loc, int Health, int RP, Color RO) {
 		this.location = loc;
 		this.health = Health;
 		this.RunoffParticles = RP; 
 		Color runoffC = RO;
-		this.wbutton = new JButton(wimg);
 		this.wbutton.putClientProperty("position", loc);
 		this.removed = false;
 	}
-	public Water(Point loc, int Health, int RP, Color RO, double speed) {
+	public Water(SplashScreen ss, Point loc, int Health, int RP, Color RO, double speed) {
+		this.splashScreen = ss;
 		this.location = loc;
 		this.health = Health;
 		this.speed = speed;
 		this.RunoffParticles = RP; 
 		Color runoffC=RO;
-		this.wbutton = new JButton(wimg);
-		this.wbutton.putClientProperty("position", loc);
+		this.wbutton = ss.createWaterLabel(loc, Health);
 		this.removed = false;
 	}
 	public int getHealth(){
@@ -57,7 +59,7 @@ public class Water
 	public Point getLocation(){
 		return this.location;
 	}
-	public JButton getWaterButton() {
+	public JLabel getWaterButton() {
 		return this.wbutton;
 	}
 	/**

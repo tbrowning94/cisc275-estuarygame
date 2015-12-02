@@ -42,6 +42,7 @@ import java.awt.event.MouseMotionListener;
 import cisc275.game.controller.PlaceObject;
 import cisc275.game.model.Game;
 import cisc275.game.model.Plant;
+import cisc275.game.model.Water;
 //import cisc275.game.view.GameView.TimerListener;
 
 public class SplashScreen extends JFrame implements ActionListener, MouseListener, MouseMotionListener {
@@ -90,12 +91,14 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
     	BufferedImage Cloud = createImage("images/cloud.png");
     	BufferedImage bi2 = createImage("images/back1_pipe_2.png");
+    	BufferedImage water1 = createImage("images/textures/water_map.png");
     	System.out.print("PrintPics");
     	pics[0] = bi;
     	pics[1] = plant1;
     	pics[2] = GarbCol;
     	pics[3] = Cloud;
     	pics[4] = bi2;
+    	pics[5] = water1;
     	  	
      	//for(int i = 0; i < pics.size(); i++)
     		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
@@ -257,11 +260,12 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		//theY+=yincr;
 		}
 		
-		
+		Water testW = new Water(this, new Point (20,20), 100, 5, Color.BLUE, 1.0);
 		
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
 		panel2.add(cloud);
+		panel2.add(testW.getWaterButton());
 
 		
         return panel2;
@@ -292,7 +296,22 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	
     	g.drawImage(plant, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
     }
-    
+    public JLabel createPlantLabel(Point loc) {
+    	BufferedImage plant = pics[1];
+    	ImageIcon plantIcon = new ImageIcon(plant.getScaledInstance(100, 100, 20));
+    	JLabel newPlant = new JLabel(plantIcon);
+    	newPlant.putClientProperty("position", loc);
+    	return newPlant;
+    }
+    public JLabel createWaterLabel(Point loc, int health) {
+    	BufferedImage water = pics[5];
+    	ImageIcon waterIcon = new ImageIcon(water.getScaledInstance(health, 100, 20));
+    	JLabel newWater = new JLabel("water");
+    	newWater.setIcon(waterIcon);
+    	newWater.setLocation(loc);
+    	newWater.setSize(75,75);
+    	return newWater;
+    }
     protected void paintGarbageCollectorComponent(Graphics g, Point loc ) {    
     	BufferedImage GarbC = pics[2];
     	g.drawImage(GarbC, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
