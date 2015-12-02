@@ -40,6 +40,7 @@ import javax.swing.Timer;
 
 import java.awt.event.MouseMotionListener;
 import cisc275.game.controller.PlaceObject;
+import cisc275.game.model.Fisherman;
 import cisc275.game.model.Game;
 import cisc275.game.model.GarbageCollector;
 import cisc275.game.model.Plant;
@@ -231,7 +232,12 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 //    			isClicked = click.norm;
             }
         });
-
+        Fisherman f = new Fisherman(null, null, 8, 200);
+        panel2.add(f.getContentPane().add(f.getbarMoney()));
+        panel2.add(f.getContentPane().add(f.getbarPh()));
+        pack();
+        setVisible(true);
+        
 		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
 		panel2.setPreferredSize(size); // set window dimension
 		panel2.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
@@ -484,6 +490,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     	//System.out.println("test5");
     }
 	public void paintwater() {
+		//Problem with is stopping,method needs to be implemented
+		//in water class
     	for(Water w: waterTiles){
     		if(!w.isStopping()){
     			w.move();
@@ -511,6 +519,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 			
 			for(Water w:waterTiles){
 				if(p.checkintersectw(w)){
+				//needs to be implemented in water class
 					w.setStopping(true);
 				}
 			}

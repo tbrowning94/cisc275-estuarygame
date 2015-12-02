@@ -17,13 +17,11 @@ import cisc275.game.view.GameView;
 import cisc275.game.view.SplashScreen;
 
 /**
- * @author Nile
  *Generates, health, path and position of water and runoff particles
  */
 public class Water 
 	implements java.io.Serializable{
 	private Point location;
-	private boolean stopping = false;
 	//ArrayList<Node> path = new ArrayList<Node>();
 	//TODO: create linked listed of water instead of nodes?
 	private int health;
@@ -41,7 +39,7 @@ public class Water
 		this.health = Health;
 		this.RunoffParticles = RP; 
 		Color runoffC = RO;
-		this.getWbutton().putClientProperty("position", loc);
+		this.wbutton.putClientProperty("position", loc);
 		this.removed = false;
 	}
 	public Water(SplashScreen ss, Point loc, int Health, int RP, Color RO, double speed) {
@@ -51,7 +49,7 @@ public class Water
 		this.speed = speed;
 		this.RunoffParticles = RP; 
 		Color runoffC=RO;
-		this.setWbutton(ss.createWaterLabel(loc, Health));
+		this.wbutton = ss.createWaterLabel(loc, Health);
 		this.removed = false;
 	}
 	public int getHealth(){
@@ -61,7 +59,7 @@ public class Water
 		return this.location;
 	}
 	public JLabel getWaterButton() {
-		return this.getWbutton();
+		return this.wbutton;
 	}
 	/**
 	 * Dependent on the level of the game, there will be a certain amount 
@@ -89,17 +87,18 @@ public class Water
 	public boolean getRemoved() {
 		return this.removed;
 	}
+	
 	public void paintWater() {
-         getWbutton().setIcon(this.wimg);
-         getWbutton().setLocation(this.location);
+         wbutton.setIcon(this.wimg);
+         wbutton.setLocation(this.location);
     }
 	public void setrunoffC(Water health){
 		int h = this.health;
-		if (h > 75 && h <= 90) {
+		if (h > -50 && h <= 0) {
 			this.runoffC = Color.CYAN;
-		} else if (h > 50 && h <= 75){
-			this.runoffC = Color.YELLOW;
 		} else if (h > 0 && h <= 50){
+			this.runoffC = Color.YELLOW;
+		} else if (h > 50 && h <= 100){
 			this.runoffC = Color.GREEN;
 		}
 	}
@@ -112,7 +111,7 @@ public class Water
 			this.removed = true; // On the next update in game, removed all water tiles with removed set to true
 		} else {
 			wimg = new ImageIcon(water.getScaledInstance(health, 100, 20)); //change image width with health
-			this.getWbutton().setIcon(wimg);
+			this.wbutton.setIcon(wimg);
 		}
 	}
 	public Color getrunoffC(){
@@ -147,17 +146,13 @@ public class Water
 
         return null;
     }
-	public JLabel getWbutton() {
-		return wbutton;
-	}
-	public void setWbutton(JLabel wbutton) {
-		this.wbutton = wbutton;
-	}
 	public boolean isStopping() {
-		return stopping;
+		// TODO Auto-generated method stub
+		return false;
 	}
-	public void setStopping(boolean stopping) {
-		this.stopping = stopping;
+	public void setStopping(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
