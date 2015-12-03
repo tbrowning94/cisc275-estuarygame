@@ -164,7 +164,7 @@ public class Water
 	}
 	public void shrink(PlantView p){
 		affected.add(p);
-		if(health/(affected.size()*2)==0){
+		if(affected.size()==0){
 			this.Stopping = true;
 		}
 		else{
@@ -175,7 +175,13 @@ public class Water
 	}
 	public void normal(PlantView p) {
 		affected.remove(p);
-		wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), 100, 20)); //change image width with health
+		if(affected.size()==0){
+			wimg = new ImageIcon(water.getScaledInstance((int) health, 100, 20));
+		}
+		else{
+			wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), 100, 20)); //change image width with health
+		}
+		
 		this.getWbutton().setIcon(wimg);
 		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), 100);
 		
