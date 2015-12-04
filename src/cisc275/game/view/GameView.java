@@ -26,6 +26,7 @@ import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -171,14 +172,15 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 	}
 	
 	private JPanel createContent() {
-        final Image image = createImage();
+        final Image[] image = createImage();
 //      panel = new JPanel(); // Initialize panel
 //		Game game = new Game(); // Not sure if this should go here?
         JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(image, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+                g.drawImage(image[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+                g.drawImage(image[1], ViewTemplate.scalex(228), ViewTemplate.scaley(100), ViewTemplate.scalex(915), ViewTemplate.scaley(121), null);
                 //g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
                 
             }
@@ -209,12 +211,13 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 		//panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 		//panel.add(Box.createRigidArea(new Dimension(300, 300)));
 		
-		JLabel Name = new JLabel("WELCOME TO RUNOFF RANGER!",JLabel.CENTER);
+		JLabel Name = new JLabel("",JLabel.CENTER);
 		Name.setForeground(Color.black);
-		Dimension size1 = Name.getPreferredSize();
 		
-		Name.setFont(new Font("Georgia",Font.BOLD, 40));
-		Name.setBounds(ViewTemplate.scalex(275), ViewTemplate.scaley(100), ViewTemplate.scalex(800) , ViewTemplate.scaley(50));
+		
+		Dimension size1 = Name.getPreferredSize();
+		System.out.println(size1);
+		Name.setSize(size1);
 		
 		JButton button1 = new JButton("Start");
 		button1.setForeground(Color.blue);
@@ -241,14 +244,16 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
         return panel;
     }
 
-    protected BufferedImage createImage() {
-        BufferedImage bufferedImage;
+    protected BufferedImage[] createImage() {
+        BufferedImage[] bufferedImage = new BufferedImage[2];
 
         try {
         	//image=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/BackTrial1.png"));
-            imgHeight=ViewTemplate.scaley(bufferedImage.getHeight());
-            imgWidth=ViewTemplate.scalex(bufferedImage.getWidth());
+            bufferedImage[0] = ImageIO.read(new File("images/BackTrial1.png"));
+            bufferedImage[1]= ImageIO.read(new File("images/maintext.png"));
+            
+            imgHeight=ViewTemplate.scaley(bufferedImage[0].getHeight());
+            imgWidth=ViewTemplate.scalex(bufferedImage[0].getWidth());
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();
