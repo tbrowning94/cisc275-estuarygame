@@ -214,19 +214,19 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 		Dimension size1 = Name.getPreferredSize();
 		
 		Name.setFont(new Font("Georgia",Font.BOLD, 40));
-		Name.setBounds(ViewTemplate.scalex(300), ViewTemplate.scaley(100), ViewTemplate.scalex(800) , ViewTemplate.scaley(50));
+		Name.setBounds(ViewTemplate.scalex(275), ViewTemplate.scaley(100), ViewTemplate.scalex(800) , ViewTemplate.scaley(50));
 		
 		JButton button1 = new JButton("Start");
 		button1.setForeground(Color.blue);
 		button1.setFont(new Font("Georgia",Font.BOLD,20));
 		size1=button1.getPreferredSize();
-		button1.setBounds(ViewTemplate.scalex(570), ViewTemplate.scaley(300), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
+		button1.setBounds(ViewTemplate.scalex(600), ViewTemplate.scaley(300), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
 		
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
 		JButton button2 = new JButton("Tutorial");
 		size1 = button2.getPreferredSize();
-		button2.setBounds(ViewTemplate.scalex(570), ViewTemplate.scaley(400), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
+		button2.setBounds(ViewTemplate.scalex(600), ViewTemplate.scaley(375), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
 		button2.setForeground(Color.blue);
 		//button2.setIcon(new ImageIcon("images/textures/grassTile05.png"));
 		button2.setFont(new Font("Georgia",Font.BOLD,20));
