@@ -1,6 +1,7 @@
 package cisc275.game.model;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import cisc275.game.view.ViewTemplate;
 import cisc275.game.view.GameView;
 import cisc275.game.view.PlantView;
 import cisc275.game.view.SplashScreen;
@@ -27,13 +29,15 @@ public class Water
 	//ArrayList<Node> path = new ArrayList<Node>();
 	//TODO: create linked listed of water instead of nodes?
 	private int health;
-	private double speed = 1.0;
+	private double speed = ViewTemplate.scaley(1);;
 	private boolean removed;
+	private int scaledimagex = ViewTemplate.scalex(100);
+	private int scaledimagey = ViewTemplate.scalex(100);;
 	private int RunoffParticles;
 	private Color runoffC;
 	private JLabel wbutton;
 	BufferedImage water = createImage("images/textures/water_map.png");
-	private ImageIcon wimg = new ImageIcon(water.getScaledInstance(100, 100, 20));
+	private ImageIcon wimg = new ImageIcon(water.getScaledInstance(scaledimagex, scaledimagey, Image.SCALE_DEFAULT));
 	private SplashScreen splashScreen;
 	public ArrayList<PlantView> affected = new ArrayList<PlantView>();
 	
@@ -113,7 +117,7 @@ public class Water
 		if (this.health <= 0) {
 			this.removed = true; // On the next update in game, removed all water tiles with removed set to true
 		} else {
-			wimg = new ImageIcon(water.getScaledInstance(health, 100, 20)); //change image width with health
+			wimg = new ImageIcon(water.getScaledInstance(health, scaledimagey, 20)); //change image width with health
 			this.getWbutton().setIcon(wimg);
 		}
 	}
@@ -168,7 +172,7 @@ public class Water
 			this.Stopping = true;
 		}
 		else{
-		wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), 100, 20)); //change image width with health
+		wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), scaledimagey, Image.SCALE_DEFAULT)); //change image width with health
 		this.getWbutton().setIcon(wimg);
 		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), 100);
 		}
@@ -176,14 +180,14 @@ public class Water
 	public void normal(PlantView p) {
 		affected.remove(p);
 		if(affected.size()==0){
-			wimg = new ImageIcon(water.getScaledInstance((int) health, 100, 20));
+			wimg = new ImageIcon(water.getScaledInstance((int) health, scaledimagey, 20));
 		}
 		else{
-			wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), 100, 20)); //change image width with health
+			wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), scaledimagey, Image.SCALE_DEFAULT)); //change image width with health
 		}
 		
 		this.getWbutton().setIcon(wimg);
-		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), 100);
+		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), scaledimagey);
 		
 	}
 

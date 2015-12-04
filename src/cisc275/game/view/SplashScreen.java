@@ -47,11 +47,9 @@ import cisc275.game.model.Plant;
 import cisc275.game.model.Water;
 //import cisc275.game.view.GameView.TimerListener;
 
-public class SplashScreen extends JFrame implements ActionListener, MouseListener, MouseMotionListener {
+public class SplashScreen extends ViewTemplate implements ActionListener, MouseListener, MouseMotionListener {
 	static int TIMER_DELAY = 50;
-	private static final int WORLD_WIDTH = 1366;
-	private static final int WORLD_HEIGHT = 768;
-	private static final int SCALE = 1;
+	//private static final int SCALE = 1;
 	private JLayeredPane panel2;
 	int deletenum = -1; //with use of crabs
 	int deletenumWater = -1; // with water
@@ -160,11 +158,11 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
                g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
             }
         };
-        moneyvalue.setLocation(1200, -75);
-        moneyvalue.setSize(200,200);
+        moneyvalue.setLocation(ViewTemplate.scalex(1200), ViewTemplate.scaley(-75));
+        moneyvalue.setSize(ViewTemplate.scalex(200), ViewTemplate.scaley(-75));
         panel2.add(moneyvalue);
         crabs.add(new CrabView()); // creates initial crab
-        waterTiles.add(new Water(this, new Point (615,330), 100, 5, Color.BLUE, 1.0));
+        waterTiles.add(new Water(this, new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
         panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
             private Color background;
 
@@ -179,7 +177,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             		break;
             		
             	case plant1:
-            		loc.setLocation(loc.getX()-30, loc.getY()-30);
+            		loc.setLocation(loc.getX()-ViewTemplate.scalex(30), loc.getY()-ViewTemplate.scaley(30));
             		PlantView tempplant = new PlantView(1, loc);
             		checkbuffer(tempplant);
             		getPanel2().add(tempplant.pbutton);
@@ -239,7 +237,7 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
         pack();
         setVisible(true);
         
-		Dimension size = new Dimension(WORLD_WIDTH*SCALE, WORLD_HEIGHT*SCALE); // create window dimension
+		Dimension size = new Dimension(WORLD_WIDTH, WORLD_HEIGHT); // create window dimension
 		panel2.setPreferredSize(size); // set window dimension
 		panel2.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
 		
@@ -257,22 +255,24 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
 		Dimension size2 = pbutton.getPreferredSize();
 		
 		//pbutton.setFont(new Font("Georgia",Font.BOLD, 12));
-		pbutton.setBounds(1250, 100, 100 , 100);
+		pbutton.setBounds(ViewTemplate.scalex(1250), ViewTemplate.scaley(100),  ViewTemplate.scalex(100), ViewTemplate.scaley(100));
 		
-		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(100, 100, 20)));
+		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(ViewTemplate.scalex(100), ViewTemplate.scaley(100), Image.SCALE_DEFAULT)));
 		pbutton.addActionListener(this);
 		pbutton.setActionCommand("Plant");
 		pbutton.setBorderPainted(true);
 		pbutton.setFocusPainted(false);
 		pbutton.setContentAreaFilled(false);
-		
+		System.out.println("SCALE\n"+widthscale+","+heightscale);
+		System.out.println("RESOLUTION\n"+WORLD_WIDTH+","+WORLD_HEIGHT);
+		System.out.println("actual scale\n"+WORLD_WIDTH/1366+","+WORLD_HEIGHT/768);
 		BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
 		gcbutton = new JButton();
 		size2 = gcbutton.getPreferredSize();
-		gcbutton.setBounds(1250, 200, 100 , 100);
+		gcbutton.setBounds(ViewTemplate.scalex(1250), ViewTemplate.scaley(200),  ViewTemplate.scalex(100), ViewTemplate.scaley(100));
 		
 		//gcbutton.setLocation(1000,1000);
-		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(100, 100, 20)));
+		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(ViewTemplate.scalex(100), ViewTemplate.scaley(100), Image.SCALE_DEFAULT)));
 		gcbutton.addActionListener(this);
 		gcbutton.setActionCommand("Garbage Collector");
 		gcbutton.setBorderPainted(true);
@@ -333,11 +333,11 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
     }
     public JLabel createWaterLabel(Point loc, int health) {
     	BufferedImage water = pics[5];
-    	ImageIcon waterIcon = new ImageIcon(water.getScaledInstance(health, 100, 20));
+    	ImageIcon waterIcon = new ImageIcon(water.getScaledInstance(ViewTemplate.scalex(health), ViewTemplate.scaley(100), 20));
     	JLabel newWater = new JLabel("water");
     	newWater.setIcon(waterIcon);
     	newWater.setLocation(loc);
-    	newWater.setSize(75,75);
+    	newWater.setSize(ViewTemplate.scalex(75),ViewTemplate.scaley(75));
     	return newWater;
     }
     protected void paintGarbageCollectorComponent(Graphics g, Point loc ) {    
@@ -444,7 +444,8 @@ public class SplashScreen extends JFrame implements ActionListener, MouseListene
             		}
                 timer +=1;
                 if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
-            		waterTiles.add(new Water(SplashScreen.this, new Point (615,330), 100, 5, Color.BLUE, 1.0));
+            		waterTiles.add(new Water(SplashScreen.this, new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
+            		
             		watercount += 1;
             		timer = 0;
             		}

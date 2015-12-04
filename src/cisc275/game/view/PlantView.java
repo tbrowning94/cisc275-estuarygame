@@ -17,8 +17,8 @@ public class PlantView {
     double xloc;
     double yloc;
     Area plantarea;
-    final static int scaledimgWidth = 75;
-    final static int scaledimgHeight = 75;
+    final static int scaledimgWidth = ViewTemplate.scalex(75);
+    final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel pbutton = new JLabel("test");
 	public boolean intersecting = false;
 	public PlantView() {
@@ -42,7 +42,7 @@ public class PlantView {
 		//loci = location;
 		pbutton.setIcon(new ImageIcon(pics[num]));
         pbutton.setLocation(location);
-        pbutton.setSize(75,75);
+        pbutton.setSize(scaledimgWidth,scaledimgWidth);
         plantarea = new Area(pbutton.getBounds());
 	}
 	public boolean checkintersects(CrabView c){

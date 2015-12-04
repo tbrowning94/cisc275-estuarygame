@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import cisc275.game.view.ViewTemplate;
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
 	boolean stop = false;
@@ -30,14 +30,18 @@ public class CrabView {
     static Image[] pics;
     int xloc = 0;
     int yloc = 0;
-    final int xIncr = 8;
-    final int yIncr = 2;
+    int upxbound = ViewTemplate.scalex(1275);
+    int upybound = ViewTemplate.scalex(627);
+    int downxbound = ViewTemplate.scalex(0);
+    int downybound = ViewTemplate.scalex(358);
+    final int xIncr = ViewTemplate.scalex(8);
+    final int yIncr = ViewTemplate.scaley(2);
     final static int frameWidth = 1440;
     final static int frameHeight = 900;
     final static int imgWidth = 315;
     final static int imgHeight = 230;
-    final static int scaledimgWidth = 79;
-    final static int scaledimgHeight = 57;
+    final static int scaledimgWidth = ViewTemplate.scalex(79);
+    final static int scaledimgHeight = ViewTemplate.scaley(57);
     private int oneX = 7;
     private int oneY = 7;
     int randcount = 0;
@@ -62,7 +66,7 @@ public class CrabView {
     		return(rnd.nextInt(4));
     	}
     	else{
-    		int j = rnd.nextInt(269)+358;
+    		int j = rnd.nextInt(ViewTemplate.scalex(269))+ViewTemplate.scalex(358);
     		return(j);
     	}
     	
@@ -100,25 +104,25 @@ public class CrabView {
         		randcount = 0;
         		rand = rando(2);
         	}
-        	 if (oneX >= 1275 || rand == 1)
+        	 if (oneX >= upxbound || rand == 1)
              {
                  right = false;
                  left = true;
              }
              
-             if (oneX <= 0 || rand == 2)
+             if (oneX <= downxbound || rand == 2)
              {
                  right = true;
                  left = false;
              }
              
-             if (oneY >=  627 || rand == 3)
+             if (oneY >=  upybound || rand == 3)
              {
                  up = true;
                  down = false;
              }
              
-             if (oneY <= 358  || rand == 4)
+             if (oneY <= downybound  || rand == 4)
              {
                  up = false;
                  down = true;
@@ -166,7 +170,7 @@ public class CrabView {
 		oneY = rando(3);
 		if(side == true){
 			side = false;
-			oneX = 1275;
+			oneX = ViewTemplate.scalex(1275);
 		}
 		else{
 			side = true;

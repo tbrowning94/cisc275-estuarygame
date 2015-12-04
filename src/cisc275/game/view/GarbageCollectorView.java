@@ -12,8 +12,8 @@ public class GarbageCollectorView {
 	static Image[] pics;
     double xloc;
     double yloc;
-    final static int scaledimgWidth = 75;
-    final static int scaledimgHeight = 75;
+    final static int scaledimgWidth = ViewTemplate.scalex(75);
+    final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel gcbutton = new JLabel("test");
 	public GarbageCollectorView() {
 		pics = new Image[4];
@@ -36,7 +36,7 @@ public class GarbageCollectorView {
 		//loci = location;
 		gcbutton.setIcon(new ImageIcon(pics[num]));
         gcbutton.setLocation(location);
-        gcbutton.setSize(75,75);
+        gcbutton.setSize(scaledimgWidth, scaledimgHeight);
 	}
 
 }

@@ -5,10 +5,13 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.DisplayMode;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
@@ -19,6 +22,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -26,6 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
@@ -40,7 +45,11 @@ import cisc275.game.model.Water;
 
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -50,17 +59,14 @@ import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class GameView extends JFrame implements GameListener<Game>, Runnable, ActionListener {
+public class GameView extends ViewTemplate implements GameListener<Game>, Runnable, ActionListener {
 	//game constants
-	private static final int WORLD_WIDTH = 1366;
-	private static final int WORLD_HEIGHT = 768;
 	private static final int SCALE = 1;
 	static int TIMER_DELAY = 50;
 	public static String title = "Estuary Defense";
 	private JButton button;
 	private JPanel panel;
 	private JFrame frame;
-	
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	private SplashScreen splashscreen = new SplashScreen();
 	private InstructionsView instructionsView;
@@ -101,6 +107,17 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 	public GameView() {
 		new Timer(TIMER_DELAY, new TimerListener()).start();
 		this.panel = createContent();
+		 getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+			        KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); //$NON-NLS-1$
+			        getRootPane().getActionMap().put("Cancel", new AbstractAction()
+			        { 
+
+			            public void actionPerformed(ActionEvent e)
+			            {
+			                System.exit(0);
+			                //framename.setVisible(false);
+			            }
+			       });
 		this.gameView = this;
 		//initUI();
 	}
@@ -161,7 +178,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(image, 0, 0, null);
+                g.drawImage(image, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
                 //g.drawImage(image, 0, 0, getWorldWidth(), getWorldHeight(), null);
                 
             }
@@ -172,7 +189,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
         		System.out.println("clicked: "+arg0.getX()+","+arg0.getY());
         	}
         });
-
+        
 		Dimension size = new Dimension(getWorldWidth()*getScale(), getWorldHeight()*getScale()); // create window dimension
 		panel.setPreferredSize(size); // set window dimension
 		panel.setBorder(BorderFactory.createLineBorder(Color.blue)); // creates a border, not really needed
@@ -183,7 +200,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 
     	pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		//setLocationRelativeTo(null);
 		setResizable(true);
 		
 		panel.setLayout(null);
@@ -197,19 +214,19 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		Dimension size1 = Name.getPreferredSize();
 		
 		Name.setFont(new Font("Georgia",Font.BOLD, 40));
-		Name.setBounds(300, 100, 800 , 50);
+		Name.setBounds(ViewTemplate.scalex(300), ViewTemplate.scaley(100), ViewTemplate.scalex(800) , ViewTemplate.scaley(50));
 		
 		JButton button1 = new JButton("Start");
 		button1.setForeground(Color.blue);
 		button1.setFont(new Font("Georgia",Font.BOLD,20));
 		size1=button1.getPreferredSize();
-		button1.setBounds(570, 300, 150, 50);
+		button1.setBounds(ViewTemplate.scalex(570), ViewTemplate.scaley(300), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
 		
 		button1.addActionListener(this);
 		button1.setActionCommand("Open");
 		JButton button2 = new JButton("Tutorial");
 		size1 = button2.getPreferredSize();
-		button2.setBounds(570, 400, 150, 50);
+		button2.setBounds(ViewTemplate.scalex(570), ViewTemplate.scaley(400), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
 		button2.setForeground(Color.blue);
 		//button2.setIcon(new ImageIcon("images/textures/grassTile05.png"));
 		button2.setFont(new Font("Georgia",Font.BOLD,20));
@@ -219,6 +236,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 		panel.add(Name); 	
 		panel.add(button1);
 		panel.add(button2);
+		
 		//button2.setLocation(0, 300);
         return panel;
     }
@@ -228,9 +246,9 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 
         try {
         	//image=ImageIO.read(file);
-            bufferedImage = ImageIO.read(new File("images/back1.png"));
-            imgHeight=bufferedImage.getHeight();
-            imgWidth=bufferedImage.getWidth();
+            bufferedImage = ImageIO.read(new File("images/BackTrial1.png"));
+            imgHeight=ViewTemplate.scaley(bufferedImage.getHeight());
+            imgWidth=ViewTemplate.scalex(bufferedImage.getWidth());
             return bufferedImage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -375,13 +393,23 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 //		gv.InitializeBoardsize();
 //		gv.startGame(); // Not sure about this either
 //		gv.start(); // runs thread which calls run()
+		
 		SwingUtilities.invokeLater(new Runnable(){
 //		EventQueue.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
 				GameView gv = new GameView();
-				gv.setVisible(true);
+				//gv.setVisible(true);
+				try {
+					gv.dispose();
+					gv.setUndecorated(true);
+				   gs.setFullScreenWindow(gv);
+				   
+				   
+				} finally {
+				    gs.setFullScreenWindow(null);
+				}
 			
 			}
 		});
@@ -389,6 +417,7 @@ public class GameView extends JFrame implements GameListener<Game>, Runnable, Ac
 
 	@Override
 	public void run() {
+		
 		GameView gv = new GameView();
 		gv.setVisible(true);
 	}
