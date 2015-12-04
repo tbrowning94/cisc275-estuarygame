@@ -209,7 +209,7 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 		//panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 		//panel.add(Box.createRigidArea(new Dimension(300, 300)));
 		
-		JLabel Name = new JLabel("WELCOME TO DRAINAGE DEFENSE!",JLabel.CENTER);
+		JLabel Name = new JLabel("WELCOME TO RUNOFF RANGER!",JLabel.CENTER);
 		Name.setForeground(Color.black);
 		Dimension size1 = Name.getPreferredSize();
 		
