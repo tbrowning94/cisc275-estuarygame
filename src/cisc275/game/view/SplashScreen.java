@@ -1,5 +1,6 @@
 package cisc275.game.view;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
@@ -7,9 +8,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -78,6 +81,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	public int fmcount = 1;
 	Game game;
 	
+	Fisherman f = new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200);
+	
 	boolean run =true;
     int imgHeight;
     int imgWidth;
@@ -95,6 +100,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	
 	public SplashScreen() {
 		PlantView p = new PlantView();
+		
 		GarbageCollectorView tempgarb = new GarbageCollectorView();
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/BackTrial1.png");
@@ -153,15 +159,44 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	    }
 
 	public JLayeredPane GameFrame(){
+		
 		new Timer(TIMER_DELAY, new TimerListener()).start();
         panel2 = new JLayeredPane() {
+        	
         	
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                // g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
                g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
-            }
+               
+        		Rectangle Hbar = new Rectangle((int)(WORLD_HEIGHT * 0.25), (int)(WORLD_HEIGHT * 0.85), 500, 80);
+        		Rectangle Mbar = new Rectangle(200,200,150,50);
+        		int health = f.getHeatlth();
+        		int money = f.getMoney();
+        		
+        		// health bar gray background
+        		g.setColor(Color.GRAY);
+        		//g.setStroke(new BasicStroke(10f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
+        		g.drawRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
+        		g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
+        		
+        		// health bar colored foreground
+        		if (health < 150) {
+        			g.setColor(Color.RED);
+        		}
+        		else if (health < 350) {
+        			g.setColor(Color.YELLOW);
+        		}
+        		else {
+        			g.setColor(Color.GREEN);
+        		}
+        		g.fillRoundRect(Hbar.x, Hbar.y, health * 5, Hbar.height, 15, 15);
+        		g.setColor(Color.BLACK);
+        		g.setFont(new Font("Purisa", Font.BOLD, 22));
+        		g.drawString("Health: " + health + "    Points: " + f.getHeatlth(), Hbar.x + 140, Hbar.y + 50);
+        		};
+        	
         };
         moneyvalue.setLocation(ViewTemplate.scalex(1200), ViewTemplate.scaley(-75));
         moneyvalue.setSize(ViewTemplate.scalex(200), ViewTemplate.scaley(-75));
@@ -237,6 +272,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             }
         });
         fms.add(new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 8, 200));
+		f.getThis().setFButton(createFLabel(new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700))));
         //panel2.add(fms.get(0).getFLabel());
         //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarMoney()));
         //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarPh()));
@@ -303,6 +339,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         return panel2;
     	
     }
+	
 //	public void paintComponent(Graphics c){
 //		BufferedImage Cloud = createImage("images/cloud.png");
 //		if(run == true){

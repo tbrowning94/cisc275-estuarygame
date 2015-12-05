@@ -49,8 +49,8 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	private SplashScreen splashScreen;
 	BufferedImage boat = createImage("images/boatman.png");
 	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 100, 20));
-	JProgressBar barPh = new JProgressBar();
-	JProgressBar barMoney = new JProgressBar();
+	//JProgressBar barPh = new JProgressBar();
+	//JProgressBar barMoney = new JProgressBar();
 //	 private static JPanel contentPane;
 //	 private JPanel bottomPane;
 //	 private JButton btnCancel;
@@ -140,28 +140,28 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 //    Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(close);
 //}
 
-		public void JProgressBar(int orientation){
-			JProgressBar barPh = new JProgressBar(JProgressBar.HORIZONTAL);
-			JProgressBar barMoney = new JProgressBar(JProgressBar.HORIZONTAL);
-			}
-		public void JProgressBar(int minimum, int maximum){
-			JProgressBar barPh = new JProgressBar(0, 500);
-			JProgressBar barMoney = new JProgressBar(0, 500);
-			}
-			
-		public void JProgressBar(){
-			DefaultBoundedRangeModel model = new DefaultBoundedRangeModel(0, 0, 0, 14);
-			JProgressBar barPh = new JProgressBar(model);
-			DefaultBoundedRangeModel model2 = new DefaultBoundedRangeModel(0, 0, 0, 500);
-			JProgressBar barMoney = new JProgressBar(model2);
-			}
-		
-		public void JProgressBarSetValue() {
-	        int value1 = getpHbar();
-	        barPh.setValue(value1);
-	        int value2 = Fishing();
-	        barMoney.setValue(value2);
-	      }
+//		public void JProgressBar(int orientation){
+//			JProgressBar barPh = new JProgressBar(JProgressBar.HORIZONTAL);
+//			JProgressBar barMoney = new JProgressBar(JProgressBar.HORIZONTAL);
+//			}
+//		public void JProgressBar(int minimum, int maximum){
+//			JProgressBar barPh = new JProgressBar(0, 500);
+//			JProgressBar barMoney = new JProgressBar(0, 500);
+//			}
+//			
+//		public void JProgressBar(){
+//			DefaultBoundedRangeModel model = new DefaultBoundedRangeModel(0, 0, 0, 14);
+//			JProgressBar barPh = new JProgressBar(model);
+//			DefaultBoundedRangeModel model2 = new DefaultBoundedRangeModel(0, 0, 0, 500);
+//			JProgressBar barMoney = new JProgressBar(model2);
+//			}
+//		
+//		public void JProgressBarSetValue() {
+//	        int value1 = getpHbar();
+//	        barPh.setValue(value1);
+//	        int value2 = Fishing();
+//	        barMoney.setValue(value2);
+//	      }
 
 	public Fisherman(SplashScreen ss, Point FL, Point EL, int MT, int M) {
 		this.splashScreen = ss;
@@ -171,7 +171,7 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		this.manTotal = MT; 
 		this.money = M;
 		this.removed = false;
-		this.setFButton(ss.createFLabel(EL));
+		//this.setFButton(ss.createFLabel(EL));
 	}
 	
 	public void move() {
@@ -188,18 +188,20 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		//TODO: come up with x algorithm
 		this.curLocation.setLocation(x, y);
 	}
-	
+	public Fisherman getThis(){
+		return this;
+	}
 	public void paintFM() {
 		getFLabel().setIcon(this.bimg);
 		getFLabel().setLocation(this.curLocation);
 	}
-	public JProgressBar getbarMoney(){
-		return barMoney;
-	}
-
-	public JProgressBar getbarPh(){
-		return barPh;
-	}
+//	public JProgressBar getbarMoney(){
+//		return barMoney;
+//	}
+//
+//	public JProgressBar getbarPh(){
+//		return barPh;
+//	}
 
 	public JLabel getFLabel() {
 		return this.boatman;
@@ -253,8 +255,17 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	}
 	return EstHealth;
 	}
+	
+	public int getHeatlth(){
+		return EstHealth;
+	}
+
 	public int Fishing(){
 		money = money+(EstHealth/10)*manTotal;
+		return money;
+	}
+	
+	public int getMoney(){
 		return money;
 	}
 	public int getpHbar(){
