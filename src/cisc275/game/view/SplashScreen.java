@@ -100,6 +100,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	BufferedImage Cloud = createImage("images/cloud.png");
     	BufferedImage bi2 = createImage("images/back1_pipe_2.png");
     	BufferedImage water1 = createImage("images/textures/water_map.png");
+    	BufferedImage fm1 = createImage("images/boatman.png");
     	System.out.print("PrintPics");
     	pics[0] = bi;
     	pics[1] = plant1;
@@ -107,6 +108,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	pics[3] = Cloud;
     	pics[4] = bi2;
     	pics[5] = water1;
+    	pics[6] = fm1;
     	  	
      	//for(int i = 0; i < pics.size(); i++)
     		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
@@ -231,7 +233,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    			isClicked = click.norm;
             }
         });
-        Fisherman f = new Fisherman(null, null, 8, 200);
+        Fisherman f = new Fisherman(this, null, new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(600)), 8, 200);
+        panel2.add(f.getFLabel());
         panel2.add(f.getContentPane().add(f.getbarMoney()));
         panel2.add(f.getContentPane().add(f.getbarPh()));
         pack();
@@ -339,6 +342,15 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	newWater.setLocation(loc);
     	newWater.setSize(ViewTemplate.scalex(75),ViewTemplate.scaley(75));
     	return newWater;
+    }
+    public JLabel createFLabel(Point loc) {
+    	BufferedImage fisherman = pics[6];
+    	ImageIcon fmIcon = new ImageIcon(fisherman.getScaledInstance(ViewTemplate.scalex(100), ViewTemplate.scaley(100), 20));
+    	JLabel newFM = new JLabel("fisherman");
+    	newFM.setIcon(fmIcon);
+    	newFM.setLocation(loc);
+    	newFM.setSize(ViewTemplate.scalex(75),ViewTemplate.scaley(75));
+    	return newFM;
     }
     protected void paintGarbageCollectorComponent(Graphics g, Point loc ) {    
     	BufferedImage GarbC = pics[2];

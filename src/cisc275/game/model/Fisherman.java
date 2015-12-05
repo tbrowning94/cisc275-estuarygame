@@ -44,6 +44,7 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	int pHbar=8;
 	int EstHealth=500;
 	private JLabel boatman;
+	private SplashScreen splashScreen;
 	BufferedImage boat = createImage("images/boatman.png");
 	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 50, 20));
 	JProgressBar barPh = new JProgressBar();
@@ -160,18 +161,31 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	        barMoney.setValue(value2);
 	      }
 
-	public Fisherman(Point FL, Point EL, int MT, int M) {
-		this.finalLocation=FL; this.entryLocation=EL;this.manTotal=MT; this.money=M;
+	public Fisherman(SplashScreen ss, Point FL, Point EL, int MT, int M) {
+		this.splashScreen = ss;
+		this.finalLocation = FL; 
+		this.entryLocation = EL;
+		this.manTotal = MT; 
+		this.money = M;
+		this.setFButton(ss.createFLabel(EL));
 		
 	}
 	
-public JProgressBar getbarMoney(){
-	return barMoney;
-}
+	public JProgressBar getbarMoney(){
+		return barMoney;
+	}
 
-public JProgressBar getbarPh(){
-	return barPh;
-}
+	public JProgressBar getbarPh(){
+		return barPh;
+	}
+
+	public JLabel getFLabel() {
+		return this.boatman;
+	}
+	
+	public void setFButton(JLabel fbutton) {
+		this.boatman = fbutton;
+	}
 	void onTick() {
 	}
 	/**
