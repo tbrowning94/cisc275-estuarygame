@@ -39,14 +39,16 @@ import cisc275.game.view.SplashScreen;
 public class Fisherman extends JFrame implements java.io.Serializable{
 	Point finalLocation;
 	Point entryLocation;
+	Point curLocation;
 	int manTotal=0;
 	int money=200;
 	int pHbar=8;
 	int EstHealth=500;
+	private boolean removed;
 	private JLabel boatman;
 	private SplashScreen splashScreen;
 	BufferedImage boat = createImage("images/boatman.png");
-	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 50, 20));
+	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 100, 20));
 	JProgressBar barPh = new JProgressBar();
 	JProgressBar barMoney = new JProgressBar();
 //	 private static JPanel contentPane;
@@ -165,12 +167,32 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		this.splashScreen = ss;
 		this.finalLocation = FL; 
 		this.entryLocation = EL;
+		this.curLocation = EL;
 		this.manTotal = MT; 
 		this.money = M;
+		this.removed = false;
 		this.setFButton(ss.createFLabel(EL));
-		
 	}
 	
+	public void move() {
+		int x, y;
+		x = (int) this.curLocation.getX();
+		y = (int) this.curLocation.getY();
+		if (x < this.finalLocation.getX() - 2) { // Not in water yet, continue moving down
+			x += 2; // TODO: finalize movement amount
+		}
+		if (this.curLocation == this.finalLocation) { //TODO: change this hard coded value
+			this.removed = true; // in water, remove on next update
+		}
+		// maybe have the water check if it collides with water to change x?
+		//TODO: come up with x algorithm
+		this.curLocation.setLocation(x, y);
+	}
+	
+	public void paintFM() {
+		getFLabel().setIcon(this.bimg);
+		getFLabel().setLocation(this.curLocation);
+	}
 	public JProgressBar getbarMoney(){
 		return barMoney;
 	}
@@ -185,6 +207,9 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	
 	public void setFButton(JLabel fbutton) {
 		this.boatman = fbutton;
+	}
+	public boolean isRemoved() {
+		return this.removed;
 	}
 	void onTick() {
 	}

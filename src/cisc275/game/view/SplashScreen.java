@@ -53,9 +53,11 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	private JLayeredPane panel2;
 	int deletenum = -1; //with use of crabs
 	int deletenumWater = -1; // with water
+	int deletenumFM = -1; // with fisherman
 	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
 	 static ArrayList<PlantView> plants = new ArrayList<PlantView>();
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
+	 static ArrayList<Fisherman> fms = new ArrayList<Fisherman>();
 	 static ArrayList<GarbageCollectorView> garbColl = new ArrayList<GarbageCollectorView>();
 	public static boolean crabby = true;
 	Button startGame;
@@ -73,6 +75,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	final int yincr = 2;
 	public int crabcount = 1;
 	public int watercount = 1;
+	public int fmcount = 1;
 	Game game;
 	
 	boolean run =true;
@@ -233,10 +236,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    			isClicked = click.norm;
             }
         });
-        Fisherman f = new Fisherman(this, null, new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(600)), 8, 200);
-        panel2.add(f.getFLabel());
-        panel2.add(f.getContentPane().add(f.getbarMoney()));
-        panel2.add(f.getContentPane().add(f.getbarPh()));
+        fms.add(new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 8, 200));
+        //panel2.add(fms.get(0).getFLabel());
+        //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarMoney()));
+        //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarPh()));
         pack();
         setVisible(true);
         
@@ -345,7 +348,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     }
     public JLabel createFLabel(Point loc) {
     	BufferedImage fisherman = pics[6];
-    	ImageIcon fmIcon = new ImageIcon(fisherman.getScaledInstance(ViewTemplate.scalex(100), ViewTemplate.scaley(100), 20));
+    	ImageIcon fmIcon = new ImageIcon(fisherman.getScaledInstance(ViewTemplate.scalex(150), ViewTemplate.scaley(100), 20));
     	JLabel newFM = new JLabel("fisherman");
     	newFM.setIcon(fmIcon);
     	newFM.setLocation(loc);
@@ -445,6 +448,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		//System.out.println("test");
                paintcrab();
                paintwater();
+               paintfm();
                plantcheck();
                 //System.out.println("test6");
 //                for(CrabView c: crabs){
@@ -457,7 +461,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
                 timer +=1;
                 if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
             		waterTiles.add(new Water(SplashScreen.this, new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
-            		
+            		if(fmcount < 5) {
+            			fms.add(new Fisherman(SplashScreen.this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 8, 200));
+            			fmcount += 1;
+            		}
             		watercount += 1;
             		timer = 0;
             		}
@@ -529,6 +536,28 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		waterTiles.remove(deletenumWater);
     		watercount -=1;
     		deletenumWater = -1;
+    	}
+    	//System.out.println("test5");
+    }
+	public void paintfm() {
+    	for(Fisherman fm: fms){
+    		if(!fm.isRemoved()){
+    			fm.move();
+    		}
+    		else { //checks if fm needs to be removed
+    			deletenumFM = fms.indexOf(fm);
+    		}
+    		fm.paintFM();
+    		getPanel2().remove(fm.getFLabel());
+    		getPanel2().add(fm.getFLabel());
+    		
+    	}
+    	if(deletenumFM != -1){ //removes water
+    		//System.out.println("deleting");
+    		getPanel2().remove(fms.get(deletenumFM).getFLabel());
+    		fms.remove(deletenumFM);
+    		fmcount -=1;
+    		deletenumFM = -1;
     	}
     	//System.out.println("test5");
     }
