@@ -169,32 +169,65 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
                 super.paintComponent(g);
                // g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
                g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
-               
-        		Rectangle Hbar = new Rectangle((int)(WORLD_HEIGHT * 0.25), (int)(WORLD_HEIGHT * 0.85), 500, 80);
-        		Rectangle Mbar = new Rectangle(200,200,150,50);
-        		int health = f.getHeatlth();
+           
+        		Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+        		Rectangle Mbar = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+        		Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+        		int health = f.getpH();
         		int money = f.getMoney();
+        		int crabs = crabcount;
         		
         		// health bar gray background
         		g.setColor(Color.GRAY);
         		//g.setStroke(new BasicStroke(10f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
+        		g.drawRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
+        		g.fillRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
+        		
         		g.drawRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
         		g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
         		
+        		g.drawRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
+        		g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
         		// health bar colored foreground
-        		if (health < 150) {
+        		if(money > 150){
+        			g.setColor(Color.GREEN);
+        		}
+        		if(money > 50 && money < 150){
+        			g.setColor(Color.YELLOW);
+        		}
+        		if(money < 50){
         			g.setColor(Color.RED);
         		}
-        		else if (health < 350) {
+        		g.fillRoundRect(Mbar.x, Mbar.y, 200 , Mbar.height, 15, 15);
+        		g.setColor(Color.BLACK);
+        		g.setFont(new Font("Purisa", Font.BOLD, 22));
+        		g.drawString("Money: " + f.getMoney(), Mbar.x, Mbar.y );
+        	
+        		
+        		if (health < 50) {
+        			g.setColor(Color.RED);
+        		}
+        		else if (health < 150) {
         			g.setColor(Color.YELLOW);
         		}
         		else {
         			g.setColor(Color.GREEN);
         		}
-        		g.fillRoundRect(Hbar.x, Hbar.y, health * 5, Hbar.height, 15, 15);
+        		g.fillRoundRect(Hbar.x, Hbar.y, 200 , Hbar.height, 15, 15);
         		g.setColor(Color.BLACK);
         		g.setFont(new Font("Purisa", Font.BOLD, 22));
-        		g.drawString("Health: " + health + "    Points: " + f.getHeatlth(), Hbar.x + 140, Hbar.y + 50);
+        		g.drawString("pH: " + f.getpH()/25, Hbar.x , Hbar.y );
+        		
+        		if (crabs < 5) {
+        			g.setColor(Color.GREEN);
+        		}
+        		else {
+        			g.setColor(Color.RED);
+        		}
+        		g.fillRoundRect(Cbar.x, Cbar.y, 200 , Cbar.height, 15, 15);
+        		g.setColor(Color.BLACK);
+        		g.setFont(new Font("Purisa", Font.BOLD, 22));
+        		g.drawString("Crabs Caught: " + crabcount, Cbar.x , Cbar.y );
         		};
         	
         };

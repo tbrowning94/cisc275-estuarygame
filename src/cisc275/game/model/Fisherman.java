@@ -42,126 +42,14 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	Point curLocation;
 	int manTotal=0;
 	int money=200;
-	int pHbar=8;
+	int pHbar=200;
 	int EstHealth=500;
 	private boolean removed;
 	private JLabel boatman;
 	private SplashScreen splashScreen;
 	BufferedImage boat = createImage("images/boatman.png");
 	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 100, 20));
-	//JProgressBar barPh = new JProgressBar();
-	//JProgressBar barMoney = new JProgressBar();
-//	 private static JPanel contentPane;
-//	 private JPanel bottomPane;
-//	 private JButton btnCancel;
-//	private Task task;
-//	private DoSomething ds;
-//public void CreateBox(){
-//	setTitle("Money");
-//	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	setBounds(100,100,450,350);
-//	
-//    contentPane = new JPanel(new BorderLayout());
-//    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//    setContentPane(contentPane);
-//    //Create panel for progress bar/cancel button
-//    bottomPane = new JPanel();
-//    bottomPane.setLayout(new BoxLayout(bottomPane, BoxLayout.Y_AXIS));
-//
-//    barMoney = new JProgressBar(0, 100);
-//    barMoney.setStringPainted(true);
-//    barMoney.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-//    barMoney.setValue(0);
-//
-//    btnCancel = new JButton("Cancel");
-//    btnCancel.addActionListener(new ActionListener() {
-//        public void actionPerformed(ActionEvent e) {
-//            closeWindow();
-//            
-//	
-//}
-//    });
-//
-//    bottomPane.add(barMoney);
-//    bottomPane.add(btnCancel);
-//    contentPane.add(bottomPane, BorderLayout.SOUTH);
-//
-//    PropertyChangeListener listener = new PropertyChangeListener(){
-//        public void propertyChange(PropertyChangeEvent event){
-//            if("progress".equals(event.getPropertyName())){
-//                barMoney.setValue(Fishing());
-//                barMoney.setString(Integer.toString(Fishing()));
-//            }
-//        }
-//    };
-//
-//    setVisible(true);
-//    task = new Task();
-//    task.execute();
-//}
-//
-//class Task extends SwingWorker<Void, String>{
-//    public Task(){
-//        ds = new DoSomething(ManNum(null));
-//    }
-//    @Override
-//    public Void doInBackground(){
-//        for(int i = 0; i < 100; i++){
-//            ds.ManNum();
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
-//    @Override
-//    public void done(){
-//        closeWindow();
-//    }
-//    public void updateProgress(int tick){
-//        setProgress(money + tick);
-//    }
-//}
-//
-//public class DoSomething{
-//    Task task;
-//    public DoSomething(int i){
-//        this.task = i;
-//    }
-//    public void incrementPercent(){
-//        task.updateProgress(1);
-//    }
-//}
-//
-//public void closeWindow(){
-//    WindowEvent close = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-//    Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(close);
-//}
 
-//		public void JProgressBar(int orientation){
-//			JProgressBar barPh = new JProgressBar(JProgressBar.HORIZONTAL);
-//			JProgressBar barMoney = new JProgressBar(JProgressBar.HORIZONTAL);
-//			}
-//		public void JProgressBar(int minimum, int maximum){
-//			JProgressBar barPh = new JProgressBar(0, 500);
-//			JProgressBar barMoney = new JProgressBar(0, 500);
-//			}
-//			
-//		public void JProgressBar(){
-//			DefaultBoundedRangeModel model = new DefaultBoundedRangeModel(0, 0, 0, 14);
-//			JProgressBar barPh = new JProgressBar(model);
-//			DefaultBoundedRangeModel model2 = new DefaultBoundedRangeModel(0, 0, 0, 500);
-//			JProgressBar barMoney = new JProgressBar(model2);
-//			}
-//		
-//		public void JProgressBarSetValue() {
-//	        int value1 = getpHbar();
-//	        barPh.setValue(value1);
-//	        int value2 = Fishing();
-//	        barMoney.setValue(value2);
-//	      }
 
 	public Fisherman(SplashScreen ss, Point FL, Point EL, int MT, int M) {
 		this.splashScreen = ss;
@@ -222,26 +110,26 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	public int ManNum(Water health){
 		if (EstHealth <= 150){
 			manTotal = 0;
-			pHbar=pHbar-4;
+			pHbar=pHbar-100;
 		}
 		if (EstHealth <= 250){
 			manTotal = 1;
-			pHbar=pHbar-3;
+			pHbar=pHbar-75;
 			Fishing();
 		}
 		if (EstHealth <= 350){
 			manTotal = 4;
-			pHbar=pHbar-2;
+			pHbar=pHbar-50;
 			Fishing();
 		}
 		if (EstHealth <= 400){
 			manTotal = 7;
-			pHbar=pHbar-1;
+			pHbar=pHbar-25;
 			Fishing();
 		}
 		else {
 			manTotal = 8;
-			pHbar = 8;
+			pHbar = 200;
 			Fishing();
 		}
 		return 0;
@@ -259,7 +147,9 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	public int getHeatlth(){
 		return EstHealth;
 	}
-
+	public int getpH(){
+		return pHbar;
+	}
 	public int Fishing(){
 		money = money+(EstHealth/10)*manTotal;
 		return money;
@@ -268,9 +158,7 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	public int getMoney(){
 		return money;
 	}
-	public int getpHbar(){
-		return pHbar;
-	}
+	
 	public String toString(){
 		return "[Fisherman: finalLocation="+finalLocation+"entryLocation="+entryLocation
 				+"manTotal="+manTotal+"money="+money+"]";
