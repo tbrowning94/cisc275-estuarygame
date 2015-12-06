@@ -10,6 +10,8 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	public static final long SPEED_START = 0;
 	public static final int MONEY_START = 0;
 	
+	public static int nativelimit = 0;
+	
 	//current amount of money the player has
 	int money;
 	

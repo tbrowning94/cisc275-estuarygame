@@ -43,6 +43,7 @@ import javax.swing.Timer;
 
 import java.awt.event.MouseMotionListener;
 import cisc275.game.controller.PlaceObject;
+import cisc275.game.model.Crab;
 import cisc275.game.model.Fisherman;
 import cisc275.game.model.Game;
 import cisc275.game.model.GarbageCollector;
@@ -57,7 +58,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	int deletenum = -1; //with use of crabs
 	int deletenumWater = -1; // with water
 	int deletenumFM = -1; // with fisherman
-	 static ArrayList<CrabView> crabs = new ArrayList<CrabView>();//array of crabviews
+	 static ArrayList<Crab> crabs = new ArrayList<Crab>();//array of crabviews
 	 static ArrayList<PlantView> plants = new ArrayList<PlantView>();
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	 static ArrayList<Fisherman> fms = new ArrayList<Fisherman>();
@@ -476,16 +477,19 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         	}
         };
      }
+	
+	//a lot of this seems like game logic
 	public void paintcrab() {
     	int i = 0;
     	//System.out.println("test2 " + i);
 		i++;
-    	for(CrabView c: crabs){
+    	for(Crab c: crabs){
     		if(c.removel == true){ //checks if crab needs to be removed
     			deletenum = crabs.indexOf(c);
+    			game.nativelimit++;
     			//System.out.println("deletenum");
     		}
-    		c.paintcrab();
+    		c.move();
     		getPanel2().remove(c.cbutton);
     		getPanel2().add(c.cbutton);
     		getPanel2().repaint();
@@ -493,7 +497,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	}
     	if(deletenum != -1){ //removes crab
     		if(crabs.get(deletenum).mitten!= true){
-    			if(crabs.get(deletenum).nativelimit > 6){
+    			if(game.nativelimit > 6){
     				money -= 10;
     			}
     			else{
