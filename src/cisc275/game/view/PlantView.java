@@ -60,8 +60,8 @@ public class PlantView extends InstanceView {
 	 * @return boolean
 	 * checks if a crab and plants label bounds are intersecting
 	 */
-	public boolean checkintersects(CrabView c){
-		Area areaA = new Area(c.cbutton.getBounds());
+	public boolean checkintersects(JLabel jLabel){
+		Area areaA = new Area(jLabel.getBounds());
 //		System.out.println("CRAB "+areaA);
 //		System.out.println("PLANT " +plantarea);
 		return areaA.intersects(plantarea.getBounds2D());

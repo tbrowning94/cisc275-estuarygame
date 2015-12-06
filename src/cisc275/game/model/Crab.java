@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import cisc275.game.view.PlantView;
 import cisc275.game.view.ViewTemplate;
 
 /**
@@ -32,11 +33,13 @@ public class Crab extends RandomMover implements java.io.Serializable{
     final int xIncr = 8;
     final int yIncr = 2;
     int randcount = 0;
+    public boolean removel = false;
     boolean up = false; //model
     boolean down = true; //model
     boolean left = false; //model
     boolean right = true; //model
     boolean side;
+    public PlantView planta; //will be changed to plant
 //	private Image image;
 //	private JButton cbutton;
 	
@@ -97,7 +100,8 @@ public class Crab extends RandomMover implements java.io.Serializable{
      * random direction
      */
     public void move() {
-    	if(!stop){
+    	System.out.println("WORKING");
+    	if(!isStop()){
     		randcount= rando(1);
         	int rand = 0;       	
         	if(randcount == 1){
@@ -116,13 +120,13 @@ public class Crab extends RandomMover implements java.io.Serializable{
                  left = false;
              }
              
-             if (xloc >=  upybound || rand == 3)
+             if (yloc >=  upybound || rand == 3)
              {
                  up = true;
                  down = false;
              }
              
-             if (xloc <= downybound  || rand == 4)
+             if (yloc <= downybound  || rand == 4)
              {
                  up = false;
                  down = true;
@@ -177,6 +181,39 @@ public class Crab extends RandomMover implements java.io.Serializable{
 		return mitten;
 	}
 
+	public boolean isStop() {
+		return stop;
+	}
+
+	public void setStop(boolean stop) {
+		this.stop = stop;
+	}
+	public void setrandom(){
+		 int rand = rando(2);
+		 if (rand == 1)
+        {
+            right = false;
+            left = true;
+        }
+        
+        if (rand == 2)
+        {
+            right = true;
+            left = false;
+        }
+        
+        if (rand == 3)
+        {
+            up = true;
+            down = false;
+        }
+        
+        if (rand == 4)
+        {
+            up = false;
+            down = true;
+        }
+	 }
 	//	public JButton getButton() {
 //		return cbutton;
 //	}

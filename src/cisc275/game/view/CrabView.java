@@ -18,14 +18,13 @@ import javax.swing.JPanel;
 
 import cisc275.game.model.Crab;
 import cisc275.game.view.ViewTemplate;
-public class CrabView {
+public class CrabView extends InstanceView{
 //	boolean stop = false; //model
 //	boolean mitten; //model
 	static int nativelimit; //model (game)
-	Image ing; //view
-	int picNum = 1; //view
+	static Image ing; //view
+	static int picNum = 1; //view
     int picNums; //view
-    boolean removel = false;
     static boolean side = true;
     final int frameCount = 8; //view
     static Image[] pics; //view
@@ -86,11 +85,13 @@ public class CrabView {
     
     /**
      * Determines the image that should be drawn to create animation
+     * @param index 
      */
-    public void paintcrab(Crab crab) {
+    public static void paintcrab(Crab crab, int index) {
+    	System.out.println("CRAB: "+crab.isMitten()+" "+index);
     	if(picNum == 1 || picNum == 2){
     		picNum++;
-    		if(crab.isMitten() ==true){
+    		if(crab.isMitten()==true){
     			ing = pics[0];
     		}
     		else{
@@ -147,107 +148,35 @@ public class CrabView {
 //             if (right) oneX+=xIncr;
 //    	}
     	//this stays in view
-         cbutton.setIcon(new ImageIcon(ing));
-         cbutton.setLocation(crab.getXloc(), crab.getYloc());
+    	System.out.println("testing"+picNum);
+    	SplashScreen.crabss.get(index).setIcon(new ImageIcon(ing.getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT)));
+         SplashScreen.crabss.get(index).setLocation(ViewTemplate.scalex(crab.getXloc()), ViewTemplate.scaley(crab.getYloc()));
     }
-
-    public CrabView(boolean b){
-    	//this should be in model and replaced with something that checks mitten attribute from model crab
-//    	if(rando(5)== 1){
-//    		mitten = false;
-//    	}
-//    	else{
-//    		mitten = true;
-//    	}
-//    	crabs.add(this); //should add to list in game
-//		oneY = rando(3);
-//		if(side == true){
-//			side = false;
-//			oneX = ViewTemplate.scalex(1275);
-//		}
-//		else{
-//			side = true;
-//		}
-		
-		//i think everything below this should be view
-		cbutton.setSize(scaledimgWidth, scaledimgHeight);
-		cbutton.addMouseListener(new MouseAdapter()  
-    	{  
-    	    public void mouseClicked(MouseEvent e)  
-    	    {  
-    	       // you can open a new frame here as
-    	       // i have assumed you have declared "frame" as instance variable
-    	    	
-    	    			removel = true;
-    	    			System.out.println(nativelimit);
-    	    	}  
-    	}); 
-		
-    }
-	public CrabView() {
-//		//this is model
-//		oneY = rando(3);
-//		if(side == true){
-//			side = false;
-//			oneX = 1275;
-//		}
-//		else{
-//			side = true;
-//		}
-		//this is view
-		cbutton.setSize(scaledimgWidth, scaledimgHeight);
-    	pics = new Image[4];
-    	 //loads all subimages into array, separated by their type
-    
-    		try {
-    			pics[0] = ImageIO.read(getClass().getResource("crabby.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-    			pics[1] = ImageIO.read(getClass().getResource("crab1.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-    			pics[2] = ImageIO.read(getClass().getResource("crab3.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-    			pics[3] = ImageIO.read(getClass().getResource("crab4.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-    		} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-    		
-    	cbutton.addMouseListener(new MouseAdapter()  
-    	{  
-    	    public void mouseClicked(MouseEvent e)  
-    	    {  
-    	       // you can open a new frame here as
-    	       // i have assumed you have declared "frame" as instance variable
-    	    	//JOptionPane.showMessageDialog(null, "You Win");
-    	    	removel = true;
-    	    }  
-    	}); 
+    public static void InitializePicturesC() {
+		pics = new BufferedImage[4];
+   		pics[0] = createImage("images/crabby.png");
+		pics[1] = createImage("images/crab1.png");
+		pics[2] = createImage("images/crab3.png");
+		pics[3] = createImage("images/crab4.png");
 	}
+ static JLabel createlabel(int index){
+	 JLabel crablabel = new JLabel();
+	 crablabel.setSize(scaledimgWidth, scaledimgHeight);
+	crablabel.addMouseListener(new MouseAdapter()  
+	{  
+	    public void mouseClicked(MouseEvent e)  
+	    {  
+	       // you can open a new frame here as
+	       // i have assumed you have declared "frame" as instance variable
+	    	//JOptionPane.showMessageDialog(null, "You Win");
+	    	SplashScreen.crabs.get(index).removel = true;
+	    }  
+	});
+	return crablabel; 
+}
  
 	 /**
 	 * Handles direction change during collision with plant. Should be moved to model.
 	 */
-//	public void setrandom(){
-//		 int rand = rando(2);
-//		 if (rand == 1)
-//         {
-//             right = false;
-//             left = true;
-//         }
-//         
-//         if (rand == 2)
-//         {
-//             right = true;
-//             left = false;
-//         }
-//         
-//         if (rand == 3)
-//         {
-//             up = true;
-//             down = false;
-//         }
-//         
-//         if (rand == 4)
-//         {
-//             up = false;
-//             down = true;
-//         }
-//	 }
+	
 }

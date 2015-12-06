@@ -59,6 +59,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	int deletenumWater = -1; // with water
 	int deletenumFM = -1; // with fisherman
 	 static ArrayList<Crab> crabs = new ArrayList<Crab>();//array of crabviews
+	 static ArrayList<JLabel> crabss = new ArrayList<JLabel>();
 	 static ArrayList<PlantView> plants = new ArrayList<PlantView>();
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	 static ArrayList<Fisherman> fms = new ArrayList<Fisherman>();
@@ -76,7 +77,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	private int theY=3;
 	final int xincr = 3;
 	final int yincr = 2;
-	public int crabcount = 1;
+	public int crabcount = 0;
 	public int watercount = 1;
 	public int fmcount = 1;
 	Game game;
@@ -99,7 +100,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	
 	public SplashScreen() {
 		PlantView.InitializePictures();
-		
+		CrabView.InitializePicturesC();
 		GarbageCollectorView.InitializeGarbage();
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/BackTrial1.png");
@@ -230,7 +231,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         	
         };
         
-        crabs.add(new CrabView()); // creates initial crab
+       // crabs.add(new Crab()); // creates initial crab
         waterTiles.add(new Water(this, new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
         panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
             private Color background;
@@ -461,8 +462,14 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //             	   frame.remove(c.cbutton);
 //            	}
                 if(rando() == 1 && crabcount < 50){ //randomly makes a crab (1/50 chance)
-            		crabs.add(new CrabView(true));
+            		Crab temp = new Crab();
+                	crabs.add(temp);
+            		int i = crabs.indexOf(temp);
+            		crabss.add(CrabView.createlabel(i));
             		crabcount += 1;
+            		CrabView.paintcrab(crabs.get(i), i);
+            		panel2.add(crabss.get(i));
+            		System.out.println("CRAB CREATED: " + crabcount);
             		}
                 timer +=1;
                 if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
@@ -483,27 +490,34 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	int i = 0;
     	//System.out.println("test2 " + i);
 		i++;
+		int index = 0;
     	for(Crab c: crabs){
+    		
     		if(c.removel == true){ //checks if crab needs to be removed
     			deletenum = crabs.indexOf(c);
-    			game.nativelimit++;
+    			Game.nativelimit++;
     			//System.out.println("deletenum");
     		}
     		c.move();
-    		getPanel2().remove(c.cbutton);
-    		getPanel2().add(c.cbutton);
+    		System.out.println("CRAB INDEX " + index);
+    		CrabView.paintcrab(c, index);
+    		getPanel2().remove(crabss.get(index));
+    		getPanel2().add(crabss.get(index));
     		getPanel2().repaint();
+    		index++;
     	}
     	if(deletenum != -1){ //removes crab
-    		if(crabs.get(deletenum).mitten!= true){
-    			if(game.nativelimit > 6){
+    		if(crabs.get(deletenum).isMitten()!= true){
+    			if(Game.nativelimit > 6){
     				money -= 10;
     			}
     			else{
     				money += 10;
     			}
     		}
-    		getPanel2().remove(crabs.get(deletenum).cbutton);
+    		getPanel2().remove(crabss.get(deletenum));
+    		System.out.println("poop");
+    		crabss.remove(deletenum);
     		crabs.remove(deletenum);
     		crabcount -=1;
     		deletenum = -1;
@@ -567,11 +581,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 			}
 			
 			p.intersecting = false;
-			for(CrabView c:crabs){
+			int index= 0;
+			for(Crab c:crabs){
 				if(c.planta == null){
-					if(p.checkintersects(c)){
-						if(c.mitten & !p.buffer){
-						c.stop = true;
+					if(p.checkintersects(crabss.get(index))){
+						if(c.isMitten() & !p.buffer){
+						c.setStop(true);
 						c.planta = p;
 						p.intersecting = true;
 						p.changepic(2);
