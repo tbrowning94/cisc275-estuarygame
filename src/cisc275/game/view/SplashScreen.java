@@ -97,7 +97,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	private File file;
 	
 	public SplashScreen() {
-		PlantView p = new PlantView();
+		try {
+			PlantView.InitializePictures();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		GarbageCollectorView tempgarb = new GarbageCollectorView();
 		pics = new BufferedImage[numpics];
@@ -172,7 +177,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
         		int health = fms.get(0).getpH();
         		int money = fms.get(0).getMoney();
-        		int crabs = crabcount;
+        		int crabs = CrabView.nativelimit;
         		
         		// health bar gray background
         		g.setColor(Color.GRAY);
@@ -224,7 +229,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		g.fillRoundRect(Cbar.x, Cbar.y, 200 , Cbar.height, 15, 15);
         		g.setColor(Color.BLACK);
         		g.setFont(new Font("Purisa", Font.BOLD, 22));
-        		g.drawString("Crabs Caught: " + crabcount, Cbar.x , Cbar.y );
+        		g.drawString("Crabs Caught: " + crabs, Cbar.x , Cbar.y );
         		};
         	
         };
@@ -515,12 +520,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			deletenumWater = waterTiles.indexOf(w);
     		}
     		w.paintWater();
-    		getPanel2().remove(w.getWaterButton());
-    		getPanel2().add(w.getWaterButton());
+    		getPanel2().remove(w.getWbutton());
+    		getPanel2().add(w.getWbutton());
     		
     	}
     	if(deletenumWater != -1){ 
-    		getPanel2().remove(waterTiles.get(deletenumWater).getWaterButton());
+    		getPanel2().remove(waterTiles.get(deletenumWater).getWbutton());
     		waterTiles.remove(deletenumWater);
     		watercount -=1;
     		deletenumWater = -1;
