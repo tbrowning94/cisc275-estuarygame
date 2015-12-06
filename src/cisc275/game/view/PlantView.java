@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import cisc275.game.model.Water;
 
 public class PlantView {
-	//comment
+	
 	boolean buffer = false;
 	static Image[] pics;
     double xloc;
