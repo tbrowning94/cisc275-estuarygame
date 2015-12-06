@@ -59,7 +59,7 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		this.manTotal = MT; 
 		this.money = M;
 		this.removed = false;
-		//this.setFButton(ss.createFLabel(EL));
+		this.setFButton(ss.createFLabel(EL));
 	}
 	
 	public void move() {

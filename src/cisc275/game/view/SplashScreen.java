@@ -81,7 +81,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	public int fmcount = 1;
 	Game game;
 	
-	Fisherman f = new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200);
+	//Fisherman f = new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200);
 	
 	boolean run =true;
     int imgHeight;
@@ -173,8 +173,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
         		Rectangle Mbar = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
         		Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-        		int health = f.getpH();
-        		int money = f.getMoney();
+        		int health = fms.get(0).getpH();
+        		int money = fms.get(0).getMoney();
         		int crabs = crabcount;
         		
         		// health bar gray background
@@ -201,7 +201,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		g.fillRoundRect(Mbar.x, Mbar.y, 200 , Mbar.height, 15, 15);
         		g.setColor(Color.BLACK);
         		g.setFont(new Font("Purisa", Font.BOLD, 22));
-        		g.drawString("Money: " + f.getMoney(), Mbar.x, Mbar.y );
+        		g.drawString("Money: " + fms.get(0).getMoney(), Mbar.x, Mbar.y );
         	
         		
         		if (health < 50) {
@@ -216,7 +216,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		g.fillRoundRect(Hbar.x, Hbar.y, 200 , Hbar.height, 15, 15);
         		g.setColor(Color.BLACK);
         		g.setFont(new Font("Purisa", Font.BOLD, 22));
-        		g.drawString("pH: " + f.getpH()/25, Hbar.x , Hbar.y );
+        		g.drawString("pH: " + fms.get(0).getpH()/25, Hbar.x , Hbar.y );
         		
         		if (crabs < 5) {
         			g.setColor(Color.GREEN);
@@ -304,8 +304,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    			isClicked = click.norm;
             }
         });
-        fms.add(new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 8, 200));
-		f.getThis().setFButton(createFLabel(new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700))));
+        fms.add(new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 200, 0));
+		//f.getThis().setFButton(createFLabel(new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700))));
         //panel2.add(fms.get(0).getFLabel());
         //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarMoney()));
         //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarPh()));
