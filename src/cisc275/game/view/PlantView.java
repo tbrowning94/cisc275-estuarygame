@@ -3,6 +3,8 @@ package cisc275.game.view;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,21 +24,16 @@ public class PlantView {
     final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel pbutton = new JLabel("test");
 	public boolean intersecting = false;
-	public PlantView() {
-		pics = new Image[4];
-   		try {
-   			pics[0] = ImageIO.read(getClass().getResource("Fern.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-   			pics[1] = ImageIO.read(getClass().getResource("Fern.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-   			pics[2] = ImageIO.read(getClass().getResource("Fernhurt.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-   			pics[3] = ImageIO.read(getClass().getResource("Fern.png")).getScaledInstance(scaledimgWidth*2, scaledimgHeight*2, Image.SCALE_DEFAULT);
-   		} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+	public static void InitializePictures() {
+		pics = new BufferedImage[4];
+   		pics[0] = createImage("images/Fern.png");
+		pics[1] = createImage("images/Fern.png");
+		pics[2] = createImage("images/Fern.png");
+		pics[3] = createImage("images/Fern.png");
 	}
 	public PlantView(int num, Point location){
 		//loci = location;
-		pbutton.setIcon(new ImageIcon(pics[num]));
+		pbutton.setIcon(new ImageIcon(pics[0].getScaledInstance(ViewTemplate.scalex(75), ViewTemplate.scaley(75), Image.SCALE_DEFAULT)));;
         pbutton.setLocation(location);
         pbutton.setSize(scaledimgWidth,scaledimgWidth);
         plantarea = new Area(pbutton.getBounds());
@@ -49,7 +46,7 @@ public class PlantView {
 	    
 	}
 	public void changepic(int i) {
-		pbutton.setIcon(new ImageIcon(pics[i]));
+		pbutton.setIcon(new ImageIcon(pics[i].getScaledInstance(ViewTemplate.scalex(75), ViewTemplate.scaley(75), Image.SCALE_DEFAULT)));;
 		if(i == 3){
 			pbutton.setSize(scaledimgWidth*2, scaledimgHeight*2);
 		}
@@ -83,7 +80,19 @@ public class PlantView {
 				SplashScreen.getPanel2().remove(q.pbutton);
 			}
 			pl.changepic(3);
+			pl.pbutton.setIcon(new ImageIcon(pics[1].getScaledInstance(ViewTemplate.scalex(150), ViewTemplate.scaley(150), Image.SCALE_DEFAULT)));;
 			pl.buffer = true;
 		}
 	}
+	private static BufferedImage createImage(String file) {
+        BufferedImage bufferedImage;
+        try {
+        	bufferedImage=ImageIO.read(new File(file));
+            return bufferedImage;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
