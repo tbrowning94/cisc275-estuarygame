@@ -99,7 +99,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	public SplashScreen() {
 		PlantView.InitializePictures();
 		
-		GarbageCollectorView tempgarb = new GarbageCollectorView();
+		GarbageCollectorView.InitializeGarbage();
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = createImage("images/BackTrial1.png");
     	BufferedImage plant1 = createImage("images/Fern.png");
