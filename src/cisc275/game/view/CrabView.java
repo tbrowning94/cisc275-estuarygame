@@ -18,63 +18,74 @@ import javax.swing.JPanel;
 import cisc275.game.view.ViewTemplate;
 public class CrabView {
 	static ArrayList<CrabView> crabs = new ArrayList<CrabView>();
-	boolean stop = false;
-	boolean mitten;
-	static int nativelimit;
-	Image ing;
-	int picNum = 1;
-    int picNums;
+	boolean stop = false; //model
+	boolean mitten; //model
+	static int nativelimit; //model
+	Image ing; //view
+	int picNum = 1; //view
+    int picNums; //view
     boolean removel = false;
     static boolean side = true;
-    final int frameCount = 8;
-    static Image[] pics;
-    int xloc = 0;
-    int yloc = 0;
+    final int frameCount = 8; //view
+    static Image[] pics; //view
+    int xloc = 0; //model
+    int yloc = 0; //model
     int upxbound = ViewTemplate.scalex(1275);
     int upybound = ViewTemplate.scalex(627);
     int downxbound = ViewTemplate.scalex(0);
     int downybound = ViewTemplate.scalex(358);
     final int xIncr = ViewTemplate.scalex(8);
     final int yIncr = ViewTemplate.scaley(2);
-    final static int frameWidth = 1440;
-    final static int frameHeight = 900;
-    final static int imgWidth = 315;
-    final static int imgHeight = 230;
-    final static int scaledimgWidth = ViewTemplate.scalex(79);
-    final static int scaledimgHeight = ViewTemplate.scaley(57);
+    final static int frameWidth = 1440; //view
+    final static int frameHeight = 900; //view
+    final static int imgWidth = 315; //view
+    final static int imgHeight = 230; //view
+    final static int scaledimgWidth = ViewTemplate.scalex(79); //view
+    final static int scaledimgHeight = ViewTemplate.scaley(57); //view
     private int oneX = 7;
     private int oneY = 7;
     int randcount = 0;
-    boolean up = false;
-    boolean down = true;
-    boolean left = false;
-    boolean right = true;
+    boolean up = false; //model
+    boolean down = true; //model
+    boolean left = false; //model
+    boolean right = true; //model
     JLabel cbutton = new JLabel("test");
 
     Image current;
 	public PlantView planta;
+	
+	
+    /**
+     * Move to model
+     * 
+     * Method controlling all random actions for crabs (mitten or native, y-axis spawn
+     * location, direction change) 
+     * @param l
+     * @return int
+     */
     public int rando(int l){
     	Random rnd = new Random();
-    	if(l == 1){
+    	if(l == 1){ //1 in 8 chance of randomly changing direction
     		return(rnd.nextInt(8)+1);
     	}
-    	else if(l == 2){
+    	else if(l == 2){ //determines which direction it moves
     		return(rnd.nextInt(4)+1);
     	}
-    	else if(l == 5){
+    	else if(l == 5){ //1 in four chance of making a mitten crab
     		System.out.print(rnd.nextInt(1));
     		return(rnd.nextInt(4));
     	}
-    	else{
+    	else{ //where on the y axis crab spawns
     		int j = rnd.nextInt(ViewTemplate.scalex(269))+ViewTemplate.scalex(358);
     		return(j);
     	}
     	
     }
     
+    /**
+     * Determines the image that should be drawn to create animation
+     */
     public void paintcrab() {
-    	//picNum = (picNum + 1) % frameCount;
-    	//System.out.println(picNum);
     	if(picNum == 1 || picNum == 2){
     		picNum++;
     		if(mitten==true){
@@ -96,10 +107,10 @@ public class CrabView {
     	else{
     		picNum = 1;
     	}
+    	//changes location if not attached to a plant (needs to be made it's own method in model)
     	if(!stop){
     		randcount= rando(1);
-        	int rand = 0;
-        	//System.out.println(cbutton);
+        	int rand = 0;       	
         	if(randcount == 1){
         		randcount = 0;
         		rand = rando(2);
@@ -133,40 +144,20 @@ public class CrabView {
              if (left) oneX-=xIncr;
              if (right) oneX+=xIncr;
     	}
-    	
-//         picNums = 0;
-//         if(up && left ){ //decides which part of the pic array to read depending on the direction
-//        	 picNums = picNum + 30;
-//         }
-//         if(up && right ){
-//        	 picNums = picNum + 20;
-//         }
-//         if(down && left ){
-//        	 picNums = picNum + 10;
-//         }
-//         if(down && right ){
-//        	 picNums = picNum;
-//         }
-         //System.out.println(panel);
-        // panel.remove(cbutton);
+    	//this stays in view
          cbutton.setIcon(new ImageIcon(ing));
          cbutton.setLocation(oneX, oneY);
-        // panel.add(cbutton);
-         
-        // g.drawImage(pics[picNums], oneX, oneY, Color.gray, panel);
-    	
-    	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
-		//Be sure that animation picture direction matches what is happening on screen.
     }
 
     public CrabView(boolean b){
+    	//this should be in model and replaced with something that checks mitten attribute from model crab
     	if(rando(5)== 1){
     		mitten = false;
     	}
     	else{
     		mitten = true;
     	}
-    	crabs.add(this);
+    	crabs.add(this); //should add to list in game
 		oneY = rando(3);
 		if(side == true){
 			side = false;
@@ -175,6 +166,8 @@ public class CrabView {
 		else{
 			side = true;
 		}
+		
+		//i think everything below this should be view
 		cbutton.setSize(scaledimgWidth, scaledimgHeight);
 		cbutton.addMouseListener(new MouseAdapter()  
     	{  
@@ -182,7 +175,6 @@ public class CrabView {
     	    {  
     	       // you can open a new frame here as
     	       // i have assumed you have declared "frame" as instance variable
-    	    	//JOptionPane.showMessageDialog(null, "You Win");
     	    	if(mitten){
     	    		removel = true;
     	    	}
@@ -190,7 +182,6 @@ public class CrabView {
     	    			removel = true;
     	    			nativelimit += 1;
     	    			System.out.println(nativelimit);
-    	    		
     	    	}
 
     	    }  
@@ -199,6 +190,7 @@ public class CrabView {
     }
 	public CrabView() {
 		
+		//this is model
 		crabs.add(this);
 		oneY = rando(3);
 		if(side == true){
@@ -208,18 +200,16 @@ public class CrabView {
 		else{
 			side = true;
 		}
+		//this is view
 		cbutton.setSize(scaledimgWidth, scaledimgHeight);
     	pics = new Image[4];
     	 //loads all subimages into array, separated by their type
-    		
-    		//pics[i] = pics[i].getScaledInstance(82, 82, Image.SCALE_DEFAULT);
+    
     		try {
     			pics[0] = ImageIO.read(getClass().getResource("crabby.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
     			pics[1] = ImageIO.read(getClass().getResource("crab1.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
     			pics[2] = ImageIO.read(getClass().getResource("crab3.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
     			pics[3] = ImageIO.read(getClass().getResource("crab4.png")).getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT);
-    			//System.out.println(pics[1]+ "crab1");
-    			//System.out.println(pics[0]+ "crab2");
     		} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -233,30 +223,14 @@ public class CrabView {
     	       // i have assumed you have declared "frame" as instance variable
     	    	//JOptionPane.showMessageDialog(null, "You Win");
     	    	removel = true;
-
     	    }  
     	}); 
 	}
-	 private BufferedImage[] createImage(){
-	    	BufferedImage[] bufferedImage = new BufferedImage[8];
-	    	try {
-	    		bufferedImage[0] = ImageIO.read(getClass().getResource("orc_jump_southeast.png"));
-	    		bufferedImage[1] = ImageIO.read(getClass().getResource("orc_jump_southwest.png"));
-	    		bufferedImage[2] = ImageIO.read(getClass().getResource("orc_jump_northeast.png"));
-	    		bufferedImage[3] = ImageIO.read(getClass().getResource("orc_jump_northwest.png"));
-	    		bufferedImage[4] = ImageIO.read(getClass().getResource("orc_jump_east.png"));
-	    		bufferedImage[5] = ImageIO.read(getClass().getResource("orc_jump_west.png"));
-	    		bufferedImage[6] = ImageIO.read(getClass().getResource("orc_jump_south.png"));
-	    		bufferedImage[7] = ImageIO.read(getClass().getResource("orc_jump_north.png"));
-	    		return bufferedImage;
-	    	} catch (IOException e) {
-	    		e.printStackTrace();
-	    	}
-	    	return null;
-	    	
-	    	// TODO: Change this method so you can load other orc animation bitmaps
-	    }
-	 public void setrandom(){
+ 
+	 /**
+	 * Handles direction change during collision with plant. Should be moved to model.
+	 */
+	public void setrandom(){
 		 int rand = rando(2);
 		 if (rand == 1)
          {
