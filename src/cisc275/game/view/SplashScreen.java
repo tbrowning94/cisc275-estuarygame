@@ -48,11 +48,11 @@ import cisc275.game.model.Game;
 import cisc275.game.model.GarbageCollector;
 import cisc275.game.model.Plant;
 import cisc275.game.model.Water;
-//import cisc275.game.view.GameView.TimerListener;
+
 
 public class SplashScreen extends ViewTemplate implements ActionListener, MouseListener, MouseMotionListener {
 	static int TIMER_DELAY = 50;
-	//private static final int SCALE = 1;
+	
 	private JLayeredPane panel2;
 	int deletenum = -1; //with use of crabs
 	int deletenumWater = -1; // with water
@@ -66,7 +66,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	Button startGame;
 	boolean intersection = false;
 	int money = 200;
-	JLabel moneyvalue = new JLabel("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
 	Button instructions;
 	Image splashimage;
     JLabel cloud = new JLabel("cloud");
@@ -81,14 +80,13 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	public int fmcount = 1;
 	Game game;
 	
-	//Fisherman f = new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200);
 	
 	boolean run =true;
     int imgHeight;
     int imgWidth;
     
 	private BufferedImage pics[];
-	//List<JLabel> plants;
+
     
 	private enum click {
 		plant1, plant2, plant3, gC1, gC2, gC3, norm
@@ -119,8 +117,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	pics[5] = water1;
     	pics[6] = fm1;
     	  	
-     	//for(int i = 0; i < pics.size(); i++)
-    		//pics.get(i).getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
+     	
      	
      	this.panel2 = GameFrame();
 		
@@ -167,7 +164,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-               // g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+               
                g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
            
         		Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
@@ -179,7 +176,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		
         		// health bar gray background
         		g.setColor(Color.GRAY);
-        		//g.setStroke(new BasicStroke(10f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
+        		
         		g.drawRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
         		g.fillRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
         		
@@ -188,7 +185,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		
         		g.drawRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
         		g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
-        		// health bar colored foreground
+        		
         		if(money > 150){
         			g.setColor(Color.GREEN);
         		}
@@ -231,9 +228,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		};
         	
         };
-        moneyvalue.setLocation(ViewTemplate.scalex(1200), ViewTemplate.scaley(-75));
-        moneyvalue.setSize(ViewTemplate.scalex(200), ViewTemplate.scaley(-75));
-        panel2.add(moneyvalue);
+        
         crabs.add(new CrabView()); // creates initial crab
         waterTiles.add(new Water(this, new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
         panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
@@ -242,7 +237,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             @Override
             public void mouseClicked(MouseEvent e) {
             	Point loc = new Point(e.getX(), e.getY()); //e.getLocationOnScreen();
-        		//System.out.println("motion detected");
+        		
             	switch (isClicked) {
             	
             	case norm:
@@ -256,10 +251,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		getPanel2().add(tempplant.pbutton);
             		plants.add(tempplant);
             		money-=10;
-            		moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
-        			//paintPlantComponent(e.getComponent().getGraphics(), loc);
-        			//getPButton().setBorderPainted(false);
-            		//plants.get(plantindex).setLocation(loc);
+            		
         			crabby = true;
         			isClicked = click.norm;
         			break;
@@ -278,9 +270,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		getPanel2().add(tempgc.gcbutton);
             		garbColl.add(tempgc);
             		money-=10;
-            		moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
-//        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
-//        			getGCButton().setBorderPainted(false);
         			isClicked = click.norm;
         			crabby = true;
         			break;
@@ -298,17 +287,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             @Override
             public void mouseReleased(MouseEvent e) {
                 setBackground(background);
-//                isClicked = click.norm;
-//                getPButton().setBorderPainted(false);
-//                crabby = true;
-//    			isClicked = click.norm;
             }
         });
         fms.add(new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200));
-		//f.getThis().setFButton(createFLabel(new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700))));
-        //panel2.add(fms.get(0).getFLabel());
-        //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarMoney()));
-        //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarPh()));
+		
         pack();
         setVisible(true);
         
@@ -318,20 +300,11 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 		
 		panel2.setLayout(null); // default layout is Flowlayout, we need to decide what we want
 
-		//panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
-		//panel2.add(Box.createRigidArea(new Dimension(50, 0)));
-	
-		
-		//ImageIcon plantIcon = createImageIcon("images/Grass.png", "picture of grass");
-		//paintComponent(null);
 		BufferedImage plant1 = createImage("images/Fern.png");
 		pbutton = new JButton();
 		
 		Dimension size2 = pbutton.getPreferredSize();
-		
-		//pbutton.setFont(new Font("Georgia",Font.BOLD, 12));
 		pbutton.setBounds(ViewTemplate.scalex(1250), ViewTemplate.scaley(100),  ViewTemplate.scalex(100), ViewTemplate.scaley(100));
-		
 		pbutton.setIcon(new ImageIcon(plant1.getScaledInstance(ViewTemplate.scalex(100), ViewTemplate.scaley(100), Image.SCALE_DEFAULT)));
 		pbutton.addActionListener(this);
 		pbutton.setActionCommand("Plant");
@@ -345,8 +318,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 		gcbutton = new JButton();
 		size2 = gcbutton.getPreferredSize();
 		gcbutton.setBounds(ViewTemplate.scalex(1250), ViewTemplate.scaley(200),  ViewTemplate.scalex(100), ViewTemplate.scaley(100));
-		
-		//gcbutton.setLocation(1000,1000);
 		gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(ViewTemplate.scalex(100), ViewTemplate.scaley(100), Image.SCALE_DEFAULT)));
 		gcbutton.addActionListener(this);
 		gcbutton.setActionCommand("Garbage Collector");
@@ -360,39 +331,15 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 		if (run == true){
 		cloud.setBounds(500, 50, 100, 150);
 		theX+=xincr;
-		//theY+=yincr;
 		}
-		
 		
 		panel2.add(pbutton);
 		panel2.add(gcbutton);
-		//panel2.add(cloud);
-
-		
         return panel2;
     	
     }
 	
-//	public void paintComponent(Graphics c){
-//		BufferedImage Cloud = createImage("images/cloud.png");
-//		if(run == true){
-//			cloud = new JLabel();
-//			cloud.setLocation(theX, theY);
-//			cloud.setBounds(50, 500, 200, 200);
-//			theX += xincr;
-//			if(theX > 1500 || theX < 0){
-//            	theX=0;
-//            }
-//			paintComponent(c);
-//			if (theY < 300){
-//				theY+=yincr;
-//			}
-//			else if(theY<=300){theY-=yincr;}
-//			
-//			//c.createGraphics();
-//            //cloud.createGraphics();
-//        }
-//	}
+
     protected void paintPlantComponent(Graphics g, Point loc ) {    
     	BufferedImage plant = pics[1];
     	
@@ -557,96 +504,70 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		
     	}
     	if(deletenum != -1){ //removes crab
-    		//System.out.println("deleting");
     		if(crabs.get(deletenum).mitten!= true){
     			if(crabs.get(deletenum).nativelimit > 6){
-    				System.out.println("subtractmoney");
     				money -= 10;
-    				moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
-    				
-    				getPanel2().remove(moneyvalue);
-    				getPanel2().add(moneyvalue);
     			}
     			else{
-    				System.out.println("addmoney");
     				money += 10;
-    				moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
-    				getPanel2().remove(moneyvalue);
-    				getPanel2().add(moneyvalue);
     			}
-    			
     		}
     		getPanel2().remove(crabs.get(deletenum).cbutton);
     		crabs.remove(deletenum);
     		crabcount -=1;
     		deletenum = -1;
     	}
-    	//System.out.println("test5");
     }
 	public void paintwater() {
-		//Problem with is stopping,method needs to be implemented
-		//in water class
     	for(Water w: waterTiles){
-    		//System.out.println(w.isStopping());
     		if(!w.isStopping()){
     			w.move();
     		}
-    		if(w.getRemoved() == true){ //checks if crab needs to be removed
+    		if(w.getRemoved() == true){ 
     			deletenumWater = waterTiles.indexOf(w);
-    			//System.out.println("deletenum:"+deletenumWater);
     		}
     		w.paintWater();
     		getPanel2().remove(w.getWaterButton());
     		getPanel2().add(w.getWaterButton());
     		
     	}
-    	if(deletenumWater != -1){ //removes water
-    		//System.out.println("deleting");
+    	if(deletenumWater != -1){ 
     		getPanel2().remove(waterTiles.get(deletenumWater).getWaterButton());
     		waterTiles.remove(deletenumWater);
     		watercount -=1;
     		deletenumWater = -1;
     	}
-    	//System.out.println("test5");
     }
 	public void paintfm() {
     	for(Fisherman fm: fms){
     		if(!fm.isRemoved()){
     			fm.move();
     		}
-    		else { //checks if fm needs to be removed
+    		else { 
     			deletenumFM = fms.indexOf(fm);
     		}
     		fm.paintFM();
     		getPanel2().remove(fm.getFLabel());
     		getPanel2().add(fm.getFLabel());
-    		
     	}
-    	if(deletenumFM != -1){ //removes water
-    		//System.out.println("deleting");
+    	if(deletenumFM != -1){ 
     		getPanel2().remove(fms.get(deletenumFM).getFLabel());
     		fms.remove(deletenumFM);
     		fmcount -=1;
     		deletenumFM = -1;
     	}
-    	//System.out.println("test5");
     }
 	void plantcheck(){
 		for(PlantView p:plants){
-			
 			for(Water w:waterTiles){
 				if(!p.intersecting){
 					if(p.checkintersectw(w)){
-						//System.out.println("work");
 						if(p.buffer){
 							w.setStopping(true);
 						}
 						else if(!w.affected.contains(p)){
 							w.shrink(p);
 						}
-						
-						
-						//System.out.println(w.isStopping());
 					}
 				}
 				else if(w.affected.contains(p)){
