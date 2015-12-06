@@ -107,7 +107,7 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	
 	/**
 	 * @param fbutton
-	 * sets fisherman label to be a button
+	 * sets fisherman label to name fbutton
 	 */
 	public void setFButton(JLabel fbutton) {
 		this.boatman = fbutton;
