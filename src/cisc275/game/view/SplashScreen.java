@@ -304,7 +304,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    			isClicked = click.norm;
             }
         });
-        fms.add(new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 200, 0));
+        fms.add(new Fisherman(this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200));
 		//f.getThis().setFButton(createFLabel(new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700))));
         //panel2.add(fms.get(0).getFLabel());
         //panel2.add(fms.get(0).getContentPane().add(fms.get(0).getbarMoney()));
@@ -532,7 +532,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
                 if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
             		waterTiles.add(new Water(SplashScreen.this, new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
             		if(fmcount < 5) {
-            			fms.add(new Fisherman(SplashScreen.this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 8, 200));
+            			fms.add(new Fisherman(SplashScreen.this, new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200));
             			fmcount += 1;
             		}
             		watercount += 1;
