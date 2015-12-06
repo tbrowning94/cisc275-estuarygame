@@ -69,7 +69,7 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		if (x < this.finalLocation.getX() - 2) { // Not in water yet, continue moving down
 			x += 2; // TODO: finalize movement amount
 		}
-		if (this.curLocation == this.finalLocation) { //TODO: change this hard coded value
+		if (this.curLocation.getX() == this.finalLocation.getX() - 2) { //TODO: change this hard coded value
 			this.removed = true; // in water, remove on next update
 		}
 		// maybe have the water check if it collides with water to change x?
