@@ -24,7 +24,7 @@ public class PlantView {
     final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel pbutton = new JLabel("test");
 	public boolean intersecting = false;
-	public static void InitializePictures() throws IOException {
+	public static void InitializePictures() {
 		pics = new BufferedImage[4];
    		pics[0] = createImage("images/Fern.png");
 		pics[1] = createImage("images/Fern.png");
