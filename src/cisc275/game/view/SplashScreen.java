@@ -53,7 +53,7 @@ import cisc275.game.model.Water;
 public class SplashScreen extends ViewTemplate implements ActionListener, MouseListener, MouseMotionListener {
 	static int TIMER_DELAY = 50;
 	
-	private JLayeredPane panel2;
+	private static JLayeredPane panel2;
 	int deletenum = -1; //with use of crabs
 	int deletenumWater = -1; // with water
 	int deletenumFM = -1; // with fisherman
@@ -131,8 +131,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	void inValidate() {
 	}
 	
-	public JLayeredPane getPanel2() {
-		return this.panel2;
+	public static JLayeredPane getPanel2() {
+		return panel2;
 	}
 	
 	public JButton getPButton() {
@@ -247,7 +247,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             	case plant1:
             		loc.setLocation(loc.getX()-ViewTemplate.scalex(30), loc.getY()-ViewTemplate.scaley(30));
             		PlantView tempplant = new PlantView(1, loc);
-            		checkbuffer(tempplant);
+            		PlantView.checkbuffer(tempplant);
             		getPanel2().add(tempplant.pbutton);
             		plants.add(tempplant);
             		money-=10;
@@ -399,18 +399,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         	crabby = false;
         	getGCButton().setBorderPainted(true);
         	getPButton().setBorderPainted(false);
-//        	crabs.add(new CrabView());
-//        	for(int i = 0; i < 10000; i++){
-//        		panel2.repaint();
-//        		if(rando() == 1){
-//        		crabs.add(new CrabView(panel2));
-//        		}
-//        		try {
-//        			Thread.sleep(30);
-//        		} catch (InterruptedException j) {
-//        			j.printStackTrace();
-//        		}
-//        	}
 		} 
 	}
 
@@ -601,23 +589,5 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 			}
 		}
 	}
-	public void checkbuffer(PlantView pl){
-		int deleteslot;
-		 ArrayList<PlantView> tempp = new ArrayList<PlantView>();
-		for(PlantView p: plants){
-			if(p != pl){
-				if(pl.checkintersectp(p)){
-					tempp.add(p);
-				}
-			}
-		}
-		if(tempp.size() == 2){
-			for(PlantView q: tempp){
-				plants.remove(q);
-				getPanel2().remove(q.pbutton);
-			}
-			pl.changepic(3);
-			pl.buffer = true;
-		}
-	}
+	
 }

@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.Area;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -72,5 +73,22 @@ public class PlantView {
 //		System.out.println("PLANT " +plantarea);
 		return areaA.intersects(plantarea.getBounds2D());
 	}
-	
+	public static void checkbuffer(PlantView pl){
+		 ArrayList<PlantView> tempp = new ArrayList<PlantView>();
+		for(PlantView p: SplashScreen.plants){
+			if(p != pl){
+				if(pl.checkintersectp(p)){
+					tempp.add(p);
+				}
+			}
+		}
+		if(tempp.size() == 2){
+			for(PlantView q: tempp){
+				SplashScreen.plants.remove(q);
+				SplashScreen.getPanel2().remove(q.pbutton);
+			}
+			pl.changepic(3);
+			pl.buffer = true;
+		}
+	}
 }
