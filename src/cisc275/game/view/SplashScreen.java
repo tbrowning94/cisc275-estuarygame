@@ -493,7 +493,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		getPanel2().remove(c.cbutton);
     		getPanel2().add(c.cbutton);
     		getPanel2().repaint();
-    		
     	}
     	if(deletenum != -1){ //removes crab
     		if(crabs.get(deletenum).mitten!= true){

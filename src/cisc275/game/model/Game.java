@@ -80,7 +80,6 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 		return crabs;
 	}
 
-
 	public List<Plant> getPlants() {
 		return plants;
 	}

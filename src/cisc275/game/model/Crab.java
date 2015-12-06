@@ -60,8 +60,6 @@ public class Crab extends RandomMover implements java.io.Serializable{
 		else{
 			side = true;
 		}
-//		cbutton = new JButton(new ImageIcon("images/textures/bush2.png"));
-//		cbutton.putClientProperty("position", loc);
 	}
 	
 	public Crab(boolean mit){

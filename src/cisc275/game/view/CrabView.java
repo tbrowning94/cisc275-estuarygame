@@ -185,7 +185,6 @@ public class CrabView {
 		
     }
 	public CrabView() {
-		
 //		//this is model
 //		oneY = rando(3);
 //		if(side == true){
