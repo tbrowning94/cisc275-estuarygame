@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class GarbageCollectorView {
+public class GarbageCollectorView extends InstanceView{
 	static Image[] pics;
     double xloc;
     double yloc;
