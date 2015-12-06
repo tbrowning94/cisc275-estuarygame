@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-//comment
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,6 +14,7 @@ import javax.swing.JLabel;
 import cisc275.game.model.Water;
 
 public class PlantView {
+	//comment
 	boolean buffer = false;
 	static Image[] pics;
     double xloc;
