@@ -554,91 +554,70 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		
     	}
     	if(deletenum != -1){ //removes crab
-    		//System.out.println("deleting");
     		if(crabs.get(deletenum).mitten!= true){
     			if(crabs.get(deletenum).nativelimit > 6){
-    				System.out.println("subtractmoney");
     				money -= 10;
-    				
     			}
     			else{
-    				System.out.println("addmoney");
     				money += 10;
-    				
     			}
-    			
     		}
     		getPanel2().remove(crabs.get(deletenum).cbutton);
     		crabs.remove(deletenum);
     		crabcount -=1;
     		deletenum = -1;
     	}
-    	//System.out.println("test5");
     }
 	public void paintwater() {
-		//Problem with is stopping,method needs to be implemented
-		//in water class
     	for(Water w: waterTiles){
-    		//System.out.println(w.isStopping());
     		if(!w.isStopping()){
     			w.move();
     		}
-    		if(w.getRemoved() == true){ //checks if crab needs to be removed
+    		if(w.getRemoved() == true){ 
     			deletenumWater = waterTiles.indexOf(w);
-    			//System.out.println("deletenum:"+deletenumWater);
     		}
     		w.paintWater();
     		getPanel2().remove(w.getWaterButton());
     		getPanel2().add(w.getWaterButton());
     		
     	}
-    	if(deletenumWater != -1){ //removes water
-    		//System.out.println("deleting");
+    	if(deletenumWater != -1){ 
     		getPanel2().remove(waterTiles.get(deletenumWater).getWaterButton());
     		waterTiles.remove(deletenumWater);
     		watercount -=1;
     		deletenumWater = -1;
     	}
-    	//System.out.println("test5");
     }
 	public void paintfm() {
     	for(Fisherman fm: fms){
     		if(!fm.isRemoved()){
     			fm.move();
     		}
-    		else { //checks if fm needs to be removed
+    		else { 
     			deletenumFM = fms.indexOf(fm);
     		}
     		fm.paintFM();
     		getPanel2().remove(fm.getFLabel());
     		getPanel2().add(fm.getFLabel());
-    		
     	}
-    	if(deletenumFM != -1){ //removes water
-    		//System.out.println("deleting");
+    	if(deletenumFM != -1){ 
     		getPanel2().remove(fms.get(deletenumFM).getFLabel());
     		fms.remove(deletenumFM);
     		fmcount -=1;
     		deletenumFM = -1;
     	}
-    	//System.out.println("test5");
     }
 	void plantcheck(){
 		for(PlantView p:plants){
-			
 			for(Water w:waterTiles){
 				if(!p.intersecting){
 					if(p.checkintersectw(w)){
-						//System.out.println("work");
 						if(p.buffer){
 							w.setStopping(true);
 						}
 						else if(!w.affected.contains(p)){
 							w.shrink(p);
 						}
-						
-						
-						//System.out.println(w.isStopping());
 					}
 				}
 				else if(w.affected.contains(p)){
