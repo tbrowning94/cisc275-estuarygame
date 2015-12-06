@@ -31,7 +31,7 @@ import javax.swing.border.EmptyBorder;
 import cisc275.game.view.GameView;
 import cisc275.game.view.SplashScreen;
 
-/**
+/** 
  * @author Nile
  *sets the number of fishermen and pH based on water health,
  *and the amount of money generated from fishermen
