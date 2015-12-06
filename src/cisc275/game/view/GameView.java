@@ -268,7 +268,8 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 	            getContentPane().removeAll();//dispose();
 	           // System.out.print("hello");
 	            //waterTiles.add(new Water(new Point(20,20), 100, 5, Color.BLUE));
-	            getContentPane().add(splashscreen.getPanel2());
+	            SplashScreen.crabby = true;
+	            getContentPane().add(SplashScreen.getPanel2());
 	            pack();
 	        }
 	      if(cmd.equals("OpenTut")){
