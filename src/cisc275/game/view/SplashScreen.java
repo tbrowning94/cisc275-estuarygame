@@ -62,7 +62,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	 static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	 static ArrayList<Fisherman> fms = new ArrayList<Fisherman>();
 	 static ArrayList<GarbageCollectorView> garbColl = new ArrayList<GarbageCollectorView>();
-	public static boolean crabby = true;
+	public static boolean crabby = false;
 	Button startGame;
 	boolean intersection = false;
 	int money = 200;
