@@ -66,7 +66,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	Button startGame;
 	boolean intersection = false;
 	int money = 200;
-	JLabel moneyvalue = new JLabel("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
 	Button instructions;
 	Image splashimage;
     JLabel cloud = new JLabel("cloud");
@@ -231,9 +230,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		};
         	
         };
-        moneyvalue.setLocation(ViewTemplate.scalex(1200), ViewTemplate.scaley(-75));
-        moneyvalue.setSize(ViewTemplate.scalex(200), ViewTemplate.scaley(-75));
-        panel2.add(moneyvalue);
+        
         crabs.add(new CrabView()); // creates initial crab
         waterTiles.add(new Water(this, new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
         panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
@@ -256,7 +253,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		getPanel2().add(tempplant.pbutton);
             		plants.add(tempplant);
             		money-=10;
-            		moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
+            		
         			//paintPlantComponent(e.getComponent().getGraphics(), loc);
         			//getPButton().setBorderPainted(false);
             		//plants.get(plantindex).setLocation(loc);
@@ -278,7 +275,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		getPanel2().add(tempgc.gcbutton);
             		garbColl.add(tempgc);
             		money-=10;
-            		moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
+            		
 //        			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
 //        			getGCButton().setBorderPainted(false);
         			isClicked = click.norm;
@@ -562,17 +559,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			if(crabs.get(deletenum).nativelimit > 6){
     				System.out.println("subtractmoney");
     				money -= 10;
-    				moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
     				
-    				getPanel2().remove(moneyvalue);
-    				getPanel2().add(moneyvalue);
     			}
     			else{
     				System.out.println("addmoney");
     				money += 10;
-    				moneyvalue.setText("<html><span style='font-weight: bold; color: green; font-size:27px'>"+"$"+ money+ "</span></html>");
-    				getPanel2().remove(moneyvalue);
-    				getPanel2().add(moneyvalue);
+    				
     			}
     			
     		}
