@@ -81,8 +81,10 @@ public class ClickCrab extends AbstractAction implements Action<Game> {
 	private void checkButton(ActionEvent e) {
 		int lidx = 0;
 		for (Crab crab : g.getCrabs()) { // loop though crabs
-			if (crab.getlocation() == ((Crab) e.getSource()).getlocation()) { // check if crabs location matches clicked location
-				System.out.println("crab location matchs");
+			if (crab.getXloc() == ((Crab) e.getSource()).getXloc()) { // check if crabs location matches clicked location
+				if (crab.getYloc() == ((Crab) e.getSource()).getYloc()) { 
+					System.out.println("crab location matchs");
+				}
 			}
 		}
 		
