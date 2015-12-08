@@ -1,12 +1,5 @@
 package cisc275.game.model;
-
-import java.awt.Image;
-import java.awt.Point;
 import java.util.Random;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
 import cisc275.game.view.PlantView;
 import cisc275.game.view.ViewTemplate;
 
@@ -21,6 +14,10 @@ import cisc275.game.view.ViewTemplate;
  *speed determines how fast the crab moves(changes by level)
  */
 public class Crab extends RandomMover implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9084334807467140813L;
 	static int mittencount; 
 	boolean mitten;
 	boolean stop = false;

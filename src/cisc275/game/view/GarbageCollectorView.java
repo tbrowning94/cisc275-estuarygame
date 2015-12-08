@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class GarbageCollectorView extends InstanceView{
-	static Image[] pics;
+	static BufferedImage[] pics;
     double xloc;
     double yloc;
     final static int scaledimgWidth = ViewTemplate.scalex(75);

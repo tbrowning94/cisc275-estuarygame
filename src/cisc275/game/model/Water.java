@@ -50,7 +50,7 @@ public class Water extends InstanceView implements java.io.Serializable{
 		this.health = Health;
 		this.speed = speed;
 		this.RunoffParticles = RP; 
-		Color runoffC=RO;
+		this.runoffC = RO;
 		this.setWbutton(createWaterLabel(loc, Health));
 		this.removed = false;
 	}
@@ -237,7 +237,6 @@ public class Water extends InstanceView implements java.io.Serializable{
 	 * @return JLabel for water objects
 	 */
 	public JLabel createWaterLabel(Point loc, int health) {
-		InitializePicturesW();
     	BufferedImage water = pics[0];
     	ImageIcon waterIcon = new ImageIcon(water.getScaledInstance(ViewTemplate.scalex(health), ViewTemplate.scaley(100), 20));
     	JLabel newWater = new JLabel("water");

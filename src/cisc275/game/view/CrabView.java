@@ -1,23 +1,12 @@
 package cisc275.game.view;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import cisc275.game.model.Crab;
-import cisc275.game.view.ViewTemplate;
+
 public class CrabView extends InstanceView{
 //	boolean stop = false; //model
 //	boolean mitten; //model

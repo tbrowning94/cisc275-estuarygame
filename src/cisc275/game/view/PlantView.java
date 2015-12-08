@@ -1,16 +1,11 @@
 package cisc275.game.view;
-
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 import cisc275.game.model.Water;
 
 /**
@@ -21,9 +16,8 @@ import cisc275.game.model.Water;
  *
  */
 public class PlantView extends InstanceView {
-	
 	boolean buffer = false;
-	static Image[] pics;
+	static BufferedImage[] pics;
     double xloc;
     double yloc;
     Area plantarea;
@@ -32,16 +26,6 @@ public class PlantView extends InstanceView {
     JLabel pbutton = new JLabel("test");
 	public boolean intersecting = false;
 	
-	/**
-	 * InitializePictures calls create image and loads image strings into the list pics
-	 */
-	public static void InitializePictures() {
-		pics = new BufferedImage[4];
-   		pics[0] = createImage("images/Fern.png");
-		pics[1] = createImage("images/Fern.png");
-		pics[2] = createImage("images/Fernhurt.png");
-		pics[3] = createImage("images/Fern.png");
-	}
 	/**
 	 * @param num
 	 * @param location
@@ -55,6 +39,25 @@ public class PlantView extends InstanceView {
         pbutton.setSize(scaledimgWidth,scaledimgWidth);
         plantarea = new Area(pbutton.getBounds());
 	}
+	/**
+	 * InitializePictures calls create image and loads image strings into the list pics
+	 */
+	public static void InitializePictures() {
+		pics = new BufferedImage[4];
+   		pics[0] = createImage("images/Fern.png");
+		pics[1] = createImage("images/Fern.png");
+		pics[2] = createImage("images/Fernhurt.png");
+		pics[3] = createImage("images/Fern.png");
+	}
+	public JLabel createPlantLabel(Point loc) {
+    	BufferedImage plant = pics[0];
+    	ImageIcon plantIcon = new ImageIcon(plant.getScaledInstance(100, 100, 20));
+    	JLabel newPlant = new JLabel("plant");
+    	newPlant.setIcon(plantIcon);
+    	newPlant.setLocation(loc);
+    	newPlant.setSize(75,75);
+    	return newPlant;
+    }
 	/**
 	 * @param CrabView
 	 * @return boolean

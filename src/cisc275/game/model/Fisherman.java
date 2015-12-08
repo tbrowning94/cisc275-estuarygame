@@ -1,75 +1,102 @@
 package cisc275.game.model;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.BoundedRangeModel;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingWorker;
-import javax.swing.border.EmptyBorder;
-
 import cisc275.game.view.GameView;
-import cisc275.game.view.SplashScreen;
+import cisc275.game.view.InstanceView;
+import cisc275.game.view.ViewTemplate;
 
 /** 
- * @author Nile
- *sets the number of fishermen and pH based on water health,
- *and the amount of money generated from fishermen
+ * @author Team 6
+ * Sets the number of fishermen and pH based on water health,
+ * and the amount of money generated from fishermen, creates label
  */
-public class Fisherman extends JFrame implements java.io.Serializable{
+public class Fisherman extends InstanceView implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1289859063590233038L;
 	Point finalLocation;
 	Point entryLocation;
 	Point curLocation;
+	static BufferedImage[] pics; //view
 	int manTotal=0;
 	int money=200;
 	int pHbar=200;
 	int EstHealth=500;
 	private boolean removed;
 	private JLabel boatman;
-	private SplashScreen splashScreen;
 	BufferedImage boat = createImage("images/boatman.png");
 	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 100, 20));
 
 
 	/**
-	 * @param ss
-	 * @param FL
-	 * @param EL
-	 * @param MT
-	 * @param M
+	 * Fisherman constructor, creates a fisherman object and label
+	 * @param FL - final location of fisherman
+	 * @param EL - entry location of fisherman
+	 * @param MT - fisherman count?
+	 * @param M - player money for use placing plants
 	 * Fisherman constructor and creates a fisherman label in splashscreen
 	 */
-	public Fisherman(SplashScreen ss, Point FL, Point EL, int MT, int M) {
-		this.splashScreen = ss;
+	public Fisherman(Point FL, Point EL, int MT, int M) {
 		this.finalLocation = FL; 
 		this.entryLocation = EL;
 		this.curLocation = EL;
 		this.manTotal = MT; 
 		this.money = M;
 		this.removed = false;
-		this.setFButton(ss.createFLabel(EL));
+		this.setFButton(createFLabel(EL));
 	}
 	
+//------Getters and Setters--------------------------------------------//
+	/**
+	 * @return label for the specific fisherman object
+	 */
+	public JLabel getFLabel() {
+		return this.boatman;
+	}
+	/**
+	 * @return health of estuary stored on fisherman
+	 */
+	public int getHeatlth(){
+		return EstHealth;
+	}
+	/**
+	 * @return pH value stored on fisherman based on health
+	 */
+	public int getpH(){
+		return pHbar;
+	}
+	/**
+	 * @return player money stored on fisherman
+	 */
+	public int getMoney(){
+		return money;
+	}
+	/**
+	 * @return this.removed
+	 * boolean if fisherman has been removed
+	 */
+	public boolean isRemoved() {
+		return this.removed;
+	}
+	/**
+	 * @param m - new money value for player
+	 * sets players money to a new value
+	 */
+	public void setMoney(int m) {
+		this.money = m;
+	}
+	/**
+	 * @param fbutton
+	 * sets fisherman label, updates location
+	 */
+	public void setFButton(JLabel fbutton) {
+		this.boatman = fbutton;
+	}
+
+//------Fisherman Methods----------------------------------------------//
 	/**
 	 * finds the coordinates of the location of a fisherman, then compares the location to the 
 	 * x coordinate at the end of the screen(finalLocation) to see if the fisherman should keep 
@@ -89,9 +116,6 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		//TODO: come up with x algorithm
 		this.curLocation.setLocation(x, y);
 	}
-	public Fisherman getThis(){
-		return this;
-	}
 	/**
 	 * Sets the location and image of the fisherman label, and updates
 	 */
@@ -99,26 +123,9 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		getFLabel().setIcon(this.bimg);
 		getFLabel().setLocation(this.curLocation);
 	}
-
-
-	public JLabel getFLabel() {
-		return this.boatman;
-	}
-	
 	/**
-	 * @param fbutton
-	 * sets fisherman label to name fbutton
+	 * Currently not implemented
 	 */
-	public void setFButton(JLabel fbutton) {
-		this.boatman = fbutton;
-	}
-	/**
-	 * @return this.removed
-	 * boolean if fisherman has been removed
-	 */
-	public boolean isRemoved() {
-		return this.removed;
-	}
 	void onTick() {
 	}
 	/**
@@ -162,17 +169,10 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 	 *updated the health of the estuary in EstHealth
 	*/
 	public int Health(Water runoffloc){
-	if (runoffloc.getLocation().getY()>=GameView.getWorldHeight()-30){
-		EstHealth= EstHealth - runoffloc.getHealth();
-	}
-	return EstHealth;
-	}
-	
-	public int getHeatlth(){
+		if (runoffloc.getLocation().getY()>=GameView.getWorldHeight()-30){
+			EstHealth= EstHealth - runoffloc.getHealth();
+		}
 		return EstHealth;
-	}
-	public int getpH(){
-		return pHbar;
 	}
 	/**
 	 * @return money
@@ -183,31 +183,32 @@ public class Fisherman extends JFrame implements java.io.Serializable{
 		money = money+(EstHealth/10)*manTotal;
 		return money;
 	}
-	
-	public int getMoney(){
-		return money;
+	/**
+	 * @param loc - location of label for fisherman object
+	 * @return label for this fisherman object
+	 */
+	public JLabel createFLabel(Point loc) {
+    	BufferedImage fisherman = pics[0];
+    	ImageIcon fmIcon = new ImageIcon(fisherman.getScaledInstance(ViewTemplate.scalex(150), ViewTemplate.scaley(100), 20));
+    	JLabel newFM = new JLabel("fisherman");
+    	newFM.setIcon(fmIcon);
+    	newFM.setLocation(loc);
+    	newFM.setSize(ViewTemplate.scalex(75),ViewTemplate.scaley(75));
+    	return newFM;
+    }
+	/**
+	 * Loads in fisherman images
+	 */
+	public static void InitializePicturesF() {
+		pics = new BufferedImage[4];
+   		pics[0] = createImage("images/boatman.png");
+		pics[1] = createImage("images/boatman.png");
+		pics[2] = createImage("images/boatman.png");
+		pics[3] = createImage("images/boatman.png");
 	}
 	
-
 	public String toString(){
 		return "[Fisherman: finalLocation="+finalLocation+"entryLocation="+entryLocation
 				+"manTotal="+manTotal+"money="+money+"]";
 	}
-
-/**
- * @param file
- * @return null
- * when called creates and loads a usable image which is buffered from a string file name
- */
-private BufferedImage createImage(String file) {
-    BufferedImage bufferedImage;
-    try {
-    	bufferedImage=ImageIO.read(new File(file));
-        return bufferedImage;
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-	return null;
-}
 }
