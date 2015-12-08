@@ -18,7 +18,7 @@ public class GarbageCollectorView extends InstanceView{
     JLabel gcbutton = new JLabel("test");
 	public static void InitializeGarbage() {
 		pics = new BufferedImage[4];
-   		pics[0] = createImage("images/Squirrel1.png");
+   		pics[0] = createImage("images/trashman1.png");
 		
 	}
 	public GarbageCollectorView(int num, Point location){
