@@ -50,20 +50,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	static ArrayList<GarbageCollectorView> garbColl = new ArrayList<GarbageCollectorView>();
 	public static boolean crabby = false;
 	boolean intersection = false;
-	int money = 200;
     JLabel cloud = new JLabel("cloud");
 	int numpics = 10;
 	private JButton pbutton, gcbutton;
-	private int theX=3;
-	private int theY=3;
-	final int xincr = 3;
-	final int yincr = 2;
 	public int crabcount = 0;
 	public int watercount = 1;
 	public int fmcount = 1;
-	boolean run =true;
-    int imgHeight;
-    int imgWidth;
 	private BufferedImage pics[];
 	private enum click {
 		plant1, plant2, plant3, gC1, gC2, gC3, norm
@@ -233,7 +225,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			break;    			
     		case gC1:
     			loc.setLocation(loc.getX()-30, loc.getY()-30);
-        		GarbageCollectorView tempgc = new GarbageCollectorView(1, loc);
+        		GarbageCollectorView tempgc = new GarbageCollectorView(loc);
         		getPanel2().add(tempgc.gcbutton);
         		garbColl.add(tempgc);
         		fms.get(0).setMoney(fms.get(0).getMoney() - 10);
@@ -276,7 +268,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	System.out.println("actual scale\n"+WORLD_WIDTH/1366+","+WORLD_HEIGHT/768);
 	BufferedImage GarbCol = GarbageCollectorView.pics[0]; //"images/Squirrel/Squirrel1.png"
 	gcbutton = new JButton();
-	size2 = gcbutton.getPreferredSize();
+	Dimension size3 = gcbutton.getPreferredSize();
 	gcbutton.setBounds(ViewTemplate.scalex(1250), ViewTemplate.scaley(200),  ViewTemplate.scalex(100), ViewTemplate.scaley(100));
 	gcbutton.setIcon(new ImageIcon(GarbCol.getScaledInstance(ViewTemplate.scalex(100), ViewTemplate.scaley(100), Image.SCALE_DEFAULT)));
 	gcbutton.addActionListener(this);
@@ -286,13 +278,13 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	gcbutton.setContentAreaFilled(false);
 	
 	BufferedImage Cloud = pics[1]; //"images/cloud.png"
-	size2=cloud.getPreferredSize();
+	Dimension size4 = cloud.getPreferredSize();
 	cloud.setIcon(new ImageIcon(Cloud.getScaledInstance(100, 100, 20)));
 	//TODO: change this
-	if (run == true){
+	//if (run == true){
 	cloud.setBounds(500, 50, 100, 150);
-	theX+=xincr;
-	}
+	//theX+=xincr;
+	//}
 	
 	panel2.add(pbutton);
 	panel2.add(gcbutton);
@@ -415,9 +407,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	 * Handles array list of crabs
 	 */
 	public void paintcrab() {
-    	int i = 0;
-    	//System.out.println("test2 " + i);
-		i++;
 		int index = 0;
     	for(Crab c: crabs){
     		
@@ -437,10 +426,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	if(deletenum != -1){ //removes crab
     		if(crabs.get(deletenum).isMitten()!= true){
     			if(Game.nativelimit > 6){
-    				money -= 10;
+    				fms.get(0).setMoney(fms.get(0).getMoney() - 10);
     			}
     			else{
-    				money += 10;
+    				fms.get(0).setMoney(fms.get(0).getMoney() + 10);
     			}
     		}
     		getPanel2().remove(crabss.get(deletenum));
