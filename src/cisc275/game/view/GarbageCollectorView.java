@@ -30,6 +30,6 @@ public class GarbageCollectorView extends InstanceView{
 	 */
 	public static void InitializeGarbage() {
 		pics = new BufferedImage[4];
-   		pics[0] = createImage("images/Squirrel1.png");
+   		pics[0] = createImage("images/trashman1.png");
 	}
 }
