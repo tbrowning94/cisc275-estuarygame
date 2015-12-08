@@ -27,7 +27,7 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	int EstHealth=500;
 	private boolean removed;
 	private JLabel boatman;
-	BufferedImage boat = createImage("images/boatmanRE.png");
+	BufferedImage boat = createImage("images/boatman.png");
 	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 100, 20));
 
 
