@@ -77,6 +77,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
     	BufferedImage Cloud = InstanceView.createImage("images/cloud.png");
     	BufferedImage bi2 = InstanceView.createImage("images/back1_pipe_2.png");
+    	BufferedImage garb = InstanceView.createImage("images/trash.png");
 //    	BufferedImage water1 = createImage("images/textures/water_map.png");
 //    	BufferedImage fm1 = createImage("images/boatman.png");
 //    	System.out.print("PrintPics");
@@ -85,6 +86,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    	pics[2] = GarbCol;
     	pics[1] = Cloud;
     	pics[2] = bi2;
+    	pics[3] = garb;
 //    	pics[5] = water1;
 //    	pics[6] = fm1;
     	  	
@@ -308,6 +310,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	BufferedImage GarbC = pics[2];
     	g.drawImage(GarbC, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
     }
+    
+    protected void paintGarbageComponent(Graphics g, Point loc) {
+    	BufferedImage garb = pics[3];
+    	g.drawImage(garb, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null);
+    }
+    
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();

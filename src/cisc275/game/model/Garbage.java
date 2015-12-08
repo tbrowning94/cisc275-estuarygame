@@ -23,26 +23,26 @@ public class Garbage extends Mob implements java.io.Serializable{
 	int ranking;
 	Point location;
 	private int damage;
-	int direction; //for view, set which way garbage is moving
-	public int getdirection() {
-		return 0;
-	}
+//	int direction; //for view, set which way garbage is moving
+//	public int getdirection() {
+//		return 0;
+//	}
 	public void setdirection(int i) {
 	}
-	public void setDamage(){
-		
+	public void setDamage(int damage){
+		this.damage = damage;
 	}
 	public int getDamage(){
 		return 0;
 	}
 	public void setlocation(Point loc){
-		
+		this.location = loc;
 	}
 	public Point getlocation() {
-		return null;
+		return this.location;
 	}
-	void onTick() {
-	}
+//	void onTick() {
+//	}
 	
 	/**Will create garbage at a random location
 	 * @param rank determines damage and pickup difficulty
