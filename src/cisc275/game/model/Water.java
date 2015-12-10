@@ -147,11 +147,6 @@ public class Water extends InstanceView implements java.io.Serializable{
 	}
 	
 //------Water Methods--------------------------------------------------//
-	/**
-	 * Currently not implemented
-	 */
-	void update() {
-	}
 	
 	/**
 	 * Repaints the water objects label at its new location
@@ -190,8 +185,9 @@ public class Water extends InstanceView implements java.io.Serializable{
 		if (y < GameView.getWorldHeight() - 2*this.speed) { // Not in water yet, continue moving down
 			y += 2*this.speed; // TODO: finalize movement amount
 		}
-		if (y >= GameView.getWorldHeight() - 30) { //TODO: change this hard coded value
+		if (y >= GameView.getWorldHeight() - 100) { //TODO: change this hard coded value
 			this.removed = true; // in water, remove on next update
+			
 		}
 		// maybe have the water check if it collides with water to change x?
 		//TODO: come up with x algorithm

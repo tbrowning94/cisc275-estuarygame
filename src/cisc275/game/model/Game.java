@@ -3,11 +3,11 @@ package cisc275.game.model;
 import java.util.List;
 
 
-public class Game implements java.io.Serializable{ //need to figure out how to loop - do it in view
+public class Game implements java.io.Serializable{ 
 
 	//game constants
 	public static final int pH_START = 0;
-	public static final long SPEED_START = 0;
+//	public static final long SPEED_START = 0;
 	public static final int MONEY_START = 0;
 	
 	public static int nativelimit = 0;
@@ -16,13 +16,16 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	int money;
 	
 	//current health of the estuary
-	int ph;
+	int pH;
 	
 	//Basic objects for the game
 	Crab[] crabs;
 	List<Plant> plants;
 	GarbageCollector[] garbageCollectors;
 	List<Garbage> garbs;
+	List<Fisherman> fMen;
+	List<Water> water;
+	
 	public Game() {
 		
 	}
@@ -38,23 +41,25 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	
 	
 	public int getMoney() {
-		return 0;
+		return this.money;
 	}
 
 	public void setMoney(int money) { 
-		
+		this.money = money;
 	}
 
-	public static int getPh() {
-		return 0;
+	public int getPh() {
+		return pH;
 	}
 	
 	/**
 	 * Sees how much of the runoff and garbage crosses the estuary boarder and 
 	 * contaminates the estuary using its location
 	 */
-	public static void IntoEstuary(Water location, Garbage loc){
-		
+	public static void IntoEstuary(List<Water> water, List<Garbage> garb){
+		for (Water w:water) {
+			//w.getLocation() <= was going to determine if each water at estuary but game doesn't have size attributes
+		}
 	}
 	
 	/**
@@ -66,10 +71,10 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	 */
 	public int setHealthOfEstuary(Water health){
 		IntoEstuary(null, null);
-		return ph;
+		return pH;
 	}
 	public int getHealthOfEstuary(){
-		return ph;
+		return pH;
 	}
 	
 	public int getlevel() {// might not need this here, but removing it causes an error in water test
