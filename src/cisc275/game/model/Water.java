@@ -28,8 +28,8 @@ public class Water extends InstanceView implements java.io.Serializable{
 	private int health;
 	private double speed = ViewTemplate.scaley(1);;
 	private boolean removed;
-	private int scaledimagex = ViewTemplate.scalex(100);
-	private int scaledimagey = ViewTemplate.scalex(100);;
+	private int scaledimagex = ViewTemplate.scalex(48);
+	private int scaledimagey = ViewTemplate.scalex(48);;
 	private int RunoffParticles;
 	private Color runoffC;
 	private JLabel wbutton;
@@ -210,7 +210,7 @@ public class Water extends InstanceView implements java.io.Serializable{
 		else{
 		wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), scaledimagey, Image.SCALE_DEFAULT)); //change image width with health
 		this.getWbutton().setIcon(wimg);
-		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), 100);
+		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), scaledimagey);
 		}
 	}
 	/**
@@ -238,11 +238,11 @@ public class Water extends InstanceView implements java.io.Serializable{
 	 */
 	public JLabel createWaterLabel(Point loc, int health) {
     	BufferedImage water = pics[0];
-    	ImageIcon waterIcon = new ImageIcon(water.getScaledInstance(ViewTemplate.scalex(health), ViewTemplate.scaley(100), 20));
+    	ImageIcon waterIcon = new ImageIcon(water.getScaledInstance(ViewTemplate.scalex(health), ViewTemplate.scaley(scaledimagey), 20));
     	JLabel newWater = new JLabel("water");
     	newWater.setIcon(waterIcon);
     	newWater.setLocation(loc);
-    	newWater.setSize(ViewTemplate.scalex(48),ViewTemplate.scaley(48));
+    	newWater.setSize(ViewTemplate.scalex(health),ViewTemplate.scaley(scaledimagey));
     	return newWater;
     }
 	/**

@@ -200,7 +200,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		};
     };
     //crabs.add(new Crab()); // creates initial crab
-    waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
+    waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
     fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(300),ViewTemplate.scaley(700)), 0, 200));
     panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
         private Color background;
@@ -399,7 +399,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		}
                 timer +=1;
                 if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
-            		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
+            		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
             		if(fmcount < fm.getManNum()) {
             			fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0, 100));
             			fmcount += 1;
