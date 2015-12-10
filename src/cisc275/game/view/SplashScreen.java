@@ -169,12 +169,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		g.fillRoundRect(Filler3.x, Filler3.y, ViewTemplate.scalex(200), ViewTemplate.scaley(Filler3.height), 15, 15);
     		g.drawRoundRect(Filler3.x, Filler3.y, ViewTemplate.scalex(Filler3.width), ViewTemplate.scaley(Filler3.height), 15, 15);
     		
-    		g.drawRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(Mbar.width), ViewTemplate.scaley(Mbar.height), 15, 15);
-    		//g.fillRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
-    		g.drawRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(Hbar.width), ViewTemplate.scaley(Hbar.height), 15, 15);
-    		//g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
-    		g.drawRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(Cbar.width), ViewTemplate.scaley(Cbar.height), 15, 15);
-    		//g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
+//    		g.drawRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(Mbar.width), ViewTemplate.scaley(Mbar.height), 15, 15);
+//    		//g.fillRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
+//    		g.drawRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(Hbar.width), ViewTemplate.scaley(Hbar.height), 15, 15);
+//    		//g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
+//    		g.drawRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(Cbar.width), ViewTemplate.scaley(Cbar.height), 15, 15);
+//    		//g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
     		if(money >= 150){
     			g.setColor(Color.GREEN);
     		}
