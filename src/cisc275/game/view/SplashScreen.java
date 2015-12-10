@@ -60,6 +60,9 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	public static boolean crabby = false;
 	boolean intersection = false;
     JLabel cloud = new JLabel("cloud");
+    JLabel crabbar = new JLabel("");
+    JLabel moneybarr = new JLabel("");
+    JLabel healthbar = new JLabel("");
 	int numpics = 10;
 	private JButton pbutton, gcbutton;
 	public int crabcount = 0;
@@ -78,6 +81,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	 * Splash screen constructor, creates panel where the game is played
 	 */
 	public SplashScreen() {
+		crabbar.setSize(ViewTemplate.scalex(310), ViewTemplate.scaley(87));
+		crabbar.setLocation(ViewTemplate.scalex(185), ViewTemplate.scaley(0));
+		moneybarr.setSize(ViewTemplate.scalex(310), ViewTemplate.scaley(87));
+		moneybarr.setLocation(ViewTemplate.scalex(530), ViewTemplate.scaley(0));
+		healthbar.setSize(ViewTemplate.scalex(310), ViewTemplate.scaley(87));
+		healthbar.setLocation(ViewTemplate.scalex(870), ViewTemplate.scaley(0));
 		PlantView.InitializePictures();
 		CrabView.InitializePicturesC();
 		Garbage.InitializePicturesG();
@@ -86,8 +95,9 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 		Fisherman.InitializePicturesF();
 		pics = new BufferedImage[numpics];
     	BufferedImage bi = InstanceView.createImage("images/FrontScreen.png");
-//    	BufferedImage plant1 = createImage("images/Fern.png");
-//    	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
+    	BufferedImage crabbar1 = InstanceView.createImage("images/craboverlay.png");
+    	BufferedImage moneybar1 = InstanceView.createImage("images/moneyoverlay.png");
+    	BufferedImage healthbar1 = InstanceView.createImage("images/healthoverlay.png");
     	BufferedImage Cloud = InstanceView.createImage("images/cloud.png");
     	BufferedImage bi2 = InstanceView.createImage("images/back1_pipe_2.png");
 //    	BufferedImage garb = InstanceView.createImage("images/trash.png");
@@ -95,15 +105,15 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    	BufferedImage fm1 = createImage("images/boatman.png");
 //    	System.out.print("PrintPics");
     	pics[0] = bi;
-//    	pics[1] = plant1;
-//    	pics[2] = GarbCol;
     	pics[1] = Cloud;
     	pics[2] = bi2;
 //    	pics[3] = garb;
 //    	pics[5] = water1;
 //    	pics[6] = fm1;
-    	  	
-     	this.panel2 = GameFrame();
+    	crabbar.setIcon(new ImageIcon(crabbar1.getScaledInstance(ViewTemplate.scalex(310), ViewTemplate.scaley(87), Image.SCALE_DEFAULT)));
+    	moneybarr.setIcon(new ImageIcon(moneybar1.getScaledInstance(ViewTemplate.scalex(310), ViewTemplate.scaley(87), Image.SCALE_DEFAULT)));
+    	healthbar.setIcon(new ImageIcon(healthbar1.getScaledInstance(ViewTemplate.scalex(310), ViewTemplate.scaley(87), Image.SCALE_DEFAULT)));
+    	this.panel2 = GameFrame();
 	}
 	
 //------Getters and Setters--------------------------------------------//
@@ -186,8 +196,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		}
     		g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(money) , ViewTemplate.scaley(Mbar.height), 15, 15);
     		g.setColor(Color.BLACK);
-    		g.setFont(new Font("Purisa", Font.BOLD, 22));
-    		g.drawString("Money: " + Fisherman.getMoney(), Mbar.x, Mbar.y );
+//    		g.setFont(new Font("Purisa", Font.BOLD, 22));
+//    		g.drawString("Money: " + Fisherman.getMoney(), Mbar.x, Mbar.y );
     	
     		if (health <= 50) {
     			g.setColor(Color.RED);
@@ -203,8 +213,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		}
     		g.fillRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(health), ViewTemplate.scaley(Hbar.height), 15, 15);
     		g.setColor(Color.BLACK);
-    		g.setFont(new Font("Purisa", Font.BOLD, 22));
-    		g.drawString("pH: " + Fisherman.getpH()/25, Hbar.x , Hbar.y );
+//    		g.setFont(new Font("Purisa", Font.BOLD, 22));
+//    		g.drawString("pH: " + Fisherman.getpH()/25, Hbar.x , Hbar.y );
     		
     		if (crabcount < 6) {
     			g.setColor(Color.GREEN);
@@ -215,8 +225,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		
     		g.fillRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(convertpercentage(crabcount,200)), ViewTemplate.scaley(Cbar.height), 15, 15);
     		g.setColor(Color.BLACK);
-    		g.setFont(new Font("Purisa", Font.BOLD, 22));
-    		g.drawString("Crabbing Limit: " + crabcount, Cbar.x , Cbar.y );
+    		//g.setFont(new Font("Purisa", Font.BOLD, 22));
+    		//g.drawString("Crabbing Limit: " + crabcount, Cbar.x , Cbar.y );
     		};
     };
     //crabs.add(new Crab()); // creates initial crab
@@ -311,7 +321,9 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	cloud.setBounds(500, 50, 100, 150);
 	//theX+=xincr;
 	//}
-	
+	panel2.add(crabbar);
+	panel2.add(moneybarr);
+	panel2.add(healthbar);
 	panel2.add(pbutton,new Integer(10));
 	panel2.add(gcbutton,new Integer(10));
     return panel2;

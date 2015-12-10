@@ -19,8 +19,10 @@ public class ViewTemplate extends JFrame {
 	static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	static GraphicsDevice gs = ge.getDefaultScreenDevice();
 	static DisplayMode dm = gs.getDisplayMode();
-	protected static int WORLD_WIDTH = dm.getWidth();;
-	protected static int WORLD_HEIGHT = dm.getHeight();
+//	protected static int WORLD_WIDTH = dm.getWidth();;
+//	protected static int WORLD_HEIGHT = dm.getHeight();
+	protected static int WORLD_WIDTH = 1366;
+	protected static int WORLD_HEIGHT = 768;
 	static double regwidth=1366.0;
 	static double regheight=768.0;
 	static double widthscale = WORLD_WIDTH/regwidth;
