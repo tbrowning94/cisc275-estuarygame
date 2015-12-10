@@ -393,6 +393,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		paintfm();
         		paintwater();
         		plantcheck();
+        		garbagecheck();
                 //System.out.println("test6");
 //                for(CrabView c: crabs){
 //             	   frame.remove(c.cbutton);
