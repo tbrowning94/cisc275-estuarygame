@@ -193,7 +193,7 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	public JLabel createFLabel(Point loc) {
     	BufferedImage fisherman = createImage("images/boatman.png");
     	ImageIcon fmIcon = new ImageIcon(fisherman.getScaledInstance(ViewTemplate.scalex(150), ViewTemplate.scaley(100), 20));
-    	JLabel newFM = new JLabel("fisherman");
+    	JLabel newFM = new JLabel();
     	newFM.setIcon(fmIcon);
     	newFM.setLocation(loc);
     	newFM.setSize(ViewTemplate.scalex(75),ViewTemplate.scaley(75));

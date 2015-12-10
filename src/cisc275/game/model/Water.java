@@ -239,7 +239,7 @@ public class Water extends InstanceView implements java.io.Serializable{
 	public JLabel createWaterLabel(Point loc, int health) {
     	BufferedImage water = pics[0];
     	ImageIcon waterIcon = new ImageIcon(water.getScaledInstance(ViewTemplate.scalex(health), ViewTemplate.scaley(scaledimagey), 20));
-    	JLabel newWater = new JLabel("water");
+    	JLabel newWater = new JLabel();
     	newWater.setIcon(waterIcon);
     	newWater.setLocation(loc);
     	newWater.setSize(ViewTemplate.scalex(health),ViewTemplate.scaley(scaledimagey));
