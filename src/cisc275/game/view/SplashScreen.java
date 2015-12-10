@@ -39,6 +39,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	private static final long serialVersionUID = 1L;
 	static int TIMER_DELAY = 50;
 	int timer = 0;
+	int GLOBALTIMER = 0;
 	Rectangle Filler1 = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
 	Rectangle Filler2 = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
 	Rectangle Filler3 = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
@@ -461,6 +462,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		//System.out.println("CRAB CREATED: " + crabcount);
             		}
                 timer +=1;
+                GLOBALTIMER += 1;
                 if(timer == 30 && watercount < 20){ //randomly makes a crab (1/50 chance)
             		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
             		if(fmcount < fm.getManNum()) {
@@ -474,6 +476,14 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		watercount += 1;
             		timer = 0;
             		}
+                else if(GLOBALTIMER >= 150 && watercount <30){
+                	timer += 1;
+                	if(timer == 30) {
+                		waterTiles.add(new Water(new Point (ViewTemplate.scalex(900),ViewTemplate.scaley(210)), ViewTemplate.scaley(96), 5, Color.BLUE, 1.0));
+                		watercount += 1;
+                		timer = 0;
+                	}
+                }
         	}
         };
      }
