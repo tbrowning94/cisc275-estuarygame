@@ -60,7 +60,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	public int watercount = 1;
 	public int garbcount = 0;
 	
-	Fisherman fm = new Fisherman(new Point(ViewTemplate.scalex(1200),ViewTemplate.scaley(700)),new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 1, 200);
+	Fisherman fm = new Fisherman(new Point(ViewTemplate.scalex(1200),ViewTemplate.scaley(700)),new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 1);
 	public int fmcount = 0;
 	private BufferedImage pics[];
 	private enum click {
@@ -153,8 +153,9 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		Rectangle Mbar = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-    		int health = fm.getpH();
-    		int money = fm.getMoney();
+    		int health = Fisherman.getpH();
+    		int money = Fisherman.getMoney();
+    		//System.out.println(money);
     		int crabs = CrabView.nativelimit;
     		// health bar gray background
     		g.setColor(Color.GRAY);
@@ -176,7 +177,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		g.fillRoundRect(Mbar.x, Mbar.y, 200 , Mbar.height, 15, 15);
     		g.setColor(Color.BLACK);
     		g.setFont(new Font("Purisa", Font.BOLD, 22));
-    		g.drawString("Money: " + fms.get(0).getMoney(), Mbar.x, Mbar.y );
+    		g.drawString("Money: " + Fisherman.getMoney(), Mbar.x, Mbar.y );
     	
     		if (health < 50) {
     			g.setColor(Color.RED);
@@ -206,7 +207,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     };
     //crabs.add(new Crab()); // creates initial crab
     waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
-    fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(300),ViewTemplate.scaley(700)), 0, 200));
+    fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(300),ViewTemplate.scaley(700)), 0));
     panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
         private Color background;
         @Override
@@ -222,7 +223,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		PlantView.checkbuffer(tempplant);
         		getPanel2().add(tempplant.pbutton,new Integer(3));
         		plants.add(tempplant);
-        		fms.get(0).setMoney(fms.get(0).getMoney() - 10);
+        		Fisherman.setMoney(Fisherman.getMoney()-10);
     			crabby = true;
     			isClicked = click.norm;
     			break;   		
@@ -237,7 +238,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		GarbageCollectorView tempgc = new GarbageCollectorView(loc);
         		getPanel2().add(tempgc.gcbutton,new Integer(4));
         		garbColl.add(tempgc);
-        		fms.get(0).setMoney(fms.get(0).getMoney() - 10);
+        		Fisherman.setMoney(Fisherman.getMoney()-10);
     			isClicked = click.norm;
     			crabby = true;
     			break;    			
@@ -410,11 +411,11 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
                 if(timer == 30 && watercount < 20){ //randomly makes a crab (1/50 chance)
             		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
             		if(fmcount < fm.getManNum()) {
-            			fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0, 100));
+            			fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0));
             			fmcount += 1;
             		}
             		if(fmcount >fm.getManNum()){
-            			fms.remove(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0, 100));
+            			fms.remove(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0));
             			fmcount -=1;
             		}
             		watercount += 1;
@@ -447,10 +448,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	if(deletenum != -1){ //removes crab
     		if(crabs.get(deletenum).isMitten()!= true){
     			if(Game.nativelimit > 6){
-    				fms.get(0).setMoney(fms.get(0).getMoney() - 10);
+    				Fisherman.setMoney(Fisherman.getMoney()-10);
     			}
     			else{
-    				fms.get(0).setMoney(fms.get(0).getMoney() + 10);
+    				Fisherman.setMoney(Fisherman.getMoney()+10);
     			}
     		}
     		getPanel2().remove(crabss.get(deletenum).cbutton);

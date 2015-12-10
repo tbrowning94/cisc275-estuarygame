@@ -22,9 +22,9 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	Point curLocation;
 	static BufferedImage[] pics; //view
 	int manTotal=0;
-	int money=200;
-	int pHbar=200;
-	int EstHealth=500;
+	static int money=200;
+	static int pHbar=200;
+	static int EstHealth=500;
 	private boolean removed;
 	private JLabel boatman;
 	BufferedImage boat = createImage("images/boatmanRE.png");
@@ -39,12 +39,11 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	 * @param M - player money for use placing plants
 	 * Fisherman constructor and creates a fisherman label in splashscreen
 	 */
-	public Fisherman(Point FL, Point EL, int MT, int M) {
+	public Fisherman(Point FL, Point EL, int MT) {
 		this.finalLocation = FL; 
 		this.entryLocation = EL;
 		this.curLocation = EL;
 		this.manTotal = MT; 
-		this.money = M;
 		this.removed = false;
 		this.setFButton(createFLabel(EL));
 	}
@@ -65,13 +64,13 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	/**
 	 * @return pH value stored on fisherman based on health
 	 */
-	public int getpH(){
+	public static int getpH(){
 		return pHbar;
 	}
 	/**
 	 * @return player money stored on fisherman
 	 */
-	public int getMoney(){
+	public static int getMoney(){
 		return money;
 	}
 	/**
@@ -85,8 +84,8 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	 * @param m - new money value for player
 	 * sets players money to a new value
 	 */
-	public void setMoney(int m) {
-		this.money = m;
+	public static void setMoney(int m) {
+		money = m;
 	}
 	/**
 	 * @param fbutton
@@ -172,6 +171,7 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	 *updated the health of the estuary in EstHealth
 	*/
 	public int Health(Water runoffloc){
+		System.out.println("test");
 		if (runoffloc.getLocation().getY()>=GameView.getWorldHeight()-30){
 			EstHealth= EstHealth - runoffloc.getHealth();
 		}
@@ -183,7 +183,9 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	 * based on the total number of fishermen and the health of the estuary
 	 */
 	public int Fishing(){
+		System.out.println("BEFOREFISH: "+money);
 		money = money+(EstHealth/10)*manTotal;
+		System.out.println("AFTERFISH: "+money);
 		return money;
 	}
 	/**

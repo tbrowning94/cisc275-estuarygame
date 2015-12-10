@@ -129,7 +129,6 @@ public class Garbage extends InstanceView implements java.io.Serializable{
 	public boolean checkintersects(JLabel jLabel){
 		Area areaA = new Area(jLabel.getBounds());
 		intersecting = true;
-		System.out.println(intersecting+" GARBAGE");
 		return areaA.intersects(garea.getBounds2D());
 	    
 	}
