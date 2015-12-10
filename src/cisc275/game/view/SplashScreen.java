@@ -574,4 +574,22 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 			}
 		}
 	}
+	/**
+	 * Checks for trash/garbage collector collisions
+	 */
+	void garbagecheck(){
+		for(Garbage g:garb){
+			g.intersecting = false;
+			for(GarbageCollectorView gc:garbColl){
+				if(g.checkintersects(gc.gcbutton)){
+						g.intersecting = true;
+						g.setRemoved(true);
+						getPanel2().remove(g.getGbutton());
+						getPanel2().add(g.getGbutton(),new Integer(3));
+				}
+
+			}
+
+		}
+	}
 }

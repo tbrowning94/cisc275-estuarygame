@@ -1,6 +1,7 @@
 package cisc275.game.model;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,6 +9,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import cisc275.game.view.InstanceView;
+import cisc275.game.view.PlantView;
 import cisc275.game.view.ViewTemplate;
 
 /**
@@ -32,7 +34,8 @@ public class Garbage extends InstanceView implements java.io.Serializable{
 	private JLabel gbutton;
 	BufferedImage trash = createImage("images/trash1.png");
 	private ImageIcon gimg = new ImageIcon(trash.getScaledInstance(48, 48, Image.SCALE_DEFAULT));
-
+	public boolean intersecting = false;
+	Area garea;
 
 	/**
 	 * Garbage constructor, creates a garbage object and label
@@ -45,6 +48,7 @@ public class Garbage extends InstanceView implements java.io.Serializable{
 		this.damage = dmg;
 		this.ranking = rank;
 		this.setGbutton(createGarbageLabel(loc));
+		this.garea = new Area(this.gbutton.getBounds());
 		this.removed = false;
 	}
 	
@@ -118,7 +122,15 @@ public class Garbage extends InstanceView implements java.io.Serializable{
 	 */
 	public void checkcollector(){
 	}
-	
+	/**
+	 * @return jlabel - label to compare for intersection
+	 * checks if a trash's and garbage collector's label bounds are intersecting
+	 */
+	public boolean checkintersects(JLabel jLabel){
+		Area areaA = new Area(jLabel.getBounds());
+		return areaA.intersects(garea.getBounds2D());
+	    
+	}
 	public static ArrayList<Garbage> generateTrash(int numGarb) {
 		ArrayList<Garbage> newGarb = new ArrayList<Garbage>();
 		for(int i = 0; i < numGarb; i++) {
