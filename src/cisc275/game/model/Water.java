@@ -33,7 +33,7 @@ public class Water extends InstanceView implements java.io.Serializable{
 	private int RunoffParticles;
 	private Color runoffC;
 	private JLabel wbutton;
-	BufferedImage water = createImage("images/textures/water_map.png");
+	BufferedImage water = createImage("images/Water_1.png");
 	private ImageIcon wimg = new ImageIcon(water.getScaledInstance(scaledimagex, scaledimagey, Image.SCALE_DEFAULT));
 	public ArrayList<PlantView> affected = new ArrayList<PlantView>();
 	
