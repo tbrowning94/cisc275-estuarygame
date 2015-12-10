@@ -27,7 +27,7 @@ public class GarbageCollectorView extends InstanceView{
     int randcount = 0;
     int picNum = 0;
     ImageIcon ing;
-    final static int scaledimgWidth = ViewTemplate.scalex(75);
+    final static int scaledimgWidth = ViewTemplate.scalex(58);
     final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel gcbutton = new JLabel("gc");
     
