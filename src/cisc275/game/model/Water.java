@@ -29,7 +29,7 @@ public class Water extends InstanceView implements java.io.Serializable{
 	private double speed = ViewTemplate.scaley(1);;
 	private boolean removed;
 	private int scaledimagex = ViewTemplate.scalex(48);
-	private int scaledimagey = ViewTemplate.scalex(48);;
+	private int scaledimagey = ViewTemplate.scalex(48);
 	private int RunoffParticles;
 	private Color runoffC;
 	private JLabel wbutton;

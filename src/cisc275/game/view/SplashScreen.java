@@ -24,6 +24,7 @@ import javax.swing.Timer;
 import cisc275.game.model.Crab;
 import cisc275.game.model.Fisherman;
 import cisc275.game.model.Game;
+import cisc275.game.model.Garbage;
 import cisc275.game.model.Water;
 
 /**
@@ -42,11 +43,13 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	int deletenum = -1; //with use of crabs
 	int deletenumWater = -1; // with water
 	int deletenumFM = -1; // with fisherman
+	int deletenumG = -1; // with garbage
 	static ArrayList<Crab> crabs = new ArrayList<Crab>();//array of crabviews
 	static ArrayList<CrabView> crabss = new ArrayList<CrabView>();
 	static ArrayList<PlantView> plants = new ArrayList<PlantView>();
 	static ArrayList<Water> waterTiles = new ArrayList<Water>();
 	static ArrayList<Fisherman> fms = new ArrayList<Fisherman>();
+	static ArrayList<Garbage> garb = new ArrayList<Garbage>();
 	static ArrayList<GarbageCollectorView> garbColl = new ArrayList<GarbageCollectorView>();
 	public static boolean crabby = false;
 	boolean intersection = false;
@@ -55,6 +58,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	private JButton pbutton, gcbutton;
 	public int crabcount = 0;
 	public int watercount = 1;
+	public int garbcount = 0;
 	
 	Fisherman fm = new Fisherman(new Point(ViewTemplate.scalex(1200),ViewTemplate.scaley(700)),new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 1, 200);
 	public int fmcount = 0;
@@ -70,6 +74,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	public SplashScreen() {
 		PlantView.InitializePictures();
 		CrabView.InitializePicturesC();
+		Garbage.InitializePicturesG();
 		GarbageCollectorView.InitializeGarbage();
 		Water.InitializePicturesW();
 		Fisherman.InitializePicturesF();
@@ -79,7 +84,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
     	BufferedImage Cloud = InstanceView.createImage("images/cloud.png");
     	BufferedImage bi2 = InstanceView.createImage("images/back1_pipe_2.png");
-    	BufferedImage garb = InstanceView.createImage("images/trash.png");
+//    	BufferedImage garb = InstanceView.createImage("images/trash.png");
 //    	BufferedImage water1 = createImage("images/textures/water_map.png");
 //    	BufferedImage fm1 = createImage("images/boatman.png");
 //    	System.out.print("PrintPics");
@@ -88,7 +93,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    	pics[2] = GarbCol;
     	pics[1] = Cloud;
     	pics[2] = bi2;
-    	pics[3] = garb;
+//    	pics[3] = garb;
 //    	pics[5] = water1;
 //    	pics[6] = fm1;
     	  	
@@ -313,11 +318,6 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	g.drawImage(GarbC, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null); //TODO:Move hard coded 30 pixels offset elsewhere for loading plants
     }
     
-    protected void paintGarbageComponent(Graphics g, Point loc) {
-    	BufferedImage garb = pics[3];
-    	g.drawImage(garb, (int)loc.getX()-33, (int)loc.getY()-36, 75, 75, null);
-    }
-    
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
@@ -381,10 +381,15 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         public void actionPerformed(java.awt.event.ActionEvent e) {
         	if(crabby == true && SplashScreen.crabby == true){
         		//System.out.println("test");
-               paintcrab();
-               paintfm();
-               paintwater();
-               plantcheck();
+        		if(garbcount < 20) {
+        			garb.addAll(Garbage.generateTrash(20));
+        			garbcount += 20;
+        		}
+        		paintgarbage();
+        		paintcrab();
+        		paintfm();
+        		paintwater();
+        		plantcheck();
                 //System.out.println("test6");
 //                for(CrabView c: crabs){
 //             	   frame.remove(c.cbutton);
@@ -473,6 +478,26 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		waterTiles.remove(deletenumWater);
     		watercount -=1;
     		deletenumWater = -1;
+    	}
+    }
+	/**
+	 * Handles array list of garbage
+	 */
+	public void paintgarbage() {
+    	for(Garbage g: garb){
+    		if(g.getRemoved() == true){ 
+    			deletenumG = garb.indexOf(g);
+    		}
+    		g.paintGarbage();
+    		getPanel2().remove(g.getGbutton());
+    		getPanel2().add(g.getGbutton(),new Integer(1));
+    		
+    	}
+    	if(deletenumG != -1){ 
+    		getPanel2().remove(garb.get(deletenumG).getGbutton());
+    		garb.remove(deletenumG);
+    		garbcount -=1;
+    		deletenumG = -1;
     	}
     }
 	/**
