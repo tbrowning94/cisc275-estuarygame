@@ -165,10 +165,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
     		g.drawRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
     		g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
-    		if(money > 150){
+    		if(money >= 150){
     			g.setColor(Color.GREEN);
     		}
-    		if(money > 50 && money < 150){
+    		if(money >= 50 && money < 150){
     			g.setColor(Color.YELLOW);
     		}
     		if(money < 50){
