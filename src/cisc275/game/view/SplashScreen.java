@@ -275,7 +275,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	System.out.println("SCALE\n"+widthscale+","+heightscale);
 	System.out.println("RESOLUTION\n"+WORLD_WIDTH+","+WORLD_HEIGHT);
 	System.out.println("actual scale\n"+WORLD_WIDTH/1366+","+WORLD_HEIGHT/768);
-	BufferedImage GarbCol = GarbageCollectorView.pics[0]; //"images/Squirrel/Squirrel1.png"
+	BufferedImage GarbCol = GarbageCollectorView.front; //"images/Squirrel/Squirrel1.png"
 	gcbutton = new JButton();
 	Dimension size3 = gcbutton.getPreferredSize();
 	gcbutton.setBounds(ViewTemplate.scalex(1250), ViewTemplate.scaley(200),  ViewTemplate.scalex(100), ViewTemplate.scaley(100));
