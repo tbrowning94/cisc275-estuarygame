@@ -99,7 +99,7 @@ public class Crab extends RandomMover implements java.io.Serializable{
      * random direction
      */
     public void move() {
-    	System.out.println("WORKING");
+    	//System.out.println("WORKING");
     	if(!isStop()){
     		randcount= rando(1);
         	int rand = 0;       	

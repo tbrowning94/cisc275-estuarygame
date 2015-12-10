@@ -393,7 +393,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		crabss.add(new CrabView(crabs.get(index)));
             		crabcount += 1;
             		panel2.add(crabss.get(index).cbutton);
-            		System.out.println("CRAB CREATED: " + crabcount);
+            		//System.out.println("CRAB CREATED: " + crabcount);
             		}
                 timer +=1;
                 if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
@@ -422,7 +422,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			//System.out.println("deletenum");
     		}
     		c.move();
-    		System.out.println("CRAB INDEX " + index);
+    		//System.out.println("CRAB INDEX " + index);
     		crabss.get(index).paintcrab();
     		getPanel2().remove(crabss.get(index).cbutton);
     		getPanel2().add(crabss.get(index).cbutton);
@@ -439,7 +439,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			}
     		}
     		getPanel2().remove(crabss.get(deletenum).cbutton);
-    		System.out.println("poop");
+    		
     		crabss.remove(deletenum);
     		crabs.remove(deletenum);
     		crabcount -=1;

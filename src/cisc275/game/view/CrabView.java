@@ -94,7 +94,7 @@ public class CrabView extends InstanceView{
      * @param index 
      */
     public void paintcrab() {
-    	System.out.println(crabholder+" CRAB: "+crabholder.mitten);
+    	//System.out.println(crabholder+" CRAB: "+crabholder.mitten);
     	if(picNum == 1 || picNum == 2){
     		picNum++;
     		if(crabholder.mitten==true){
@@ -154,7 +154,7 @@ public class CrabView extends InstanceView{
 //             if (right) oneX+=xIncr;
 //    	}
     	//this stays in view
-    	System.out.println("testing"+picNum);
+    	//System.out.println("testing"+picNum);
     	cbutton.setIcon(ing);
          cbutton.setLocation(ViewTemplate.scalex(crabholder.getXloc()), ViewTemplate.scaley(crabholder.getYloc()));
     }
