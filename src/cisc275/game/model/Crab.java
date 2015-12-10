@@ -49,7 +49,7 @@ public class Crab extends RandomMover implements java.io.Serializable{
 	public Crab(int num) {
 		index = num;
 		if(rando(5)== 1){
-    		mitten = false;
+    		mitten = true;
     	}
     	else{
     		mitten = true;

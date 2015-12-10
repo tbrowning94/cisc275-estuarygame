@@ -215,7 +215,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		loc.setLocation(loc.getX()-ViewTemplate.scalex(30), loc.getY()-ViewTemplate.scaley(30));
         		PlantView tempplant = new PlantView(1, loc);
         		PlantView.checkbuffer(tempplant);
-        		getPanel2().add(tempplant.pbutton);
+        		getPanel2().add(tempplant.pbutton,new Integer(3));
         		plants.add(tempplant);
         		fms.get(0).setMoney(fms.get(0).getMoney() - 10);
     			crabby = true;
@@ -230,7 +230,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		case gC1:
     			loc.setLocation(loc.getX()-30, loc.getY()-30);
         		GarbageCollectorView tempgc = new GarbageCollectorView(loc);
-        		getPanel2().add(tempgc.gcbutton);
+        		getPanel2().add(tempgc.gcbutton,new Integer(4));
         		garbColl.add(tempgc);
         		fms.get(0).setMoney(fms.get(0).getMoney() - 10);
     			isClicked = click.norm;
@@ -290,8 +290,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	//theX+=xincr;
 	//}
 	
-	panel2.add(pbutton);
-	panel2.add(gcbutton);
+	panel2.add(pbutton,new Integer(10));
+	panel2.add(gcbutton,new Integer(10));
     return panel2;
     }
     /**
@@ -394,7 +394,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
                 	int index = crabs.size()-1;
             		crabss.add(new CrabView(crabs.get(index)));
             		crabcount += 1;
-            		panel2.add(crabss.get(index).cbutton);
+            		panel2.add(crabss.get(index).cbutton,new Integer(2));
             		//System.out.println("CRAB CREATED: " + crabcount);
             		}
                 timer +=1;
@@ -431,7 +431,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		//System.out.println("CRAB INDEX " + index);
     		crabss.get(index).paintcrab();
     		getPanel2().remove(crabss.get(index).cbutton);
-    		getPanel2().add(crabss.get(index).cbutton);
+    		getPanel2().add(crabss.get(index).cbutton,new Integer(2));
     		getPanel2().repaint();
     		index++;
     	}
@@ -465,7 +465,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		}
     		w.paintWater();
     		getPanel2().remove(w.getWbutton());
-    		getPanel2().add(w.getWbutton());
+    		getPanel2().add(w.getWbutton(),new Integer(1));
     		
     	}
     	if(deletenumWater != -1){ 
@@ -488,7 +488,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		}
     		fm.paintFM();
     		getPanel2().remove(fm.getFLabel());
-    		getPanel2().add(fm.getFLabel());
+    		getPanel2().add(fm.getFLabel(),new Integer(2));
     	}
     	if(deletenumFM != -1){ 
     		getPanel2().remove(fms.get(deletenumFM).getFLabel());
@@ -511,14 +511,14 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 						else if(!w.affected.contains(p)){
 							w.shrink(p);
 							getPanel2().remove(w.getWbutton());
-							getPanel2().add(w.getWbutton());
+							getPanel2().add(w.getWbutton(),new Integer(1));
 						}
 					}
 				}
 				else if(w.affected.contains(p)){
 					w.normal(p);
 					getPanel2().remove(w.getWbutton());
-					getPanel2().add(w.getWbutton());
+					getPanel2().add(w.getWbutton(),new Integer(1));
 				}
 			}
 			p.intersecting = false;
@@ -532,7 +532,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 						p.intersecting = true;
 						p.changepic(2);
 						getPanel2().remove(p.pbutton);
-						getPanel2().add(p.pbutton);
+						getPanel2().add(p.pbutton,new Integer(3));
 						}
 						else{
 							c.setrandom();
