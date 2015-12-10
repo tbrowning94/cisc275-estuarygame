@@ -223,7 +223,7 @@ public class Water extends InstanceView implements java.io.Serializable{
 			wimg = new ImageIcon(water.getScaledInstance((int) health, scaledimagey, 20));
 		}
 		else{
-			wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), scaledimagey, Image.SCALE_DEFAULT)); //change image width with health
+			return;
 		}
 		
 		this.getWbutton().setIcon(wimg);
