@@ -185,46 +185,62 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    		//g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
 //    		g.drawRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(Cbar.width), ViewTemplate.scaley(Cbar.height), 15, 15);
 //    		//g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
-    		if(money >= 150){
+    		if(money>190){
     			g.setColor(Color.GREEN);
+    			g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(200) , ViewTemplate.scaley(Mbar.height), 15, 15);
+    		}
+    		if(money >= 150 && money <= 190){
+    			g.setColor(Color.GREEN);
+    			g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(money) , ViewTemplate.scaley(Mbar.height), 15, 15);
     		}
     		if(money >= 50 && money < 150){
     			g.setColor(Color.YELLOW);
+    			g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(money) , ViewTemplate.scaley(Mbar.height), 15, 15);
     		}
     		if(money < 50){
     			g.setColor(Color.RED);
+    			g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(money) , ViewTemplate.scaley(Mbar.height), 15, 15);
     		}
-    		g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(money) , ViewTemplate.scaley(Mbar.height), 15, 15);
-    		g.setColor(Color.BLACK);
+    		//g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(money) , ViewTemplate.scaley(Mbar.height), 15, 15);
+    		//g.setColor(Color.BLACK);
 //    		g.setFont(new Font("Purisa", Font.BOLD, 22));
 //    		g.drawString("Money: " + Fisherman.getMoney(), Mbar.x, Mbar.y );
     	
     		if (health <= 50) {
     			g.setColor(Color.RED);
-    			//g.fillRoundRect(Hbar.x, Hbar.y, health, Hbar.height, 15, 15);
+    			g.fillRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(health), ViewTemplate.scaley(Hbar.height), 15, 15);
     		}
     		else if (health <= 150) {
     			g.setColor(Color.YELLOW);
-
+    			g.fillRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(health), ViewTemplate.scaley(Hbar.height), 15, 15);
     		}
-    		else {
+    		else if (health > 150 && health <=190){
     			g.setColor(Color.GREEN);
-    		
+    			g.fillRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(health), ViewTemplate.scaley(Hbar.height), 15, 15);
     		}
-    		g.fillRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(health), ViewTemplate.scaley(Hbar.height), 15, 15);
+    		
+    		else if (health >190){
+    			g.setColor(Color.GREEN);
+    			g.fillRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(200), ViewTemplate.scaley(Hbar.height), 15, 15);
+    		}
+    		
     		g.setColor(Color.BLACK);
 //    		g.setFont(new Font("Purisa", Font.BOLD, 22));
 //    		g.drawString("pH: " + Fisherman.getpH()/25, Hbar.x , Hbar.y );
     		
     		if (crabcount < 6) {
     			g.setColor(Color.GREEN);
+    			g.fillRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(convertpercentage(crabcount,200)), ViewTemplate.scaley(Cbar.height), 15, 15);
     		}
     		else {
+    			g.setFont(new Font("Purisa", Font.BOLD, 22));
+    			g.drawString("OVERFISHING", Cbar.x, Cbar.y+75);
     			g.setColor(Color.RED);
+    			g.fillRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(200), ViewTemplate.scaley(Cbar.height), 15, 15);
     		}
     		
-    		g.fillRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(convertpercentage(crabcount,200)), ViewTemplate.scaley(Cbar.height), 15, 15);
-    		g.setColor(Color.BLACK);
+    		//g.fillRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(convertpercentage(crabcount,200)), ViewTemplate.scaley(Cbar.height), 15, 15);
+    		//g.setColor(Color.BLACK);
     		//g.setFont(new Font("Purisa", Font.BOLD, 22));
     		//g.drawString("Crabbing Limit: " + crabcount, Cbar.x , Cbar.y );
     		};
