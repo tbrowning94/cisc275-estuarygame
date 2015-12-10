@@ -55,7 +55,9 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	private JButton pbutton, gcbutton;
 	public int crabcount = 0;
 	public int watercount = 1;
-	public int fmcount = 1;
+	
+	Fisherman fm = new Fisherman(new Point(ViewTemplate.scalex(1200),ViewTemplate.scaley(700)),new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 1, 200);
+	public int fmcount = 0;
 	private BufferedImage pics[];
 	private enum click {
 		plant1, plant2, plant3, gC1, gC2, gC3, norm
@@ -72,7 +74,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 		Water.InitializePicturesW();
 		Fisherman.InitializePicturesF();
 		pics = new BufferedImage[numpics];
-    	BufferedImage bi = InstanceView.createImage("images/BackTrial1.png");
+    	BufferedImage bi = InstanceView.createImage("images/FrontScreen.png");
 //    	BufferedImage plant1 = createImage("images/Fern.png");
 //    	BufferedImage GarbCol = createImage("images/Squirrel/Squirrel1.png");
     	BufferedImage Cloud = InstanceView.createImage("images/cloud.png");
@@ -146,8 +148,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		Rectangle Mbar = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-    		int health = fms.get(0).getpH();
-    		int money = fms.get(0).getMoney();
+    		int health = fm.getpH();
+    		int money = fm.getMoney();
     		int crabs = CrabView.nativelimit;
     		// health bar gray background
     		g.setColor(Color.GRAY);
@@ -199,7 +201,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     };
     //crabs.add(new Crab()); // creates initial crab
     waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
-    fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200));
+    fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(300),ViewTemplate.scaley(700)), 0, 200));
     panel2.addMouseListener(new MouseAdapter() { //change to addMouseMotionListener if using drag 
         private Color background;
         @Override
@@ -380,8 +382,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         	if(crabby == true && SplashScreen.crabby == true){
         		//System.out.println("test");
                paintcrab();
-               paintwater();
                paintfm();
+               paintwater();
                plantcheck();
                 //System.out.println("test6");
 //                for(CrabView c: crabs){
@@ -398,9 +400,13 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
                 timer +=1;
                 if(timer == 30 && watercount < 50){ //randomly makes a crab (1/50 chance)
             		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(280)), ViewTemplate.scaley(100), 5, Color.BLUE, 1.0));
-            		if(fmcount < 5) {
-            			fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(100),ViewTemplate.scaley(700)), 0, 200));
+            		if(fmcount < fm.getManNum()) {
+            			fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0, 100));
             			fmcount += 1;
+            		}
+            		if(fmcount >fm.getManNum()){
+            			fms.remove(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0, 100));
+            			fmcount -=1;
             		}
             		watercount += 1;
             		timer = 0;

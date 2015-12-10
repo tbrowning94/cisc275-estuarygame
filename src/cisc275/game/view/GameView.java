@@ -108,7 +108,7 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 	 * Creates panel and adds all needed buttons and labels
 	 */
 	private JPanel createContent() {
-        final BufferedImage image1 = InstanceView.createImage("images/BackTrial1.png");
+        final BufferedImage image1 = InstanceView.createImage("images/FrontScreen.png");
         final BufferedImage image2 = InstanceView.createImage("images/maintext.png");
         JPanel panel = new JPanel() {
             /**

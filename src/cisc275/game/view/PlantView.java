@@ -46,7 +46,7 @@ public class PlantView extends InstanceView {
 		pics = new BufferedImage[4];
    		pics[0] = createImage("images/Fern.png");
 		pics[1] = createImage("images/Fern.png");
-		pics[2] = createImage("images/Fernhurt.png");
+		pics[2] = createImage("images/HFern.png");
 		pics[3] = createImage("images/Fern.png");
 	}
 	public JLabel createPlantLabel(Point loc) {

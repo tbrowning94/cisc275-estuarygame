@@ -28,7 +28,7 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	private boolean removed;
 	private JLabel boatman;
 	BufferedImage boat = createImage("images/boatmanRE.png");
-	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(150, 100, 20));
+	private ImageIcon bimg = new ImageIcon(boat.getScaledInstance(90, 70, 20));
 
 
 	/**
@@ -161,6 +161,9 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 		}
 		return 0;
 	}
+	public int getManNum(){
+		return manTotal;
+	}
 	/**
 	 *@param runoffloc
 	 *@return EstHealth
@@ -188,7 +191,7 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	 * @return label for this fisherman object
 	 */
 	public JLabel createFLabel(Point loc) {
-    	BufferedImage fisherman = pics[0];
+    	BufferedImage fisherman = createImage("images/boatman.png");
     	ImageIcon fmIcon = new ImageIcon(fisherman.getScaledInstance(ViewTemplate.scalex(150), ViewTemplate.scaley(100), 20));
     	JLabel newFM = new JLabel("fisherman");
     	newFM.setIcon(fmIcon);
