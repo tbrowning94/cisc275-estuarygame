@@ -234,7 +234,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		}
     		else {
     			g.setFont(new Font("Purisa", Font.BOLD, 22));
-    			g.drawString("OVERFISHING", Cbar.x, Cbar.y+75);
+    			g.drawString("OVERFISHING", Cbar.x, Cbar.y*4);
     			g.setColor(Color.RED);
     			g.fillRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(200), ViewTemplate.scaley(Cbar.height), 15, 15);
     		}
