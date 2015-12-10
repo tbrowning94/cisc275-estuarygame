@@ -162,8 +162,8 @@ public class CrabView extends InstanceView{
 		BufferedImage[] picss = new BufferedImage[4];
    		picss[0] = createImage("images/Mcrab1.png");
 		picss[1] = createImage("images/Mcrab2.png");
-		picss[2] = createImage("images/crab1.png");
-		picss[3] = createImage("images/crab2.png");
+		picss[2] = createImage("images/crab5.png");
+		picss[3] = createImage("images/crab6.png");
 		pics = new ImageIcon[4];
 		pics[0] = new ImageIcon(picss[0].getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT));
 		pics[1] = new ImageIcon(picss[1].getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT));
