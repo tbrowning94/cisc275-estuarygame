@@ -22,7 +22,7 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 	Crab[] crabs;
 	List<Plant> plants;
 	GarbageCollector[] garbageCollectors;
-	
+	List<Garbage> garbs;
 	public Game() {
 		
 	}
@@ -107,6 +107,11 @@ public class Game implements java.io.Serializable{ //need to figure out how to l
 		plants.add(plant);
 	}
 	
+	//adds garbage to level 
+		public void addGarb(Garbage garb) {
+			garbs.add(garb);
+		}
+		
 	//Runs Fisherman's fishing method then multiplies by number of fisherman
 	int moneyFish() { 
 		return 0;
