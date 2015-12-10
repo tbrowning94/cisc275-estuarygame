@@ -20,9 +20,9 @@ public class Level {
 	static ArrayList<GarbageCollectorView> garbColl = new ArrayList<GarbageCollectorView>();
 	public static boolean crabby = false;
 	boolean intersection = false;
-	public int crabcount = 0;
+	public int crabcount = 1;
 	public int watercount = 1;
-	public int garbcount = 0;
+	public int garbcount = 1;
 	
 	public Level(int lvl) {
 		if(lvl == 0){
@@ -31,6 +31,20 @@ public class Level {
 	}
 
 	public void generateTutorial() {
+		// stall game, set intro text, spawn one water and enable
+		// the player to place a plant
+		// if they place it and decrease water size move to next state
+		// stall game, explain buffers and water effect, allow player to place buffer
+		// if water removed stall game, introduce crabs and spawn one mitten
+		// make the crab move to the plant manually, when it stall plant, stall game
+		// explain effect, allow player to remove
+		// if crabcount = 0, spawn a native crab, explain that player can remove them for 
+		// money, but if they remove too many the health goes down
+		// if the player removes the crab again, remove all and reset
+		// this time spawn garbage, explain the effect
+		// introduce garbage collector and allow them to place one
+		// if garbage is removed stall the game, remind the player
+		// of fisherman, remove all and advance game state to level 1
 		
 	}
 }
