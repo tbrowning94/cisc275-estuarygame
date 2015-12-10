@@ -106,10 +106,8 @@ public class PlantView extends InstanceView {
 	 * of each
 	 */
 	public boolean checkintersectp(PlantView p){
-		
-//		System.out.println("CRAB "+areaA);
-//		System.out.println("PLANT " +plantarea);
-		return p.plantarea.intersects(plantarea.getBounds2D());
+		Area areaA = new Area(p.pbutton.getBounds());
+		return areaA.intersects(plantarea.getBounds2D());
 	}
 	/**
 	 * @param plantview

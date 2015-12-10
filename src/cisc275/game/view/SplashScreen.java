@@ -515,11 +515,11 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 						}
 					}
 				}
-				else if(w.affected.contains(p)){
-					w.normal(p);
-					getPanel2().remove(w.getWbutton());
-					getPanel2().add(w.getWbutton(),new Integer(1));
-				}
+//				else if(w.affected.contains(p)){
+//					w.normal(p);
+//					getPanel2().remove(w.getWbutton());
+//					getPanel2().add(w.getWbutton(),new Integer(1));
+//				}
 			}
 			p.intersecting = false;
 			int index= 0;
