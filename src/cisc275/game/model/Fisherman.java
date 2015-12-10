@@ -68,6 +68,15 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 		return pHbar;
 	}
 	/**
+	 * @return pH value stored on fisherman based on health
+	 */
+	public static int lowerpH(int pH){
+		 return pHbar -= pH;
+	}
+	public static int raisepH(int pH){
+		 return pHbar += pH;
+	}
+	/**
 	 * @return player money stored on fisherman
 	 */
 	public static int getMoney(){

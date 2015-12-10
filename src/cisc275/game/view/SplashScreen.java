@@ -525,6 +525,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			w.move();
     		}
     		if(w.getRemoved() == true){ 
+    			if (w.getLocation().getY() >= GameView.getWorldHeight() -100) {
+    				Fisherman.lowerpH(10);
+    				panel2.repaint();
+    			}
     			deletenumWater = waterTiles.indexOf(w);
     		}
     		w.paintWater();
