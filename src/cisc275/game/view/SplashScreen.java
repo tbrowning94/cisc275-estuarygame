@@ -266,12 +266,15 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		loc.setLocation(loc.getX()-ViewTemplate.scalex(30), loc.getY()-ViewTemplate.scaley(30));
         		PlantView tempplant = new PlantView(1, loc);
         		if(PlantView.checkbuffer(tempplant)){
-        			getPanel2().add(tempplant.pbutton,new Integer(3));
-            		plants.add(tempplant);
-            		Fisherman.setMoney(Fisherman.getMoney()-10);
-        			
-        			
-        			getPanel2().repaint();
+        			if(loc.getY() < ViewTemplate.scaley(627) && loc.getY() > ViewTemplate.scaley(358)){
+        				getPanel2().add(tempplant.pbutton,new Integer(3));
+                		plants.add(tempplant);
+                		Fisherman.setMoney(Fisherman.getMoney()-10);
+            			
+            			
+            			getPanel2().repaint();
+        			}
+        			;
         		};
         		crabby = true;
         		isClicked = click.norm;
@@ -283,11 +286,13 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			paintPlantComponent(e.getComponent().getGraphics(), loc);
     			break;    			
     		case gC1:
+    			if(loc.getY() < ViewTemplate.scaley(627) && loc.getY() > ViewTemplate.scaley(358)){
     			loc.setLocation(loc.getX()-30, loc.getY()-30);
         		GarbageCollectorView tempgc = new GarbageCollectorView(loc);
         		getPanel2().add(tempgc.gcbutton,new Integer(4));
         		garbColl.add(tempgc);
         		Fisherman.setMoney(Fisherman.getMoney()-10);
+    			}
     			isClicked = click.norm;
     			crabby = true;
     			getPanel2().repaint();
