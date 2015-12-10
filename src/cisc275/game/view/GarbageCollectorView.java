@@ -13,13 +13,15 @@ import javax.swing.JLabel;
  */
 public class GarbageCollectorView extends InstanceView{
 	static ImageIcon[] pics = new ImageIcon[4];
-	static int upxbound = ViewTemplate.scalex(1306);
-    static int upybound = ViewTemplate.scalex(580);
-    static int downxbound = ViewTemplate.scalex(20);
-    static int downybound = ViewTemplate.scalex(270);
+	 int upxbound;
+     int upybound;
+     int downxbound;
+     int downybound;
     static BufferedImage front;
     final int xIncr = 8;
     final int yIncr = 2;
+    int xloc; //model
+	int yloc; //model
     boolean up = false; //model
     boolean down = true; //model
     boolean left = false; //model
@@ -30,12 +32,18 @@ public class GarbageCollectorView extends InstanceView{
     final static int scaledimgWidth = ViewTemplate.scalex(58);
     final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel gcbutton = new JLabel("gc");
-    
+    Point original;
 	/**
 	 * @param location - location for garbage collector label
 	 * Set the label icon and position for garbage collector
 	 */
 	public GarbageCollectorView(Point location){
+		upxbound = (int) location.getX()+ViewTemplate.scalex(250);
+		downxbound = (int) location.getX()-ViewTemplate.scalex(250);
+		upybound = (int) location.getY()+ViewTemplate.scaley(200);
+		downybound = (int) location.getY()-ViewTemplate.scaley(200);
+		xloc = (int) location.getX(); //model
+		yloc = (int) location.getY(); //model
 		gcbutton.setIcon(pics[0]);
         gcbutton.setLocation(location);
         gcbutton.setSize(scaledimgWidth, scaledimgHeight);
@@ -52,17 +60,37 @@ public class GarbageCollectorView extends InstanceView{
         		randcount = 0;
         		rand = grndxdir(2);
         	}
-        	 if (gcbutton.getX() >= upxbound || rand == 1)
+        	 if (xloc >= upxbound || rand == 1)
              {
-                 right = false;
-                 left = true;
+        		 if(xloc >= upxbound){
+        			 //System.out.println((gcbutton.getX()+" "+ upxbound));
+        			 right = false;
+                     left = true;
+        		 }
              }
              
-             if (gcbutton.getX() <= downxbound || rand == 2)
+             if (xloc <= downxbound || rand == 2)
              {
-                 right = true;
-                 left = false;
+            	 if(xloc <= downxbound){
+            		// System.out.println((gcbutton.getX()+" "+ downxbound));
+            		 right = true;
+            		 left = false;
+            	 }
              }
+//             if (yloc >=  upybound || rand == 3)
+//             {
+//            	 System.out.println((gcbutton.getY()+" "+ upybound));
+//                 up = true;
+//                 down = false;
+//             }
+//             
+//             if (yloc <= downybound  || rand == 4)
+//             {
+//            	 System.out.println((gcbutton.getY()+" "+ downybound));
+//                 up = false;
+//                 down = true;
+//             }
+             rand = 0;
              rand = 0;
              if(picNum == 1 || picNum == 2){
          		picNum++;
@@ -86,8 +114,12 @@ public class GarbageCollectorView extends InstanceView{
          		picNum = 1;
          	}
             gcbutton.setIcon(ing);
-             if (left) gcbutton.setLocation(gcbutton.getX()-xIncr, gcbutton.getY());
-             if (right) gcbutton.setLocation(gcbutton.getX()+xIncr, gcbutton.getY());
+//            if (up) yloc-=yIncr;
+//            if (down) yloc+=yIncr;
+            if (left) xloc-=xIncr;
+            if (right) xloc+=xIncr;
+            gcbutton.setLocation(xloc, yloc);
+             
     }
     
     /**
