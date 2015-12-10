@@ -91,7 +91,7 @@ public class PlantView extends InstanceView {
 	/**
 	 * @param water
 	 * @return boolean
-	 * checks if a plants boundary is intersecting a water labels boundary, returns true or false
+	 * checks if plants boundary is intersecting a water labels boundary, returns true or false
 	 */
 	public boolean checkintersectw(Water w) {
 		Area areaA = new Area(w.getWbutton().getBounds());
