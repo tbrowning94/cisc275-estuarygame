@@ -53,7 +53,7 @@ public class PlantView extends InstanceView {
    		pics[0] = createImage("images/Fern.png");
 		pics[1] = createImage("images/Fern.png");
 		pics[2] = createImage("images/HFern.png");
-		pics[3] = createImage("images/Fern.png");
+		pics[3] = createImage("images/buffer.png");
 	}
 	public JLabel createPlantLabel(Point loc) {
     	BufferedImage plant = pics[0];
@@ -83,7 +83,7 @@ public class PlantView extends InstanceView {
 	public void changepic(int i) {
 		pbutton.setIcon(new ImageIcon(pics[i].getScaledInstance(ViewTemplate.scalex(75), ViewTemplate.scaley(75), Image.SCALE_DEFAULT)));;
 		if(i == 3){
-			pbutton.setSize(scaledimgWidth*2, scaledimgHeight*2);
+			pbutton.setSize(ViewTemplate.scalex(110), ViewTemplate.scaley(75));
 		}
 		// TODO Auto-generated method stub
 		
@@ -113,13 +113,19 @@ public class PlantView extends InstanceView {
 	 * @param plantview
 	 * checks if three plants are placed next to each other by calling checkintersectp(),
 	 * if three plant are placed in a row buffer is set to true 
+	 * @return 
 	 */
-	public static void checkbuffer(PlantView pl){
+	public static boolean checkbuffer(PlantView pl){
 		 ArrayList<PlantView> tempp = new ArrayList<PlantView>();
 		for(PlantView p: SplashScreen.plants){
 			if(p != pl){
 				if(pl.checkintersectp(p)){
+					if(p.buffer){
+						return false;
+					}
+					else{
 					tempp.add(p);
+					}
 				}
 			}
 		}
@@ -129,9 +135,10 @@ public class PlantView extends InstanceView {
 				SplashScreen.getPanel2().remove(q.pbutton);
 			}
 			pl.changepic(3);
-			pl.pbutton.setIcon(new ImageIcon(pics[1].getScaledInstance(ViewTemplate.scalex(150), ViewTemplate.scaley(150), Image.SCALE_DEFAULT)));;
+			pl.pbutton.setIcon(new ImageIcon(pics[3].getScaledInstance(ViewTemplate.scalex(110), ViewTemplate.scaley(75), Image.SCALE_DEFAULT)));;
 			pl.buffer = true;
 		}
+		return true;
 	}
 
 }
