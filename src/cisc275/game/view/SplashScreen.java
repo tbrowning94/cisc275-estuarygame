@@ -385,6 +385,9 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         			garb.addAll(Garbage.generateTrash(20));
         			garbcount += 20;
         		}
+        		for(GarbageCollectorView gc:garbColl){
+        			gc.move();
+        		}
         		paintgarbage();
         		paintcrab();
         		paintfm();

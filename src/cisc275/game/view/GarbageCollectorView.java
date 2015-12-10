@@ -2,6 +2,8 @@ package cisc275.game.view;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -11,6 +13,17 @@ import javax.swing.JLabel;
  */
 public class GarbageCollectorView extends InstanceView{
 	static BufferedImage[] pics;
+	static int upxbound = ViewTemplate.scalex(1306);
+    static int upybound = ViewTemplate.scalex(580);
+    static int downxbound = ViewTemplate.scalex(20);
+    static int downybound = ViewTemplate.scalex(270);
+    final int xIncr = 8;
+    final int yIncr = 2;
+    boolean up = false; //model
+    boolean down = true; //model
+    boolean left = false; //model
+    boolean right = true; //model
+    int randcount = 0;
     final static int scaledimgWidth = ViewTemplate.scalex(75);
     final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel gcbutton = new JLabel("gc");
@@ -25,6 +38,50 @@ public class GarbageCollectorView extends InstanceView{
         gcbutton.setSize(scaledimgWidth, scaledimgHeight);
 	}
 	
+	/**
+     * If rando determines that the crab should change directions it determines the new
+     * random direction
+     */
+    public void move() {
+    		randcount= grndxdir(1);
+        	int rand = 0;       	
+        	if(randcount == 1){
+        		randcount = 0;
+        		rand = grndxdir(2);
+        	}
+        	 if (gcbutton.getX() >= upxbound || rand == 1)
+             {
+                 right = false;
+                 left = true;
+             }
+             
+             if (gcbutton.getX() <= downxbound || rand == 2)
+             {
+                 right = true;
+                 left = false;
+             }
+             rand = 0;
+             if (left) gcbutton.setLocation(gcbutton.getX()-xIncr, gcbutton.getY());
+             if (right) gcbutton.setLocation(gcbutton.getX()+xIncr, gcbutton.getY());
+    }
+    
+    /**
+     * 
+     * Method controlling all random actions for crabs (mitten or native, y-axis spawn
+     * location, direction change) 
+     * @param l
+     * @return int
+     */
+    public int grndxdir(int l){
+    	Random rnd = new Random();
+    	if(l == 1){ //1 in 8 chance of randomly changing direction
+    		return(rnd.nextInt(8)+1);
+    	}
+    	else { //determines which direction it moves(l=2)
+    		return(rnd.nextInt(4)+1);
+    	}
+    }
+  
 	/**
 	 * Initializes garbage collector images
 	 */
