@@ -39,6 +39,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	private static final long serialVersionUID = 1L;
 	static int TIMER_DELAY = 50;
 	int timer = 0;
+	Rectangle Filler1 = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+	Rectangle Filler2 = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+	Rectangle Filler3 = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+	Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+	Rectangle Mbar = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+	Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
 	private static JLayeredPane panel2;
 	int deletenum = -1; //with use of crabs
 	int deletenumWater = -1; // with water
@@ -150,29 +156,24 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
-			Rectangle Filler1 = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-			Rectangle Filler2 = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-			Rectangle Filler3 = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-    		Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-    		Rectangle Mbar = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
-    		Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+			
     		int health = Fisherman.getpH();
     		int money = Fisherman.getMoney();
-    		int crabs = CrabView.nativelimit;
+    		int crabcount = Game.nativelimit;
     		// health bar gray background
     		g.setColor(Color.GRAY);
-    		g.fillRoundRect(Filler1.x, Filler1.y, 200, Filler1.height, 15, 15);
-    		g.drawRoundRect(Filler1.x, Filler1.y, Filler1.width, Filler1.height, 15, 15);
-    		g.fillRoundRect(Filler2.x, Filler2.y, 200, Filler2.height, 15, 15);
-    		g.drawRoundRect(Filler2.x, Filler2.y, Filler2.width, Filler2.height, 15, 15);
-    		g.fillRoundRect(Filler3.x, Filler3.y, 200, Filler3.height, 15, 15);
-    		g.drawRoundRect(Filler3.x, Filler3.y, Filler3.width, Filler3.height, 15, 15);
+    		g.fillRoundRect(Filler1.x, Filler1.y, ViewTemplate.scalex(200), ViewTemplate.scaley(Filler1.height), 15, 15);
+    		g.drawRoundRect(Filler1.x, Filler1.y, ViewTemplate.scalex(Filler1.width), ViewTemplate.scaley(Filler1.height), 15, 15);
+    		g.fillRoundRect(Filler2.x, Filler2.y, ViewTemplate.scalex(200), ViewTemplate.scaley(Filler2.height), 15, 15);
+    		g.drawRoundRect(Filler2.x, Filler2.y, ViewTemplate.scalex(Filler2.width), ViewTemplate.scaley(Filler2.height), 15, 15);
+    		g.fillRoundRect(Filler3.x, Filler3.y, ViewTemplate.scalex(200), ViewTemplate.scaley(Filler3.height), 15, 15);
+    		g.drawRoundRect(Filler3.x, Filler3.y, ViewTemplate.scalex(Filler3.width), ViewTemplate.scaley(Filler3.height), 15, 15);
     		
-    		g.drawRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
+    		g.drawRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(Mbar.width), ViewTemplate.scaley(Mbar.height), 15, 15);
     		//g.fillRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
-    		g.drawRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
+    		g.drawRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(Hbar.width), ViewTemplate.scaley(Hbar.height), 15, 15);
     		//g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
-    		g.drawRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
+    		g.drawRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(Cbar.width), ViewTemplate.scaley(Cbar.height), 15, 15);
     		//g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
     		if(money >= 150){
     			g.setColor(Color.GREEN);
@@ -183,7 +184,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		if(money < 50){
     			g.setColor(Color.RED);
     		}
-    		g.fillRoundRect(Mbar.x, Mbar.y, money , Mbar.height, 15, 15);
+    		g.fillRoundRect(Mbar.x, Mbar.y, ViewTemplate.scalex(money) , ViewTemplate.scaley(Mbar.height), 15, 15);
     		g.setColor(Color.BLACK);
     		g.setFont(new Font("Purisa", Font.BOLD, 22));
     		g.drawString("Money: " + Fisherman.getMoney(), Mbar.x, Mbar.y );
@@ -200,21 +201,22 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     			g.setColor(Color.GREEN);
     		
     		}
-    		g.fillRoundRect(Hbar.x, Hbar.y, health, Hbar.height, 15, 15);
+    		g.fillRoundRect(Hbar.x, Hbar.y, ViewTemplate.scalex(health), ViewTemplate.scaley(Hbar.height), 15, 15);
     		g.setColor(Color.BLACK);
     		g.setFont(new Font("Purisa", Font.BOLD, 22));
     		g.drawString("pH: " + Fisherman.getpH()/25, Hbar.x , Hbar.y );
     		
-    		if (crabs < 5) {
+    		if (crabcount < 6) {
     			g.setColor(Color.GREEN);
     		}
     		else {
     			g.setColor(Color.RED);
     		}
-    		g.fillRoundRect(Cbar.x, Cbar.y, crabs, Cbar.height, 15, 15);
+    		
+    		g.fillRoundRect(Cbar.x, Cbar.y, ViewTemplate.scalex(convertpercentage(crabcount,200)), ViewTemplate.scaley(Cbar.height), 15, 15);
     		g.setColor(Color.BLACK);
     		g.setFont(new Font("Purisa", Font.BOLD, 22));
-    		g.drawString("Crabs Caught: " + crabs, Cbar.x , Cbar.y );
+    		g.drawString("Crabbing Limit: " + crabcount, Cbar.x , Cbar.y );
     		};
     };
     //crabs.add(new Crab()); // creates initial crab
@@ -238,6 +240,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		Fisherman.setMoney(Fisherman.getMoney()-10);
     			crabby = true;
     			isClicked = click.norm;
+    			getPanel2().repaint();
     			break;   		
     		case plant2:
     			paintPlantComponent(e.getComponent().getGraphics(), loc);
@@ -253,6 +256,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         		Fisherman.setMoney(Fisherman.getMoney()-10);
     			isClicked = click.norm;
     			crabby = true;
+    			getPanel2().repaint();
     			break;    			
     		case gC2:
     			paintGarbageCollectorComponent(e.getComponent().getGraphics(), loc);
@@ -445,8 +449,12 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	for(Crab c: crabs){
     		
     		if(c.removel == true){ //checks if crab needs to be removed
+    			if(!c.mitten){
+    				Game.nativelimit++;
+    				getPanel2().repaint();
+    			}
     			deletenum = crabs.indexOf(c);
-    			Game.nativelimit++;
+    			
     			//System.out.println("deletenum");
     		}
     		c.move();
@@ -608,5 +616,23 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 			}
 
 		}
+	}
+	int convertpercentage(int current, int regular){
+		if(current == 5){
+			return(200);
+		}
+		double cur = current;
+		//System.out.println(current);
+		if(current==0){
+			return 0;
+		}
+		else{
+			cur = cur/5;
+		}
+		
+		//System.out.println(cur);
+		cur = cur*regular;
+		return (int)cur;
+		
 	}
 }
