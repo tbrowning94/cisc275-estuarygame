@@ -265,13 +265,16 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         	case plant1:
         		loc.setLocation(loc.getX()-ViewTemplate.scalex(30), loc.getY()-ViewTemplate.scaley(30));
         		PlantView tempplant = new PlantView(1, loc);
-        		PlantView.checkbuffer(tempplant);
-        		getPanel2().add(tempplant.pbutton,new Integer(3));
-        		plants.add(tempplant);
-        		Fisherman.setMoney(Fisherman.getMoney()-10);
-    			crabby = true;
-    			isClicked = click.norm;
-    			getPanel2().repaint();
+        		if(PlantView.checkbuffer(tempplant)){
+        			getPanel2().add(tempplant.pbutton,new Integer(3));
+            		plants.add(tempplant);
+            		Fisherman.setMoney(Fisherman.getMoney()-10);
+        			
+        			
+        			getPanel2().repaint();
+        		};
+        		crabby = true;
+        		isClicked = click.norm;
     			break;   		
     		case plant2:
     			paintPlantComponent(e.getComponent().getGraphics(), loc);
