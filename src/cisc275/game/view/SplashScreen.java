@@ -150,21 +150,30 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(pics[0], 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+			Rectangle Filler1 = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+			Rectangle Filler2 = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
+			Rectangle Filler3 = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		Rectangle Hbar = new Rectangle((int)(WORLD_WIDTH * 0.7), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		Rectangle Mbar = new Rectangle((int)(WORLD_WIDTH * 0.45), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		Rectangle Cbar = new Rectangle((int)(WORLD_WIDTH * 0.2), (int)(WORLD_HEIGHT * 0.03), 20, 40);
     		int health = Fisherman.getpH();
     		int money = Fisherman.getMoney();
-    		//System.out.println(money);
     		int crabs = CrabView.nativelimit;
     		// health bar gray background
     		g.setColor(Color.GRAY);
+    		g.fillRoundRect(Filler1.x, Filler1.y, 200, Filler1.height, 15, 15);
+    		g.drawRoundRect(Filler1.x, Filler1.y, Filler1.width, Filler1.height, 15, 15);
+    		g.fillRoundRect(Filler2.x, Filler2.y, 200, Filler2.height, 15, 15);
+    		g.drawRoundRect(Filler2.x, Filler2.y, Filler2.width, Filler2.height, 15, 15);
+    		g.fillRoundRect(Filler3.x, Filler3.y, 200, Filler3.height, 15, 15);
+    		g.drawRoundRect(Filler3.x, Filler3.y, Filler3.width, Filler3.height, 15, 15);
+    		
     		g.drawRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
-    		g.fillRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
+    		//g.fillRoundRect(Mbar.x, Mbar.y, Mbar.width, Mbar.height, 15, 15);
     		g.drawRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
-    		g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
+    		//g.fillRoundRect(Hbar.x, Hbar.y, Hbar.width, Hbar.height, 15, 15);
     		g.drawRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
-    		g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
+    		//g.fillRoundRect(Cbar.x, Cbar.y, Cbar.width, Cbar.height, 15, 15);
     		if(money >= 150){
     			g.setColor(Color.GREEN);
     		}
@@ -174,24 +183,27 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		if(money < 50){
     			g.setColor(Color.RED);
     		}
-    		g.fillRoundRect(Mbar.x, Mbar.y, 200 , Mbar.height, 15, 15);
+    		g.fillRoundRect(Mbar.x, Mbar.y, money , Mbar.height, 15, 15);
     		g.setColor(Color.BLACK);
     		g.setFont(new Font("Purisa", Font.BOLD, 22));
     		g.drawString("Money: " + Fisherman.getMoney(), Mbar.x, Mbar.y );
     	
-    		if (health < 50) {
+    		if (health <= 50) {
     			g.setColor(Color.RED);
+    			//g.fillRoundRect(Hbar.x, Hbar.y, health, Hbar.height, 15, 15);
     		}
-    		else if (health < 150) {
+    		else if (health <= 150) {
     			g.setColor(Color.YELLOW);
+
     		}
     		else {
     			g.setColor(Color.GREEN);
+    		
     		}
-    		g.fillRoundRect(Hbar.x, Hbar.y, 200 , Hbar.height, 15, 15);
+    		g.fillRoundRect(Hbar.x, Hbar.y, health, Hbar.height, 15, 15);
     		g.setColor(Color.BLACK);
     		g.setFont(new Font("Purisa", Font.BOLD, 22));
-    		g.drawString("pH: " + fms.get(0).getpH()/25, Hbar.x , Hbar.y );
+    		g.drawString("pH: " + Fisherman.getpH()/25, Hbar.x , Hbar.y );
     		
     		if (crabs < 5) {
     			g.setColor(Color.GREEN);
@@ -199,7 +211,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     		else {
     			g.setColor(Color.RED);
     		}
-    		g.fillRoundRect(Cbar.x, Cbar.y, 200 , Cbar.height, 15, 15);
+    		g.fillRoundRect(Cbar.x, Cbar.y, crabs, Cbar.height, 15, 15);
     		g.setColor(Color.BLACK);
     		g.setFont(new Font("Purisa", Font.BOLD, 22));
     		g.drawString("Crabs Caught: " + crabs, Cbar.x , Cbar.y );
