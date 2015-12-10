@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -108,8 +110,8 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 	 * Creates panel and adds all needed buttons and labels
 	 */
 	private JPanel createContent() {
-        final BufferedImage image1 = InstanceView.createImage("images/FrontScreen.png");
-        final BufferedImage image2 = InstanceView.createImage("images/maintext.png");
+        final BufferedImage image1 = InstanceView.createImage("images/backtest.png");
+        final BufferedImage image2 = InstanceView.createImage("images/testlogo.png");
         JPanel panel = new JPanel() {
             /**
 			 * 
@@ -117,9 +119,17 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 			private static final long serialVersionUID = -5664679380050387004L;
 			@Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(image1, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
-                g.drawImage(image2, ViewTemplate.scalex(228), ViewTemplate.scaley(100), ViewTemplate.scalex(915), ViewTemplate.scaley(121), null);     
+//                super.paintComponent(g);
+//                g.drawImage(image1, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, null);
+                
+				int width = getWidth();  
+		        int height = getHeight();  
+		        for (int x = 0; x < WORLD_WIDTH; x += image1.getWidth()) {  
+		            for (int y = 0; y < WORLD_HEIGHT; y += image1.getHeight()) {  
+		                g.drawImage(image1, x, y, this);  
+		            }  
+		        }
+		        g.drawImage(image2, ViewTemplate.scalex(228), ViewTemplate.scaley(100), ViewTemplate.scalex(915), ViewTemplate.scaley(121), null); 
             }
         };
         panel.addMouseListener(new MouseAdapter() {
@@ -143,26 +153,31 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 		Dimension size1 = Name.getPreferredSize();
 		System.out.println(size1);
 		Name.setSize(size1);
-		
-		JButton button1 = new JButton("Start");
-		button1.setForeground(Color.blue);
-		button1.setFont(new Font("Georgia",Font.BOLD,20));
-		size1=button1.getPreferredSize();
-		button1.setBounds(ViewTemplate.scalex(600), ViewTemplate.scaley(300), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
-		button1.addActionListener(this);
-		button1.setActionCommand("Open");
-		
-		JButton button2 = new JButton("Tutorial");
-		size1 = button2.getPreferredSize();
-		button2.setBounds(ViewTemplate.scalex(600), ViewTemplate.scaley(375), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
-		button2.setForeground(Color.blue);
-		button2.setFont(new Font("Georgia",Font.BOLD,20));
-		button2.addActionListener(this);
-		button2.setActionCommand("OpenTut");
+   		BufferedImage butt = InstanceView.createImage("images/button (2).png");
+   		
+		JLabel button1 = new JLabel();
+		button1.setBounds(ViewTemplate.scalex(575), ViewTemplate.scaley(400), ViewTemplate.scalex(150), ViewTemplate.scaley(50));
+		button1.setSize(ViewTemplate.scalex(201),ViewTemplate.scaley(100));
+		button1.setIcon(new ImageIcon(butt.getScaledInstance(ViewTemplate.scalex(201), ViewTemplate.scaley(100), Image.SCALE_DEFAULT)));
+		button1.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		       // you can open a new frame here as
+		       // i have assumed you have declared "frame" as instance variable
+		    	//JOptionPane.showMessageDialog(null, "You Win");
+		    	 getContentPane().removeAll();//dispose();
+		           // System.out.print("hello");
+		            //waterTiles.add(new Water(new Point(20,20), 100, 5, Color.BLUE));
+		            SplashScreen.crabby = true;
+		            getContentPane().add(SplashScreen.getPanel2());
+		            pack();
+		    	
+		    }  
+		});
 
 		panel.add(Name); 	
 		panel.add(button1);
-		panel.add(button2);
         return panel;
     }
 	@Override
