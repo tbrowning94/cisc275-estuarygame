@@ -1,6 +1,8 @@
 package cisc275.game.view;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class PlantView extends InstanceView {
     double xloc;
     double yloc;
     Area plantarea;
+    
     final static int scaledimgWidth = ViewTemplate.scalex(75);
     final static int scaledimgHeight = ViewTemplate.scaley(75);
     JLabel pbutton = new JLabel("test");
@@ -37,7 +40,10 @@ public class PlantView extends InstanceView {
 		pbutton.setIcon(new ImageIcon(pics[0].getScaledInstance(ViewTemplate.scalex(75), ViewTemplate.scaley(75), Image.SCALE_DEFAULT)));;
         pbutton.setLocation(location);
         pbutton.setSize(scaledimgWidth,scaledimgWidth);
-        plantarea = new Area(pbutton.getBounds());
+        JLabel temp = new JLabel();
+        temp.setSize(scaledimgWidth/2,scaledimgWidth/2);
+        temp.setLocation(location);
+        plantarea = new Area(temp.getBounds());
 	}
 	/**
 	 * InitializePictures calls create image and loads image strings into the list pics
@@ -100,10 +106,10 @@ public class PlantView extends InstanceView {
 	 * of each
 	 */
 	public boolean checkintersectp(PlantView p){
-		Area areaA = new Area(p.pbutton.getBounds());
+		
 //		System.out.println("CRAB "+areaA);
 //		System.out.println("PLANT " +plantarea);
-		return areaA.intersects(plantarea.getBounds2D());
+		return p.plantarea.intersects(plantarea.getBounds2D());
 	}
 	/**
 	 * @param plantview
