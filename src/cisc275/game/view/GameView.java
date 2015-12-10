@@ -203,8 +203,9 @@ public class GameView extends ViewTemplate implements GameListener<Game>, Runnab
 	public void onEvent(String event, Game game) {
 		// TODO Auto-generated method stub		
 	}
-
+	
 	public static void main(String[] args) { //move to view, windows are central thread of game
+		
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
 			public void run() {

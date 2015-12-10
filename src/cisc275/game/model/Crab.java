@@ -19,7 +19,7 @@ public class Crab extends RandomMover implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 9084334807467140813L;
 	static int mittencount; 
-	boolean mitten;
+	public boolean mitten;
 	boolean stop = false;
 	int xloc = 7; //model
 	int yloc = 7; //model
@@ -39,13 +39,15 @@ public class Crab extends RandomMover implements java.io.Serializable{
     public PlantView planta; //will be changed to plant
 //	private Image image;
 //	private JButton cbutton;
+	public int index;
 	
 	
 	/**
 	 * Constructor for crab. Uses rando to determine location and whether or not it's a 
 	 * mitten crab
 	 */
-	public Crab() {
+	public Crab(int num) {
+		index = num;
 		if(rando(5)== 1){
     		mitten = false;
     	}

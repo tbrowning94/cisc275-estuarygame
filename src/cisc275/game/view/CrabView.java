@@ -11,12 +11,12 @@ public class CrabView extends InstanceView{
 //	boolean stop = false; //model
 //	boolean mitten; //model
 	static int nativelimit; //model (game)
-	static Image ing; //view
-	static int picNum = 1; //view
+	ImageIcon ing; //view
+	int picNum = 1; //view
     int picNums; //view
     static boolean side = true;
     final int frameCount = 8; //view
-    static Image[] pics; //view
+    static ImageIcon[] pics; //view
 //    int xloc = 0; //model
 //    int yloc = 0; //model
     //both model and view. Controller will need to translate between the two. 
@@ -40,10 +40,27 @@ public class CrabView extends InstanceView{
 //    boolean left = false; //model
 //    boolean right = true; //model
     JLabel cbutton = new JLabel("test");
-
+    Crab crabholder;
     Image current;
+    boolean removel;
 	public PlantView planta;
-	
+	CrabView(Crab crabh){
+		crabholder = crabh;
+		JLabel crablabel = new JLabel();
+		 crablabel.setSize(scaledimgWidth, scaledimgHeight);
+		crablabel.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		       // you can open a new frame here as
+		       // i have assumed you have declared "frame" as instance variable
+		    	//JOptionPane.showMessageDialog(null, "You Win");
+		    	crabholder.removel = true;
+		    	
+		    }  
+		});
+		cbutton = crablabel;
+	}
 	
 //    /**
 //     * Move to model
@@ -76,11 +93,11 @@ public class CrabView extends InstanceView{
      * Determines the image that should be drawn to create animation
      * @param index 
      */
-    public static void paintcrab(Crab crab, int index) {
-    	System.out.println("CRAB: "+crab.isMitten()+" "+index);
+    public void paintcrab() {
+    	System.out.println(crabholder+" CRAB: "+crabholder.mitten);
     	if(picNum == 1 || picNum == 2){
     		picNum++;
-    		if(crab.isMitten()==true){
+    		if(crabholder.mitten==true){
     			ing = pics[0];
     		}
     		else{
@@ -89,7 +106,7 @@ public class CrabView extends InstanceView{
     	}
     	else if(picNum == 3){
     		picNum++;
-    		if(crab.isMitten()==true){
+    		if(crabholder.mitten==true){
     			ing = pics[1];
     		}
     		else{
@@ -138,32 +155,23 @@ public class CrabView extends InstanceView{
 //    	}
     	//this stays in view
     	System.out.println("testing"+picNum);
-    	SplashScreen.crabss.get(index).setIcon(new ImageIcon(ing.getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT)));
-         SplashScreen.crabss.get(index).setLocation(ViewTemplate.scalex(crab.getXloc()), ViewTemplate.scaley(crab.getYloc()));
+    	cbutton.setIcon(ing);
+         cbutton.setLocation(ViewTemplate.scalex(crabholder.getXloc()), ViewTemplate.scaley(crabholder.getYloc()));
     }
     public static void InitializePicturesC() {
-		pics = new BufferedImage[4];
-   		pics[0] = createImage("images/crabby.png");
-		pics[1] = createImage("images/crab1.png");
-		pics[2] = createImage("images/crab3.png");
-		pics[3] = createImage("images/crab4.png");
+		BufferedImage[] picss = new BufferedImage[4];
+   		picss[0] = createImage("images/Mcrab1.png");
+		picss[1] = createImage("images/Mcrab2.png");
+		picss[2] = createImage("images/crab1.png");
+		picss[3] = createImage("images/crab2.png");
+		pics = new ImageIcon[4];
+		pics[0] = new ImageIcon(picss[0].getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT));
+		pics[1] = new ImageIcon(picss[1].getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT));
+		pics[2] = new ImageIcon(picss[2].getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT));
+		pics[3] = new ImageIcon(picss[3].getScaledInstance(scaledimgWidth, scaledimgHeight, Image.SCALE_DEFAULT));
 	}
- static JLabel createlabel(int index){
-	 JLabel crablabel = new JLabel();
-	 crablabel.setSize(scaledimgWidth, scaledimgHeight);
-	crablabel.addMouseListener(new MouseAdapter()  
-	{  
-	    public void mouseClicked(MouseEvent e)  
-	    {  
-	       // you can open a new frame here as
-	       // i have assumed you have declared "frame" as instance variable
-	    	//JOptionPane.showMessageDialog(null, "You Win");
-	    	SplashScreen.crabs.get(index).removel = true;
-	    }  
-	});
-	return crablabel; 
-}
- 
+
+
 	 /**
 	 * Handles direction change during collision with plant. Should be moved to model.
 	 */
