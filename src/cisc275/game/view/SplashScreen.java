@@ -468,7 +468,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		}
                 timer +=1;
                 GLOBALTIMER += 1;
-                if(timer == 30 && watercount < 70){ //randomly makes a crab (1/50 chance)
+                if(timer == 30 && watercount < 20){ //randomly makes a crab (1/50 chance)
             		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
             		if(fmcount < fm.getManNum()) {
             			fms.add(new Fisherman(new Point (ViewTemplate.scalex(1200),ViewTemplate.scaley(700)), new Point (ViewTemplate.scalex(500),ViewTemplate.scaley(700)), 0));
@@ -481,11 +481,13 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
             		watercount += 1;
             		timer = 0;
             		}
-                else if(GLOBALTIMER >= 200 && watercount <70){
+                else if(GLOBALTIMER >= 200 && watercount <100){
                 	timer += 1;
                 	if(timer == 30) {
                 		waterTiles.add(new Water(new Point (ViewTemplate.scalex(900),ViewTemplate.scaley(210)), ViewTemplate.scaley(96), 5, Color.BLUE, 1.0));
                 		watercount += 1;
+                		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
+                		watercount+=1;
                 		timer = 0;
                 	}
                 }
