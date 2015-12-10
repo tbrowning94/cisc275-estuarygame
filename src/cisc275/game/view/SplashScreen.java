@@ -63,6 +63,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     JLabel crabbar = new JLabel("");
     JLabel moneybarr = new JLabel("");
     JLabel healthbar = new JLabel("");
+    JLabel sewerlabel = new JLabel("");
 	int numpics = 10;
 	private JButton pbutton, gcbutton;
 	public int crabcount = 0;
@@ -87,6 +88,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 		moneybarr.setLocation(ViewTemplate.scalex(530), ViewTemplate.scaley(0));
 		healthbar.setSize(ViewTemplate.scalex(310), ViewTemplate.scaley(87));
 		healthbar.setLocation(ViewTemplate.scalex(870), ViewTemplate.scaley(0));
+		sewerlabel.setSize(ViewTemplate.scalex(158), ViewTemplate.scaley(118));
+		sewerlabel.setLocation(ViewTemplate.scalex(530), ViewTemplate.scaley(190));
 		PlantView.InitializePictures();
 		CrabView.InitializePicturesC();
 		Garbage.InitializePicturesG();
@@ -100,7 +103,8 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	BufferedImage healthbar1 = InstanceView.createImage("images/healthoverlay.png");
     	BufferedImage Cloud = InstanceView.createImage("images/cloud.png");
     	BufferedImage bi2 = InstanceView.createImage("images/back1_pipe_2.png");
-//    	BufferedImage garb = InstanceView.createImage("images/trash.png");
+    	BufferedImage sewer = InstanceView.createImage("images/Sewer.png");
+ //   	BufferedImage garb = InstanceView.createImage("images/trash.png");
 //    	BufferedImage water1 = createImage("images/textures/water_map.png");
 //    	BufferedImage fm1 = createImage("images/boatman.png");
 //    	System.out.print("PrintPics");
@@ -110,6 +114,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 //    	pics[3] = garb;
 //    	pics[5] = water1;
 //    	pics[6] = fm1;
+    	sewerlabel.setIcon(new ImageIcon(sewer.getScaledInstance(ViewTemplate.scalex(158), ViewTemplate.scaley(118), Image.SCALE_DEFAULT)));
     	crabbar.setIcon(new ImageIcon(crabbar1.getScaledInstance(ViewTemplate.scalex(310), ViewTemplate.scaley(87), Image.SCALE_DEFAULT)));
     	moneybarr.setIcon(new ImageIcon(moneybar1.getScaledInstance(ViewTemplate.scalex(310), ViewTemplate.scaley(87), Image.SCALE_DEFAULT)));
     	healthbar.setIcon(new ImageIcon(healthbar1.getScaledInstance(ViewTemplate.scalex(310), ViewTemplate.scaley(87), Image.SCALE_DEFAULT)));
@@ -337,9 +342,10 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
 	cloud.setBounds(500, 50, 100, 150);
 	//theX+=xincr;
 	//}
-	panel2.add(crabbar);
-	panel2.add(moneybarr);
-	panel2.add(healthbar);
+	panel2.add(sewerlabel, new Integer(2));
+	panel2.add(crabbar, new Integer(10));
+	panel2.add(moneybarr, new Integer(10));
+	panel2.add(healthbar, new Integer(10));
 	panel2.add(pbutton,new Integer(10));
 	panel2.add(gcbutton,new Integer(10));
     return panel2;
