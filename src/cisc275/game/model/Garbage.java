@@ -20,10 +20,10 @@ public class Garbage extends InstanceView implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 611892886341823647L;
-	int upxbound = 1275;
-    int upybound = 627;
-    int downxbound = 0;
-    int downybound = 358;
+	static int upxbound = ViewTemplate.scalex(1306);
+    static int upybound = ViewTemplate.scalex(580);
+    static int downxbound = ViewTemplate.scalex(20);
+    static int downybound = ViewTemplate.scalex(270);
 	private int ranking;
 	private Point location;
 	private int damage;
@@ -130,7 +130,7 @@ public class Garbage extends InstanceView implements java.io.Serializable{
 	public static Point rndGarbPoint() {
 		Random rndx = new Random();
 		Random rndy = new Random();
-		Point rnd = new Point(rndx.nextInt(ViewTemplate.scalex(1366)), rndy.nextInt(ViewTemplate.scalex(269))+ViewTemplate.scalex(358));
+		Point rnd = new Point(rndx.nextInt(upxbound-downxbound)+downxbound, rndy.nextInt(upybound-downybound)+downybound);
 		return rnd;
 	}
 
