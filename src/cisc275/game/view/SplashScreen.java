@@ -435,7 +435,7 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
         public void actionPerformed(java.awt.event.ActionEvent e) {
         	if(crabby == true && SplashScreen.crabby == true){
         		//System.out.println("test");
-        		if(garbcount < 20) {
+        		if(garbcount < 5) {
         			garb.addAll(Garbage.generateTrash(20));
         			garbcount += 20;
         		}
@@ -526,7 +526,9 @@ public class SplashScreen extends ViewTemplate implements ActionListener, MouseL
     	for(Water w: waterTiles){
     		if(!w.isStopping()){
     			w.move();
-    		}
+    		} //else { // this seems to mess up buffers
+    			//w.setRemoved(true);
+    		//}
     		if(w.getRemoved() == true){ 
     			if (w.getLocation().getY() >= GameView.getWorldHeight() -100) {
     				int waterWidth = w.getWbutton().getWidth();

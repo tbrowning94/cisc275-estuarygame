@@ -53,8 +53,8 @@ public class Level {
 		SplashScreen.getPanel2().add(mainFM.getFLabel());
 		waterTiles.add(new Water(new Point (ViewTemplate.scalex(575),ViewTemplate.scaley(210)), ViewTemplate.scaley(48), 5, Color.BLUE, 1.0));
 		watercount += 1;
-		SplashScreen.paintwater();
-		crabby = true;
+		//SplashScreen.paintwater();
+		crabby = true; //need to set this when the player clicks the plant button
 		// the player to place a plant
 		// if they place it and decrease water size move to next state
 		// stall game, explain buffers and water effect, allow player to place buffer

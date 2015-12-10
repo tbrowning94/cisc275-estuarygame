@@ -98,6 +98,9 @@ public class Water extends InstanceView implements java.io.Serializable{
 	public boolean isStopping() {
 		return Stopping;
 	}
+	public void setRemoved(boolean b) {
+		this.removed = b;
+	}
 	/**
 	 * Sets this water objects stopping boolean
 	 * @param b - new stopping boolean value
