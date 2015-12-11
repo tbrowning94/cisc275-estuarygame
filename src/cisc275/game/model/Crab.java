@@ -27,7 +27,7 @@ public class Crab extends RandomMover implements java.io.Serializable{
     int upybound = 627;
     int downxbound = 0;
     int downybound = 358;
-    final int xIncr = 8;
+    final int xIncr = 4;
     final int yIncr = 2;
     int randcount = 0;
     public boolean removel = false;
@@ -49,10 +49,10 @@ public class Crab extends RandomMover implements java.io.Serializable{
 	public Crab(int num) {
 		index = num;
 		if(rando(5)== 1){
-    		mitten = true;
+    		mitten = false;
     	}
     	else{
-    		mitten = false;
+    		mitten = true;
     	}
 		yloc = rando(3);
 		if(side == true){

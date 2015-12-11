@@ -22,7 +22,7 @@ public class Fisherman extends InstanceView implements java.io.Serializable{
 	Point curLocation;
 	static BufferedImage[] pics; //view
 	int manTotal=0;
-	static int money=100;
+	static int money=200;
 	static int pHbar=200;
 	static int EstHealth=500;
 	private boolean removed;
