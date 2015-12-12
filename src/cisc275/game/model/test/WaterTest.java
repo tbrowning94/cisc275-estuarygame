@@ -1,11 +1,9 @@
 package cisc275.game.model.test;
-
 import static org.junit.Assert.*;
-
 import java.awt.Color;
+import java.awt.Point;
 
 import org.junit.Test;
-
 import cisc275.game.model.Game;
 import cisc275.game.model.Garbage;
 import cisc275.game.model.Water;
@@ -15,15 +13,16 @@ import cisc275.game.model.Water;
  *Basic tests of water methods
  */
 public class WaterTest {
-	Water test = new Water(null, 0, 10, null);
-	Garbage G = new Garbage(0);
-	Game game = new Game(0, 0, null, null, null, 0, 0, 0, 0);
 	/**
 	 * tests if setHealthOfRunoff returns product of 
 	 * garbage damage and number of particles
 	 */
 	@Test
 	public void testsetHealthOfRunoff() {
+		Point p1 = new Point(0,0);
+		Water.InitializePicturesW();
+		Water test = new Water(p1, 48, 5, Color.BLUE, 1.0);
+		Garbage G = new Garbage(p1, 10, 1);
 		int result = G.getDamage()*test.getRunoffParticles();
 		assertEquals(result,test.setHealthOfRunoff(G, test));
 	}
@@ -32,6 +31,9 @@ public class WaterTest {
 	 */
 	@Test
 	public void testsetrunoffC(){
+		Point p1 = new Point(0,0);
+		Water.InitializePicturesW();
+		Water test = new Water(p1, 48, 5, Color.BLUE, 1.0);
 		Color result = Color.blue;
 		if(test.getHealth()<50)
 			result = Color.blue;
@@ -47,6 +49,10 @@ public class WaterTest {
 	 */
 	@Test
 	public void testsetRunoffParticles(){
+		Point p1 = new Point(0,0);
+		Water.InitializePicturesW();
+		Water test = new Water(p1, 48, 5, Color.BLUE, 1.0);
+		Game game = new Game(0, 0, null, null, null, 0, 0, 0, 0);
 		int result = 0;
 		if(game.getlevel() == 0)
 			 result = 2;
