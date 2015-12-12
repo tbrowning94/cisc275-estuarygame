@@ -53,6 +53,7 @@ public class Water extends InstanceView implements java.io.Serializable{
 		this.runoffC = RO;
 		this.setWbutton(createWaterLabel(loc, Health));
 		this.removed = false;
+		this.Stopping = false;
 	}
 	
 //------Getters and Setters--------------------------------------------//
@@ -101,6 +102,9 @@ public class Water extends InstanceView implements java.io.Serializable{
 	public void setRemoved(boolean b) {
 		this.removed = b;
 	}
+	public void setLocation(Point p) {
+		this.location = p;
+	}
 	/**
 	 * Sets this water objects stopping boolean
 	 * @param b - new stopping boolean value
@@ -132,17 +136,17 @@ public class Water extends InstanceView implements java.io.Serializable{
 	 * @return health of runoff
 	 * decides what color runoff  will be
 	 */
-	public int setHealthOfRunoff(Garbage damage, Water RunoffParticles ){
-		return this.health;
+	public int setHealthOfRunoff(int health){
+		return this.health = health;
 	}
 	/**
 	 * Sets runoff color based on current health of water
 	 */
 	public void setrunoffC(){
 		int h = this.health;
-		if (h > -50 && h <= 0) {
+		if (h <= 25) {
 			this.runoffC = Color.CYAN;
-		} else if (h > 0 && h <= 50){
+		} else if (h > 25 && h <= 50){
 			this.runoffC = Color.YELLOW;
 		} else if (h > 50 && h <= 100){
 			this.runoffC = Color.GREEN;
@@ -185,10 +189,10 @@ public class Water extends InstanceView implements java.io.Serializable{
 		int x, y;
 		x = (int) this.location.getX();
 		y = (int) this.location.getY();
-		if (y < GameView.getWorldHeight() - 2*this.speed) { // Not in water yet, continue moving down
+		if (y < ViewTemplate.WORLD_HEIGHT + 2*this.speed) { // Not in water yet, continue moving down
 			y += 2*this.speed; // TODO: finalize movement amount
 		}
-		if (y >= GameView.getWorldHeight() - 100) { //TODO: change this hard coded value
+		if (y >= ViewTemplate.WORLD_HEIGHT - 100) { //TODO: change this hard coded value
 			this.removed = true; // in water, remove on next update
 			
 		}
@@ -203,21 +207,22 @@ public class Water extends InstanceView implements java.io.Serializable{
 	 */
 	public void shrink(PlantView p){
 		affected.add(p);
-		if(affected.size()==0){
-			this.Stopping = true;
-		}
-		else{
-		wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), scaledimagey, Image.SCALE_DEFAULT)); //change image width with health
-		this.getWbutton().setIcon(wimg);
-		this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), scaledimagey);
-		this.decreaseHealth((int)(this.health*(.25)));
-		}
+//		if(affected.size()==0){ //TODO: add logic to update list based on pv radius
+//			//currently this never happens unless manully set in splash screen
+//			this.Stopping = true;
+//		}
+//		else{
+			wimg = new ImageIcon(water.getScaledInstance((int) (health/(affected.size()*(1.75))), scaledimagey, Image.SCALE_DEFAULT)); //change image width with health
+			this.getWbutton().setIcon(wimg);
+			this.getWbutton().setSize((int) (health/(affected.size()*(1.75))), scaledimagey);
+			this.decreaseHealth((int)(this.health*(.25)));
+//		}
 	}
 	/**
 	 * Returns the water to its normal size when the plant is effected by a crab
 	 * @param p - plant view object within water's radius
 	 */
-	public void normal(PlantView p) {
+	public void normal(PlantView p) { //TODO: this function doesn't work as intended
 		affected.remove(p);
 		if(affected.size()==0){
 			wimg = new ImageIcon(water.getScaledInstance((int) health, scaledimagey, 20));
