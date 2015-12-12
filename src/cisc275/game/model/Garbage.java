@@ -116,13 +116,6 @@ public class Garbage extends InstanceView implements java.io.Serializable{
 	
 	//------Garbage Methods-------------------------------------------------//
 	/**
-	 * Uses the checkproximity method with GarbageCollector Matrix as input to check if there are any 
-	 * garbage collectors nearby and if so, trash will despawn
-	 * and garbagecollector's currgrab will go up
-	 */
-	public void checkcollector(){
-	}
-	/**
 	 * @return jlabel - label to compare for intersection
 	 * checks if a trash's and garbage collector's label bounds are intersecting
 	 */
