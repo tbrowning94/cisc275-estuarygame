@@ -35,11 +35,6 @@ public class Game implements java.io.Serializable{
 		
 	}
 	
-	//not sure what this does
-	void nodeSorter() {
-	}
-	
-	
 	public int getMoney() {
 		return this.money;
 	}
@@ -100,25 +95,5 @@ public class Game implements java.io.Serializable{
 	 */
 	boolean isEnd() {
 		return false;
-	}
-	
-	//adds crabs to the level
-	public void addRandomCrabs() {
-		
-	}
-	
-	//adds plant to level when player chooses
-	public void addPlant(Plant plant) {
-		plants.add(plant);
-	}
-	
-	//adds garbage to level 
-		public void addGarb(Garbage garb) {
-			garbs.add(garb);
-		}
-		
-	//Runs Fisherman's fishing method then multiplies by number of fisherman
-	int moneyFish() { 
-		return 0;
 	}
 }

@@ -26,22 +26,5 @@ public class Mob implements java.io.Serializable{
 	public Mob() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	/**The method will be called within the methods of Mob 
-	 * subclasses(Plant uses checkefficiency() and blockwater(), garbage 
-	 * uses checkcollector()), checks proximity according to the Mob's radius
-	 * and the  Mob matrix. 
-	 * @return ArrayList<Mob> containing all Mob objects found in the matrix
-	 * within the given Mob's radius
-	 */
-	public static ArrayList<Mob> checkProximity(Mob[][] mobs){
-		return null; 
-		
-	}
-
-	public void setlocation(Point points) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

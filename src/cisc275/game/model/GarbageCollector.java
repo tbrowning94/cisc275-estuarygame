@@ -34,22 +34,6 @@ public class GarbageCollector extends RandomMover implements Serializable {
 		return null;
 		
 	}
-
-	public void setCurrGarb(int currGarb) {
-	
-	}
-	
-	public int getCurrGarb() {
-		return 0;
-	}
-	
-	/**
-	 * @return
-	 * compares currGarb to BAG_CAPACITY to determine if the bag is full. If it is the Garbage Collector will cease moving and can no longer pick up trash.
-	 */
-	public boolean checkfull() {
-		return false;
-	}
 	
 	public String toString() {
 		return null;
